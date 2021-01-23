@@ -4,25 +4,47 @@ package Model.Articulos;
 public class Fuente_alimentacion extends Articulo{
     
     private int Potencia;
-    private int Certificacion;
+    private String Certificacion;
 
     public Fuente_alimentacion() {
         super();
     }
 
+    /**
+     * Obtiene la potencia de la fuente de alimentacion
+     *
+     * @return Devuelve un Integer que representa la potencia de la 
+     * fuente de alimentacion
+     */
     public int getPotencia() {
         return Potencia;
     }
 
+    /**
+     * Establece una nueva potencia de la fuente de alimentacion
+     *
+     * @param Potencia int
+     */
     public void setPotencia(int Potencia) {
         this.Potencia = Potencia;
     }
 
-    public int getCertificacion() {
+    /**
+     * Obtiene la certificacion de la fuente de alimentacion
+     *
+     * @return Devuelve un String que representa la certificacion de la 
+     * fuente de alimentacion
+     */
+    public String getCertificacion() {
         return Certificacion;
     }
 
-    public void setCertificacion(int Certificacion) {
+    /**
+     * Establece una nueva certificacion de la fuente de alimentacion
+     *
+     * @param Certificacion String
+     */
+    public void setCertificacion(String Certificacion) {
         this.Certificacion = Certificacion;
     }
        
