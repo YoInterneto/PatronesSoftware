@@ -8,12 +8,22 @@ public class Cliente extends Usuario{
         super();
     }
 
+    /**
+     * Get the value of Tarjeta
+     *
+     * @return the value of Tarjeta
+     */
     public String getTarjeta() {
         return Tarjeta;
     }
 
+    /**
+     * Set the value of Tarjeta
+     *
+     * @param Tarjeta new value of Tarjeta
+     */
     public void setTarjeta(String Tarjeta) {
         this.Tarjeta = Tarjeta;
     }
-       
+
 }
