@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="222,0" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.4"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -14,7 +14,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Usuario">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="100" y="600"/>
+	<position x="80" y="300"/>
 	<column name="ID_Usuario" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -31,7 +31,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="varchar" length="0"/>
 	</column>
 	<column name="Telefono">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="Password" not-null="true">
 		<type name="varchar" length="0"/>
@@ -52,7 +52,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Empleado">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="40" y="920"/>
+	<position x="20" y="720"/>
 	<column name="DNI">
 		<type name="varchar" length="0"/>
 	</column>
@@ -64,7 +64,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Cliente">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="340" y="940"/>
+	<position x="420" y="600"/>
 	<column name="Tarjeta">
 		<type name="varchar" length="0"/>
 	</column>
@@ -96,7 +96,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Tienda">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="80" y="80"/>
+	<position x="420" y="40"/>
 	<column name="ID" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -132,7 +132,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Articulo">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="480" y="120"/>
+	<position x="800" y="1020"/>
 	<column name="Modelo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -164,19 +164,23 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Portatil">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1220" y="20"/>
-	<column name="Nombre">
+	<position x="1500" y="0"/>
+	<column name="Panel">
 		<type name="varchar" length="0"/>
 	</column>
 	<column name="Peso">
 		<type name="smallint" length="0"/>
 	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Portatil_pk" index="0"/>
+	</customidxs>
 </table>
 
 <table name="WebCam">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1060" y="360"/>
+	<position x="1560" y="2000"/>
 	<column name="Calidad">
 		<type name="varchar" length="0"/>
 	</column>
@@ -185,7 +189,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="PcTorre">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="820" y="40"/>
+	<position x="1600" y="2400"/>
 	<column name="Nombre">
 		<type name="varchar" length="0"/>
 	</column>
@@ -194,7 +198,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Grafica">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="620" y="540"/>
+	<position x="1500" y="1000"/>
 	<column name="Generacion">
 		<type name="smallint" length="0"/>
 	</column>
@@ -207,16 +211,20 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Procesador">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1260" y="560"/>
+	<position x="1520" y="1560"/>
 	<column name="Socket">
-		<type name="smallint" length="0"/>
+		<type name="varchar" length="0"/>
 	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Procesador_pk" index="0"/>
+	</customidxs>
 </table>
 
 <table name="Memoria_RAM">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="880" y="560"/>
+	<position x="1500" y="1180"/>
 	<column name="PN">
 		<type name="varchar" length="0"/>
 	</column>
@@ -225,7 +233,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Disco_duro">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1700" y="280"/>
+	<position x="1480" y="620"/>
 	<column name="Tipo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -238,7 +246,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Placa_base">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1240" y="760"/>
+	<position x="1500" y="1380"/>
 	<column name="Socket">
 		<type name="varchar" length="0"/>
 	</column>
@@ -251,19 +259,23 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Fuente_alimentacion">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1580" y="600"/>
+	<position x="1460" y="800"/>
 	<column name="Potencia">
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="Certificacion">
-		<type name="smallint" length="0"/>
+		<type name="varchar" length="0"/>
 	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Fuente_alimentacion_pk" index="0"/>
+	</customidxs>
 </table>
 
 <table name="Caja">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1640" y="60"/>
+	<position x="1500" y="200"/>
 	<column name="Cristal">
 		<type name="boolean" length="0"/>
 	</column>
@@ -272,10 +284,20 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Raton">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1380" y="380"/>
+	<position x="1500" y="400"/>
+	<column name="DPI">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Tipo">
+		<type name="varchar" length="0"/>
+	</column>
 	<column name="Peso">
 		<type name="smallint" length="0"/>
 	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Raton_pk" index="0"/>
+	</customidxs>
 </table>
 
 <relationship name="Raton_herencia_Articulos" type="relgen"
@@ -313,7 +335,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Carrito">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="440" y="1160"/>
+	<position x="320" y="1000"/>
 	<column name="Precio_total">
 		<type name="money" length="0"/>
 	</column>
@@ -345,7 +367,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Teclado">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1300" y="200"/>
+	<position x="1580" y="2200"/>
 	<column name="Tipo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -423,5 +445,231 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</label>
 	<special-pk-cols indexes="1"/>
 </relationship>
+
+<table name="Pedido">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="800" y="780"/>
+	<column name="Precio_total">
+		<type name="money" length="0"/>
+	</column>
+	<column name="Id" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="Pedido_pk" type="pk-constr" table="public.&quot;Pedido&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="ID_Usuario_Cliente" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Cliente_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="Cliente_tiene_muchos_Pedidos" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Cliente&quot;"
+	 dst-table="public.&quot;Pedido&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Monitor">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1540" y="1760"/>
+	<column name="Pulgadas">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Panel">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Hz">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<relationship name="Monitor_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Monitor&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<table name="Puntuacion">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2620" y="960"/>
+	<column name="Nota" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="Codigo_ref_Caja" index="13"/>
+		<object name="Codigo_ref_Disco_duro" index="12"/>
+		<object name="Codigo_ref_Fuente_alimentacion" index="9"/>
+		<object name="Codigo_ref_Grafica" index="11"/>
+		<object name="Codigo_ref_Memoria_RAM" index="10"/>
+		<object name="Codigo_ref_Monitor" index="1"/>
+		<object name="Codigo_ref_PcTorre" index="5"/>
+		<object name="Codigo_ref_Placa_base" index="2"/>
+		<object name="Codigo_ref_Portatil" index="6"/>
+		<object name="Codigo_ref_Procesador" index="3"/>
+		<object name="Codigo_ref_Raton" index="8"/>
+		<object name="Codigo_ref_Teclado" index="7"/>
+		<object name="Codigo_ref_WebCam" index="4"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Caja_fk" index="12"/>
+		<object name="Disco_duro_fk" index="11"/>
+		<object name="Fuente_alimentacion_fk" index="8"/>
+		<object name="Grafica_fk" index="10"/>
+		<object name="Memoria_RAM_fk" index="9"/>
+		<object name="Monitor_fk" index="0"/>
+		<object name="PcTorre_fk" index="4"/>
+		<object name="Placa_base_fk" index="1"/>
+		<object name="Portatil_fk" index="5"/>
+		<object name="Procesador_fk" index="2"/>
+		<object name="Raton_fk" index="7"/>
+		<object name="Teclado_fk" index="6"/>
+		<object name="WebCam_fk" index="3"/>
+	</customidxs>
+</table>
+
+<relationship name="Pedido_tiene_muchos_Articulo" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Pedido&quot;"
+	 dst-table="public.&quot;Articulo&quot;"
+	 src-required="false" dst-required="false">
+	<column name="Fecha">
+		<type name="date" length="0"/>
+	</column>
+</relationship>
+
+<relationship name="Monitor_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Monitor&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Placa_base_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Placa_base&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Procesador_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Procesador&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="WebCam_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;WebCam&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="PcTorre_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;PcTorre&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Portatil_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Portatil&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Teclado_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Teclado&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Raton_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Raton&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Fuente_alimentacion_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Fuente_alimentacion&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Memoria_RAM_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Memoria_RAM&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Grafica_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Grafica&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Disco_duro_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Disco_duro&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Caja_tiene_muchos_Puntuacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Caja&quot;"
+	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
 
 </dbmodel>
