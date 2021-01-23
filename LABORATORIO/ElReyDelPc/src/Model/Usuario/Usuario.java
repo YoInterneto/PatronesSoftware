@@ -141,4 +141,8 @@ public class Usuario {
         this.ID_Tienda = ID_Tienda;
     }
 
+    @Override
+    public String toString() {
+        return "Nombre=" + Nombre + ", Apellido=" + Apellido + ", Email=" + Email + ", Direccion=" + Direccion + ", Telefono=" + Telefono + ", Password=" + Pass + ", ID_Tienda=" + ID_Tienda ;
+    }
 }

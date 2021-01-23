@@ -45,4 +45,8 @@ public class Empleado extends Usuario{
         this.Cargo = Cargo;
     }
 
+    @Override
+    public String toString() {
+        return "Empleado{"+ super.toString() + ", DNI=" + DNI + ", Cargo=" + Cargo + '}';
+    }
 }

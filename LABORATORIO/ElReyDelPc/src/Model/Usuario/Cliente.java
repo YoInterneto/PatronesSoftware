@@ -26,4 +26,8 @@ public class Cliente extends Usuario{
         this.Tarjeta = Tarjeta;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" + super.toString() + ", Tarjeta=" + Tarjeta + '}';
+    }
 }
