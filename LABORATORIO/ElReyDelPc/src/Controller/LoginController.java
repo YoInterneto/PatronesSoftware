@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import Views.Login;
 import Model.Usuario.Cliente;
 import Model.Usuario.Empleado;
+import Views.InicioCliente;
 import Views.InicioEmpleado;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -82,6 +83,14 @@ public class LoginController implements ActionListener{
                     Log.log.info("TIPO USUARIO: "+ tipoUsuario);
                     cliente = consulta.getCliente(usuario);
                     Log.log.info("Usuario  "+ cliente.toString());
+                    
+                    //Creamos la siguiente vista y su controlador
+                    InicioCliente inicioVista = new InicioCliente();
+                    ClienteController inicio = new ClienteController(inicioVista, cliente);
+                    //Iniciamos la nueva vista y cerramos la anterior
+                    inicio.iniciar();
+                    login.setVisible(false);
+                    inicioVista.setVisible(true);
                 }
                 else if(tipoUsuario.equalsIgnoreCase("empleado")){
                     Log.log.info("TIPO USUARIO: "+ tipoUsuario);

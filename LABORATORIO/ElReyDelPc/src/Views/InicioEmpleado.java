@@ -118,6 +118,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("AREA DE PERSONAL");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
