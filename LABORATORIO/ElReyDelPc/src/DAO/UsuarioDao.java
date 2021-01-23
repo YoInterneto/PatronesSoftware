@@ -3,6 +3,7 @@ package DAO;
 
 import Model.Usuario.Cliente;
 import Model.Usuario.Empleado;
+import Model.Usuario.Tienda;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -140,5 +141,33 @@ public class UsuarioDao {
 
         Log.logBd.info("Consulta realizada con éxito - getCliente()");
         return cliente;
+    }
+    
+    public Tienda getTienda(int idTienda){
+        Tienda tienda = new Tienda();
+        Log.logBd.info("CONSULTA getTienda");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getTienda()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from tienda where id='" + idTienda + "';");
+            Log.logBd.info("Realizada consulta - getTienda()");
+
+            while (resultado.next()) {
+                tienda.setId_tienda(idTienda);
+                tienda.setNombre(resultado.getString("nombre"));
+                tienda.setDireccion(resultado.getString("direccion"));
+                tienda.setCodigo_postal(resultado.getInt("cp"));
+                tienda.setCuidad(resultado.getString("ciudad"));
+                tienda.setProvincia(resultado.getString("provincia"));
+            }
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getTienda(): " + error);
+            Log.logBd.error("              SQL State - " + error.getSQLState());
+            Log.logBd.error("              ErrorCode - " + error.getErrorCode());
+        }
+
+        Log.logBd.info("Consulta realizada con éxito - getTienda()");
+        return tienda;
     }
 }
