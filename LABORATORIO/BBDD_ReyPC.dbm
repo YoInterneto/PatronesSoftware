@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="222,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="Usuario">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="600"/>
+	<column name="ID_Usuario" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Nombre">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Apellido">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Email">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Direccion">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Telefono">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Password" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="Usuario_pk" type="pk-constr" table="public.&quot;Usuario&quot;">
+		<columns names="ID_Usuario" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="ID_Tienda" index="7"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Tienda_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="Empleado">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="920"/>
+	<column name="DNI">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Cargo">
+		<type name="varchar" length="0"/>
+	</column>
+</table>
+
+<table name="Cliente">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="340" y="940"/>
+	<column name="Tarjeta">
+		<type name="varchar" length="0"/>
+	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Cliente_pk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="Empleado_herencia_Usuario" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Empleado&quot;"
+	 dst-table="public.&quot;Usuario&quot;">
+	<label ref-type="name-label">
+		<position x="-19.1945" y="1.68302"/>
+	</label>
+	<special-pk-cols indexes="0"/>
+</relationship>
+
+<relationship name="Cliente_herencia_Usuario" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Cliente&quot;"
+	 dst-table="public.&quot;Usuario&quot;">
+	<special-pk-cols indexes="0"/>
+</relationship>
+
+<table name="Tienda">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="80" y="80"/>
+	<column name="ID" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Nombre">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Direccion">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="CP">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Ciudad">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Provincia">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="Tienda_pk" type="pk-constr" table="public.&quot;Tienda&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="Tienda_tiene_muchos_Usuario" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Tienda&quot;"
+	 dst-table="public.&quot;Usuario&quot;"
+	 src-required="true" dst-required="false"/>
+
+<table name="Articulo">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="120"/>
+	<column name="Modelo">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Codigo_ref" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Precio">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Descripcion">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Stock">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="Articulos_pk" type="pk-constr" table="public.&quot;Articulo&quot;">
+		<columns names="Codigo_ref" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="ID_Tienda" index="5"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Tienda_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="Portatil">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1220" y="20"/>
+	<column name="Nombre">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Peso">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<table name="WebCam">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1060" y="360"/>
+	<column name="Calidad">
+		<type name="varchar" length="0"/>
+	</column>
+</table>
+
+<table name="PcTorre">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="820" y="40"/>
+	<column name="Nombre">
+		<type name="varchar" length="0"/>
+	</column>
+</table>
+
+<table name="Grafica">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="620" y="540"/>
+	<column name="Generacion">
+		<type name="smallint" length="0"/>
+	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Grafica_pk" index="0"/>
+	</customidxs>
+</table>
+
+<table name="Procesador">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1260" y="560"/>
+	<column name="Socket">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<table name="Memoria_RAM">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="880" y="560"/>
+	<column name="PN">
+		<type name="varchar" length="0"/>
+	</column>
+</table>
+
+<table name="Disco_duro">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1700" y="280"/>
+	<column name="Tipo">
+		<type name="varchar" length="0"/>
+	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Disco_duro_pk" index="0"/>
+	</customidxs>
+</table>
+
+<table name="Placa_base">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1240" y="760"/>
+	<column name="Socket">
+		<type name="varchar" length="0"/>
+	</column>
+
+	<customidxs object-type="constraint">
+		<object name="Placa_base_pk" index="0"/>
+	</customidxs>
+</table>
+
+<table name="Fuente_alimentacion">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1580" y="600"/>
+	<column name="Potencia">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Certificacion">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<table name="Caja">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1640" y="60"/>
+	<column name="Cristal">
+		<type name="boolean" length="0"/>
+	</column>
+</table>
+
+<table name="Raton">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1380" y="380"/>
+	<column name="Peso">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<relationship name="Raton_herencia_Articulos" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Raton&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="WebCam_herencia_Articulos" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;WebCam&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="PcTorre_herencia_Articulos" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;PcTorre&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Portatil_herencia_Articulos" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Portatil&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<table name="Carrito">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="440" y="1160"/>
+	<column name="Precio_total">
+		<type name="money" length="0"/>
+	</column>
+</table>
+
+<relationship name="Carrito_tiene_uno_Cliente" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Cliente&quot;"
+	 dst-table="public.&quot;Carrito&quot;"
+	 src-required="true" dst-required="false">
+	<label ref-type="src-label">
+		<position x="-8.4825" y="-14.275"/>
+	</label>
+	<special-pk-cols indexes="0"/>
+</relationship>
+
+<relationship name="Tienda_tiene_muchos_Articulos" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Tienda&quot;"
+	 dst-table="public.&quot;Articulo&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Teclado">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1300" y="200"/>
+	<column name="Tipo">
+		<type name="varchar" length="0"/>
+	</column>
+</table>
+
+<relationship name="Teclado_herencia_Articulos" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Teclado&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Grafica_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Grafica&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Memoria_RAM_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Memoria_RAM&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Procesador_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Procesador&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Placa_base_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Placa_base&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Fuente_alimentacion_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Fuente_alimentacion&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Caja_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Caja&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+<relationship name="Disco_duro_herencia_Articulo" type="relgen"
+	 pk-pattern="{dt}_pk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Disco_duro&quot;"
+	 dst-table="public.&quot;Articulo&quot;">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+	<special-pk-cols indexes="1"/>
+</relationship>
+
+</dbmodel>
