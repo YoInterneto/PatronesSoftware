@@ -74,10 +74,13 @@ public class LoginController implements ActionListener{
 
                 if(tipoUsuario.equalsIgnoreCase("cliente")){
                     Log.log.info("TIPO USUARIO: "+ tipoUsuario);
-
+                    cliente = consulta.getCliente(usuario);
+                    Log.log.info("Usuario  "+ cliente.toString());
                 }
                 else if(tipoUsuario.equalsIgnoreCase("empleado")){
                     Log.log.info("TIPO USUARIO: "+ tipoUsuario);
+                    empleado = consulta.getEmpleado(usuario);
+                    Log.log.info("Usuario  "+ empleado.toString());
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "ERROR: Usuario no registrado");
