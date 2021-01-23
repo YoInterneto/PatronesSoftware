@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 import Views.Login;
 import Model.Usuario.Cliente;
 import Model.Usuario.Empleado;
+import Views.InicioEmpleado;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import util.Log;
 
@@ -35,6 +37,10 @@ public class LoginController implements ActionListener{
     public void iniciar(){
         login.setTitle("INICIO SESION");
         login.setLocationRelativeTo(null);
+        login.setResizable(false);
+        
+        ImageIcon logo = new ImageIcon("./images/logo.png");
+        login.setIconImage(logo.getImage());
     }
     
     public boolean comprobarFormulario(){
@@ -81,6 +87,14 @@ public class LoginController implements ActionListener{
                     Log.log.info("TIPO USUARIO: "+ tipoUsuario);
                     empleado = consulta.getEmpleado(usuario);
                     Log.log.info("Usuario  "+ empleado.toString());
+                    
+                    //Creamos la siguiente vista y su controlador
+                    InicioEmpleado inicioVista = new InicioEmpleado();
+                    InicioEmpleadoController inicio = new InicioEmpleadoController(inicioVista, empleado);
+                    //Iniciamos la nueva vista y cerramos la anterior
+                    inicio.iniciar();
+                    login.setVisible(false);
+                    inicioVista.setVisible(true);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "ERROR: Usuario no registrado");

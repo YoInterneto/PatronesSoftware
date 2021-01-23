@@ -1,0 +1,13 @@
+[INFO] Sistema Operativo - Windows 10
+[INFO] Creacion de nuevo log en C:\Users\Alberto\OneDrive\Documentos\GitHub\PatronesSoftware\LABORATORIO\ElReyDelPc/logs/log2021-01-23/[19··53··45]logBd.log
+[INFO] CONSULTA GetTipoUsuario
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Conexion establecida en puerto[5432]
+[INFO] Realizada conexion - getTipoUsuario()
+[INFO] Realizada consulta - getTipoUsuario()
+[INFO] Consulta realizada con éxito - getTipoUsuario()
+[INFO] CONSULTA GetEmpleado
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getEmpleado()
+[INFO] Realizada consulta - getEmpleado()
+[INFO] Consulta realizada con éxito - getEmpleado()
