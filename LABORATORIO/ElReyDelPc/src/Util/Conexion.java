@@ -11,12 +11,13 @@ public class Conexion {
     private static Connection conexion = null;
     
     public static Connection getConexion() {
-        String driver = "com.mysql.cj.jdbc.Driver";
-        String nombreBd = "base_empresa";
+        String driver = "org.postgresql.Driver";
+        String nombreBd = "ElReyDelPc";
         String puerto = "3306";
-        String user = "root";
-        String password = "admin";
-        String url = "jdbc:mysql://localhost:"+ puerto +"/"+ nombreBd +"?useTimezone=true&serverTimezone=UTC";
+        String user = "postgres";
+        String password = "postgres";
+        String url = "jdbc:postgresql://localhost:"+ puerto +"/"+ nombreBd;
+        Log.logBd.info("Inicio de conexion en puerto["+ puerto + "]");
         if (conexion != null){
             return conexion;
         }
@@ -24,9 +25,13 @@ public class Conexion {
             try{
                 Class.forName(driver);
                 conexion = DriverManager.getConnection(url, user, password);
+                Log.logBd.info("Conexion establecida en puerto["+ puerto +"]");
             }catch(ClassNotFoundException error){
+                Log.logBd.error("ERROR Conexion: "+ error.getMessage());
             }catch(SQLException error){
+                Log.logBd.error("ERROR SQL: "+ error.getMessage());
             }
+            
             return conexion;
         }
     }

@@ -49,7 +49,7 @@ public final class Logger {
         //Creamos la carpeta log para agrupar los archivos en dias   
         File directorio = new File(env + "/logs/log" + dateFormat.format(calendario.getTime()));
         if(!directorio.exists()){
-            System.err.println("INFO: Creamos el directorio en" + env);
+            System.err.println("INFO: Creamos el directorio en " + env);
             directorio.mkdir();
         }
         

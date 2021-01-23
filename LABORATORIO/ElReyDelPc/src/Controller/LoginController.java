@@ -1,0 +1,94 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controller;
+
+import DAO.UsuarioDao;
+import java.awt.event.ActionListener;
+import Views.Login;
+import Model.Usuario.Cliente;
+import Model.Usuario.Empleado;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import util.Log;
+
+/**
+ *
+ * @author Alberto
+ */
+public class LoginController implements ActionListener{
+    
+    private Login login;
+    private Cliente cliente;
+    private Empleado empleado;
+    
+    private UsuarioDao consulta = new UsuarioDao();
+    
+    public LoginController(Login loginVista){
+        this.login = loginVista;
+        this.login.iniciarSesion.addActionListener(this);
+        this.login.borrar.addActionListener(this);
+    }
+    
+    public void iniciar(){
+        login.setTitle("INICIO SESION");
+        login.setLocationRelativeTo(null);
+    }
+    
+    public boolean comprobarFormulario(){
+        boolean correcto = false;
+        if(!login.usuario.getText().equalsIgnoreCase("")){
+            if(login.contrasenna.getPassword().length != 0){
+                correcto = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "ERROR: Introduzca la contraseña");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "ERROR: Introduzca el nombre de usuario");
+        }
+        
+        return correcto;
+    }
+    
+    public void reset(){
+        login.contrasenna.setText(null);
+        login.usuario.setText(null);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent boton){
+        if(boton.getSource() == login.iniciarSesion){
+            Log.log.info("Vista Login - evento iniciarSesion");
+            
+            if(comprobarFormulario()){
+                String usuario = login.usuario.getText();
+                char[] valorContrasenna = login.contrasenna.getPassword();
+                String contrasenna = new String(valorContrasenna);
+                
+                Log.log.info("USUARIO: "+ usuario +" - CONTRASEÑA: "+ contrasenna);
+                String tipoUsuario = consulta.getTipoUsuario(usuario, contrasenna);
+
+                if(tipoUsuario.equalsIgnoreCase("cliente")){
+
+                }
+                else if(tipoUsuario.equalsIgnoreCase("empleado")){
+
+                }
+                else{
+
+                }
+            }
+        }
+        else if(boton.getSource() == login.borrar){
+            Log.log.info("Vista Login - evento borrar");
+            reset();
+        }
+        else{
+            Log.log.error("ERROR: Boton no encontrado");
+        }
+    }
+}
