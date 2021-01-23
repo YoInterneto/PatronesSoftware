@@ -1,5 +1,5 @@
 
-package Util.Usuario;
+package Model.Usuario;
 
 
 public class Usuario {

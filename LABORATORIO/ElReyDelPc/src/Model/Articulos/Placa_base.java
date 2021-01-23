@@ -1,11 +1,11 @@
 
-package Util.Articulos;
+package Model.Articulos;
 
-public class Procesador extends Articulo{
+public class Placa_base extends Articulo{
     
     private String Socket;
 
-    public Procesador() {
+    public Placa_base() {
         super();
     }
 
@@ -16,6 +16,5 @@ public class Procesador extends Articulo{
     public void setSocket(String Socket) {
         this.Socket = Socket;
     }
-    
     
 }

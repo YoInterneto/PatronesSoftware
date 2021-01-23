@@ -1,5 +1,5 @@
 
-package Util.Articulos;
+package Model.Articulos;
 
 public class Disco_duro extends Articulo{
     
