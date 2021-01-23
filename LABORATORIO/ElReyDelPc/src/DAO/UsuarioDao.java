@@ -31,7 +31,7 @@ public class UsuarioDao {
             ResultSet resultadoEmpleado = s.executeQuery("select * from empleado where email='" + correo + "';");
             Log.logBd.info("Realizada consulta - getTipoUsuario()");
             if (resultadoEmpleado.next()) {
-                if (resultadoEmpleado.getString("password").equalsIgnoreCase(contrasenna)) {
+                if (resultadoEmpleado.getString("pass").equalsIgnoreCase(contrasenna)) {
                     tipo = "empleado";
                 } else {
                     tipo = "error";
@@ -40,7 +40,7 @@ public class UsuarioDao {
                 ResultSet resultadoUsuario = s.executeQuery("select * from cliente where email='" + correo + "';");  //Si no es ni usuario ni empleado es error
 
                 if (resultadoUsuario.next()) {
-                    if (resultadoUsuario.getString("password").equalsIgnoreCase(contrasenna)) {
+                    if (resultadoUsuario.getString("pass").equalsIgnoreCase(contrasenna)) {
                         tipo = "cliente";
                     } else {
                         tipo = "error";
