@@ -4,7 +4,6 @@ package Model.Usuario;
 
 public class Usuario {
     
-    private int ID_Usuario;
     private String Nombre;
     private String Apellido;
     private String Email;
@@ -14,24 +13,6 @@ public class Usuario {
     private int ID_Tienda;
 
     public Usuario() {
-    }
-       
-    /**
-     * Get the value of ID_Usuario
-     *
-     * @return the value of ID_Usuario
-     */
-    public int getID_Usuario() {
-        return ID_Usuario;
-    }
-
-    /**
-     * Set the value of ID_Usuario
-     *
-     * @param ID_Usuario new value of ID_Usuario
-     */
-    public void setID_Usuario(int ID_Usuario) {
-        this.ID_Usuario = ID_Usuario;
     }
 
     /**
