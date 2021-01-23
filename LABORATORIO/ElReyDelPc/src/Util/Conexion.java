@@ -13,7 +13,7 @@ public class Conexion {
     public static Connection getConexion() {
         String driver = "org.postgresql.Driver";
         String nombreBd = "ElReyDelPc";
-        String puerto = "3306";
+        String puerto = "5432";
         String user = "postgres";
         String password = "postgres";
         String url = "jdbc:postgresql://localhost:"+ puerto +"/"+ nombreBd;
