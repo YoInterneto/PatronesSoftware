@@ -1,0 +1,14 @@
+[INFO] Sistema Operativo - Windows 10
+[INFO] Creacion de nuevo log en C:\Users\Alberto\OneDrive\Documentos\GitHub\PatronesSoftware\LABORATORIO\ElReyDelPc/logs/log2021-01-23/[15··08··12]log.log
+[INFO] Vista Login - evento iniciarSesion
+[INFO] USUARIO: email1@email.com - CONTRASEÑA: pass1
+[INFO] TIPO USUARIO: cliente
+[INFO] Vista Login - evento iniciarSesion
+[INFO] USUARIO: email1@email.com - CONTRASEÑA: pass1
+[INFO] TIPO USUARIO: cliente
+[INFO] Vista Login - evento borrar
+[INFO] Vista Login - evento iniciarSesion
+[INFO] USUARIO: email2@email.com - CONTRASEÑA: pass1
+[INFO] TIPO USUARIO: empleado
+[INFO] Vista Login - evento iniciarSesion
+[INFO] USUARIO: email2@email.com - CONTRASEÑA: pa1

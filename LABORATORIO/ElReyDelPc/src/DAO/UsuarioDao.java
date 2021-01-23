@@ -28,19 +28,19 @@ public class UsuarioDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - getTipoUsuario()");
             Statement s = conexion.createStatement();
-            ResultSet resultadoEmpleado = s.executeQuery("select * from EmpleadoRRHH where Correo='" + correo + "';");
+            ResultSet resultadoEmpleado = s.executeQuery("select * from empleado where email='" + correo + "';");
             Log.logBd.info("Realizada consulta - getTipoUsuario()");
             if (resultadoEmpleado.next()) {
-                if (resultadoEmpleado.getString("Contrasenia").equalsIgnoreCase(contrasenna)) {
+                if (resultadoEmpleado.getString("password").equalsIgnoreCase(contrasenna)) {
                     tipo = "empleado";
                 } else {
                     tipo = "error";
                 }
             } else {
-                ResultSet resultadoUsuario = s.executeQuery("select * from EmpleadoEmpresa where Correo='" + correo + "';");  //Si no es ni usuario ni empleado es error
+                ResultSet resultadoUsuario = s.executeQuery("select * from cliente where email='" + correo + "';");  //Si no es ni usuario ni empleado es error
 
                 if (resultadoUsuario.next()) {
-                    if (resultadoUsuario.getString("Contrasenia").equalsIgnoreCase(contrasenna)) {
+                    if (resultadoUsuario.getString("password").equalsIgnoreCase(contrasenna)) {
                         tipo = "cliente";
                     } else {
                         tipo = "error";
