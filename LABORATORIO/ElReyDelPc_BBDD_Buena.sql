@@ -16,15 +16,14 @@
 -- object: public.Usuario | type: TABLE --
 -- DROP TABLE IF EXISTS public.Usuario CASCADE;
 CREATE TABLE public.Usuario(
-	ID_Usuario smallint NOT NULL,
 	Nombre varchar,
 	Apellido varchar,
-	Email varchar,
+	Email varchar NOT NULL,
 	Direccion varchar,
 	Telefono integer,
-	Password varchar NOT NULL,
+	Pass varchar NOT NULL,
 	ID_Tienda smallint NOT NULL,
-	CONSTRAINT Usuario_pk PRIMARY KEY (ID_Usuario)
+	CONSTRAINT Usuario_pk PRIMARY KEY (Email)
 
 );
 -- ddl-end --
@@ -36,15 +35,14 @@ ALTER TABLE public.Usuario OWNER TO postgres;
 CREATE TABLE public.Empleado(
 	DNI varchar,
 	Cargo varchar,
--- 	ID_Usuario smallint NOT NULL,
 -- 	Nombre varchar,
 -- 	Apellido varchar,
--- 	Email varchar,
+-- 	Email varchar NOT NULL,
 -- 	Direccion varchar,
 -- 	Telefono integer,
--- 	Password varchar NOT NULL,
+-- 	Pass varchar NOT NULL,
 -- 	ID_Tienda smallint NOT NULL,
-	CONSTRAINT Empleado_pk PRIMARY KEY (ID_Usuario)
+	CONSTRAINT Empleado_pk PRIMARY KEY (Email)
 
 ) INHERITS(public.Usuario)
 ;
@@ -56,15 +54,14 @@ ALTER TABLE public.Empleado OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.Cliente CASCADE;
 CREATE TABLE public.Cliente(
 	Tarjeta varchar,
--- 	ID_Usuario smallint NOT NULL,
 -- 	Nombre varchar,
 -- 	Apellido varchar,
--- 	Email varchar,
+-- 	Email varchar NOT NULL,
 -- 	Direccion varchar,
 -- 	Telefono integer,
--- 	Password varchar NOT NULL,
+-- 	Pass varchar NOT NULL,
 -- 	ID_Tienda smallint NOT NULL,
-	CONSTRAINT Cliente_pk PRIMARY KEY (ID_Usuario)
+	CONSTRAINT Cliente_pk PRIMARY KEY (Email)
 
 ) INHERITS(public.Usuario)
 ;
@@ -341,8 +338,8 @@ ALTER TABLE public.Raton OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.Carrito CASCADE;
 CREATE TABLE public.Carrito(
 	Precio_total money,
-	ID_Usuario_Cliente smallint NOT NULL,
-	CONSTRAINT Carrito_pk PRIMARY KEY (ID_Usuario_Cliente)
+	Email_Cliente varchar NOT NULL,
+	CONSTRAINT Carrito_pk PRIMARY KEY (Email_Cliente)
 
 );
 -- ddl-end --
@@ -351,14 +348,14 @@ ALTER TABLE public.Carrito OWNER TO postgres;
 
 -- object: Cliente_fk | type: CONSTRAINT --
 -- ALTER TABLE public.Carrito DROP CONSTRAINT IF EXISTS Cliente_fk CASCADE;
-ALTER TABLE public.Carrito ADD CONSTRAINT Cliente_fk FOREIGN KEY (ID_Usuario_Cliente)
-REFERENCES public.Cliente (ID_Usuario) MATCH FULL
+ALTER TABLE public.Carrito ADD CONSTRAINT Cliente_fk FOREIGN KEY (Email_Cliente)
+REFERENCES public.Cliente (Email) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: Carrito_uq | type: CONSTRAINT --
 -- ALTER TABLE public.Carrito DROP CONSTRAINT IF EXISTS Carrito_uq CASCADE;
-ALTER TABLE public.Carrito ADD CONSTRAINT Carrito_uq UNIQUE (ID_Usuario_Cliente);
+ALTER TABLE public.Carrito ADD CONSTRAINT Carrito_uq UNIQUE (Email_Cliente);
 -- ddl-end --
 
 -- object: Tienda_fk | type: CONSTRAINT --
@@ -392,8 +389,8 @@ ALTER TABLE public.Teclado OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.Pedido CASCADE;
 CREATE TABLE public.Pedido(
 	Precio_total money,
-	ID_Usuario_Cliente smallint,
 	Id smallint NOT NULL,
+	Email_Cliente varchar,
 	CONSTRAINT Pedido_pk PRIMARY KEY (Id)
 
 );
@@ -403,8 +400,8 @@ ALTER TABLE public.Pedido OWNER TO postgres;
 
 -- object: Cliente_fk | type: CONSTRAINT --
 -- ALTER TABLE public.Pedido DROP CONSTRAINT IF EXISTS Cliente_fk CASCADE;
-ALTER TABLE public.Pedido ADD CONSTRAINT Cliente_fk FOREIGN KEY (ID_Usuario_Cliente)
-REFERENCES public.Cliente (ID_Usuario) MATCH FULL
+ALTER TABLE public.Pedido ADD CONSTRAINT Cliente_fk FOREIGN KEY (Email_Cliente)
+REFERENCES public.Cliente (Email) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
@@ -550,20 +547,20 @@ REFERENCES public.Caja (Codigo_ref) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
+
 -- INSERTS -- 
 
 
 -- TIENDA Y USUARIOS --
 
 INSERT INTO Tienda VALUES(0, 'Name1', 'Direccion1', 28073, 'Ciudad1', 'Provincia1');
-INSERT INTO Empleado VALUES(1,'Name2', 'Apellido2', 'email2@email.com', 'Direccion2', 621512233, 'pass1',0,'DNI1','Empleado1');
-INSERT INTO Cliente VALUES(2,'Name3', 'Apellido1', 'email1@email.com', 'Direccion1', 621424233, 'pass1',0,'tarjeta1');
+INSERT INTO Empleado VALUES('Name2', 'Apellido2', 'email@email.com', 'Direccion2', 621512233, 'pass1',0,'DNI1','Empleado1');
+INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1', 621424233, 'pass1',0,'tarjeta1');
 
 -- TRAMITESS -- 
 
-INSERT INTO Carrito VALUES(0,2);
-INSERT INTO Pedido VALUES(0,2,1);
-INSERT INTO Articulo VALUES('Modelo1', 3, 20, 'Descripcion1', 3, 0, null, null);
+INSERT INTO Carrito VALUES(0,'email2@email.com');
+INSERT INTO Pedido VALUES(0,2,'email2@email.com');
 
 -- ARTICULOS -- 
 
