@@ -337,6 +337,7 @@ public class InicioCliente extends javax.swing.JFrame {
         panelArticulo.setBackground(new java.awt.Color(51, 51, 51));
         panelArticulo.setPreferredSize(new java.awt.Dimension(960, 620));
         panelArticulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelArticulo.setVisible(false);
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -444,7 +445,6 @@ public class InicioCliente extends javax.swing.JFrame {
         panelArticulo.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 170, 40));
 
         jPanel6.add(panelArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
-        panelArticulo.getAccessibleContext().setAccessibleParent(jPanel1);
 
         panelCarro.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -459,11 +459,14 @@ public class InicioCliente extends javax.swing.JFrame {
             .addGap(0, 620, Short.MAX_VALUE)
         );
 
+        panelCarro.setVisible(false);
+
         jPanel6.add(panelCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
 
         panelMonta.setBackground(new java.awt.Color(51, 51, 51));
         panelMonta.setMinimumSize(new java.awt.Dimension(960, 620));
         panelMonta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelMonta.setVisible(false);
 
         jLabel27.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -823,12 +826,15 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel11.setText("VISTA PREVIA");
         panelProducto.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 300, 310));
 
+        panelProducto.setVisible(false);
+
         jPanel6.add(panelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
 
         panelPerfil.setBackground(new java.awt.Color(51, 51, 51));
         panelPerfil.setForeground(new java.awt.Color(255, 255, 255));
         panelPerfil.setPreferredSize(new java.awt.Dimension(960, 620));
         panelPerfil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelPerfil.setVisible(false);
 
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
