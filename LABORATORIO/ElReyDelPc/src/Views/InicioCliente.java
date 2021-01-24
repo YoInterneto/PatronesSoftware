@@ -78,6 +78,17 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         panelCarro = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaPedidos = new javax.swing.JList<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jSeparator32 = new javax.swing.JSeparator();
+        jSeparator33 = new javax.swing.JSeparator();
+        jSeparator34 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        precioCarro = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         panelMonta = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -451,17 +462,60 @@ public class InicioCliente extends javax.swing.JFrame {
         jPanel6.add(panelArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
 
         panelCarro.setBackground(new java.awt.Color(51, 51, 51));
+        panelCarro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelCarroLayout = new javax.swing.GroupLayout(panelCarro);
-        panelCarro.setLayout(panelCarroLayout);
-        panelCarroLayout.setHorizontalGroup(
-            panelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
-        );
-        panelCarroLayout.setVerticalGroup(
-            panelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
+        listaPedidos.setBackground(new java.awt.Color(51, 51, 51));
+        listaPedidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        listaPedidos.setForeground(new java.awt.Color(255, 255, 255));
+        listaPedidos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listaPedidos);
+
+        panelCarro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 590, 370));
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Tus articulos guardados");
+        panelCarro.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 60));
+
+        jLabel42.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("Carrito");
+        panelCarro.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 70));
+
+        jLabel43.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel43.setText("Tu tienda de tecnología online líder por precio, calidad y servicio");
+        panelCarro.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 520, 60));
+
+        jSeparator32.setForeground(new java.awt.Color(255, 255, 255));
+        panelCarro.add(jSeparator32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 960, 20));
+
+        jSeparator33.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator33.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        panelCarro.add(jSeparator33, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 10, 130));
+
+        jSeparator34.setForeground(new java.awt.Color(255, 255, 255));
+        panelCarro.add(jSeparator34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 30));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Precio Total:");
+        panelCarro.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 410, 150, 40));
+
+        precioCarro.setForeground(new java.awt.Color(255, 255, 255));
+        precioCarro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        precioCarro.setText("jLabel5");
+        panelCarro.add(precioCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 460, 110, 30));
+
+        jButton8.setText("Realizar pedido");
+        panelCarro.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 500, 180, -1));
 
         panelCarro.setVisible(false);
 
@@ -1070,6 +1124,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -1085,6 +1140,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1100,6 +1156,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -1113,6 +1170,8 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
@@ -1145,6 +1204,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -1170,12 +1230,16 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator30;
     private javax.swing.JSeparator jSeparator31;
+    private javax.swing.JSeparator jSeparator32;
+    private javax.swing.JSeparator jSeparator33;
+    private javax.swing.JSeparator jSeparator34;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    public javax.swing.JList<String> listaPedidos;
     public javax.swing.JLabel nombreAtributo1;
     public javax.swing.JLabel nombreAtributo2;
     public javax.swing.JLabel nombreAtributo3;
@@ -1190,6 +1254,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JPanel panelPerfil;
     public javax.swing.JPanel panelProducto;
     public javax.swing.JLabel precio;
+    public javax.swing.JLabel precioCarro;
     public javax.swing.JLabel productoSeleccionado;
     public javax.swing.JPasswordField repitePass;
     public javax.swing.JTextField textoBusqueda;

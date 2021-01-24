@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.UsuarioDao;
 import Model.Usuario.Cliente;
+import Util.FocusedTitleListCellRenderer;
 
 import Views.InicioCliente;
 import Views.Login;
@@ -10,6 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class ClienteController implements ActionListener {
 
@@ -62,7 +67,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
-
+                hola();
             }
         });
         this.client.btnMontar.addMouseListener(new MouseAdapter() {
@@ -102,6 +107,14 @@ public class ClienteController implements ActionListener {
                 loginVista.setVisible(true);
             }
         });
+        this.client.listaPedidos.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(e.getValueIsAdjusting()) {
+                    System.out.println("DATO SELECCIONADO "+ client.listaPedidos.getSelectedIndex());
+                }
+            }
+        });
     }
 
     public void iniciarPanelProducto(){
@@ -130,6 +143,57 @@ public class ClienteController implements ActionListener {
         client.datoTarjeta.setText(cliente.getTarjeta());
         client.datoEmail.setText(cliente.getEmail());   
     }
+    
+    public void hola(){
+        DefaultListModel listModel = new DefaultListModel();
+        
+        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+        
+        lista.add("1 GRAFICA MODELO1 389€");
+        lista.add("GRAFICA   MODELO 2   389€");
+        lista.add("GRAFICA   MODELO 3   389€");
+        lista.add("GRAFICA   MODELO 4   389€");
+        lista.add("GRAFICA   MODELO 5   389€");
+        lista.add("GRAFICA   MODELO 6   389€");
+        lista.add("GRAFICA   MODELO 7   389€");
+        lista.add("GRAFICA   MODELO 8   389€");
+        lista.add("GRAFICA   MODELO 9   389€");
+        lista.add("GRAFICA   MODELO 10   389€");
+        lista.add("GRAFICA   MODELO 11  389€");
+        lista.add("GRAFICA   MODELO 12  389€");
+        lista.add("GRAFICA   MODELO 13  389€");
+        lista.add("GRAFICA   MODELO 14  389€");
+        lista.add("GRAFICA   MODELO 15  389€");
+        lista.add("GRAFICA   MODELO 16  389€");
+        
+        listaRuta.add("/images/aaaa.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/pc.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/torre.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/nvidia_23133.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/nvidia_23133.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/a.png");
+        listaRuta.add("/images/a.png");
+        listaRuta.add("/images/a.png");
+        listaRuta.add("/images/aa.png");
+        listaRuta.add("/images/aa.png");        
+        
+        for(int i = 0; i<lista.size(); i++){
+            //En vez de i añadir cod referencia
+            listModel.add(i, lista.get(i));
+            
+        }
+        
+        client.listaPedidos.setModel(listModel);
+        client.listaPedidos.setCellRenderer(new FocusedTitleListCellRenderer(lista, listaRuta));
+    }
+    
     
     
     @Override
