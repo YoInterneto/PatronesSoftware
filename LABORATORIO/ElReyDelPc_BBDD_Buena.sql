@@ -392,6 +392,7 @@ CREATE TABLE public.Pedido(
 	Precio_total float,
 	Id smallint NOT NULL,
 	Email_Cliente varchar,
+	Fecha Date,
 	CONSTRAINT Pedido_pk PRIMARY KEY (Id)
 
 );
@@ -561,7 +562,9 @@ INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1
 -- TRAMITESS -- 
 
 INSERT INTO Carrito VALUES(0,'email2@email.com');
-INSERT INTO Pedido VALUES(100.9,2,'email2@email.com');
+INSERT INTO Pedido VALUES(100.9,0,'email2@email.com');
+INSERT INTO Pedido VALUES(36.78,1,'email2@email.com');
+INSERT INTO Pedido VALUES(50,2,'email2@email.com');
 
 -- ARTICULOS -- 
 
