@@ -98,7 +98,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator21 = new javax.swing.JSeparator();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel54 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
+        precioTotalPc = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
@@ -107,19 +107,19 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel61 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        cpuBox = new javax.swing.JComboBox<>();
+        placaBox = new javax.swing.JComboBox<>();
+        ramBox = new javax.swing.JComboBox<>();
+        graficaBox = new javax.swing.JComboBox<>();
+        discoBox = new javax.swing.JComboBox<>();
+        fuenteBox = new javax.swing.JComboBox<>();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
         jLabel66 = new javax.swing.JLabel();
         jLabel67 = new javax.swing.JLabel();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jComboBox9 = new javax.swing.JComboBox<>();
-        jComboBox10 = new javax.swing.JComboBox<>();
+        ratonBox = new javax.swing.JComboBox<>();
+        tecladoBox = new javax.swing.JComboBox<>();
+        camBox = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jSeparator22 = new javax.swing.JSeparator();
@@ -563,10 +563,10 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel54.setText("Precio total:");
         panelMonta.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 110, 40));
 
-        jLabel55.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel55.setText("jLabel55");
-        panelMonta.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, -1, -1));
+        precioTotalPc.setForeground(new java.awt.Color(255, 255, 255));
+        precioTotalPc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        precioTotalPc.setText("jLabel55");
+        panelMonta.add(precioTotalPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, -1, -1));
 
         jLabel56.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel56.setForeground(new java.awt.Color(255, 255, 255));
@@ -609,23 +609,21 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel63.setText("Fuente");
         panelMonta.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 482, 70, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 190, -1));
+        panelMonta.add(cpuBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 190, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 265, 190, -1));
+        panelMonta.add(placaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 265, 190, -1));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 190, -1));
+        ramBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(ramBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 190, -1));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 375, 190, -1));
+        graficaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(graficaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 375, 190, -1));
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 190, -1));
+        discoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(discoBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 190, -1));
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 485, 190, -1));
+        fuenteBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(fuenteBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 485, 190, -1));
 
         jLabel64.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel64.setForeground(new java.awt.Color(255, 255, 255));
@@ -648,14 +646,14 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel67.setText("WebCam");
         panelMonta.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 425, 70, 30));
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 180, -1));
+        ratonBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(ratonBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 180, -1));
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 375, 180, -1));
+        tecladoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(tecladoBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 375, 180, -1));
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelMonta.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 180, -1));
+        camBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelMonta.add(camBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 180, -1));
 
         jButton6.setText("jButton6");
         panelMonta.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 130, -1));
@@ -1107,7 +1105,9 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel btnMontar;
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel btnProducto;
+    public javax.swing.JComboBox<String> camBox;
     public javax.swing.JLabel codigo_ref;
+    public javax.swing.JComboBox<String> cpuBox;
     public javax.swing.JTextField datoDireccion;
     public javax.swing.JLabel datoEmail;
     public javax.swing.JLabel datoModelo;
@@ -1115,7 +1115,10 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JTextField datoTarjeta;
     public javax.swing.JTextField datoTelefono;
     public javax.swing.JLabel descripcion;
+    public javax.swing.JComboBox<String> discoBox;
     private javax.swing.JLabel fotoInicio;
+    public javax.swing.JComboBox<String> fuenteBox;
+    public javax.swing.JComboBox<String> graficaBox;
     public javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1125,16 +1128,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JComboBox<String> jComboBox9;
+    public javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1182,7 +1176,6 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
@@ -1253,10 +1246,15 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JPanel panelMonta;
     public javax.swing.JPanel panelPerfil;
     public javax.swing.JPanel panelProducto;
+    public javax.swing.JComboBox<String> placaBox;
     public javax.swing.JLabel precio;
     public javax.swing.JLabel precioCarro;
+    private javax.swing.JLabel precioTotalPc;
     public javax.swing.JLabel productoSeleccionado;
+    public javax.swing.JComboBox<String> ramBox;
+    public javax.swing.JComboBox<String> ratonBox;
     public javax.swing.JPasswordField repitePass;
+    public javax.swing.JComboBox<String> tecladoBox;
     public javax.swing.JTextField textoBusqueda;
     // End of variables declaration//GEN-END:variables
 }

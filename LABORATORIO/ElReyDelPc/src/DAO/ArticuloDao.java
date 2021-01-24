@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import util.Conexion;
 import util.Log;
 
@@ -43,6 +44,47 @@ public class ArticuloDao {
         Log.logBd.info("Consulta realizada con éxito - getArticuloIgualModelo()");
         return tipo;
     }
+    
+    
+    /**
+     * Realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes.
+     *
+     * @return Devuelve una lista de objetos de tipo Articulo
+     */
+    public ArrayList<Articulo> getAllArticulos() {
+        
+        ArrayList<Articulo> articulodb = new ArrayList<Articulo>();
+        
+            try {
+                conexion = Conexion.getConexion();
+                Log.logBd.info("Realizada conexion - getAllArticulos()");
+                Statement s = conexion.createStatement();
+                ResultSet rs = s.executeQuery("select * from articulo;");
+                Log.logBd.info("CONSULTA getAllArticulos");
+                
+                while (rs.next()) {                	
+                	
+                    Articulo articulo = new Articulo();
+                  
+                    articulo.setCodigo_ref(rs.getInt("Codigo_ref"));
+                    articulo.setDescripcion(rs.getString("Descripcion"));
+                    articulo.setModelo(rs.getString("Modelo"));
+                    articulo.setPrecio(rs.getInt("Precio"));
+                    articulo.setRutaImagen(rs.getString("RutaImagen"));
+                    articulo.setStock(rs.getInt("Stock"));
+                    
+                    articulodb.add(articulo);
+                }               
+            } catch (SQLException error) {
+                Log.logBd.error("ERROR SQL en getAllArticulos(): " + error);
+                Log.logBd.error("                   SQL State - " + error.getSQLState());
+                Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+            }                   
+      
+        Log.logBd.info("Consulta realizada con éxito - getAllArticulos()");
+       return articulodb;
+    }  
     
     /**
      * Dado el codigo de un portatil realiza una consulta en la base de
@@ -171,7 +213,7 @@ public class ArticuloDao {
      * @param codigo
      * @return Devuelve un objeto de tipo Disco_duro
      */
-    public Disco_duro getDiisco_duro(int codigo){
+    public Disco_duro getDisco_duro(int codigo){
         Disco_duro disco_duro = new Disco_duro();
         Log.logBd.info("CONSULTA getDisco_duro");
         try {
@@ -208,7 +250,7 @@ public class ArticuloDao {
      * @param codigo
      * @return Devuelve un objeto de tipo Fuente_alimentacion
      */
-    public Fuente_alimentacion getDisco_duro(int codigo){
+    public Fuente_alimentacion getFuente(int codigo){
         Fuente_alimentacion fuente = new Fuente_alimentacion();
         Log.logBd.info("CONSULTA getFuente_alimentacion");
         try {
@@ -358,8 +400,8 @@ public class ArticuloDao {
     }
     
     /**
-     * Dado el codigo de un cpu realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes a dicho cpu.
+     * Dado el codigo de un articulo realiza una consulta en la base de
+ datos y devuelve todos los datos correspondientes a dicho articulo.
      *
      * @pacpu codigo
      * @return Devuelve un objeto de tipo Procesador

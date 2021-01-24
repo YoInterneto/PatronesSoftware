@@ -1,6 +1,15 @@
 package Controller;
 
+import DAO.DiscoDuroDao;
+import DAO.GraficaDao;
+import DAO.MemoriaRAMDao;
+import DAO.Placa_baseDao;
+import DAO.ProcesadorDao;
 import DAO.UsuarioDao;
+import Model.Articulos.Grafica;
+import Model.Articulos.Memoria_RAM;
+import Model.Articulos.Placa_base;
+import Model.Articulos.Procesador;
 import Model.Usuario.Cliente;
 import Util.ListaDinamicaImagen;
 
@@ -23,10 +32,16 @@ public class ClienteController implements ActionListener {
     
 
     private UsuarioDao consulta = new UsuarioDao();
+    private ProcesadorDao daoCpu;
+    private Placa_baseDao daoPlaca;
+    private MemoriaRAMDao daoRam;
+    private GraficaDao daoGrafica;
+    private DiscoDuroDao daoDisco;
 
     public ClienteController(InicioCliente clientVista, Cliente cliente) {
         this.cliente = cliente;
         this.client = clientVista;
+        daoCpu = new ProcesadorDao();
     }
 
     public void iniciar() {
@@ -79,7 +94,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(true);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
-
+                iniciarPanelMontar();
             }
         });
         this.client.btnPerfil.addMouseListener(new MouseAdapter() {
@@ -142,6 +157,27 @@ public class ClienteController implements ActionListener {
         client.datoDireccion.setText(cliente.getDireccion());
         client.datoTarjeta.setText(cliente.getTarjeta());
         client.datoEmail.setText(cliente.getEmail());   
+    }
+    
+    public void iniciarPanelMontar(){
+        
+        ArrayList<Procesador> listaCpu = daoCpu.getAllProcesadores();
+        for (int i = 0 ; i<listaCpu.size(); i++) {
+            client.cpuBox.addItem(listaCpu.get(i).getModelo()+ " - " + listaCpu.get(i).getSocket() + " - " +listaCpu.get(i).getPrecio() + " €" );
+        }
+        ArrayList<Placa_base> listaPlaca = daoPlaca.getAllProcesadores();
+        for (int i = 0 ; i<listaCpu.size(); i++) {
+            client.cpuBox.addItem(listaPlaca.get(i).getModelo()+ " - " + listaPlaca.get(i).getSocket() + " - " +listaPlaca.get(i).getPrecio() + " €" );
+        }
+        ArrayList<Memoria_RAM> listaRam = daoRam.getAllProcesadores();
+        for (int i = 0 ; i<listaCpu.size(); i++) {
+            client.cpuBox.addItem(listaRam.get(i).getModelo()+ " - " + listaRam.get(i).getSocket() + " - " +listaRam.get(i).getPrecio() + " €" );
+        }
+        ArrayList<Grafica> listaGrafica = daoGrafica.getAllProcesadores();
+        for (int i = 0 ; i<listaCpu.size(); i++) {
+            client.cpuBox.addItem(listaGrafica.get(i).getModelo()+ " - " + listaGrafica.get(i).getSocket() + " - " +listaGrafica.get(i).getPrecio() + " €" );
+        }
+        
     }
     
     public void hola(){
