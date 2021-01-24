@@ -33,10 +33,10 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        nombreCliente = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        textoBusqueda = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JLabel();
         btnCarro = new javax.swing.JLabel();
         btnInicio = new javax.swing.JLabel();
         btnProducto = new javax.swing.JLabel();
@@ -54,7 +54,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        fotoInicio = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
@@ -148,7 +148,7 @@ public class InicioCliente extends javax.swing.JFrame {
         descripcion = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        imgProducto = new javax.swing.JLabel();
         panelPerfil = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -159,26 +159,26 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
+        nuevoEmail = new javax.swing.JTextField();
+        nombrePerfil = new javax.swing.JLabel();
+        apellidoPerfil = new javax.swing.JLabel();
+        datoEmail = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        nuevaPass = new javax.swing.JPasswordField();
+        repitePass = new javax.swing.JPasswordField();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel50 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        datoTarjeta = new javax.swing.JTextField();
+        datoTelefono = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        datoDireccion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -204,27 +204,31 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Name1");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 130, 40));
+        nombreCliente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        nombreCliente.setForeground(new java.awt.Color(255, 255, 255));
+        nombreCliente.setText("Name1");
+        jPanel2.add(nombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 130, 40));
 
         jLabel4.setForeground(new java.awt.Color(102, 255, 102));
         jLabel4.setText("Online");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 70, 20));
 
-        jTextField1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField1.setBorder(null);
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 40));
+        textoBusqueda.setBackground(new java.awt.Color(51, 51, 51));
+        textoBusqueda.setForeground(new java.awt.Color(255, 255, 255));
+        textoBusqueda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textoBusqueda.setBorder(null);
+        textoBusqueda.setCaretColor(new java.awt.Color(255, 255, 255));
+        textoBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jPanel2.add(textoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 40));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                btnBuscarMouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 50, 40));
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 50, 40));
 
         btnCarro.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnCarro.setForeground(new java.awt.Color(255, 255, 255));
@@ -314,9 +318,9 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel14.setText("Tu tienda de tecnología online líder por precio, calidad y servicio");
         panelInicio.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 520, 60));
 
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png"))); // NOI18N
-        panelInicio.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 340, 260));
+        fotoInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fotoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png"))); // NOI18N
+        panelInicio.add(fotoInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 340, 260));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/texto.png"))); // NOI18N
@@ -695,23 +699,29 @@ public class InicioCliente extends javax.swing.JFrame {
         nombreAtributo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreAtributo1.setForeground(new java.awt.Color(255, 255, 255));
         nombreAtributo1.setText("AtributoParticular*");
+        nombreAtributo1.setVisible(false);
 
         atrParticular1.setForeground(new java.awt.Color(204, 204, 204));
         atrParticular1.setText("jLabel9");
+        atrParticular1.setVisible(false);
 
         nombreAtributo2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreAtributo2.setForeground(new java.awt.Color(255, 255, 255));
         nombreAtributo2.setText("AtributoParticular*");
+        nombreAtributo2.setVisible(false);
 
         atrParticular2.setForeground(new java.awt.Color(204, 204, 204));
         atrParticular2.setText("jLabel11");
+        atrParticular2.setVisible(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Precio");
 
         precio.setForeground(new java.awt.Color(204, 204, 204));
+        precio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         precio.setText("jLabel10");
+        precio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
@@ -723,9 +733,11 @@ public class InicioCliente extends javax.swing.JFrame {
         nombreAtributo3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreAtributo3.setForeground(new java.awt.Color(255, 255, 255));
         nombreAtributo3.setText("AtributoParticular*");
+        nombreAtributo3.setVisible(false);
 
         atrParticular3.setForeground(new java.awt.Color(204, 204, 204));
         atrParticular3.setText("jLabel18");
+        atrParticular3.setVisible(false);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
@@ -736,7 +748,7 @@ public class InicioCliente extends javax.swing.JFrame {
 
         jButton1.setText("Comprar");
 
-        jButton2.setText("Favorito");
+        jButton2.setText("Cesta");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -822,9 +834,9 @@ public class InicioCliente extends javax.swing.JFrame {
 
         panelProducto.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, 490));
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("VISTA PREVIA");
-        panelProducto.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 300, 310));
+        imgProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgProducto.setText("VISTA PREVIA");
+        panelProducto.add(imgProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 300, 310));
 
         panelProducto.setVisible(false);
 
@@ -864,51 +876,54 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator18.setForeground(new java.awt.Color(255, 255, 255));
         panelPerfil.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 30));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Email :");
-        panelPerfil.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 60, 30));
+        panelPerfil.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 60, 30));
 
+        jLabel30.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("Nombre");
-        panelPerfil.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 120, 30));
+        panelPerfil.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 120, 30));
 
+        jLabel41.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(255, 255, 255));
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("Apellido");
         panelPerfil.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 120, 30));
 
-        jTextField2.setText("example@gmail.com");
-        panelPerfil.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 200, 30));
+        nuevoEmail.setText("example@gmail.com");
+        panelPerfil.add(nuevoEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 200, 30));
 
-        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel42.setText("jLabel42");
-        panelPerfil.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+        nombrePerfil.setForeground(new java.awt.Color(255, 255, 255));
+        nombrePerfil.setText("jLabel42");
+        panelPerfil.add(nombrePerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel43.setText("jLabel43");
-        panelPerfil.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
+        apellidoPerfil.setForeground(new java.awt.Color(255, 255, 255));
+        apellidoPerfil.setText("jLabel43");
+        panelPerfil.add(apellidoPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
 
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel44.setText("jLabel44");
-        panelPerfil.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, -1, -1));
+        datoEmail.setForeground(new java.awt.Color(255, 255, 255));
+        datoEmail.setText("jLabel44");
+        panelPerfil.add(datoEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, -1, -1));
 
+        jLabel45.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setText("Cambiar contraseña: ");
-        panelPerfil.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, 140, 30));
+        panelPerfil.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, 190, 30));
 
+        jLabel46.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(255, 255, 255));
         jLabel46.setText("Cambiar correo");
-        panelPerfil.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, 170, 30));
+        panelPerfil.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 170, 30));
 
-        jLabel47.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel47.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel47.setText("DATOS PERSONALES");
-        panelPerfil.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 160, 40));
-        panelPerfil.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 190, -1));
-        panelPerfil.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 190, 20));
+        panelPerfil.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 160, 40));
+        panelPerfil.add(nuevaPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 190, -1));
+        panelPerfil.add(repitePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 190, -1));
 
         jLabel48.setForeground(new java.awt.Color(255, 255, 255));
         jLabel48.setText("Repitela");
@@ -919,21 +934,23 @@ public class InicioCliente extends javax.swing.JFrame {
         panelPerfil.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 110, 20));
 
         jButton3.setText("Cambiar");
-        panelPerfil.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 80, 30));
+        panelPerfil.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 100, 30));
 
         jButton4.setText("Cambiar");
-        panelPerfil.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, -1, -1));
+        panelPerfil.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 90, -1));
 
+        jLabel50.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(255, 255, 255));
         jLabel50.setText("Tarjeta");
         panelPerfil.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 100, 30));
 
-        jTextField3.setText("jTextField3");
-        panelPerfil.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 270, 30));
+        datoTarjeta.setText("jTextField3");
+        panelPerfil.add(datoTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 270, 30));
 
-        jTextField4.setText("jTextField4");
-        panelPerfil.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, -1));
+        datoTelefono.setText("jTextField4");
+        panelPerfil.add(datoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 120, 30));
 
+        jLabel51.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(255, 255, 255));
         jLabel51.setText("Telefono");
         panelPerfil.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 140, 30));
@@ -941,12 +958,13 @@ public class InicioCliente extends javax.swing.JFrame {
         jButton5.setText("Guardar");
         panelPerfil.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 180, 40));
 
+        jLabel52.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(255, 255, 255));
         jLabel52.setText("Direccion");
-        panelPerfil.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 100, 30));
+        panelPerfil.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 100, 30));
 
-        jTextField5.setText("Direcion1");
-        panelPerfil.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 270, 30));
+        datoDireccion.setText("Direcion1");
+        panelPerfil.add(datoDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 270, 30));
 
         jPanel6.add(panelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
@@ -966,9 +984,9 @@ public class InicioCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductoMouseClicked
         // TODO add your handling code here:
@@ -1024,9 +1042,11 @@ public class InicioCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel apellidoPerfil;
     public javax.swing.JLabel atrParticular1;
     public javax.swing.JLabel atrParticular2;
     public javax.swing.JLabel atrParticular3;
+    public javax.swing.JLabel btnBuscar;
     public javax.swing.JLabel btnCarro;
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JLabel btnInicio;
@@ -1034,9 +1054,15 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel btnProducto;
     public javax.swing.JLabel codigo_ref;
+    public javax.swing.JTextField datoDireccion;
+    public javax.swing.JLabel datoEmail;
     public javax.swing.JLabel datoModelo;
     public javax.swing.JLabel datoStock;
+    public javax.swing.JTextField datoTarjeta;
+    public javax.swing.JTextField datoTelefono;
     public javax.swing.JLabel descripcion;
+    private javax.swing.JLabel fotoInicio;
+    public javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1056,11 +1082,9 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1076,7 +1100,6 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -1090,15 +1113,11 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
@@ -1126,8 +1145,6 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -1159,14 +1176,13 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JLabel nombreAtributo1;
-    private javax.swing.JLabel nombreAtributo2;
-    private javax.swing.JLabel nombreAtributo3;
+    public javax.swing.JLabel nombreAtributo1;
+    public javax.swing.JLabel nombreAtributo2;
+    public javax.swing.JLabel nombreAtributo3;
+    public javax.swing.JLabel nombreCliente;
+    public javax.swing.JLabel nombrePerfil;
+    public javax.swing.JPasswordField nuevaPass;
+    public javax.swing.JTextField nuevoEmail;
     public javax.swing.JPanel panelArticulo;
     public javax.swing.JPanel panelCarro;
     public javax.swing.JPanel panelInicio;
@@ -1174,6 +1190,8 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JPanel panelPerfil;
     public javax.swing.JPanel panelProducto;
     public javax.swing.JLabel precio;
-    private javax.swing.JLabel productoSeleccionado;
+    public javax.swing.JLabel productoSeleccionado;
+    public javax.swing.JPasswordField repitePass;
+    public javax.swing.JTextField textoBusqueda;
     // End of variables declaration//GEN-END:variables
 }

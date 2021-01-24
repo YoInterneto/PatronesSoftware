@@ -8,6 +8,7 @@ public class Articulo {
     private int Precio;
     private String Descripcion;
     private int Stock;
+    private String rutaImagen;
     private int ID_Tienda;
     private int Id_Pedido;
     private String Fecha;
@@ -103,6 +104,24 @@ public class Articulo {
      */
     public void setStock(int Stock) {
         this.Stock = Stock;
+    }
+
+    /**
+     * Get the value of rutaImagen
+     *
+     * @return the value of rutaImagen
+     */
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    /**
+     * Set the value of rutaImagen
+     *
+     * @param rutaImagen new value of rutaImagen
+     */
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
     }
 
     /**

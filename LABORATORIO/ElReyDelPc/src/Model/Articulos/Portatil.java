@@ -4,7 +4,7 @@ package Model.Articulos;
 public class Portatil extends Articulo{
     
     private int Peso;
-    private String Nombre;
+    private String panel;
 
     public Portatil() {
         super();
@@ -33,17 +33,17 @@ public class Portatil extends Articulo{
      *
      * @return Devuelve un String que representa el nombre del portatil
      */
-    public String getNombre() {
-        return Nombre;
+    public String getPanel() {
+        return panel;
     }
 
     /**
-     * Establece un nuevo Nombre del portatil
+     * Establece un nuevo panel del portatil
      *
-     * @param Nombre String
+     * @param panel String
      */
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setPanel(String panel) {
+        this.panel = panel;
     }
     
     
