@@ -22,7 +22,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Alberto
  */
-public class FocusedTitleListCellRenderer extends DefaultListCellRenderer {
+public class ListaDinamicaImagen extends DefaultListCellRenderer {
     Border noFocusBorder = new EmptyBorder(15, 1, 1, 1);
 
     TitledBorder focusBorder = new TitledBorder(LineBorder.createGrayLineBorder(), "title");
@@ -31,7 +31,7 @@ public class FocusedTitleListCellRenderer extends DefaultListCellRenderer {
     
     Map<String, ImageIcon> imageMap;
     
-    public FocusedTitleListCellRenderer(ArrayList<String> informacion, ArrayList<String> rutaImagen){
+    public ListaDinamicaImagen(ArrayList<String> informacion, ArrayList<String> rutaImagen){
         this.imageMap = crearImageMap(informacion, rutaImagen);
     }
     

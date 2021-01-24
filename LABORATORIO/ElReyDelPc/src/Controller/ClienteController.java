@@ -2,7 +2,7 @@ package Controller;
 
 import DAO.UsuarioDao;
 import Model.Usuario.Cliente;
-import Util.FocusedTitleListCellRenderer;
+import Util.ListaDinamicaImagen;
 
 import Views.InicioCliente;
 import Views.Login;
@@ -191,7 +191,7 @@ public class ClienteController implements ActionListener {
         }
         
         client.listaPedidos.setModel(listModel);
-        client.listaPedidos.setCellRenderer(new FocusedTitleListCellRenderer(lista, listaRuta));
+        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta));
     }
     
     

@@ -4,7 +4,7 @@ package Controller;
 import DAO.UsuarioDao;
 import Model.Usuario.Empleado;
 import Model.Usuario.Tienda;
-import Util.FocusedTitleListCellRenderer;
+import Util.ListaDinamicaImagen;
 import Views.InicioEmpleado;
 import Views.Login;
 import java.awt.event.ActionEvent;
@@ -164,7 +164,7 @@ public class EmpleadoController implements ActionListener{
         }
         
         inicio.listaPedidos.setModel(listModel);
-        inicio.listaPedidos.setCellRenderer(new FocusedTitleListCellRenderer(lista, listaRuta));
+        inicio.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta));
     }
     
     public void iniciarPanelInicio(){
