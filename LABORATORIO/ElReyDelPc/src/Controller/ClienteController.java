@@ -36,11 +36,77 @@ public class ClienteController implements ActionListener{
             public void mouseClicked(MouseEvent e) {
                 if(e.getSource()==client.btnProducto){
                     client.panelInicio.setVisible(false);
+                    client.panelCarro.setVisible(false);
+                    client.panelPerfil.setVisible(false);
+                    client.panelMonta.setVisible(false);
+                    client.panelProducto.setVisible(false);
                     client.panelArticulo.setVisible(true);
                 }
             }
         });
+        this.client.btnInicio.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==client.btnInicio){
+                    client.panelInicio.setVisible(true);
+                    client.panelCarro.setVisible(false);
+                    client.panelPerfil.setVisible(false);
+                    client.panelMonta.setVisible(false);
+                    client.panelProducto.setVisible(false);
+                    client.panelArticulo.setVisible(false);
+                }
+            }
+        });
+        this.client.btnCarro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getSource()==client.btnCarro){
+                    client.panelInicio.setVisible(false);
+                    client.panelCarro.setVisible(true);
+                    client.panelPerfil.setVisible(false);
+                    client.panelMonta.setVisible(false);
+                    client.panelProducto.setVisible(false);
+                    client.panelArticulo.setVisible(false);
+                }
+            }
+         });
+        this.client.btnMontar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {              
+                 if(e.getSource()==client.btnMontar){
+                    client.panelInicio.setVisible(false);
+                    client.panelCarro.setVisible(false);
+                    client.panelPerfil.setVisible(false);
+                    client.panelMonta.setVisible(true);
+                    client.panelProducto.setVisible(false);
+                    client.panelArticulo.setVisible(false);
+                }
+            }
+         });
+        this.client.btnPerfil.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {              
+                 if(e.getSource()==client.btnPerfil){
+                    client.panelInicio.setVisible(false);
+                    client.panelCarro.setVisible(false);
+                    client.panelPerfil.setVisible(true);
+                    client.panelMonta.setVisible(false);
+                    client.panelProducto.setVisible(false);
+                    client.panelArticulo.setVisible(false);
+                }
+            }
+         });
+        this.client.btnCerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {                             
+                 if(e.getSource()==client.btnCerrar){
+                    //client.panelInicio.setVisible(true);
+                    //client.panelArticulo.setVisible(false);
+                }
+            }
+         });    
     }
+            
 
     @Override
     public void actionPerformed(ActionEvent e) {
