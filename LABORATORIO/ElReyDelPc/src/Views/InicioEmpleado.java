@@ -41,7 +41,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnPerfil = new javax.swing.JLabel();
         btnProducto = new javax.swing.JLabel();
         btnAnnadir = new javax.swing.JLabel();
-        btnPlaceholder = new javax.swing.JLabel();
+        btnEditarArticulo = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
@@ -120,10 +120,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
         nombreUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         nombreUsuario.setText("jLabel2");
-        jPanel2.add(nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 11, 445, -1));
+        jPanel2.add(nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 11, 440, -1));
 
         imagenUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        jPanel2.add(imagenUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, -1, 41));
+        jPanel2.add(imagenUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, -1, 41));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 21, -1, 40));
 
@@ -177,8 +177,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnCompras.setForeground(new java.awt.Color(255, 255, 255));
         btnCompras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Carrito.png"))); // NOI18N
-        btnCompras.setText("Ver compras");
-        panelLateral.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 200, 60));
+        btnCompras.setText(" Ver compras");
+        panelLateral.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 200, 60));
 
         btnPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnPerfil.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,7 +196,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pc.png"))); // NOI18N
-        btnProducto.setText("Productos");
+        btnProducto.setText(" Productos");
         btnProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnProductoMouseClicked(evt);
@@ -207,16 +207,16 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnAnnadir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAnnadir.setForeground(new java.awt.Color(255, 255, 255));
         btnAnnadir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnAnnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ajustes.png"))); // NOI18N
+        btnAnnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/anadir.png"))); // NOI18N
         btnAnnadir.setText("Añadir artículo");
-        panelLateral.add(btnAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 180, 70));
+        panelLateral.add(btnAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 200, 60));
 
-        btnPlaceholder.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnPlaceholder.setForeground(new java.awt.Color(255, 255, 255));
-        btnPlaceholder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnPlaceholder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfil.png"))); // NOI18N
-        btnPlaceholder.setText("Gestiona tu perfil");
-        panelLateral.add(btnPlaceholder, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, 60));
+        btnEditarArticulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnEditarArticulo.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarArticulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnEditarArticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ajustes.png"))); // NOI18N
+        btnEditarArticulo.setText(" Editar artículo");
+        panelLateral.add(btnEditarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 190, 70));
 
         jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, -1));
@@ -225,7 +225,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         panelLateral.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 10));
 
         jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
-        panelLateral.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 250, -1));
+        panelLateral.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 382, 250, 10));
 
         jSeparator6.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 250, 10));
@@ -594,8 +594,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JLabel btnAnnadir;
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JLabel btnCompras;
+    public javax.swing.JLabel btnEditarArticulo;
     public javax.swing.JLabel btnPerfil;
-    public javax.swing.JLabel btnPlaceholder;
     public javax.swing.JLabel btnProducto;
     public javax.swing.JLabel ciudadTienda;
     public javax.swing.JLabel codTienda;

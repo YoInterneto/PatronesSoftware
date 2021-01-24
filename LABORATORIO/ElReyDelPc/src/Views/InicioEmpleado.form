@@ -83,7 +83,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="35" y="11" width="445" height="-1"/>
+                  <AbsoluteConstraints x="35" y="11" width="440" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -98,7 +98,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="490" y="0" width="-1" height="41"/>
+                  <AbsoluteConstraints x="480" y="0" width="-1" height="41"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -226,14 +226,14 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/Carrito.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ver compras"/>
+            <Property name="text" type="java.lang.String" value=" Ver compras"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="390" width="200" height="60"/>
+              <AbsoluteConstraints x="10" y="450" width="200" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -275,7 +275,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/pc.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Productos"/>
+            <Property name="text" type="java.lang.String" value=" Productos"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnProductoMouseClicked"/>
@@ -299,7 +299,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/ajustes.png"/>
+              <Image iconType="3" name="/images/anadir.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="A&#xf1;adir art&#xed;culo"/>
           </Properties>
@@ -308,11 +308,11 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="320" width="180" height="70"/>
+              <AbsoluteConstraints x="20" y="320" width="200" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="btnPlaceholder">
+        <Component class="javax.swing.JLabel" name="btnEditarArticulo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="1"/>
@@ -322,16 +322,16 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/perfil.png"/>
+              <Image iconType="3" name="/images/ajustes.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gestiona tu perfil"/>
+            <Property name="text" type="java.lang.String" value=" Editar art&#xed;culo"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="450" width="220" height="60"/>
+              <AbsoluteConstraints x="20" y="380" width="190" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -367,7 +367,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="390" width="250" height="-1"/>
+              <AbsoluteConstraints x="0" y="382" width="250" height="10"/>
             </Constraint>
           </Constraints>
         </Component>
