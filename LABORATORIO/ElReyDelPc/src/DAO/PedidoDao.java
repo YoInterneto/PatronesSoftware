@@ -48,7 +48,7 @@ public class PedidoDao {
                 pedido.setEmail_cliente(resultado.getString("email_cliente"));
                 pedido.setIdPedido(resultado.getInt("id"));
                 pedido.setFecha(resultado.getString("fecha"));
-                pedido.setPrecio_total(resultado.getInt("precio_total"));
+                pedido.setPrecio_total(resultado.getFloat("precio_total"));
                 
                 listaPedidos.add(pedido);
             }

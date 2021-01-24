@@ -4,6 +4,7 @@ package Controller;
 import DAO.ArticuloDao;
 import DAO.PedidoDao;
 import DAO.UsuarioDao;
+import Model.Articulos.Articulo;
 import Model.Negocio.Pedido;
 import Model.Usuario.Empleado;
 import Model.Usuario.Tienda;
@@ -138,6 +139,17 @@ public class EmpleadoController implements ActionListener{
                 }
             }
         });
+        
+        //Evento para cuando se clicka en un pedido
+        this.inicio.listaProductos.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(e.getValueIsAdjusting()) {
+                    //Meter posiblement una interfaz con la info del pedido
+                    System.out.println("ARTICULO SELECCIONADO "+ inicio.listaProductos.getSelectedIndex()+1);
+                }
+            }
+        });
     }
     
     /*public void cargarListaProductos(){
@@ -192,20 +204,43 @@ public class EmpleadoController implements ActionListener{
     
     public void cargarListaProductos(){
         DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
+        
+        ArrayList<Articulo> lista = consultaArticulo.getAllArticulos();
+        
+        ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
+        
+        for(int i=0; i<lista.size(); i++){
+            Articulo articulo = lista.get(i);
+            int codigoReferencia = articulo.getCodigo_ref();
+            String articuloInfo = "  CodRef-"+ String.format("%04d", codigoReferencia) +" \t"+ articulo.getModelo() +" \tPrecio-"+ articulo.getPrecio() +"    \t[stock: "+ articulo.getStock() +"]";
+            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            
+            listaInfo.add(articuloInfo);
+            if(articulo.getRutaImagen() == null){
+                listaRuta.add("/images/error.png");
+            }
+            else{
+                listaRuta.add(articulo.getRutaImagen());
+            }
+            
+            listModel.add(codigoReferencia-1, articuloInfo);
+        }
+        
+        inicio.listaProductos.setModel(listModel);
+        inicio.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
     }
     
     public void cargarListaPedidos(){
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
-        
+        System.out.println(listaPedidos.size());
         for(int i=0; i<listaPedidos.size(); i++){
             Pedido pedido = listaPedidos.get(i);
             int idPedido = pedido.getIdPedido();
-            String pedidoInfo = "  ID-"+ String.format("%04d", idPedido) +" \tFecha-"+ pedido.getFecha()+" \tPrecio pedido-"+ pedido.getPrecio_total() +"€ \tUsuario-"+ pedido.getEmail_cliente();
+            String pedidoInfo = "  ID-"+ String.format("%04d", idPedido) +" \tFecha-"+ pedido.getFecha() +" \tPrecio pedido-"+ pedido.getPrecio_total() +"€ \tUsuario-"+ pedido.getEmail_cliente();
             pedidoInfo = pedidoInfo.replaceAll("\t", "         ");
-
+            
             listModel.add(idPedido, pedidoInfo);
         }
         
@@ -230,7 +265,6 @@ public class EmpleadoController implements ActionListener{
         inicio.provinciaTienda.setText(tienda.getProvincia());
         
         inicio.barraBusqueda.setEditable(true);
-       // PlaceHolder holder = new PlaceHolder(inicio.barraBusqueda, "Introduzca tipo: Grafica, Raton...");
     }
     
     @Override

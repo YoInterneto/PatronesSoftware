@@ -11,7 +11,7 @@ package Model.Negocio;
  */
 public class Pedido {
     
-    private int precio_total;
+    private float precio_total;
     private String fecha;
     private String email_cliente;
     private int idPedido;
@@ -78,7 +78,7 @@ public class Pedido {
      *
      * @return the value of precio_total
      */
-    public int getPrecio_total() {
+    public float getPrecio_total() {
         return precio_total;
     }
 
@@ -87,7 +87,7 @@ public class Pedido {
      *
      * @param precio_total new value of precio_total
      */
-    public void setPrecio_total(int precio_total) {
+    public void setPrecio_total(float precio_total) {
         this.precio_total = precio_total;
     }
 
