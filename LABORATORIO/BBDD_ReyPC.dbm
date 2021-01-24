@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.4"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,341" last-zoom="0.9"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -148,15 +148,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="Stock">
 		<type name="smallint" length="0"/>
 	</column>
+	<column name="rutaImagen">
+		<type name="varchar" length="0"/>
+	</column>
 	<constraint name="Articulos_pk" type="pk-constr" table="public.&quot;Articulo&quot;">
 		<columns names="Codigo_ref" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="ID_Tienda" index="5"/>
+		<object name="Fecha" index="8"/>
+		<object name="ID_Tienda" index="6"/>
+		<object name="Id_Pedido" index="7"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
+		<object name="Pedido_fk" index="2"/>
 		<object name="Tienda_fk" index="1"/>
 	</customidxs>
 </table>
