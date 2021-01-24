@@ -99,7 +99,7 @@ public class LoginController implements ActionListener{
                     
                     //Creamos la siguiente vista y su controlador
                     InicioEmpleado inicioVista = new InicioEmpleado();
-                    InicioEmpleadoController inicio = new InicioEmpleadoController(inicioVista, empleado);
+                    EmpleadoController inicio = new EmpleadoController(inicioVista, empleado);
                     //Iniciamos la nueva vista y cerramos la anterior
                     inicio.iniciar();
                     login.setVisible(false);
