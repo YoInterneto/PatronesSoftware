@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import util.Log;
 
 public class ClienteController implements ActionListener {
 
@@ -72,7 +73,7 @@ public class ClienteController implements ActionListener {
         client.setTitle("INICIO - CLIENTE");
         client.setLocationRelativeTo(null);
         client.nombreCliente.setText(cliente.getNombre());
-        String[] a = client.cpuBox.getSelectedItem().toString().split(">");
+        
         //client.fotoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png")));
         this.client.btnProducto.addMouseListener(new MouseAdapter() {
             @Override
@@ -84,6 +85,7 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(true);
                 //iniciarPanelProducto();
+                resetValuesBox();
             }
         });
         this.client.btnInicio.addMouseListener(new MouseAdapter() {
@@ -95,7 +97,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
-
+                resetValuesBox();
             }
         });
         this.client.btnCarro.addMouseListener(new MouseAdapter() {
@@ -108,6 +110,7 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 hola();
+                resetValuesBox();
             }
         });
         this.client.btnMontar.addMouseListener(new MouseAdapter() {
@@ -132,6 +135,7 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 iniciarPanelPerfil();
+                resetValuesBox();
             }
         });
         this.client.btnCerrar.addMouseListener(new MouseAdapter() {
@@ -157,6 +161,51 @@ public class ClienteController implements ActionListener {
         });
 
         this.client.cpuBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.ramBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.cajaBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.graficaBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.tecladoBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.placaBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.discoBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.ratonBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.fuenteBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.camBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
@@ -205,70 +254,115 @@ public class ClienteController implements ActionListener {
 
         ArrayList<Procesador> listaCpu = daoCpu.getAllProcesadores();
         for (int i = 0; i < listaCpu.size(); i++) {
-            client.cpuBox.addItem(listaCpu.get(i).getModelo() + " - " + listaCpu.get(i).getSocket() + " -> " + listaCpu.get(i).getPrecio());
+            client.cpuBox.addItem(listaCpu.get(i).getModelo() + " - " + listaCpu.get(i).getSocket() + " - € " + listaCpu.get(i).getPrecio());
         }
         ArrayList<Placa_base> listaPlaca = daoPlaca.getAllPlacas();
         for (int i = 0; i < listaPlaca.size(); i++) {
-            client.placaBox.addItem(listaPlaca.get(i).getModelo() + " - " + listaPlaca.get(i).getSocket() + " -> " + listaPlaca.get(i).getPrecio() + " €");
+            client.placaBox.addItem(listaPlaca.get(i).getModelo() + " - " + listaPlaca.get(i).getSocket() + " - € " + listaPlaca.get(i).getPrecio());
         }
         ArrayList<Memoria_RAM> listaRam = daoRam.getAllMemoria_RAM();
         for (int i = 0; i < listaRam.size(); i++) {
-            client.ramBox.addItem(listaRam.get(i).getModelo() + " -> " + listaRam.get(i).getPrecio() + " €");
+            client.ramBox.addItem(listaRam.get(i).getModelo() + " - € " + listaRam.get(i).getPrecio());
         }
         ArrayList<Grafica> listaGrafica = daoGrafica.getAllGraficas();
         for (int i = 0; i < listaGrafica.size(); i++) {
-            client.graficaBox.addItem(listaGrafica.get(i).getModelo() + " -> " + listaGrafica.get(i).getPrecio() + " €");
+            client.graficaBox.addItem(listaGrafica.get(i).getModelo() + " - € " + listaGrafica.get(i).getPrecio());
         }
         ArrayList<Disco_duro> listaDisco = daoDisco.getAllDiscos();
         for (int i = 0; i < listaDisco.size(); i++) {
-            client.discoBox.addItem(listaDisco.get(i).getModelo() + " - " + listaDisco.get(i).getTipo() + " ->" + listaDisco.get(i).getPrecio() + " €");
+            client.discoBox.addItem(listaDisco.get(i).getModelo() + " - " + listaDisco.get(i).getTipo() + " - € " + listaDisco.get(i).getPrecio());
         }
         ArrayList<Fuente_alimentacion> listaFuente = daoFuente.getAllFuentes();
         for (int i = 0; i < listaFuente.size(); i++) {
-            client.fuenteBox.addItem(listaFuente.get(i).getModelo() + " - " + listaFuente.get(i).getPotencia() + " W -> " + listaFuente.get(i).getPrecio() + " €");
+            client.fuenteBox.addItem(listaFuente.get(i).getModelo() + " - " + listaFuente.get(i).getPotencia() + " W - € " + listaFuente.get(i).getPrecio());
         }
         ArrayList<Caja> listaCaja = daoCaja.getAllCajas();
         for (int i = 0; i < listaCaja.size(); i++) {
-            client.cajaBox.addItem(listaCaja.get(i).getModelo() + " -> " + listaCaja.get(i).getPrecio() + " €");
+            client.cajaBox.addItem(listaCaja.get(i).getModelo() + " - € " + listaCaja.get(i).getPrecio());
         }
         ArrayList<Raton> listaRaton = daoRaton.getAllRatones();
         for (int i = 0; i < listaRaton.size(); i++) {
-            client.ratonBox.addItem(listaRaton.get(i).getModelo() + " - " + listaRaton.get(i).getPeso() + " gr -> " + listaRaton.get(i).getPrecio() + " €");
+            client.ratonBox.addItem(listaRaton.get(i).getModelo() + " - " + listaRaton.get(i).getPeso() + " gr - € " + listaRaton.get(i).getPrecio());
         }
         ArrayList<Teclado> listaTeclado = daoTeclado.getAllTeclados();
         for (int i = 0; i < listaTeclado.size(); i++) {
-            client.tecladoBox.addItem(listaTeclado.get(i).getModelo() + " -> " + listaTeclado.get(i).getPrecio() + " €");
+            client.tecladoBox.addItem(listaTeclado.get(i).getModelo() + " - € " + listaTeclado.get(i).getPrecio());
         }
         ArrayList<WebCam> listaCam = daoCam.getAllWebCams();
         for (int i = 0; i < listaCam.size(); i++) {
-            client.camBox.addItem(listaCam.get(i).getModelo() + " - " + listaCam.get(i).getCalidad() + " -> " + listaCam.get(i).getPrecio() + " €");
+            client.camBox.addItem(listaCam.get(i).getModelo() + " - " + listaCam.get(i).getCalidad() + " - € " + listaCam.get(i).getPrecio());
         }
 
     }
 
+    /**
+     * Obtiene el precio del producto seleccionado mediante un split del string
+     * luego suma los valores de cada uno y pone el precio total del montaje
+     * 
+     * @return Devuelve un valor float del precio del montaje
+     */
     private float calculaPrecioMontaje(){
         float total = 0;
         
-        
-        String[] precioCpu = client.cpuBox.getSelectedItem().toString().split(">");
-        String[] precioPlaca = client.placaBox.getSelectedItem().toString().split(">");
-        String[] precioRam = client.ramBox.getSelectedItem().toString().split(">");
-        String[] precioGrafica = client.graficaBox.getSelectedItem().toString().split(">");
-        String[] precioDisco = client.discoBox.getSelectedItem().toString().split(">");
-        String[] precioFuente = client.fuenteBox.getSelectedItem().toString().split(">");
-        String[] precioCaja = client.cajaBox.getSelectedItem().toString().split(">");
-        String[] precioRaton = client.ratonBox.getSelectedItem().toString().split(">");
-        String[] precioTeclado = client.tecladoBox.getSelectedItem().toString().split(">");
-        String[] precioCam = client.camBox.getSelectedItem().toString().split(">");
+        String[] precioCpu = client.cpuBox.getSelectedItem().toString().split("€");
+        String[] precioPlaca = client.placaBox.getSelectedItem().toString().split("€");
+        String[] precioRam = client.ramBox.getSelectedItem().toString().split("€");
+        String[] precioGrafica = client.graficaBox.getSelectedItem().toString().split("€");
+        String[] precioDisco = client.discoBox.getSelectedItem().toString().split("€");
+        String[] precioFuente = client.fuenteBox.getSelectedItem().toString().split("€");
+        String[] precioCaja = client.cajaBox.getSelectedItem().toString().split("€");
+        String[] precioRaton = client.ratonBox.getSelectedItem().toString().split("€");
+        String[] precioTeclado = client.tecladoBox.getSelectedItem().toString().split("€");
+        String[] precioCam = client.camBox.getSelectedItem().toString().split("€");
 
+        
+        total = sacarPrecio(precioCpu) + sacarPrecio(precioPlaca) + sacarPrecio(precioRam)+
+                sacarPrecio(precioGrafica) + sacarPrecio(precioDisco) + sacarPrecio(precioCaja)+
+                sacarPrecio(precioFuente) + sacarPrecio(precioRaton)+ sacarPrecio(precioTeclado)+
+                sacarPrecio(precioCam);
+        
+        client.precioTotalPc.setText(String.valueOf(total) + " €");
+        return total;
+        
+    }
+    
+    /**
+     * Transforma el precio de String a float en caso de ser posible
+     * si no lo es da error y pone valor a 0 dado que no hay precio disponible.
+     *
+     * @param text
+     * @return Devuelve el precio en formato float
+     */
+    private float sacarPrecio(String[] text){
+        float valor = 0;
         try{
-            total = Float.parseFloat(precioCpu[1]);
-        }catch (Exception e){
-            
+            if (text[0].equals("Seleccione")){
+                return 0;
+            }
+            valor = Float.parseFloat(text[1]);         
+        }catch (NumberFormatException e){
+            Log.log.info("Error al sacar precio montaje " + e);
+            valor = 0;
         }finally{
-            client.precioTotalPc.setText(String.valueOf(total));
-            return total;
-        } 
+            return valor;
+        }
+      
+    }
+    
+    /**
+     * Restablece los valores de los comboBox del panel al valor default
+     */
+    private void resetValuesBox(){
+        client.cpuBox.setSelectedIndex(0);
+        client.placaBox.setSelectedIndex(0);
+        client.ramBox.setSelectedIndex(0);
+        client.graficaBox.setSelectedIndex(0);
+        client.discoBox.setSelectedIndex(0);
+        client.fuenteBox.setSelectedIndex(0);
+        client.cajaBox.setSelectedIndex(0);
+        client.ratonBox.setSelectedIndex(0);
+        client.tecladoBox.setSelectedIndex(0);
+        client.camBox.setSelectedIndex(0);
     }
     
     public void hola() {

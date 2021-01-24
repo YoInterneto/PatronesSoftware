@@ -565,9 +565,9 @@ public class InicioCliente extends javax.swing.JFrame {
         panelMonta.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 110, 40));
 
         precioTotalPc.setForeground(new java.awt.Color(255, 255, 255));
-        precioTotalPc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        precioTotalPc.setText("jLabel55");
-        panelMonta.add(precioTotalPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, -1, -1));
+        precioTotalPc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        precioTotalPc.setText("0.0 €");
+        panelMonta.add(precioTotalPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(777, 236, 120, 20));
 
         jLabel56.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel56.setForeground(new java.awt.Color(255, 255, 255));
@@ -610,7 +610,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel63.setText("Fuente");
         panelMonta.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 482, 70, 30));
 
-        cpuBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione > 0" }));
+        cpuBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(cpuBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 190, -1));
 
         placaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
