@@ -17,10 +17,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Formatter;
+import java.util.Arrays;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import util.Log;
 
 public class EmpleadoController implements ActionListener{
     
@@ -45,6 +47,9 @@ public class EmpleadoController implements ActionListener{
         inicio.setSize(1200, 750);
         
         iniciarPanelInicio();
+        
+        //Boton para editar los datos
+        this.inicio.btnEditarDatos.addActionListener(this);
         
         //Boton para cerrar sesion
         this.inicio.btnCerrar.addMouseListener(new MouseAdapter() {
@@ -96,6 +101,8 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelElegirProducto.setVisible(false);
                 
                 inicio.panelEditarPerfil.setVisible(true);
+                
+                iniciarPanelEditarUsuario();
             }
         });
         
@@ -151,56 +158,6 @@ public class EmpleadoController implements ActionListener{
             }
         });
     }
-    
-    /*public void cargarListaProductos(){
-        DefaultListModel listModel = new DefaultListModel();
-        
-        ArrayList<String> lista = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-        
-        lista.add("1 GRAFICA MODELO1 389€");
-        lista.add("GRAFICA   MODELO 2   389€");
-        lista.add("GRAFICA   MODELO 3   389€");
-        lista.add("GRAFICA   MODELO 4   389€");
-        lista.add("GRAFICA   MODELO 5   389€");
-        lista.add("GRAFICA   MODELO 6   389€");
-        lista.add("GRAFICA   MODELO 7   389€");
-        lista.add("GRAFICA   MODELO 8   389€");
-        lista.add("GRAFICA   MODELO 9   389€");
-        lista.add("GRAFICA   MODELO 10   389€");
-        lista.add("GRAFICA   MODELO 11  389€");
-        lista.add("GRAFICA   MODELO 12  389€");
-        lista.add("GRAFICA   MODELO 13  389€");
-        lista.add("GRAFICA   MODELO 14  389€");
-        lista.add("GRAFICA   MODELO 15  389€");
-        lista.add("GRAFICA   MODELO 16  389€");
-        
-        listaRuta.add("/images/aaaa.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/pc.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/torre.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/nvidia_23133.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/nvidia_23133.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/a.png");
-        listaRuta.add("/images/a.png");
-        listaRuta.add("/images/a.png");
-        listaRuta.add("/images/aa.png");
-        listaRuta.add("/images/aa.png");        
-        
-        for(int i = 0; i<lista.size(); i++){
-            //En vez de i añadir cod referencia
-            listModel.add(i, lista.get(i));
-            
-        }
-        
-        inicio.listaPedidos.setModel(listModel);
-        inicio.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta, "Pedido"));
-    }*/
     
     public void cargarListaProductos(){
         DefaultListModel listModel = new DefaultListModel();
@@ -267,8 +224,67 @@ public class EmpleadoController implements ActionListener{
         inicio.barraBusqueda.setEditable(true);
     }
     
+    public void iniciarPanelEditarUsuario(){
+        
+        inicio.tituloUsuarioId.setText("USUARIO "+ empleado.getEmail());
+        inicio.nombreEdit.setText(empleado.getNombre());
+        inicio.apellidoEdit.setText(empleado.getApellido());
+        inicio.direccionEdit.setText(empleado.getDireccion());
+        inicio.telefonoEdit.setText(""+empleado.getTelefono());
+        inicio.passActualEdit.setText("");
+        inicio.passNuevaEdit.setText("");
+        inicio.passRepitaEdit.setText("");
+    }
+    
+    //AQUI COMPROBAMOS QUE LA NINGUNA CAMPO SEA VACIA EXCEPTO CONTRASEÑA
+    //SI CONTRASEÑA ACTUAL NO VACIO ENTONCES NO VACIAS LAS OTRAS
+    //CONTRASEÑA NUEVA Y REPITE TIENEN QUE SE IGUALES Y DIFERENTES DE ANTERIOR
+    public boolean comprobarFormularioEditarEmpleado(){
+        boolean correcto = false;
+        
+        if(inicio.nombreEdit.getText().equalsIgnoreCase("") || inicio.apellidoEdit.getText().equalsIgnoreCase("") 
+                || inicio.direccionEdit.getText().equalsIgnoreCase("") || inicio.telefonoEdit.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Nombre, Apellido, Direccion, Telefono");
+        }
+        else{
+            if(inicio.passActualEdit.getPassword().length != 0){
+                if((inicio.passNuevaEdit.getPassword().length != 0 && inicio.passRepitaEdit.getPassword().length != 0)){
+                    String passNueva= Arrays.toString(inicio.passNuevaEdit.getPassword());
+                    String passRepite= Arrays.toString(inicio.passRepitaEdit.getPassword());
+                    
+                    if(passNueva.equals(passRepite)){
+                        String passAnterior= Arrays.toString(inicio.passActualEdit.getPassword());
+                        if(passNueva.equals(passAnterior)){
+                            JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+                        }
+                        else{
+                            correcto = true;
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
+                }
+            }
+            else{
+                correcto = true;
+            }
+        }
+        
+        return correcto;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent boton){
-        
+        if(boton.getSource() == inicio.btnEditarDatos){
+            Log.log.info("Vista Inicio - evento editarDatos");
+            
+            if(comprobarFormularioEditarEmpleado()){
+                //TODO - HACEMOS CONSULTA EN LA BD PARA EDITAR EMPLEADO CON NUEVOS DATOS
+            }
+        }
     }
 }
