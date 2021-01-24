@@ -562,9 +562,9 @@ INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1
 -- TRAMITESS -- 
 
 INSERT INTO Carrito VALUES(0,'email2@email.com');
-INSERT INTO Pedido VALUES(100.9,0,'email2@email.com');
-INSERT INTO Pedido VALUES(36.78,1,'email2@email.com');
-INSERT INTO Pedido VALUES(50,2,'email2@email.com');
+INSERT INTO Pedido VALUES(100.9,0,'email2@email.com','2017-03-14');
+INSERT INTO Pedido VALUES(36.78,1,'email2@email.com','2017-03-14');
+INSERT INTO Pedido VALUES(50,2,'email2@email.com','2017-03-14');
 
 -- ARTICULOS -- 
 
