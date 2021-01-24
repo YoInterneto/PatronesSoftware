@@ -100,6 +100,7 @@ CREATE TABLE public.Articulo(
 	Precio smallint,
 	Descripcion text,
 	Stock smallint,
+	rutaImagen varchar,
 	ID_Tienda smallint,
 	Id_Pedido smallint,
 	Fecha date,
@@ -564,19 +565,19 @@ INSERT INTO Pedido VALUES(0,2,'email2@email.com');
 
 -- ARTICULOS -- 
 
-INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2, 0, null, null,'IPS',2);
-INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4, 0, null, null,'HD');
-INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7, 0, null, null,'NombreTorre1');
-INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5, 0, null, null,3);
-INSERT INTO Procesador VALUES('Modelo5', 5, 25, 'Descripcion5', 6, 0, null, null,'AM4');
-INSERT INTO Memoria_RAM VALUES('Modelo6', 6, 25, 'Descripcion6', 6, 0, null, null,'PN1');
-INSERT INTO Disco_duro VALUES('Modelo7', 7, 25, 'Descripcion7', 4, 0, null, null,'SSD');
-INSERT INTO Placa_base VALUES('Modelo8', 8, 253, 'Descripcion8', 8, 0, null, null,'AM4');
-INSERT INTO Fuente_alimentacion VALUES('Modelo9', 9, 25, 'Descripcion9', 3, 0, null, null,750,'GOLD');
-INSERT INTO Caja VALUES('Modelo10', 10, 25, 'Descripcion10', 10, 0, null, null,true);
-INSERT INTO Raton VALUES('Modelo11', 11, 115, 'Descripcion11', 11, 0, null, null,8000,'Tipo1',0.5);
-INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12, 0, null, null,'Tipo1');
-INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11, 0, null, null,24,'PN',144);
+INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2,null ,0, null, null,'IPS',2);
+INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4,null ,0, null, null,'HD');
+INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,null,0, null, null,'NombreTorre1');
+INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5,null, 0, null, null,3);
+INSERT INTO Procesador VALUES('Modelo5', 5, 25, 'Descripcion5', 6,null, 0, null, null,'AM4');
+INSERT INTO Memoria_RAM VALUES('Modelo6', 6, 25, 'Descripcion6', 6,null, 0, null, null,'PN1');
+INSERT INTO Disco_duro VALUES('Modelo7', 7, 25, 'Descripcion7', 4,null, 0, null, null,'SSD');
+INSERT INTO Placa_base VALUES('Modelo8', 8, 253, 'Descripcion8', 8,null, 0, null, null,'AM4');
+INSERT INTO Fuente_alimentacion VALUES('Modelo9', 9, 25, 'Descripcion9', 3,null, 0, null, null,750,'GOLD');
+INSERT INTO Caja VALUES('Modelo10', 10, 25, 'Descripcion10', 10,null, 0, null, null,true);
+INSERT INTO Raton VALUES('Modelo11', 11, 115, 'Descripcion11', 11,null, 0, null, null,8000,'Tipo1',0.5);
+INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12,null, 0, null, null,'Tipo1');
+INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11,null, 0, null, null,24,'PN',144);
 
 -- PUNTUACION EJEMPLO PARA GRAFICA -- 
 
