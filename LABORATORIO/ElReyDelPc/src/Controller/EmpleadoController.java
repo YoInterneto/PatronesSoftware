@@ -12,11 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -182,6 +178,9 @@ public class EmpleadoController implements ActionListener{
         inicio.codTienda.setText(""+tienda.getCodigo_postal());
         inicio.ciudadTienda.setText(tienda.getCuidad());
         inicio.provinciaTienda.setText(tienda.getProvincia());
+        
+        inicio.barraBusqueda.setEditable(true);
+       // PlaceHolder holder = new PlaceHolder(inicio.barraBusqueda, "Introduzca tipo: Grafica, Raton...");
     }
     
     @Override

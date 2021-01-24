@@ -35,8 +35,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         panelLateral = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
+        barraBusqueda = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JLabel();
         btnCompras = new javax.swing.JLabel();
         btnPerfil = new javax.swing.JLabel();
         btnProducto = new javax.swing.JLabel();
@@ -48,6 +48,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         btnCerrar = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         panelInicio = new javax.swing.JPanel();
         panelInicioInfo = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -105,7 +106,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1200, 750));
         setMinimumSize(new java.awt.Dimension(1200, 750));
+        setPreferredSize(new java.awt.Dimension(1200, 750));
         setResizable(false);
         setSize(new java.awt.Dimension(1200, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,7 +142,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +152,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 80));
 
@@ -160,18 +163,18 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 250, 10));
 
-        jTextField1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField1.setBorder(null);
-        panelLateral.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, 40));
+        barraBusqueda.setBackground(new java.awt.Color(51, 51, 51));
+        barraBusqueda.setBorder(null);
+        panelLateral.add(barraBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 30));
 
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
-        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel22MouseClicked(evt);
+                btnBuscarMouseClicked(evt);
             }
         });
-        panelLateral.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 50, 40));
+        panelLateral.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 50, -1));
 
         btnCompras.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnCompras.setForeground(new java.awt.Color(255, 255, 255));
@@ -208,7 +211,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnAnnadir.setForeground(new java.awt.Color(255, 255, 255));
         btnAnnadir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnAnnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/anadir.png"))); // NOI18N
-        btnAnnadir.setText("Añadir artículo");
+        btnAnnadir.setText(" Añadir artículo");
         panelLateral.add(btnAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 200, 60));
 
         btnEditarArticulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -240,6 +243,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnCerrar.setText("Cerrar sesion");
         btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         panelLateral.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 220, 50));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("BUSQUEDA:");
+        panelLateral.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, -1));
 
         getContentPane().add(panelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, 760));
 
@@ -540,9 +547,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel22MouseClicked
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseClicked
         // TODO add your handling code here:
@@ -591,7 +598,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField barraBusqueda;
     public javax.swing.JLabel btnAnnadir;
+    public javax.swing.JLabel btnBuscar;
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JLabel btnCompras;
     public javax.swing.JLabel btnEditarArticulo;
@@ -622,9 +631,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -655,7 +664,6 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField jTextField1;
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JLabel nombreTienda;
     public javax.swing.JLabel nombreUsuario;
