@@ -49,7 +49,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         btnCerrar = new javax.swing.JLabel();
         panelInicio = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        panelInicioInfo = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -81,14 +81,25 @@ public class InicioEmpleado extends javax.swing.JFrame {
         provinciaTienda = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        panelAnadir = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         panelProductos = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        infoPanelProductos = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jSeparator15 = new javax.swing.JSeparator();
+        jSeparator16 = new javax.swing.JSeparator();
+        jLabel25 = new javax.swing.JLabel();
         panelCompras = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPedidos = new javax.swing.JList<>();
+        infoPanelCompras = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jSeparator13 = new javax.swing.JSeparator();
+        jSeparator14 = new javax.swing.JSeparator();
+        jLabel20 = new javax.swing.JLabel();
+        panelAnadir = new javax.swing.JPanel();
+        infoPanelAnadir = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jSeparator11 = new javax.swing.JSeparator();
+        jSeparator12 = new javax.swing.JSeparator();
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
 
@@ -145,6 +156,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
         panelLateral.setBackground(new java.awt.Color(153, 153, 153));
         panelLateral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelLateral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 250, 10));
 
         jTextField1.setBackground(new java.awt.Color(51, 51, 51));
@@ -204,10 +217,20 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnPlaceholder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfil.png"))); // NOI18N
         btnPlaceholder.setText("Gestiona tu perfil");
         panelLateral.add(btnPlaceholder, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, 60));
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, -1));
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 10));
+
+        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 250, -1));
+
+        jSeparator6.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 250, 10));
+
+        jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         panelLateral.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 250, -1));
 
         btnCerrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -223,7 +246,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         panelInicio.setBackground(new java.awt.Color(51, 51, 51));
         panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        panelInicioInfo.setBackground(new java.awt.Color(51, 51, 51));
 
         jPanel7.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -375,14 +398,14 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sevicioTecnico.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelInicioInfoLayout = new javax.swing.GroupLayout(panelInicioInfo);
+        panelInicioInfo.setLayout(panelInicioInfoLayout);
+        panelInicioInfoLayout.setHorizontalGroup(
+            panelInicioInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioInfoLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(panelInicioInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInicioInfoLayout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -390,52 +413,56 @@ public class InicioEmpleado extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        panelInicioInfoLayout.setVerticalGroup(
+            panelInicioInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioInfoLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(panelInicioInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInicioInfoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(46, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioInfoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
 
-        panelInicio.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panelInicio.add(panelInicioInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(panelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
-
-        panelAnadir.setBackground(new java.awt.Color(51, 51, 51));
-        panelAnadir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("AÑADIR ARTICULO");
-        panelAnadir.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 68, 217, 79));
-
-        getContentPane().add(panelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelProductos.setBackground(new java.awt.Color(51, 51, 51));
         panelProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("PRODUCTOS");
-        panelProductos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 88, 285, 138));
+        infoPanelProductos.setBackground(new java.awt.Color(51, 51, 51));
+        infoPanelProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel24.setText("Información sobre nuestros productos");
+        infoPanelProductos.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 420, 70));
+        infoPanelProductos.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 10));
+
+        jSeparator16.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        infoPanelProductos.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 50, 71));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Productos disponibles");
+        infoPanelProductos.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 70));
+
+        panelProductos.add(infoPanelProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
 
         getContentPane().add(panelProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelCompras.setBackground(new java.awt.Color(51, 51, 51));
         panelCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("COMPRAS");
-        panelCompras.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 220, 90));
 
         listaPedidos.setBackground(new java.awt.Color(51, 51, 51));
         listaPedidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -449,7 +476,49 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         panelCompras.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 880, 520));
 
+        infoPanelCompras.setBackground(new java.awt.Color(51, 51, 51));
+        infoPanelCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel18.setText("Pedidos realizados por los clientes en nuestra aplicación");
+        infoPanelCompras.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 420, 70));
+        infoPanelCompras.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 10));
+
+        jSeparator14.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        infoPanelCompras.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 50, 71));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Resumen pedidos");
+        infoPanelCompras.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 70));
+
+        panelCompras.add(infoPanelCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
+
         getContentPane().add(panelCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
+
+        panelAnadir.setBackground(new java.awt.Color(51, 51, 51));
+        panelAnadir.setPreferredSize(new java.awt.Dimension(960, 620));
+        panelAnadir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        infoPanelAnadir.setBackground(new java.awt.Color(51, 51, 51));
+        infoPanelAnadir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Nuevo producto");
+        infoPanelAnadir.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 70));
+        infoPanelAnadir.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 10));
+
+        jSeparator12.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        infoPanelAnadir.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 50, 71));
+
+        panelAnadir.add(infoPanelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
+
+        getContentPane().add(panelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
@@ -540,23 +609,28 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JLabel direccionTienda;
     public javax.swing.JLabel idTienda;
     public javax.swing.JLabel imagenUsuario;
+    private javax.swing.JPanel infoPanelAnadir;
+    private javax.swing.JPanel infoPanelCompras;
+    private javax.swing.JPanel infoPanelProductos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -565,11 +639,16 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
+    private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -583,6 +662,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JPanel panelAnadir;
     public javax.swing.JPanel panelCompras;
     public javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelInicioInfo;
     private javax.swing.JPanel panelLateral;
     public javax.swing.JPanel panelProductos;
     public javax.swing.JLabel provinciaTienda;

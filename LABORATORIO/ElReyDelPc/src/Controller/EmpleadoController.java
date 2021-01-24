@@ -102,11 +102,11 @@ public class EmpleadoController implements ActionListener{
                 
                 inicio.panelCompras.setVisible(true);
                 
-                //listaPedidosRender();
-                hola();
+                cargarListaPedidos();
             }
         });
         
+        //Evento para cuando se clicka en un pedido
         this.inicio.listaPedidos.addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -117,7 +117,7 @@ public class EmpleadoController implements ActionListener{
         });
     }
     
-    public void hola(){
+    public void cargarListaPedidos(){
         DefaultListModel listModel = new DefaultListModel();
         
         ArrayList<String> lista = new ArrayList<>();

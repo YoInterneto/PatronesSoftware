@@ -112,7 +112,8 @@ public class LoginController implements ActionListener{
         }
         else if(boton.getSource() == login.borrar){
             Log.log.info("Vista Login - evento borrar");
-            reset();
+            login.usuario.setText("email@email.com");
+            login.contrasenna.setText("pass1");
         }
         else{
             Log.log.error("ERROR: Boton no encontrado");
