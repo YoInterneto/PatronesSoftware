@@ -23,16 +23,17 @@ import javax.swing.border.TitledBorder;
  * @author Alberto
  */
 public class ListaDinamicaImagen extends DefaultListCellRenderer {
-    Border noFocusBorder = new EmptyBorder(15, 1, 1, 1);
-
-    TitledBorder focusBorder = new TitledBorder(LineBorder.createGrayLineBorder(), "title");
-
-    DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+    Border noFocusBorder;
+    TitledBorder focusBorder;
+    DefaultListCellRenderer defaultRenderer;
     
     Map<String, ImageIcon> imageMap;
     
-    public ListaDinamicaImagen(ArrayList<String> informacion, ArrayList<String> rutaImagen){
+    public ListaDinamicaImagen(ArrayList<String> informacion, ArrayList<String> rutaImagen, String titulo){
         this.imageMap = crearImageMap(informacion, rutaImagen);
+        this.noFocusBorder = new EmptyBorder(15, 1, 1, 1);
+        this.focusBorder = new TitledBorder(LineBorder.createGrayLineBorder(), titulo);
+        this.defaultRenderer = new DefaultListCellRenderer();
     }
     
     public Map<String, ImageIcon> crearImageMap(ArrayList<String> informacion, ArrayList<String> rutaImagen) {
@@ -42,7 +43,7 @@ public class ListaDinamicaImagen extends DefaultListCellRenderer {
             java.net.URL imgURL = getClass().getResource(rutaImagen.get(i));
             if(imgURL == null){
                 map.put(informacion.get(i), new ImageIcon(
-                    getClass().getResource("/images/fa.png")));
+                    getClass().getResource("/images/fa.png"))); //PONER IMAGEN POR DEFECTO
             }
             else{
                 map.put(informacion.get(i), new ImageIcon(

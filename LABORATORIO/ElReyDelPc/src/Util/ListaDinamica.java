@@ -29,9 +29,9 @@ public class ListaDinamica extends DefaultListCellRenderer {
     private DefaultListCellRenderer defaultRenderer;
     
     public ListaDinamica(String titulo){
-        noFocusBorder = new EmptyBorder(15, 1, 1, 1);
-        focusBorder = new TitledBorder(LineBorder.createGrayLineBorder(), titulo);
-        defaultRenderer = new DefaultListCellRenderer();
+        this.noFocusBorder = new EmptyBorder(15, 1, 1, 1);
+        this.focusBorder = new TitledBorder(LineBorder.createGrayLineBorder(), titulo);
+        this.defaultRenderer = new DefaultListCellRenderer();
     }
 
     @Override

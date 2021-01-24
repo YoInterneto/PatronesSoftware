@@ -191,7 +191,8 @@ public class ClienteController implements ActionListener {
         }
         
         client.listaPedidos.setModel(listModel);
-        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta));
+        String titulo = "TITULO"; //PON EL TITULO QUE QUIERAS
+        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta, titulo));
     }
     
     

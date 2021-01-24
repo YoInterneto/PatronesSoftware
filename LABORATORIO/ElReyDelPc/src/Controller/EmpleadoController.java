@@ -164,7 +164,7 @@ public class EmpleadoController implements ActionListener{
         }
         
         inicio.listaPedidos.setModel(listModel);
-        inicio.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta));
+        inicio.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta, "Pedido"));
     }
     
     public void iniciarPanelInicio(){
@@ -187,23 +187,5 @@ public class EmpleadoController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent boton){
         
-    }
-    
-    public Map<String, ImageIcon> crearImageMap(ArrayList<String> informacion, ArrayList<String> rutaImagen) {
-        Map<String, ImageIcon> map = new HashMap<>();
-        
-        for (int i=0; i<informacion.size(); i++) {
-            java.net.URL imgURL = getClass().getResource(rutaImagen.get(i));
-            if(imgURL == null){
-                map.put(informacion.get(i), new ImageIcon(
-                    getClass().getResource("/images/fa.png")));
-            }
-            else{
-                map.put(informacion.get(i), new ImageIcon(
-                    getClass().getResource(rutaImagen.get(i))));
-            }
-        }
-        
-        return map;
     }
 }
