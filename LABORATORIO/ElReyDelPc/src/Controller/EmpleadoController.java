@@ -4,13 +4,21 @@ package Controller;
 import DAO.UsuarioDao;
 import Model.Usuario.Empleado;
 import Model.Usuario.Tienda;
+import Util.FocusedTitleListCellRenderer;
 import Views.InicioEmpleado;
 import Views.Login;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class EmpleadoController implements ActionListener{
     
@@ -55,8 +63,8 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelProductos.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                
                 inicio.panelInicio.setVisible(true);
-                iniciarPanelInicio();
             }
         });
         
@@ -67,6 +75,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelInicio.setVisible(false);
                 inicio.panelProductos.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                
                 inicio.panelAnadir.setVisible(true);
             }
         });
@@ -78,20 +87,84 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelInicio.setVisible(false);
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                
                 inicio.panelProductos.setVisible(true);
             }
         });
         
-        //Boton para ver todos los productos
+        //Boton para ver todos las compras
         this.inicio.btnCompras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 inicio.panelInicio.setVisible(false);
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelProductos.setVisible(false);
+                
                 inicio.panelCompras.setVisible(true);
+                
+                //listaPedidosRender();
+                hola();
             }
         });
+        
+        this.inicio.listaPedidos.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(e.getValueIsAdjusting()) {
+                    System.out.println("DATO SELECCIONADO "+ inicio.listaPedidos.getSelectedIndex());
+                }
+            }
+        });
+    }
+    
+    public void hola(){
+        DefaultListModel listModel = new DefaultListModel();
+        
+        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+        
+        lista.add("1 GRAFICA MODELO1 389€");
+        lista.add("GRAFICA   MODELO 2   389€");
+        lista.add("GRAFICA   MODELO 3   389€");
+        lista.add("GRAFICA   MODELO 4   389€");
+        lista.add("GRAFICA   MODELO 5   389€");
+        lista.add("GRAFICA   MODELO 6   389€");
+        lista.add("GRAFICA   MODELO 7   389€");
+        lista.add("GRAFICA   MODELO 8   389€");
+        lista.add("GRAFICA   MODELO 9   389€");
+        lista.add("GRAFICA   MODELO 10   389€");
+        lista.add("GRAFICA   MODELO 11  389€");
+        lista.add("GRAFICA   MODELO 12  389€");
+        lista.add("GRAFICA   MODELO 13  389€");
+        lista.add("GRAFICA   MODELO 14  389€");
+        lista.add("GRAFICA   MODELO 15  389€");
+        lista.add("GRAFICA   MODELO 16  389€");
+        
+        listaRuta.add("/images/aaaa.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/pc.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/torre.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/nvidia_23133.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/nvidia_23133.png");
+        listaRuta.add("/images/perfil.png");
+        listaRuta.add("/images/a.png");
+        listaRuta.add("/images/a.png");
+        listaRuta.add("/images/a.png");
+        listaRuta.add("/images/aa.png");
+        listaRuta.add("/images/aa.png");        
+        
+        for(int i = 0; i<lista.size(); i++){
+            //En vez de i añadir cod referencia
+            listModel.add(i, lista.get(i));
+            
+        }
+        
+        inicio.listaPedidos.setModel(listModel);
+        inicio.listaPedidos.setCellRenderer(new FocusedTitleListCellRenderer(lista, listaRuta));
     }
     
     public void iniciarPanelInicio(){
@@ -114,5 +187,23 @@ public class EmpleadoController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent boton){
         
+    }
+    
+    public Map<String, ImageIcon> crearImageMap(ArrayList<String> informacion, ArrayList<String> rutaImagen) {
+        Map<String, ImageIcon> map = new HashMap<>();
+        
+        for (int i=0; i<informacion.size(); i++) {
+            java.net.URL imgURL = getClass().getResource(rutaImagen.get(i));
+            if(imgURL == null){
+                map.put(informacion.get(i), new ImageIcon(
+                    getClass().getResource("/images/fa.png")));
+            }
+            else{
+                map.put(informacion.get(i), new ImageIcon(
+                    getClass().getResource(rutaImagen.get(i))));
+            }
+        }
+        
+        return map;
     }
 }
