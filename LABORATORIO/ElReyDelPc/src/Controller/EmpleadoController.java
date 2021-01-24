@@ -1,9 +1,13 @@
 
 package Controller;
 
+import DAO.ArticuloDao;
+import DAO.PedidoDao;
 import DAO.UsuarioDao;
+import Model.Negocio.Pedido;
 import Model.Usuario.Empleado;
 import Model.Usuario.Tienda;
+import Util.ListaDinamica;
 import Util.ListaDinamicaImagen;
 import Views.InicioEmpleado;
 import Views.Login;
@@ -12,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Formatter;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,12 +27,14 @@ public class EmpleadoController implements ActionListener{
     private Empleado empleado;
     private Tienda tienda;
     
-    private UsuarioDao consulta = new UsuarioDao();
+    private UsuarioDao consultaUsuario = new UsuarioDao();
+    private PedidoDao consultaPedido = new PedidoDao();
+    private ArticuloDao consultaArticulo = new ArticuloDao();
     
     public EmpleadoController(InicioEmpleado inicioVista, Empleado usuario){
         this.inicio = inicioVista;
         this.empleado = usuario;
-        this.tienda = consulta.getTienda(empleado.getID_Tienda());
+        this.tienda = consultaUsuario.getTienda(empleado.getID_Tienda());
     }
     
     public void iniciar(){
@@ -57,8 +64,9 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 inicio.panelAnadir.setVisible(false);
-                inicio.panelProductos.setVisible(false);
+                inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                inicio.panelElegirProducto.setVisible(false);
                 
                 inicio.panelInicio.setVisible(true);
             }
@@ -69,22 +77,24 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 inicio.panelInicio.setVisible(false);
-                inicio.panelProductos.setVisible(false);
+                inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                inicio.panelElegirProducto.setVisible(false);
                 
                 inicio.panelAnadir.setVisible(true);
             }
         });
         
-        //Boton para ver todos los productos
-        this.inicio.btnProducto.addMouseListener(new MouseAdapter() {
+        //Boton para editar el perfil de usuario
+        this.inicio.btnEditarPerfil.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 inicio.panelInicio.setVisible(false);
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                inicio.panelElegirProducto.setVisible(false);
                 
-                inicio.panelProductos.setVisible(true);
+                inicio.panelEditarPerfil.setVisible(true);
             }
         });
         
@@ -94,11 +104,27 @@ public class EmpleadoController implements ActionListener{
             public void mouseClicked(MouseEvent e) {
                 inicio.panelInicio.setVisible(false);
                 inicio.panelAnadir.setVisible(false);
-                inicio.panelProductos.setVisible(false);
+                inicio.panelEditarPerfil.setVisible(false);
+                inicio.panelElegirProducto.setVisible(false);
                 
                 inicio.panelCompras.setVisible(true);
                 
                 cargarListaPedidos();
+            }
+        });
+        
+        //Boton para elegir el articulo a editar
+        this.inicio.btnEditarArticulo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inicio.panelInicio.setVisible(false);
+                inicio.panelAnadir.setVisible(false);
+                inicio.panelEditarPerfil.setVisible(false);
+                inicio.panelCompras.setVisible(false);
+                
+                inicio.panelElegirProducto.setVisible(true);
+                
+                cargarListaProductos();
             }
         });
         
@@ -107,13 +133,14 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()) {
-                    System.out.println("DATO SELECCIONADO "+ inicio.listaPedidos.getSelectedIndex());
+                    //Meter posiblement una interfaz con la info del pedido
+                    System.out.println("PEDIDO SELECCIONADO "+ inicio.listaPedidos.getSelectedIndex());
                 }
             }
         });
     }
     
-    public void cargarListaPedidos(){
+    /*public void cargarListaProductos(){
         DefaultListModel listModel = new DefaultListModel();
         
         ArrayList<String> lista = new ArrayList<>();
@@ -161,6 +188,29 @@ public class EmpleadoController implements ActionListener{
         
         inicio.listaPedidos.setModel(listModel);
         inicio.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta, "Pedido"));
+    }*/
+    
+    public void cargarListaProductos(){
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
+        ArrayList<String> listaRuta = new ArrayList<>();
+    }
+    
+    public void cargarListaPedidos(){
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
+        
+        for(int i=0; i<listaPedidos.size(); i++){
+            Pedido pedido = listaPedidos.get(i);
+            int idPedido = pedido.getIdPedido();
+            String pedidoInfo = "  ID-"+ String.format("%04d", idPedido) +" \tFecha-"+ pedido.getFecha()+" \tPrecio pedido-"+ pedido.getPrecio_total() +"€ \tUsuario-"+ pedido.getEmail_cliente();
+            pedidoInfo = pedidoInfo.replaceAll("\t", "         ");
+
+            listModel.add(idPedido, pedidoInfo);
+        }
+        
+        inicio.listaPedidos.setModel(listModel);
+        inicio.listaPedidos.setCellRenderer(new ListaDinamica("Pedido"));
     }
     
     public void iniciarPanelInicio(){
