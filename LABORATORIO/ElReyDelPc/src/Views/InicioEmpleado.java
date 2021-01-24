@@ -108,6 +108,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator17 = new javax.swing.JSeparator();
         jSeparator18 = new javax.swing.JSeparator();
         jLabel41 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaProductos = new javax.swing.JList<>();
         panelEditarProducto = new javax.swing.JPanel();
         infoPanelAnadir2 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
@@ -568,6 +570,18 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         panelElegirProducto.add(infoPanelAnadir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
 
+        listaProductos.setBackground(new java.awt.Color(51, 51, 51));
+        listaProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        listaProductos.setForeground(new java.awt.Color(255, 255, 255));
+        listaProductos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listaProductos);
+
+        panelElegirProducto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 800, 450));
+
         getContentPane().add(panelElegirProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelEditarProducto.setBackground(new java.awt.Color(51, 51, 51));
@@ -710,6 +724,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -728,6 +743,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     public javax.swing.JList<String> listaPedidos;
+    public javax.swing.JList<String> listaProductos;
     public javax.swing.JLabel nombreTienda;
     public javax.swing.JLabel nombreUsuario;
     public javax.swing.JPanel panelAnadir;
