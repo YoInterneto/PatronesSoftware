@@ -39,7 +39,7 @@ public class Placa_baseDao {
                     placa.setCodigo_ref(rs.getInt("Codigo_ref"));
                     placa.setDescripcion(rs.getString("Descripcion"));
                     placa.setModelo(rs.getString("Modelo"));
-                    placa.setPrecio(rs.getInt("Precio"));
+                    placa.setPrecio(rs.getFloat("Precio"));
                     placa.setRutaImagen(rs.getString("RutaImagen"));
                     placa.setSocket(rs.getString("Socket"));
                     placa.setStock(rs.getInt("Stock"));

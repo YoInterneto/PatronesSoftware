@@ -151,6 +151,7 @@ public class ClienteController implements ActionListener {
                 loginVista.setVisible(true);
             }
         });
+        
         this.client.listaPedidos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -161,51 +162,61 @@ public class ClienteController implements ActionListener {
         });
 
         this.client.cpuBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.ramBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.cajaBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.graficaBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.tecladoBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.placaBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.discoBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.ratonBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.fuenteBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
         });
         this.client.camBox.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
@@ -371,6 +382,9 @@ public class ClienteController implements ActionListener {
         ArrayList<String> lista = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
 
+        for (int i = 0; i < 10; i++) {
+            
+        }
         lista.add("1 GRAFICA MODELO1 389€");
         lista.add("GRAFICA   MODELO 2   389€");
         lista.add("GRAFICA   MODELO 3   389€");
@@ -412,7 +426,7 @@ public class ClienteController implements ActionListener {
         }
 
         client.listaPedidos.setModel(listModel);
-        String titulo = "TITULO"; //PON EL TITULO QUE QUIERAS
+        String titulo = "CARRITO"; //PON EL TITULO QUE QUIERAS
         client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta, titulo));
     }
 

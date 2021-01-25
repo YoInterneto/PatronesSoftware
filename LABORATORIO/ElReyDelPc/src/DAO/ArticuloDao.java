@@ -70,7 +70,7 @@ public class ArticuloDao {
                     articulo.setCodigo_ref(rs.getInt("Codigo_ref"));
                     articulo.setDescripcion(rs.getString("Descripcion"));
                     articulo.setModelo(rs.getString("Modelo"));
-                    articulo.setPrecio(rs.getInt("Precio"));
+                    articulo.setPrecio(rs.getFloat("Precio"));
                     articulo.setRutaImagen(rs.getString("RutaImagen"));
                     articulo.setStock(rs.getInt("Stock"));
                     
@@ -106,7 +106,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 portatil.setCodigo_ref(codigo);
                 portatil.setModelo(resultado.getString("Modelo"));
-                portatil.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                portatil.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 portatil.setDescripcion(resultado.getString("Descripcion"));
                 portatil.setStock(Integer.parseInt(resultado.getString("Stock")));
                 portatil.setRutaImagen(resultado.getString("rutaImagen"));
@@ -146,7 +146,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 caja.setCodigo_ref(codigo);
                 caja.setModelo(resultado.getString("Modelo"));
-                caja.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                caja.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 caja.setDescripcion(resultado.getString("Descripcion"));
                 caja.setStock(Integer.parseInt(resultado.getString("Stock")));
                 caja.setRutaImagen(resultado.getString("rutaImagen"));
@@ -185,7 +185,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 raton.setCodigo_ref(codigo);
                 raton.setModelo(resultado.getString("Modelo"));
-                raton.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                raton.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 raton.setDescripcion(resultado.getString("Descripcion"));
                 raton.setStock(Integer.parseInt(resultado.getString("Stock")));
                 raton.setRutaImagen(resultado.getString("rutaImagen"));
@@ -226,7 +226,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 disco_duro.setCodigo_ref(codigo);
                 disco_duro.setModelo(resultado.getString("Modelo"));
-                disco_duro.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                disco_duro.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 disco_duro.setDescripcion(resultado.getString("Descripcion"));
                 disco_duro.setStock(Integer.parseInt(resultado.getString("Stock")));
                 disco_duro.setRutaImagen(resultado.getString("rutaImagen"));
@@ -263,7 +263,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 fuente.setCodigo_ref(codigo);
                 fuente.setModelo(resultado.getString("Modelo"));
-                fuente.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                fuente.setPrecio(resultado.getFloat("Precio"));
                 fuente.setDescripcion(resultado.getString("Descripcion"));
                 fuente.setStock(Integer.parseInt(resultado.getString("Stock")));
                 fuente.setRutaImagen(resultado.getString("rutaImagen"));
@@ -303,7 +303,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 grafica.setCodigo_ref(codigo);
                 grafica.setModelo(resultado.getString("Modelo"));
-                grafica.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                grafica.setPrecio(resultado.getFloat("Precio"));
                 grafica.setDescripcion(resultado.getString("Descripcion"));
                 grafica.setStock(Integer.parseInt(resultado.getString("Stock")));
                 grafica.setRutaImagen(resultado.getString("rutaImagen"));
@@ -342,7 +342,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 ram.setCodigo_ref(codigo);
                 ram.setModelo(resultado.getString("Modelo"));
-                ram.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                ram.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 ram.setDescripcion(resultado.getString("Descripcion"));
                 ram.setStock(Integer.parseInt(resultado.getString("Stock")));
                 ram.setRutaImagen(resultado.getString("rutaImagen"));
@@ -380,7 +380,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 placa.setCodigo_ref(codigo);
                 placa.setModelo(resultado.getString("Modelo"));
-                placa.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                placa.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 placa.setDescripcion(resultado.getString("Descripcion"));
                 placa.setStock(Integer.parseInt(resultado.getString("Stock")));
                 placa.setRutaImagen(resultado.getString("rutaImagen"));
@@ -419,7 +419,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 cpu.setCodigo_ref(codigo);
                 cpu.setModelo(resultado.getString("Modelo"));
-                cpu.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                cpu.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 cpu.setDescripcion(resultado.getString("Descripcion"));
                 cpu.setStock(Integer.parseInt(resultado.getString("Stock")));
                 cpu.setRutaImagen(resultado.getString("rutaImagen"));
@@ -458,7 +458,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 monitor.setCodigo_ref(codigo);
                 monitor.setModelo(resultado.getString("Modelo"));
-                monitor.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                monitor.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 monitor.setDescripcion(resultado.getString("Descripcion"));
                 monitor.setStock(Integer.parseInt(resultado.getString("Stock")));
                 monitor.setRutaImagen(resultado.getString("rutaImagen"));
@@ -498,7 +498,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 webcam.setCodigo_ref(codigo);
                 webcam.setModelo(resultado.getString("Modelo"));
-                webcam.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                webcam.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 webcam.setDescripcion(resultado.getString("Descripcion"));
                 webcam.setStock(Integer.parseInt(resultado.getString("Stock")));
                 webcam.setRutaImagen(resultado.getString("rutaImagen"));
@@ -536,7 +536,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 teclado.setCodigo_ref(codigo);
                 teclado.setModelo(resultado.getString("Modelo"));
-                teclado.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                teclado.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 teclado.setDescripcion(resultado.getString("Descripcion"));
                 teclado.setStock(Integer.parseInt(resultado.getString("Stock")));
                 teclado.setRutaImagen(resultado.getString("rutaImagen"));
@@ -574,7 +574,7 @@ public class ArticuloDao {
             while (resultado.next()) {
                 torre.setCodigo_ref(codigo);
                 torre.setModelo(resultado.getString("Modelo"));
-                torre.setPrecio(Integer.parseInt(resultado.getString("Precio")));
+                torre.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 torre.setDescripcion(resultado.getString("Descripcion"));
                 torre.setStock(Integer.parseInt(resultado.getString("Stock")));
                 torre.setRutaImagen(resultado.getString("rutaImagen"));

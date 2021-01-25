@@ -5,7 +5,7 @@ public class Articulo {
     
     private String Modelo;
     private int Codigo_ref;
-    private int Precio;
+    private float Precio;
     private String Descripcion;
     private int Stock;
     private String rutaImagen;
@@ -55,18 +55,18 @@ public class Articulo {
     /**
      * Obtiene el precio del articulo
      *
-     * @return Devuelve un Integer con el precio del articulo
+     * @return Devuelve un Float con el precio del articulo
      */
-    public int getPrecio() {
+    public float getPrecio() {
         return Precio;
     }
 
     /**
      * Establece un nuevo precio del articulo
      *
-     * @param Precio int
+     * @param Precio float
      */
-    public void setPrecio(int Precio) {
+    public void setPrecio(float Precio) {
         this.Precio = Precio;
     }
 

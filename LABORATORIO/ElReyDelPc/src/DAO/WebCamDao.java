@@ -39,7 +39,7 @@ public class WebCamDao {
                     cam.setCodigo_ref(rs.getInt("Codigo_ref"));
                     cam.setDescripcion(rs.getString("Descripcion"));
                     cam.setModelo(rs.getString("Modelo"));
-                    cam.setPrecio(rs.getInt("Precio"));
+                    cam.setPrecio(rs.getFloat("Precio"));
                     cam.setRutaImagen(rs.getString("RutaImagen"));
                     cam.setStock(rs.getInt("Stock"));
                     

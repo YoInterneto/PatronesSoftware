@@ -39,7 +39,7 @@ public class FuenteDao {
                     fuente.setCodigo_ref(rs.getInt("Codigo_ref"));
                     fuente.setDescripcion(rs.getString("Descripcion"));
                     fuente.setModelo(rs.getString("Modelo"));
-                    fuente.setPrecio(rs.getInt("Precio"));
+                    fuente.setPrecio(rs.getFloat("Precio"));
                     fuente.setRutaImagen(rs.getString("RutaImagen"));
                     fuente.setCertificacion(rs.getString("Certificacion"));
                     fuente.setStock(rs.getInt("Stock"));

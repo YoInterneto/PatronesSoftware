@@ -39,7 +39,7 @@ public class GraficaDao {
                     grafica.setCodigo_ref(rs.getInt("Codigo_ref"));
                     grafica.setDescripcion(rs.getString("Descripcion"));
                     grafica.setModelo(rs.getString("Modelo"));
-                    grafica.setPrecio(rs.getInt("Precio"));
+                    grafica.setPrecio(rs.getFloat("Precio"));
                     grafica.setRutaImagen(rs.getString("RutaImagen"));
                     grafica.setGeneracion(rs.getInt("Generacion"));
                     grafica.setStock(rs.getInt("Stock"));

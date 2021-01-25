@@ -39,7 +39,7 @@ public class RatonDao {
                     raton.setCodigo_ref(rs.getInt("Codigo_ref"));
                     raton.setDescripcion(rs.getString("Descripcion"));
                     raton.setModelo(rs.getString("Modelo"));
-                    raton.setPrecio(rs.getInt("Precio"));
+                    raton.setPrecio(rs.getFloat("Precio"));
                     raton.setRutaImagen(rs.getString("RutaImagen"));
                     
                     raton.setStock(rs.getInt("Stock"));

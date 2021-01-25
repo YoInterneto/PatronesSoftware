@@ -39,7 +39,7 @@ public class DiscoDuroDao {
                     disco.setCodigo_ref(rs.getInt("Codigo_ref"));
                     disco.setDescripcion(rs.getString("Descripcion"));
                     disco.setModelo(rs.getString("Modelo"));
-                    disco.setPrecio(rs.getInt("Precio"));
+                    disco.setPrecio(rs.getFloat("Precio"));
                     disco.setRutaImagen(rs.getString("RutaImagen"));
                     disco.setTipo(rs.getString("Tipo"));
                     disco.setStock(rs.getInt("Stock"));

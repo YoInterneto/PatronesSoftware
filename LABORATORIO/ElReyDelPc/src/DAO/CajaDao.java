@@ -39,7 +39,7 @@ public class CajaDao {
                     caja.setCodigo_ref(rs.getInt("Codigo_ref"));
                     caja.setDescripcion(rs.getString("Descripcion"));
                     caja.setModelo(rs.getString("Modelo"));
-                    caja.setPrecio(rs.getInt("Precio"));
+                    caja.setPrecio(rs.getFloat("Precio"));
                     caja.setRutaImagen(rs.getString("RutaImagen"));
                     caja.setCristal(rs.getBoolean("Cristal"));
                     caja.setStock(rs.getInt("Stock"));

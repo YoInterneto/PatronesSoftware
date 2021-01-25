@@ -39,7 +39,7 @@ public class MemoriaRAMDao {
                     ram.setCodigo_ref(rs.getInt("Codigo_ref"));
                     ram.setDescripcion(rs.getString("Descripcion"));
                     ram.setModelo(rs.getString("Modelo"));
-                    ram.setPrecio(rs.getInt("Precio"));
+                    ram.setPrecio(rs.getFloat("Precio"));
                     ram.setRutaImagen(rs.getString("RutaImagen"));
                     ram.setPN(rs.getString("PN"));
                     ram.setStock(rs.getInt("Stock"));

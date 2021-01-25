@@ -40,7 +40,7 @@ public class ProcesadorDao {
                     cpu.setCodigo_ref(rs.getInt("Codigo_ref"));
                     cpu.setDescripcion(rs.getString("Descripcion"));
                     cpu.setModelo(rs.getString("Modelo"));
-                    cpu.setPrecio(rs.getInt("Precio"));
+                    cpu.setPrecio(rs.getFloat("Precio"));
                     cpu.setRutaImagen(rs.getString("RutaImagen"));
                     cpu.setSocket(rs.getString("Socket"));
                     cpu.setStock(rs.getInt("Stock"));

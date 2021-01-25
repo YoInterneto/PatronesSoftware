@@ -40,7 +40,7 @@ public class TecladoDao {
                     teclado.setCodigo_ref(rs.getInt("Codigo_ref"));
                     teclado.setDescripcion(rs.getString("Descripcion"));
                     teclado.setModelo(rs.getString("Modelo"));
-                    teclado.setPrecio(rs.getInt("Precio"));
+                    teclado.setPrecio(rs.getFloat("Precio"));
                     teclado.setRutaImagen(rs.getString("RutaImagen"));
                     teclado.setTipo(rs.getString("Tipo"));
                     teclado.setStock(rs.getInt("Stock"));
