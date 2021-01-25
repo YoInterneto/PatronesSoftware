@@ -119,7 +119,74 @@ public class ArticuloDao {
       
         Log.logBd.info("Consulta realizada con éxito - getAllArticulos()");
        return articulodb;
-    }  
+    }
+    
+    /**
+     * Dado el nombre de la tabla y el codigo de referencia retorna la ruta de la imagen
+     * del artículo
+     *
+     * @param tabla
+     * @param codigo
+     * @return Devuelve un String
+     */
+    public String getRutaImg(String tabla, int codigo){
+        String ruta = null;
+        Log.logBd.info("CONSULTA GetRutaImg");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getRutaImg()");
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select rutaImagen from "+ tabla+ " where codigo_ref="+ codigo);
+            Log.logBd.info("Realizada consulta - getRutaImg()");
+            if(rs.next()) { 
+                ruta = rs.getString("RutaImagen");
+            }
+
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getRutaImg(): " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+
+        Log.logBd.info("Consulta realizada con éxito - getRutaImg()");
+        return ruta;
+    }
+    
+    /**
+     * Dado los nuevos datos que quiere cambiar el empleado de un articulo
+     * se realiza una actualización en la base de datos para ese articulo
+     * 
+     * @param codigoReferencia
+     * @param modelo
+     * @param descripcion
+     * @param precio
+     * @param stock
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+     */
+    public boolean editarArticulo(int codigoReferencia, String modelo, String descripcion, int stock, float precio){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA EditarArticulo");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - editarArticulo()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE articulo SET modelo='"+ modelo +"', descripcion='"+ descripcion +"', precio="+ precio +
+                    ", stock="+ stock +" WHERE codigo_ref="+ codigoReferencia +";");
+            Log.logBd.info("Realizada consulta - editarArticulo()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - editarArticulo()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en editarArticulo(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
     
     /**
      * Dado el codigo de un portatil realiza una consulta en la base de

@@ -184,7 +184,7 @@ public class EmpleadoController implements ActionListener{
     }
     
     public void cargarProductoEdit(int codigoReferencia){
-        inicio.idProductoEdit.setText("PRODUCTO - COD.REF "+ (codigoReferencia+1));
+        inicio.idProductoEdit.setText(""+(codigoReferencia+1));
         Articulo articulo = consultaArticulo.getArticulo(codigoReferencia+1);
         
         inicio.modeloEdit.setText(articulo.getModelo());
@@ -370,7 +370,22 @@ public class EmpleadoController implements ActionListener{
             Log.log.info("Vista Inicio - evento editarProducto");
             
             if(comprobarFormularioEditarProducto()){
-                //TODO - AQUI TENEMOS QUE HACER Y PONER UNA CONSULTA PARA EDITAR EL ARTICULO
+                int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
+                String modelo = inicio.modeloEdit.getText();
+                int stock = Integer.parseInt(inicio.stockEdit.getText());
+                float precio = Float.parseFloat(inicio.precioEdit.getText());
+                String descripcion = inicio.descripcionEdit.getText();
+                
+                System.out.println(codigoReferencia);
+                
+                boolean exito = consultaArticulo.editarArticulo(codigoReferencia, modelo, descripcion, stock, precio);
+                
+                if(exito){
+                    JOptionPane.showMessageDialog(null, "Datos de artículo se han modificado con éxito.");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar los datos del artículo");
+                }
             }
         }
     }

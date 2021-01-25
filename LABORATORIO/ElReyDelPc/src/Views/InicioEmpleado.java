@@ -135,7 +135,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator26 = new javax.swing.JSeparator();
         jLabel43 = new javax.swing.JLabel();
         imgProductoEdit = new javax.swing.JLabel();
-        idProductoEdit = new javax.swing.JLabel();
+        nada = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -147,6 +147,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         descripcionEdit = new javax.swing.JTextArea();
         btnEditarProducto = new javax.swing.JButton();
+        idProductoEdit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -801,11 +802,11 @@ public class InicioEmpleado extends javax.swing.JFrame {
         imgProductoEdit.setText("VISTA PREVIA");
         panelEditarProducto.add(imgProductoEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, 280));
 
-        idProductoEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        idProductoEdit.setForeground(new java.awt.Color(255, 255, 255));
-        idProductoEdit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        idProductoEdit.setText("PRODUCTO ID");
-        panelEditarProducto.add(idProductoEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 700, 80));
+        nada.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        nada.setForeground(new java.awt.Color(255, 255, 255));
+        nada.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        nada.setText("PRODUCTO ID -");
+        panelEditarProducto.add(nada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 80));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -906,6 +907,11 @@ public class InicioEmpleado extends javax.swing.JFrame {
         );
 
         panelEditarProducto.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 520, 400));
+
+        idProductoEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        idProductoEdit.setForeground(new java.awt.Color(255, 255, 255));
+        idProductoEdit.setText("3");
+        panelEditarProducto.add(idProductoEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 70, 80));
 
         getContentPane().add(panelEditarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
@@ -1085,6 +1091,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JList<String> listaProductos;
     public javax.swing.JTextField modeloEdit;
+    private javax.swing.JLabel nada;
     public javax.swing.JTextField nombreEdit;
     public javax.swing.JLabel nombreTienda;
     public javax.swing.JLabel nombreUsuario;
