@@ -153,7 +153,7 @@ public class EmpleadoController implements ActionListener{
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()) {
                     //Meter posiblement una interfaz con la info del pedido
-                    System.out.println("ARTICULO SELECCIONADO "+ inicio.listaProductos.getSelectedIndex()+1);
+                    System.out.println("ARTICULO SELECCIONADO "+ (inicio.listaProductos.getSelectedIndex()+1));
                 }
             }
         });

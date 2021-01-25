@@ -109,7 +109,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
-                hola();
+                listaArticulos();
                 resetValuesBox();
             }
         });
@@ -376,7 +376,7 @@ public class ClienteController implements ActionListener {
         client.camBox.setSelectedIndex(0);
     }
     
-    public void hola() {
+    public void listaArticulos() {
         DefaultListModel listModel = new DefaultListModel();
 
         ArrayList<String> lista = new ArrayList<>();
