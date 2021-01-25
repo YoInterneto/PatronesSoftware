@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,341" last-zoom="0.9"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,480" last-zoom="0.65"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -15,16 +15,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="80" y="300"/>
-	<column name="ID_Usuario" not-null="true">
-		<type name="smallint" length="0"/>
-	</column>
 	<column name="Nombre">
 		<type name="varchar" length="0"/>
 	</column>
 	<column name="Apellido">
 		<type name="varchar" length="0"/>
 	</column>
-	<column name="Email">
+	<column name="Email" not-null="true">
 		<type name="varchar" length="0"/>
 	</column>
 	<column name="Direccion">
@@ -33,26 +30,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="Telefono">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="Password" not-null="true">
+	<column name="Pass" not-null="true">
 		<type name="varchar" length="0"/>
 	</column>
 	<constraint name="Usuario_pk" type="pk-constr" table="public.&quot;Usuario&quot;">
-		<columns names="ID_Usuario" ref-type="src-columns"/>
+		<columns names="Email" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="ID_Tienda" index="7"/>
+		<object name="ID_Tienda" index="6"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="Tienda_fk" index="1"/>
+		<object name="Tienda_fk" index="0"/>
 	</customidxs>
 </table>
 
 <table name="Empleado">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="20" y="720"/>
+	<position x="40" y="640"/>
 	<column name="DNI">
 		<type name="varchar" length="0"/>
 	</column>
@@ -64,7 +61,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Cliente">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="420" y="600"/>
+	<position x="320" y="660"/>
 	<column name="Tarjeta">
 		<type name="varchar" length="0"/>
 	</column>
@@ -82,7 +79,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<label ref-type="name-label">
 		<position x="-19.1945" y="1.68302"/>
 	</label>
-	<special-pk-cols indexes="0"/>
+	<special-pk-cols indexes="2"/>
 </relationship>
 
 <relationship name="Cliente_herencia_Usuario" type="relgen"
@@ -90,7 +87,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#83af1f"
 	 src-table="public.&quot;Cliente&quot;"
 	 dst-table="public.&quot;Usuario&quot;">
-	<special-pk-cols indexes="0"/>
+	<special-pk-cols indexes="2"/>
 </relationship>
 
 <table name="Tienda">
@@ -132,7 +129,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Articulo">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="1020"/>
+	<position x="920" y="1060"/>
 	<column name="Modelo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -140,7 +137,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="smallint" length="0"/>
 	</column>
 	<column name="Precio">
-		<type name="smallint" length="0"/>
+		<type name="float" length="0"/>
 	</column>
 	<column name="Descripcion">
 		<type name="text" length="0"/>
@@ -156,13 +153,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="Fecha" index="8"/>
 		<object name="ID_Tienda" index="6"/>
-		<object name="Id_Pedido" index="7"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="Pedido_fk" index="2"/>
 		<object name="Tienda_fk" index="1"/>
 	</customidxs>
 </table>
@@ -341,10 +335,20 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Carrito">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="320" y="1000"/>
+	<position x="220" y="1060"/>
 	<column name="Precio_total">
-		<type name="money" length="0"/>
+		<type name="float" length="0"/>
 	</column>
+
+	<customidxs object-type="column">
+		<object name="Email_Cliente" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Carrito_pk" index="0"/>
+		<object name="Carrito_uq" index="2"/>
+		<object name="Cliente_fk" index="1"/>
+	</customidxs>
 </table>
 
 <relationship name="Carrito_tiene_uno_Cliente" type="rel11"
@@ -455,9 +459,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Pedido">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="780"/>
+	<position x="480" y="1240"/>
 	<column name="Precio_total">
-		<type name="money" length="0"/>
+		<type name="float" length="0"/>
+	</column>
+	<column name="Fecha">
+		<type name="date" length="0"/>
 	</column>
 	<column name="Id" not-null="true">
 		<type name="smallint" length="0"/>
@@ -465,24 +472,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="Pedido_pk" type="pk-constr" table="public.&quot;Pedido&quot;">
 		<columns names="Id" ref-type="src-columns"/>
 	</constraint>
-
-	<customidxs object-type="column">
-		<object name="ID_Usuario_Cliente" index="1"/>
-	</customidxs>
-
-	<customidxs object-type="constraint">
-		<object name="Cliente_fk" index="0"/>
-	</customidxs>
 </table>
-
-<relationship name="Cliente_tiene_muchos_Pedidos" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Cliente&quot;"
-	 dst-table="public.&quot;Pedido&quot;"
-	 src-required="false" dst-required="false"/>
 
 <table name="Monitor">
 	<schema name="public"/>
@@ -547,19 +537,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<object name="WebCam_fk" index="3"/>
 	</customidxs>
 </table>
-
-<relationship name="Pedido_tiene_muchos_Articulo" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Pedido&quot;"
-	 dst-table="public.&quot;Articulo&quot;"
-	 src-required="false" dst-required="false">
-	<column name="Fecha">
-		<type name="date" length="0"/>
-	</column>
-</relationship>
 
 <relationship name="Monitor_tiene_muchos_Puntuacion" type="rel1n"
 	 src-col-pattern="{sc}_{st}"
@@ -676,6 +653,30 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#83af1f"
 	 src-table="public.&quot;Caja&quot;"
 	 dst-table="public.&quot;Puntuacion&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="new_table">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="460" y="420"/>
+</table>
+
+<relationship name="Carrito_tiene_muchos_Pedido" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Carrito&quot;"
+	 dst-table="public.&quot;Pedido&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Pedido_tiene_uno_Articulo" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Articulo&quot;"
+	 dst-table="public.&quot;Pedido&quot;"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>
