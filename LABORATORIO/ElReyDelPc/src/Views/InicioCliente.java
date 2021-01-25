@@ -59,6 +59,14 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
+        panelElegirProducto = new javax.swing.JPanel();
+        infoPanelAnadir1 = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jSeparator35 = new javax.swing.JSeparator();
+        jSeparator36 = new javax.swing.JSeparator();
+        jLabel55 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaProductos = new javax.swing.JList<>();
         panelArticulo = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -66,17 +74,17 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jSeparator12 = new javax.swing.JSeparator();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
+        raton = new javax.swing.JLabel();
+        placaBase = new javax.swing.JLabel();
+        cpu = new javax.swing.JLabel();
+        grafica = new javax.swing.JLabel();
+        caja = new javax.swing.JLabel();
+        monitor = new javax.swing.JLabel();
+        teclado = new javax.swing.JLabel();
+        disco = new javax.swing.JLabel();
+        cam = new javax.swing.JLabel();
+        fuente = new javax.swing.JLabel();
+        ram = new javax.swing.JLabel();
         panelCarro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPedidos = new javax.swing.JList<>();
@@ -349,6 +357,46 @@ public class InicioCliente extends javax.swing.JFrame {
 
         jPanel6.add(panelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
+        panelElegirProducto.setBackground(new java.awt.Color(51, 51, 51));
+        panelElegirProducto.setPreferredSize(new java.awt.Dimension(960, 620));
+        panelElegirProducto.setVisible(false);
+        panelElegirProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        infoPanelAnadir1.setBackground(new java.awt.Color(51, 51, 51));
+        infoPanelAnadir1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel44.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel44.setText("Catálogo de productos");
+        infoPanelAnadir1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 70));
+        infoPanelAnadir1.add(jSeparator35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 10));
+
+        jSeparator36.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        infoPanelAnadir1.add(jSeparator36, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 50, 71));
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel55.setText("Elija el producto a editar");
+        infoPanelAnadir1.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 420, 70));
+
+        panelElegirProducto.add(infoPanelAnadir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
+
+        listaProductos.setBackground(new java.awt.Color(51, 51, 51));
+        listaProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        listaProductos.setForeground(new java.awt.Color(255, 255, 255));
+        listaProductos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listaProductos);
+
+        panelElegirProducto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 800, 450));
+
+        jPanel6.add(panelElegirProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
+
         panelArticulo.setBackground(new java.awt.Color(51, 51, 51));
         panelArticulo.setPreferredSize(new java.awt.Dimension(960, 620));
         panelArticulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -382,82 +430,82 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator12.setForeground(new java.awt.Color(255, 255, 255));
         panelArticulo.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 30));
 
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mouse_46934.png"))); // NOI18N
-        jLabel20.setText("Raton");
-        jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 330, 130, 40));
+        raton.setForeground(new java.awt.Color(255, 255, 255));
+        raton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        raton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mouse_46934.png"))); // NOI18N
+        raton.setText("Raton");
+        raton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(raton, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 330, 130, 40));
 
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/placa.png"))); // NOI18N
-        jLabel31.setText("Placa base");
-        jLabel31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 130, 40));
+        placaBase.setForeground(new java.awt.Color(255, 255, 255));
+        placaBase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        placaBase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/placa.png"))); // NOI18N
+        placaBase.setText("Placa base");
+        placaBase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(placaBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 130, 40));
 
-        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cpu_78933.png"))); // NOI18N
-        jLabel32.setText("CPU");
-        jLabel32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 200, 130, 40));
+        cpu.setForeground(new java.awt.Color(255, 255, 255));
+        cpu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cpu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cpu_78933.png"))); // NOI18N
+        cpu.setText("CPU");
+        cpu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 200, 130, 40));
 
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nvidia_23133.png"))); // NOI18N
-        jLabel33.setText("Grafica");
-        jLabel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 200, 130, 40));
+        grafica.setForeground(new java.awt.Color(255, 255, 255));
+        grafica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        grafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nvidia_23133.png"))); // NOI18N
+        grafica.setText("Grafica");
+        grafica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(grafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 200, 130, 40));
 
-        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/torre.png"))); // NOI18N
-        jLabel34.setText("Caja");
-        jLabel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 130, 40));
+        caja.setForeground(new java.awt.Color(255, 255, 255));
+        caja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        caja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/torre.png"))); // NOI18N
+        caja.setText("Caja");
+        caja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(caja, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 130, 40));
 
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/monitor_icon-icons.com_64979.png"))); // NOI18N
-        jLabel35.setText("Monitor");
-        jLabel35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 130, 40));
+        monitor.setForeground(new java.awt.Color(255, 255, 255));
+        monitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        monitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/monitor.png"))); // NOI18N
+        monitor.setText("Monitor");
+        monitor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(monitor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 130, 40));
 
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/keyboard.png"))); // NOI18N
-        jLabel36.setText("Teclado");
-        jLabel36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 330, 130, 40));
+        teclado.setForeground(new java.awt.Color(255, 255, 255));
+        teclado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        teclado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/keyboard.png"))); // NOI18N
+        teclado.setText("Teclado");
+        teclado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(teclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 330, 130, 40));
 
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hd.png"))); // NOI18N
-        jLabel37.setText("Disco Duro");
-        jLabel37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, 170, 40));
+        disco.setForeground(new java.awt.Color(255, 255, 255));
+        disco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        disco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hd.png"))); // NOI18N
+        disco.setText("Disco Duro");
+        disco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(disco, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, 170, 40));
 
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cam.png"))); // NOI18N
-        jLabel38.setText("WebCam");
-        jLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 330, 130, 40));
+        cam.setForeground(new java.awt.Color(255, 255, 255));
+        cam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cam.png"))); // NOI18N
+        cam.setText("WebCam");
+        cam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(cam, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 330, 130, 40));
 
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fa.png"))); // NOI18N
-        jLabel39.setText("Fuente alimentacion");
-        jLabel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 170, 40));
+        fuente.setForeground(new java.awt.Color(255, 255, 255));
+        fuente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fuente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fa.png"))); // NOI18N
+        fuente.setText("Fuente alimentacion");
+        fuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(fuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 170, 40));
 
-        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/memory_ram_hardware_21433.png"))); // NOI18N
-        jLabel40.setText("Memoria RAM");
-        jLabel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 170, 40));
+        ram.setForeground(new java.awt.Color(255, 255, 255));
+        ram.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/memory_ram_hardware_21433.png"))); // NOI18N
+        ram.setText("Memoria RAM");
+        ram.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 170, 40));
 
         jPanel6.add(panelArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
 
@@ -776,7 +824,6 @@ public class InicioCliente extends javax.swing.JFrame {
         precio.setForeground(new java.awt.Color(204, 204, 204));
         precio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         precio.setText("jLabel10");
-        precio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
@@ -881,10 +928,10 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(precio)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(0, 31, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
 
         panelProducto.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, 490));
@@ -1108,9 +1155,12 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel btnMontar;
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel btnProducto;
+    public javax.swing.JLabel caja;
     public javax.swing.JComboBox<String> cajaBox;
+    public javax.swing.JLabel cam;
     public javax.swing.JComboBox<String> camBox;
     public javax.swing.JLabel codigo_ref;
+    public javax.swing.JLabel cpu;
     public javax.swing.JComboBox<String> cpuBox;
     public javax.swing.JTextField datoDireccion;
     public javax.swing.JLabel datoEmail;
@@ -1119,11 +1169,15 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JTextField datoTarjeta;
     public javax.swing.JTextField datoTelefono;
     public javax.swing.JLabel descripcion;
+    public javax.swing.JLabel disco;
     public javax.swing.JComboBox<String> discoBox;
     private javax.swing.JLabel fotoInicio;
+    public javax.swing.JLabel fuente;
     public javax.swing.JComboBox<String> fuenteBox;
+    public javax.swing.JLabel grafica;
     public javax.swing.JComboBox<String> graficaBox;
     public javax.swing.JLabel imgProducto;
+    private javax.swing.JPanel infoPanelAnadir1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1143,7 +1197,6 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1155,20 +1208,11 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
@@ -1179,6 +1223,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
@@ -1201,6 +1246,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -1229,6 +1275,8 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator32;
     private javax.swing.JSeparator jSeparator33;
     private javax.swing.JSeparator jSeparator34;
+    private javax.swing.JSeparator jSeparator35;
+    private javax.swing.JSeparator jSeparator36;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
@@ -1236,6 +1284,8 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     public javax.swing.JList<String> listaPedidos;
+    public javax.swing.JList<String> listaProductos;
+    public javax.swing.JLabel monitor;
     public javax.swing.JLabel nombreAtributo1;
     public javax.swing.JLabel nombreAtributo2;
     public javax.swing.JLabel nombreAtributo3;
@@ -1245,18 +1295,23 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JTextField nuevoEmail;
     public javax.swing.JPanel panelArticulo;
     public javax.swing.JPanel panelCarro;
+    public javax.swing.JPanel panelElegirProducto;
     public javax.swing.JPanel panelInicio;
     public javax.swing.JPanel panelMonta;
     public javax.swing.JPanel panelPerfil;
     public javax.swing.JPanel panelProducto;
+    public javax.swing.JLabel placaBase;
     public javax.swing.JComboBox<String> placaBox;
     public javax.swing.JLabel precio;
     public javax.swing.JLabel precioCarro;
     public javax.swing.JLabel precioTotalPc;
     public javax.swing.JLabel productoSeleccionado;
+    public javax.swing.JLabel ram;
     public javax.swing.JComboBox<String> ramBox;
+    public javax.swing.JLabel raton;
     public javax.swing.JComboBox<String> ratonBox;
     public javax.swing.JPasswordField repitePass;
+    public javax.swing.JLabel teclado;
     public javax.swing.JComboBox<String> tecladoBox;
     public javax.swing.JTextField textoBusqueda;
     // End of variables declaration//GEN-END:variables

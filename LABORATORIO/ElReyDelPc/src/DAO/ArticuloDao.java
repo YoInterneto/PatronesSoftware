@@ -292,7 +292,7 @@ public class ArticuloDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - getFuente_alimentacion()");
             Statement s = conexion.createStatement();
-            ResultSet resultado = s.executeQuery("select * from fuente where codigo_ref='" + codigo + "';");
+            ResultSet resultado = s.executeQuery("select * from fuente_alimentacion where codigo_ref='" + codigo + "';");
             Log.logBd.info("Realizada consulta - getFuente_alimentacion()");
 
             while (resultado.next()) {
@@ -371,7 +371,7 @@ public class ArticuloDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - getMemoria_RAM()");
             Statement s = conexion.createStatement();
-            ResultSet resultado = s.executeQuery("select * from ram where codigo_ref='" + codigo + "';");
+            ResultSet resultado = s.executeQuery("select * from Memoria_ram where codigo_ref='" + codigo + "';");
             Log.logBd.info("Realizada consulta - getMemoria_RAM()");
 
             while (resultado.next()) {
@@ -409,7 +409,7 @@ public class ArticuloDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - getPlaca_base()");
             Statement s = conexion.createStatement();
-            ResultSet resultado = s.executeQuery("select * from placa where codigo_ref='" + codigo + "';");
+            ResultSet resultado = s.executeQuery("select * from placa_base where codigo_ref='" + codigo + "';");
             Log.logBd.info("Realizada consulta - getPlaca_base()");
 
             while (resultado.next()) {
@@ -448,7 +448,7 @@ public class ArticuloDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - getProcesador()");
             Statement s = conexion.createStatement();
-            ResultSet resultado = s.executeQuery("select * from cpu where codigo_ref='" + codigo + "';");
+            ResultSet resultado = s.executeQuery("select * from Procesador where codigo_ref='" + codigo + "';");
             Log.logBd.info("Realizada consulta - getProcesador()");
 
             while (resultado.next()) {
@@ -603,7 +603,7 @@ public class ArticuloDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - getPcTorre()");
             Statement s = conexion.createStatement();
-            ResultSet resultado = s.executeQuery("select * from torre where codigo_ref='" + codigo + "';");
+            ResultSet resultado = s.executeQuery("select * from pctorre where codigo_ref='" + codigo + "';");
             Log.logBd.info("Realizada consulta - getPcTorre()");
 
             while (resultado.next()) {
