@@ -134,6 +134,19 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator25 = new javax.swing.JSeparator();
         jSeparator26 = new javax.swing.JSeparator();
         jLabel43 = new javax.swing.JLabel();
+        imgProductoEdit = new javax.swing.JLabel();
+        idProductoEdit = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        modeloEdit = new javax.swing.JTextField();
+        precioEdit = new javax.swing.JTextField();
+        stockEdit = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        descripcionEdit = new javax.swing.JTextArea();
+        btnEditarProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -784,6 +797,116 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         panelEditarProducto.add(infoPanelAnadir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
 
+        imgProductoEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgProductoEdit.setText("VISTA PREVIA");
+        panelEditarProducto.add(imgProductoEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, 280));
+
+        idProductoEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        idProductoEdit.setForeground(new java.awt.Color(255, 255, 255));
+        idProductoEdit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        idProductoEdit.setText("PRODUCTO ID");
+        panelEditarProducto.add(idProductoEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 700, 80));
+
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("MODELO");
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("STOCK");
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("PRECIO");
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("DESCRIPCION");
+
+        modeloEdit.setText("jTextField1");
+        modeloEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeloEditActionPerformed(evt);
+            }
+        });
+
+        precioEdit.setText("jTextField2");
+        precioEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioEditActionPerformed(evt);
+            }
+        });
+
+        stockEdit.setText("jTextField3");
+
+        descripcionEdit.setColumns(20);
+        descripcionEdit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        descripcionEdit.setLineWrap(true);
+        descripcionEdit.setRows(5);
+        jScrollPane3.setViewportView(descripcionEdit);
+
+        btnEditarProducto.setText("Editar");
+        btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProductoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(modeloEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel26)
+                            .addComponent(precioEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(stockEdit))
+                        .addGap(73, 73, 73))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addGap(336, 336, 336))
+                            .addComponent(jScrollPane3))
+                        .addContainerGap(43, Short.MAX_VALUE))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modeloEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(precioEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(btnEditarProducto)
+                .addGap(25, 25, 25))
+        );
+
+        panelEditarProducto.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 520, 400));
+
         getContentPane().add(panelEditarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         pack();
@@ -812,6 +935,18 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private void btnEditarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDatosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarDatosActionPerformed
+
+    private void precioEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioEditActionPerformed
+
+    private void modeloEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modeloEditActionPerformed
+
+    private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -858,6 +993,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JLabel btnEditarArticulo;
     public javax.swing.JButton btnEditarDatos;
     public javax.swing.JLabel btnEditarPerfil;
+    public javax.swing.JButton btnEditarProducto;
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel ciudadTienda;
     public javax.swing.JLabel codTienda;
@@ -867,12 +1003,15 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JLabel datoEmail;
     public javax.swing.JLabel datoNombre;
     public javax.swing.JLabel datoTelefono;
+    public javax.swing.JTextArea descripcionEdit;
     private javax.swing.JLabel direccion;
     private javax.swing.JLabel direccion1;
     public javax.swing.JTextField direccionEdit;
     public javax.swing.JLabel direccionTienda;
+    public javax.swing.JLabel idProductoEdit;
     public javax.swing.JLabel idTienda;
     public javax.swing.JLabel imagenUsuario;
+    public javax.swing.JLabel imgProductoEdit;
     private javax.swing.JPanel infoPanelAnadir;
     private javax.swing.JPanel infoPanelAnadir1;
     private javax.swing.JPanel infoPanelAnadir2;
@@ -896,30 +1035,36 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -939,6 +1084,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JList<String> listaProductos;
+    public javax.swing.JTextField modeloEdit;
     public javax.swing.JTextField nombreEdit;
     public javax.swing.JLabel nombreTienda;
     public javax.swing.JLabel nombreUsuario;
@@ -953,7 +1099,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JPasswordField passActualEdit;
     public javax.swing.JPasswordField passNuevaEdit;
     public javax.swing.JPasswordField passRepitaEdit;
+    public javax.swing.JTextField precioEdit;
     public javax.swing.JLabel provinciaTienda;
+    public javax.swing.JTextField stockEdit;
     public javax.swing.JTextField telefonoEdit;
     public javax.swing.JLabel tituloUsuarioId;
     // End of variables declaration//GEN-END:variables

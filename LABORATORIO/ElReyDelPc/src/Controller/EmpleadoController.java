@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -48,8 +49,11 @@ public class EmpleadoController implements ActionListener{
         
         iniciarPanelInicio();
         
-        //Boton para editar los datos
+        //Boton para editar los datos del empleado
         this.inicio.btnEditarDatos.addActionListener(this);
+        
+        //Boton para editar los datos de un producto
+        this.inicio.btnEditarProducto.addActionListener(this);
         
         //Boton para cerrar sesion
         this.inicio.btnCerrar.addMouseListener(new MouseAdapter() {
@@ -73,6 +77,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelCompras.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
+                inicio.panelEditarProducto.setVisible(false);
                 
                 inicio.panelInicio.setVisible(true);
             }
@@ -86,6 +91,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelCompras.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
+                inicio.panelEditarProducto.setVisible(false);
                 
                 inicio.panelAnadir.setVisible(true);
             }
@@ -99,6 +105,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelCompras.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
+                inicio.panelEditarProducto.setVisible(false);
                 
                 inicio.panelEditarPerfil.setVisible(true);
                 
@@ -114,6 +121,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
+                inicio.panelEditarProducto.setVisible(false);
                 
                 inicio.panelCompras.setVisible(true);
                 
@@ -129,6 +137,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelAnadir.setVisible(false);
                 inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelCompras.setVisible(false);
+                inicio.panelEditarProducto.setVisible(false);
                 
                 inicio.panelElegirProducto.setVisible(true);
                 
@@ -147,7 +156,7 @@ public class EmpleadoController implements ActionListener{
             }
         });
         
-        //Evento para cuando se clicka en un pedido
+        //Evento para cuando se clicka en un producto y nos manda al panel para editarlo
         this.inicio.listaProductos.addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -159,9 +168,36 @@ public class EmpleadoController implements ActionListener{
                     //************************************************************
                     //Meter posiblement una interfaz con la info del pedido
                     System.out.println("ARTICULO SELECCIONADO "+ (inicio.listaProductos.getSelectedIndex()+1));
+                    
+                    inicio.panelInicio.setVisible(false);
+                    inicio.panelAnadir.setVisible(false);
+                    inicio.panelEditarPerfil.setVisible(false);
+                    inicio.panelCompras.setVisible(false);
+                    inicio.panelElegirProducto.setVisible(false);
+                    
+                    inicio.panelEditarProducto.setVisible(true);
+                    
+                    cargarProductoEdit(inicio.listaProductos.getSelectedIndex());
                 }
             }
         });
+    }
+    
+    public void cargarProductoEdit(int codigoReferencia){
+        inicio.idProductoEdit.setText("PRODUCTO - COD.REF "+ (codigoReferencia+1));
+        Articulo articulo = consultaArticulo.getArticulo(codigoReferencia+1);
+        
+        inicio.modeloEdit.setText(articulo.getModelo());
+        inicio.descripcionEdit.setText(articulo.getDescripcion());
+        inicio.precioEdit.setText(""+articulo.getPrecio());
+        inicio.stockEdit.setText(""+articulo.getStock());
+        
+        if(articulo.getRutaImagen() == null){
+            inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png")));
+        }
+        else{
+            inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource(articulo.getRutaImagen())));
+        }
     }
     
     public void cargarListaProductos(){
@@ -246,9 +282,6 @@ public class EmpleadoController implements ActionListener{
         inicio.passRepitaEdit.setText("");
     }
     
-    //AQUI COMPROBAMOS QUE LA NINGUNA CAMPO SEA VACIA EXCEPTO CONTRASEÑA
-    //SI CONTRASEÑA ACTUAL NO VACIO ENTONCES NO VACIAS LAS OTRAS
-    //CONTRASEÑA NUEVA Y REPITE TIENEN QUE SE IGUALES Y DIFERENTES DE ANTERIOR
     public boolean comprobarFormularioEditarEmpleado(){
         boolean correcto = false;
         
@@ -287,6 +320,20 @@ public class EmpleadoController implements ActionListener{
         return correcto;
     }
     
+    public boolean comprobarFormularioEditarProducto(){
+        boolean correcto = false;
+        
+        if(inicio.modeloEdit.getText().equalsIgnoreCase("") || inicio.stockEdit.getText().equalsIgnoreCase("") 
+                || inicio.precioEdit.getText().equalsIgnoreCase("") || inicio.descripcionEdit.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Modelo, Stock, Precio, Descripcion");
+        }
+        else{
+            correcto = true;
+        }
+        
+        return correcto;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent boton){
         if(boton.getSource() == inicio.btnEditarDatos){
@@ -317,6 +364,13 @@ public class EmpleadoController implements ActionListener{
                 else{
                     JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar tus datos");
                 }
+            }
+        }
+        else if(boton.getSource() == inicio.btnEditarProducto){
+            Log.log.info("Vista Inicio - evento editarProducto");
+            
+            if(comprobarFormularioEditarProducto()){
+                //TODO - AQUI TENEMOS QUE HACER Y PONER UNA CONSULTA PARA EDITAR EL ARTICULO
             }
         }
     }

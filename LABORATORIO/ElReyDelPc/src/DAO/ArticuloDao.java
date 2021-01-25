@@ -45,6 +45,41 @@ public class ArticuloDao {
         return tipo;
     }
     
+    /**
+     * Retorna el articulo de la base de datos el cual tenga codigo de referencia indicado
+     *
+     * @param codigoReferencia
+     * @return Devuelve un objeto articulo
+     */
+    public Articulo getArticulo(int codigoReferencia) {
+        Articulo articulo = new Articulo();
+        Log.logBd.info("CONSULTA GetArticulo");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getArticulo()");
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select * from articulo where codigo_ref="+ codigoReferencia);
+            Log.logBd.info("Realizada consulta - getArticulo()");
+             
+            if(rs.next()) {
+                articulo.setCodigo_ref(rs.getInt("Codigo_ref"));
+                articulo.setDescripcion(rs.getString("Descripcion"));
+                articulo.setModelo(rs.getString("Modelo"));
+                articulo.setPrecio(rs.getFloat("Precio"));
+                articulo.setRutaImagen(rs.getString("RutaImagen"));
+                articulo.setStock(rs.getInt("Stock"));
+            }           
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getArticulo(): " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getArticulo()");
+        return articulo;
+    }
+    
     
     /**
      * Realiza una consulta en la base de
