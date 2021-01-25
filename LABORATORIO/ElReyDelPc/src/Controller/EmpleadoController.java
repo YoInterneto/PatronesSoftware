@@ -152,6 +152,11 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()) {
+                    //************************************************************
+                    //************************************************************
+                    //ESTO ES PORQUE DE MOMENTO CODIGO DE REFERENCIA EMPIEZA EN 1
+                    //************************************************************
+                    //************************************************************
                     //Meter posiblement una interfaz con la info del pedido
                     System.out.println("ARTICULO SELECCIONADO "+ (inicio.listaProductos.getSelectedIndex()+1));
                 }
@@ -181,6 +186,11 @@ public class EmpleadoController implements ActionListener{
                 listaRuta.add(articulo.getRutaImagen());
             }
             
+            //************************************************************
+            //************************************************************
+            //ESTO ES PORQUE DE MOMENTO CODIGO DE REFERENCIA EMPIEZA EN 1
+            //************************************************************
+            //************************************************************
             listModel.add(codigoReferencia-1, articuloInfo);
         }
         
@@ -283,7 +293,30 @@ public class EmpleadoController implements ActionListener{
             Log.log.info("Vista Inicio - evento editarDatos");
             
             if(comprobarFormularioEditarEmpleado()){
-                //TODO - HACEMOS CONSULTA EN LA BD PARA EDITAR EMPLEADO CON NUEVOS DATOS
+                String correo = empleado.getEmail();
+                String nombre = inicio.nombreEdit.getText();
+                String apellido = inicio.apellidoEdit.getText();
+                String direccion = inicio.direccionEdit.getText();
+                int telefono = Integer.parseInt(inicio.telefonoEdit.getText());
+                
+                boolean exito = false;
+                
+                //Si quiere cambiar la contraseña cogemos el valor
+                if(inicio.passNuevaEdit.getPassword().length != 0){
+                    char[] valorContrasenna = inicio.passNuevaEdit.getPassword();
+                    String contrasenna = new String(valorContrasenna);
+                    exito = consultaUsuario.editarUsuarioPass(correo, nombre, apellido, direccion, telefono, contrasenna);
+                }
+                else{
+                    exito = consultaUsuario.editarUsuario(correo, nombre, apellido, direccion, telefono);
+                }
+                
+                if(exito){
+                    JOptionPane.showMessageDialog(null, "Tus datos se han modificado con éxito.");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar tus datos");
+                }
             }
         }
     }
