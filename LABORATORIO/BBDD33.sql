@@ -504,6 +504,30 @@ REFERENCES public.Cliente (Email) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
+-- object: public.Carrito | type: TABLE --
+-- DROP TABLE IF EXISTS public.Carrito CASCADE;
+CREATE TABLE public.Carrito(
+	datosArticulos varchar,
+	Email_Cliente varchar NOT NULL,
+	CONSTRAINT Carrito_pk PRIMARY KEY (Email_Cliente)
+
+);
+-- ddl-end --
+ALTER TABLE public.Carrito OWNER TO postgres;
+-- ddl-end --
+
+-- object: Cliente_fk | type: CONSTRAINT --
+-- ALTER TABLE public.Carrito DROP CONSTRAINT IF EXISTS Cliente_fk CASCADE;
+ALTER TABLE public.Carrito ADD CONSTRAINT Cliente_fk FOREIGN KEY (Email_Cliente)
+REFERENCES public.Cliente (Email) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: Carrito_uq | type: CONSTRAINT --
+-- ALTER TABLE public.Carrito DROP CONSTRAINT IF EXISTS Carrito_uq CASCADE;
+ALTER TABLE public.Carrito ADD CONSTRAINT Carrito_uq UNIQUE (Email_Cliente);
+-- ddl-end --
+
 -- INSERTS -- 
 
 
@@ -519,9 +543,7 @@ INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1
 
 -- ARTICULOS -- 
 
-
 INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2,null ,0,'IPS',2);
-INSERT INTO Caja VALUES('Modelo111', 1, 25, 'Descripcion1111', 2,null ,0,true);
 INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4,null ,0,'HD');
 INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,null,0,'NombreTorre1');
 INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5,null, 0, 3);
@@ -536,6 +558,8 @@ INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12,'/images/key
 INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11,'/images/monitor.png', 0,24,'PN',144);
 
 
+INSERT INTO Carrito VALUES('placa_base-4-modelo-30','email2@email.com');
+
 INSERT INTO Pedido VALUES(100.9,'2017-03-14',0,'{3,4}','email2@email.com');
 INSERT INTO Pedido VALUES(30.75,'2017-03-14',1,'{2,1}','email2@email.com');
 INSERT INTO Pedido VALUES(50,'2017-03-14',2,'{5,6}','email2@email.com');
@@ -547,4 +571,6 @@ INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(2,4);
 INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(0,4);
 INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(5,4);
 INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(3,4);
+
+update caja set modelo='modelo1000000' where codigo_ref = 10;
 

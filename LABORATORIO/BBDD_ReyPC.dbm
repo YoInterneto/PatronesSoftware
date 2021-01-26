@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.65"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,119" last-zoom="0.65"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -637,5 +637,35 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="public.&quot;Cliente&quot;"
 	 dst-table="public.&quot;Pedido&quot;"
 	 src-required="false" dst-required="false"/>
+
+<table name="Carrito">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="360" y="960"/>
+	<column name="datosArticulos">
+		<type name="varchar" length="0"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="Email_Cliente" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Carrito_pk" index="2"/>
+		<object name="Carrito_uq" index="1"/>
+		<object name="Cliente_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="Carrito_tiene_uno_Cliente" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;Cliente&quot;"
+	 dst-table="public.&quot;Carrito&quot;"
+	 src-required="false" dst-required="false">
+	<special-pk-cols indexes="0"/>
+</relationship>
 
 </dbmodel>

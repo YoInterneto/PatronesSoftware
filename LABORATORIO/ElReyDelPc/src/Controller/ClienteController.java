@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.ArticuloDao;
 import DAO.CajaDao;
+import DAO.CarroDao;
 import DAO.DiscoDuroDao;
 import DAO.FuenteDao;
 import DAO.GraficaDao;
@@ -59,8 +60,11 @@ public class ClienteController implements ActionListener {
     private WebCamDao daoCam;
     private FuenteDao daoFuente;
     private MonitorDao daoMonitor;
+    private CarroDao carroDao;
 
     private String tipo;
+    private ArrayList<String> cesta;
+    
     public ClienteController(InicioCliente clientVista, Cliente cliente) {
         this.cliente = cliente;
         this.client = clientVista;
@@ -75,6 +79,8 @@ public class ClienteController implements ActionListener {
         daoCam = new WebCamDao();
         daoFuente = new FuenteDao();
         daoMonitor = new MonitorDao();
+        cesta = new ArrayList<>();
+        carroDao= new CarroDao();
     }
 
     public void iniciar() {
@@ -82,7 +88,6 @@ public class ClienteController implements ActionListener {
         client.setLocationRelativeTo(null);
         client.nombreCliente.setText(cliente.getNombre());
         
-        //client.fotoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png")));
         this.client.btnProducto.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -118,6 +123,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
+                cargarCarro();
                 listaArticulos();
                 resetValuesBox();
             }
@@ -172,7 +178,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 cargarListaPlaca();
-                tipo = "placa";
+                tipo = "placa_base";
             }
         });
         this.client.caja.addMouseListener(new MouseAdapter() {
@@ -200,7 +206,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 cargarListaCpu();
-                tipo = "cpu";
+                tipo = "procesador";
             }
         });
         this.client.grafica.addMouseListener(new MouseAdapter() {
@@ -270,7 +276,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 cargarListaCam();
-                tipo = "cam";
+                tipo = "webcam";
             }
         });
         this.client.fuente.addMouseListener(new MouseAdapter() {
@@ -284,7 +290,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 cargarListaFuente();
-                tipo = "fuente";
+                tipo = "fuente_alimentacion";
             }
         });
         this.client.disco.addMouseListener(new MouseAdapter() {
@@ -298,7 +304,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 cargarListaDisco();
-                tipo = "disco";
+                tipo = "disco_duro";
             }
         });
         this.client.ram.addMouseListener(new MouseAdapter() {
@@ -312,7 +318,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 cargarListaRam();
-                tipo = "ram";
+                tipo = "memoria_ram";
             }
         });
         
@@ -391,13 +397,13 @@ public class ClienteController implements ActionListener {
                     client.panelArticulo.setVisible(false);
                     client.panelElegirProducto.setVisible(false);
                     client.panelProducto.setVisible(true);
-                    System.out.println(tipo + codigo);
+                    
                     switch (tipo){
-                        case "placa":
+                        case "placa_base":
                             Placa_base placa = consultaArticulo.getPlaca_base(codigo);
                             iniciarPanelProductoPlaca(placa);
                             break;
-                        case "cpu":
+                        case "procesador":
                             Procesador cpu = consultaArticulo.getProcesador(codigo);
                             iniciarPanelProductoCpu(cpu);
                             break;
@@ -421,19 +427,19 @@ public class ClienteController implements ActionListener {
                             Raton raton = consultaArticulo.getRaton(codigo);
                             iniciarPanelProductoRaton(raton);
                             break;
-                        case "cam":
+                        case "webcam":
                             WebCam cam = consultaArticulo.getWebcam(codigo);
                             iniciarPanelProductoCam(cam);
                             break;
-                        case "fuente":
+                        case "fuente_alimentacion":
                             Fuente_alimentacion fuente = consultaArticulo.getFuente(codigo);
                             iniciarPanelProductoFuente(fuente);
                             break;
-                        case "ram":
+                        case "memoria_ram":
                             Memoria_RAM ram = consultaArticulo.getMemoria_RAM(codigo);
                             iniciarPanelProductoRam(ram);
                             break;
-                        case "disco":
+                        case "disco_duro":
                             Disco_duro disco = consultaArticulo.getDisco_duro(codigo);
                             iniciarPanelProductoDisco(disco);
                             break;               
@@ -441,6 +447,25 @@ public class ClienteController implements ActionListener {
                     
                 }
                 
+            }
+        });
+        
+        this.client.insertarCesta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int codigo = Integer.parseInt(client.codigo_ref.getText());
+                String modelo = client.datoModelo.getText();
+                String precio = client.precio.getText();   
+                
+                String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+                String nuevoCarro = carroActual+"," + tipo+"-"+codigo+"-"+modelo+"-"+precio;
+                
+                carroDao.actualizaCarro(cliente.getEmail(),nuevoCarro);
+               
+                     
+                
+                 
+                 //cesta.add(tipo+"-"+codigo+"-"+modelo+"-"+precio);
             }
         });
     }
@@ -466,7 +491,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(placa.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(placa.getStock()));
         client.descripcion.setText(placa.getDescripcion());
-        client.precio.setText(String.valueOf(placa.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(placa.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(placa.getRutaImagen())));
         
         client.atrParticular1.setVisible(true);
@@ -482,7 +507,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(cpu.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(cpu.getStock()));
         client.descripcion.setText(cpu.getDescripcion());
-        client.precio.setText(String.valueOf(cpu.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(cpu.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(cpu.getRutaImagen())));
         
         client.atrParticular1.setText(cpu.getSocket());
@@ -498,7 +523,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(grafica.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(grafica.getStock()));
         client.descripcion.setText(grafica.getDescripcion());
-        client.precio.setText(String.valueOf(grafica.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(grafica.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(grafica.getRutaImagen())));
         
         client.atrParticular1.setText(String.valueOf(grafica.getGeneracion()));
@@ -513,7 +538,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(caja.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(caja.getStock()));
         client.descripcion.setText(caja.getDescripcion());
-        client.precio.setText(String.valueOf(caja.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(caja.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(caja.getRutaImagen())));
         if (caja.isCristal()){
             client.atrParticular1.setText("Si");
@@ -531,7 +556,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(monitor.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(monitor.getStock()));
         client.descripcion.setText(monitor.getDescripcion());
-        client.precio.setText(String.valueOf(monitor.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(monitor.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(monitor.getRutaImagen())));
         
         client.nombreAtributo1.setText("Panel");
@@ -555,7 +580,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(teclado.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(teclado.getStock()));
         client.descripcion.setText(teclado.getDescripcion());
-        client.precio.setText(String.valueOf(teclado.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(teclado.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(teclado.getRutaImagen())));
         
         client.nombreAtributo1.setText("Tipo");
@@ -570,7 +595,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(raton.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(raton.getStock()));
         client.descripcion.setText(raton.getDescripcion());
-        client.precio.setText(String.valueOf(raton.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(raton.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(raton.getRutaImagen())));
         
         client.nombreAtributo1.setText("Tipo");
@@ -594,7 +619,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(cam.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(cam.getStock()));
         client.descripcion.setText(cam.getDescripcion());
-        client.precio.setText(String.valueOf(cam.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(cam.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(cam.getRutaImagen())));
         
         client.nombreAtributo1.setText("Calidad");
@@ -610,7 +635,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(fuente.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(fuente.getStock()));
         client.descripcion.setText(fuente.getDescripcion());
-        client.precio.setText(String.valueOf(fuente.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(fuente.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(fuente.getRutaImagen())));
         
         client.nombreAtributo1.setText("Potencia");
@@ -630,7 +655,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(ram.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(ram.getStock()));
         client.descripcion.setText(ram.getDescripcion());
-        client.precio.setText(String.valueOf(ram.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(ram.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(ram.getRutaImagen())));
         
         client.nombreAtributo1.setText("P/N");
@@ -645,7 +670,7 @@ public class ClienteController implements ActionListener {
         client.codigo_ref.setText(String.valueOf(disco.getCodigo_ref()));
         client.datoStock.setText(String.valueOf(disco.getStock()));
         client.descripcion.setText(disco.getDescripcion());
-        client.precio.setText(String.valueOf(disco.getPrecio()) + " €");
+        client.precio.setText(String.valueOf(disco.getPrecio()));
         client.imgProducto.setIcon(new ImageIcon (getClass().getResource(disco.getRutaImagen())));
         
         client.nombreAtributo1.setText("Tipo");
@@ -774,58 +799,54 @@ public class ClienteController implements ActionListener {
         client.camBox.setSelectedIndex(0);
     }
     
+    private void cargarCarro(){
+        
+        
+        String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+        String[] articulo = carroActual.split(",");
+        for (int i = 0; i < articulo.length; i++) {
+            System.out.println(articulo[i]);
+            cesta.add(articulo[i]);
+            
+        }
+        
+        
+        
+    }
+    
     public void listaArticulos() {
         DefaultListModel listModel = new DefaultListModel();
 
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
+        
+        
+        for(int i=0; i<cesta.size(); i++){
             
-        }
-        lista.add("1 GRAFICA MODELO1 389€");
-        lista.add("GRAFICA   MODELO 2   389€");
-        lista.add("GRAFICA   MODELO 3   389€");
-        lista.add("GRAFICA   MODELO 4   389€");
-        lista.add("GRAFICA   MODELO 5   389€");
-        lista.add("GRAFICA   MODELO 6   389€");
-        lista.add("GRAFICA   MODELO 7   389€");
-        lista.add("GRAFICA   MODELO 8   389€");
-        lista.add("GRAFICA   MODELO 9   389€");
-        lista.add("GRAFICA   MODELO 10   389€");
-        lista.add("GRAFICA   MODELO 11  389€");
-        lista.add("GRAFICA   MODELO 12  389€");
-        lista.add("GRAFICA   MODELO 13  389€");
-        lista.add("GRAFICA   MODELO 14  389€");
-        lista.add("GRAFICA   MODELO 15  389€");
-        lista.add("GRAFICA   MODELO 16  389€");
-
-        listaRuta.add("/images/aaaa.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/pc.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/torre.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/nvidia_23133.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/nvidia_23133.png");
-        listaRuta.add("/images/perfil.png");
-        listaRuta.add("/images/a.png");
-        listaRuta.add("/images/a.png");
-        listaRuta.add("/images/a.png");
-        listaRuta.add("/images/aa.png");
-        listaRuta.add("/images/aa.png");
-
-        for (int i = 0; i < lista.size(); i++) {
-            //En vez de i añadir cod referencia
-            listModel.add(i, lista.get(i));
-
+            String datoArticulo = cesta.get(i);
+            String[] valores = datoArticulo.split("-");
+            String tipo = valores[0];
+            int codigo = Integer.parseInt(valores[1]);
+            String modelo = valores[2];
+            String precio = valores[3];
+            
+            String articuloInfo = "  CodRef-"+ String.format("%04d", codigo) +"- \t"+ modelo +" \tPrecio € "+ precio ;
+            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            
+            listaInfo.add(articuloInfo);
+            String ruta = consultaArticulo.getRutaImg(tipo,codigo);
+            if(ruta == null){
+                listaRuta.add("/images/error.png");
+            }
+            else{
+                listaRuta.add(ruta);
+            }
+            
+            listModel.add(i, articuloInfo);
         }
 
         client.listaPedidos.setModel(listModel);
-        String titulo = "CARRITO"; //PON EL TITULO QUE QUIERAS
-        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(lista, listaRuta, titulo));
+        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
     }
 
     public void cargarListaPlaca(){

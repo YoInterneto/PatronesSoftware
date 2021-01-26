@@ -166,7 +166,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         descripcion = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        insertarCesta = new javax.swing.JButton();
         imgProducto = new javax.swing.JLabel();
         panelPerfil = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
@@ -850,7 +850,7 @@ public class InicioCliente extends javax.swing.JFrame {
 
         jButton1.setText("Comprar");
 
-        jButton2.setText("Cesta");
+        insertarCesta.setText("Cesta");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -884,7 +884,7 @@ public class InicioCliente extends javax.swing.JFrame {
                                     .addGroup(jPanel8Layout.createSequentialGroup()
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(insertarCesta, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
@@ -929,7 +929,7 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(insertarCesta)
                     .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
         );
@@ -1178,8 +1178,8 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> graficaBox;
     public javax.swing.JLabel imgProducto;
     private javax.swing.JPanel infoPanelAnadir1;
+    public javax.swing.JButton insertarCesta;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
