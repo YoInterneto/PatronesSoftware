@@ -85,6 +85,8 @@ public class InicioCliente extends javax.swing.JFrame {
         cam = new javax.swing.JLabel();
         fuente = new javax.swing.JLabel();
         ram = new javax.swing.JLabel();
+        pctorre = new javax.swing.JLabel();
+        portatil = new javax.swing.JLabel();
         panelCarro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPedidos = new javax.swing.JList<>();
@@ -97,6 +99,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         precioCarro = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+        eliminarArticulo = new javax.swing.JButton();
         panelMonta = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -484,7 +487,7 @@ public class InicioCliente extends javax.swing.JFrame {
         disco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hd.png"))); // NOI18N
         disco.setText("Disco Duro");
         disco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(disco, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, 170, 40));
+        panelArticulo.add(disco, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 130, 40));
 
         cam.setForeground(new java.awt.Color(255, 255, 255));
         cam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -498,14 +501,28 @@ public class InicioCliente extends javax.swing.JFrame {
         fuente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fa.png"))); // NOI18N
         fuente.setText("Fuente alimentacion");
         fuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(fuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 170, 40));
+        panelArticulo.add(fuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, 160, 40));
 
         ram.setForeground(new java.awt.Color(255, 255, 255));
         ram.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/memory_ram_hardware_21433.png"))); // NOI18N
         ram.setText("Memoria RAM");
         ram.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelArticulo.add(ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 460, 170, 40));
+        panelArticulo.add(ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 460, 130, 40));
+
+        pctorre.setForeground(new java.awt.Color(255, 255, 255));
+        pctorre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pctorre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/monitor.png"))); // NOI18N
+        pctorre.setText("PC Torre");
+        pctorre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(pctorre, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 460, 130, 40));
+
+        portatil.setForeground(new java.awt.Color(255, 255, 255));
+        portatil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        portatil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/portatil.png"))); // NOI18N
+        portatil.setText("Portatil");
+        portatil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelArticulo.add(portatil, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 130, 40));
 
         jPanel6.add(panelArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
 
@@ -564,6 +581,9 @@ public class InicioCliente extends javax.swing.JFrame {
 
         jButton8.setText("Realizar pedido");
         panelCarro.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 500, 180, -1));
+
+        eliminarArticulo.setText("Eliminar");
+        panelCarro.add(eliminarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 550, 180, 40));
 
         panelCarro.setVisible(false);
 
@@ -927,10 +947,11 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(insertarCesta)
-                    .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(precio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(insertarCesta)))
                 .addGap(31, 31, 31))
         );
 
@@ -1171,6 +1192,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel descripcion;
     public javax.swing.JLabel disco;
     public javax.swing.JComboBox<String> discoBox;
+    public javax.swing.JButton eliminarArticulo;
     private javax.swing.JLabel fotoInicio;
     public javax.swing.JLabel fuente;
     public javax.swing.JComboBox<String> fuenteBox;
@@ -1300,8 +1322,10 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JPanel panelMonta;
     public javax.swing.JPanel panelPerfil;
     public javax.swing.JPanel panelProducto;
+    public javax.swing.JLabel pctorre;
     public javax.swing.JLabel placaBase;
     public javax.swing.JComboBox<String> placaBox;
+    public javax.swing.JLabel portatil;
     public javax.swing.JLabel precio;
     public javax.swing.JLabel precioCarro;
     public javax.swing.JLabel precioTotalPc;
