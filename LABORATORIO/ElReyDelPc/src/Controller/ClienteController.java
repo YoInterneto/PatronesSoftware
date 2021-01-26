@@ -1,20 +1,7 @@
 package Controller;
 
 import DAO.*;
-import Model.Articulos.Articulo;
-import Model.Articulos.Caja;
-import Model.Articulos.Disco_duro;
-import Model.Articulos.Fuente_alimentacion;
-import Model.Articulos.Grafica;
-import Model.Articulos.Memoria_RAM;
-import Model.Articulos.Monitor;
-import Model.Articulos.PcTorre;
-import Model.Articulos.Placa_base;
-import Model.Articulos.Portatil;
-import Model.Articulos.Procesador;
-import Model.Articulos.Raton;
-import Model.Articulos.Teclado;
-import Model.Articulos.WebCam;
+import Model.Articulos.*;
 import Model.Usuario.Cliente;
 import Util.ListaDinamicaImagen;
 
@@ -37,26 +24,26 @@ import util.Log;
 
 public class ClienteController implements ActionListener {
 
-    private InicioCliente client;
-    private Cliente cliente;
+    private final InicioCliente client;
+    private final Cliente cliente;
 
-    private ArticuloDao consultaArticulo = new ArticuloDao();
-    private ProcesadorDao daoCpu;
-    private Placa_baseDao daoPlaca;
-    private MemoriaRAMDao daoRam;
-    private GraficaDao daoGrafica;
-    private DiscoDuroDao daoDisco;
-    private CajaDao daoCaja;
-    private TecladoDao daoTeclado;
-    private RatonDao daoRaton;
-    private WebCamDao daoCam;
-    private FuenteDao daoFuente;
-    private MonitorDao daoMonitor;
-    private CarroDao carroDao;
-    private PortatilDao daoPortatil;
-    private PcTorreDao daoPctorre;
-    private UsuarioDao daoUser;
-    private PedidoDao daoPedido;
+    private final ArticuloDao consultaArticulo = new ArticuloDao();
+    private final ProcesadorDao daoCpu;
+    private final Placa_baseDao daoPlaca;
+    private final MemoriaRAMDao daoRam;
+    private final GraficaDao daoGrafica;
+    private final DiscoDuroDao daoDisco;
+    private final CajaDao daoCaja;
+    private final TecladoDao daoTeclado;
+    private final RatonDao daoRaton;
+    private final WebCamDao daoCam;
+    private final FuenteDao daoFuente;
+    private final MonitorDao daoMonitor;
+    private final CarroDao carroDao;
+    private final PortatilDao daoPortatil;
+    private final PcTorreDao daoPctorre;
+    private final UsuarioDao daoUser;
+    private final PedidoDao daoPedido;
 
     private String tipo;
 
@@ -670,7 +657,12 @@ public class ClienteController implements ActionListener {
 
     }
 
-    public void iniciarPanelPerfil() {
+    /**
+     * Inicia el panel de perfil cargando los valores del cliente
+     * que ha iniciado sesion en su correspondiente etiqueta.
+     * 
+    */
+    private void iniciarPanelPerfil() {
         client.nombrePerfil.setText(cliente.getNombre());
         client.apellidoPerfil.setText(cliente.getApellido());
         client.datoTelefono.setText(String.valueOf(cliente.getTelefono()));
@@ -678,14 +670,19 @@ public class ClienteController implements ActionListener {
         client.datoTarjeta.setText(cliente.getTarjeta());
         client.datoEmail.setText(cliente.getEmail());
     }
-
-    public void iniciarPanelMontar() {
-
+    /**
+     * Inicia el panel de montar cargando los valores de los articulos 
+     * en los respectivos JComboBox
+    */
+    private void iniciarPanelMontar() {
         rellenaComboBox();
-
     }
-
-    public void iniciarPanelProductoPlaca(Placa_base placa) {
+    /**
+     * Inicia el panel del producto Placa base cargando los valores de la placa
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param placa
+    */
+    private void iniciarPanelProductoPlaca(Placa_base placa) {
         client.productoSeleccionado.setText("Placa base");
         client.datoModelo.setText(placa.getModelo());
         client.codigo_ref.setText(String.valueOf(placa.getCodigo_ref()));
@@ -708,8 +705,12 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setText("Socket");
 
     }
-
-    public void iniciarPanelProductoCpu(Procesador cpu) {
+    /**
+     * Inicia el panel del producto procesador  cargando los valores del procesador
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param cpu
+    */
+    private void iniciarPanelProductoCpu(Procesador cpu) {
         client.productoSeleccionado.setText("CPU");
         client.datoModelo.setText(cpu.getModelo());
         client.codigo_ref.setText(String.valueOf(cpu.getCodigo_ref()));
@@ -732,8 +733,12 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setVisible(true);
 
     }
-
-    public void iniciarPanelProductoGrafica(Grafica grafica) {
+    /**
+     * Inicia el panel del producto grafica cargando los valores del grafica
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param grafica
+    */
+    private void iniciarPanelProductoGrafica(Grafica grafica) {
         client.productoSeleccionado.setText("Grafica");
         client.datoModelo.setText(grafica.getModelo());
         client.codigo_ref.setText(String.valueOf(grafica.getCodigo_ref()));
@@ -755,8 +760,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
-
-    public void iniciarPanelProductoCaja(Caja caja) {
+    /**
+     * Inicia el panel del producto caja cargando los valores de la caja
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param caja
+    */
+    private void iniciarPanelProductoCaja(Caja caja) {
         client.productoSeleccionado.setText("Caja");
         client.datoModelo.setText(caja.getModelo());
         client.codigo_ref.setText(String.valueOf(caja.getCodigo_ref()));
@@ -782,8 +791,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
-
-    public void iniciarPanelProductoMonitor(Monitor monitor) {
+    /**
+     * Inicia el panel del producto monitor cargando los valores del monitor
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param monitor
+    */
+    private void iniciarPanelProductoMonitor(Monitor monitor) {
         client.productoSeleccionado.setText("Monitor");
         client.datoModelo.setText(monitor.getModelo());
         client.codigo_ref.setText(String.valueOf(monitor.getCodigo_ref()));
@@ -814,8 +827,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular3.setVisible(true);
         client.nombreAtributo3.setVisible(true);
     }
-
-    public void iniciarPanelProductoTeclado(Teclado teclado) {
+    /**
+     * Inicia el panel del teclado monitor cargando los valores del teclado
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param teclado
+    */
+    private void iniciarPanelProductoTeclado(Teclado teclado) {
         client.productoSeleccionado.setText("Teclado");
         client.datoModelo.setText(teclado.getModelo());
         client.codigo_ref.setText(String.valueOf(teclado.getCodigo_ref()));
@@ -837,8 +854,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
-
-    public void iniciarPanelProductoRaton(Raton raton) {
+    /**
+     * Inicia el panel del raton monitor cargando los valores del raton
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param raton
+    */
+    private void iniciarPanelProductoRaton(Raton raton) {
         client.productoSeleccionado.setText("Raton");
         client.datoModelo.setText(raton.getModelo());
         client.codigo_ref.setText(String.valueOf(raton.getCodigo_ref()));
@@ -869,8 +890,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular3.setVisible(true);
         client.nombreAtributo3.setVisible(true);
     }
-
-    public void iniciarPanelProductoCam(WebCam cam) {
+    /**
+     * Inicia el panel de la wecbam monitor cargando los valores de la webcam
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param cam
+    */
+    private void iniciarPanelProductoCam(WebCam cam) {
         client.productoSeleccionado.setText("Web-Cam");
         client.datoModelo.setText(cam.getModelo());
         client.codigo_ref.setText(String.valueOf(cam.getCodigo_ref()));
@@ -893,8 +918,12 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setVisible(true);
 
     }
-
-    public void iniciarPanelProductoFuente(Fuente_alimentacion fuente) {
+    /**
+     * Inicia el panel de la fuente de alimentacion monitor cargando los valores de la
+     * fuente en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param fuente
+    */
+    private void iniciarPanelProductoFuente(Fuente_alimentacion fuente) {
         client.productoSeleccionado.setText("Fuente alimentacion");
         client.datoModelo.setText(fuente.getModelo());
         client.codigo_ref.setText(String.valueOf(fuente.getCodigo_ref()));
@@ -921,8 +950,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular2.setVisible(true);
         client.nombreAtributo2.setVisible(true);
     }
-
-    public void iniciarPanelProductoRam(Memoria_RAM ram) {
+    /**
+     * Inicia el panel de la memoria ram monitor cargando los valores de la 
+     * memoria ram en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param ram
+    */
+    private void iniciarPanelProductoRam(Memoria_RAM ram) {
         client.productoSeleccionado.setText("Memoria RAM");
         client.datoModelo.setText(ram.getModelo());
         client.codigo_ref.setText(String.valueOf(ram.getCodigo_ref()));
@@ -944,8 +977,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
-
-    public void iniciarPanelProductoDisco(Disco_duro disco) {
+    /**
+     * Inicia el panel del producto disco duro cargando los valores del disco
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param disco
+    */
+    private void iniciarPanelProductoDisco(Disco_duro disco) {
         client.productoSeleccionado.setText("Disco duro");
         client.datoModelo.setText(disco.getModelo());
         client.codigo_ref.setText(String.valueOf(disco.getCodigo_ref()));
@@ -967,8 +1004,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
-
-    public void iniciarPanelProductoPortatil(Portatil portatil) {
+    /**
+     * Inicia el panel del producto portatil cargando los valores del portatil
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param portatil
+    */
+    private void iniciarPanelProductoPortatil(Portatil portatil) {
         client.productoSeleccionado.setText("Portatil");
         client.datoModelo.setText(portatil.getModelo());
         client.codigo_ref.setText(String.valueOf(portatil.getCodigo_ref()));
@@ -994,8 +1035,12 @@ public class ClienteController implements ActionListener {
         client.atrParticular2.setVisible(true);
         client.nombreAtributo2.setVisible(true);
     }
-
-    public void iniciarPanelProductoPcTorre(PcTorre pctorre) {
+    /**
+     * Inicia el panel del producto torre pc cargando los valores de la pc torre
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * @param pctorre
+    */
+    private void iniciarPanelProductoPcTorre(PcTorre pctorre) {
         client.productoSeleccionado.setText("Pc Torre");
         client.datoModelo.setText(pctorre.getModelo());
         client.codigo_ref.setText(String.valueOf(pctorre.getCodigo_ref()));
@@ -1018,6 +1063,7 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setVisible(true);
     }
 
+    
     /**
      * Coloca los valores de la base de datos en los comboBox al cual pertenecen
      * mediante una consulta se guarda la lista de valores y se insertan como
@@ -1136,7 +1182,11 @@ public class ClienteController implements ActionListener {
         client.tecladoBox.setSelectedIndex(0);
         client.camBox.setSelectedIndex(0);
     }
-
+    /**
+     * Obtiene el carro de la base de datos y lo transforma en un
+     * arraylist de enteros.
+     * @return Devuelve un arrayList de enteros que corresponden a los codigos de referencia
+     */
     private ArrayList<Integer> cargarCarro() {
 
         ArrayList<Integer> cesta = new ArrayList<>();
@@ -1153,7 +1203,13 @@ public class ClienteController implements ActionListener {
         return cesta;
     }
 
-    public void listaArticulos(ArrayList<Integer> cesta) {
+    /**
+     * Crea una Jlist con los articulos que hay en el 
+     * arraylist pasado por parametro con informacion relativa a los mismos
+     * sacada de la base de datos.
+     * @param cesta 
+     */
+    private void listaArticulos(ArrayList<Integer> cesta) {
         DefaultListModel listModel = new DefaultListModel();
 
         ArrayList<String> listaInfo = new ArrayList<>();
@@ -1186,7 +1242,11 @@ public class ClienteController implements ActionListener {
         client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
     }
 
-    public void cargarListaPlaca() {
+    /**
+     * Crea una Jlist con informacion de todas las placas que 
+     * hay en la base de datos.
+     */
+    private void cargarListaPlaca() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Placa_base> lista = daoPlaca.getAllPlacas();
 
@@ -1212,8 +1272,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Placa_base"));
     }
-
-    public void cargarListaCpu() {
+    /**
+     * Crea una Jlist con informacion de todos los procesadores que 
+     * hay en la base de datos.
+     */
+    private void cargarListaCpu() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Procesador> lista = daoCpu.getAllProcesadores();
 
@@ -1239,8 +1302,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Procesador"));
     }
-
-    public void cargarListaGraficas() {
+    /**
+     * Crea una Jlist con informacion de todas las graficas que 
+     * hay en la base de datos.
+     */
+    private void cargarListaGraficas() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Grafica> lista = daoGrafica.getAllGraficas();
 
@@ -1266,8 +1332,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Grafica"));
     }
-
-    public void cargarListaMonitor() {
+    /**
+     * Crea una Jlist con informacion de todos los monitores que 
+     * hay en la base de datos.
+     */
+    private void cargarListaMonitor() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Monitor> lista = daoMonitor.getAllMonitores();
 
@@ -1293,8 +1362,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Monitor"));
     }
-
-    public void cargarListaTeclado() {
+    /**
+     * Crea una Jlist con informacion de todos los teclados que 
+     * hay en la base de datos.
+     */
+    private void cargarListaTeclado() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Teclado> lista = daoTeclado.getAllTeclados();
 
@@ -1320,8 +1392,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Teclado"));
     }
-
-    public void cargarListaRaton() {
+    /**
+     * Crea una Jlist con informacion de todos los ratones que 
+     * hay en la base de datos.
+     */
+    private void cargarListaRaton() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Raton> lista = daoRaton.getAllRatones();
 
@@ -1347,8 +1422,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Raton"));
     }
-
-    public void cargarListaCam() {
+    /**
+     * Crea una Jlist con informacion de todas las webcam que 
+     * hay en la base de datos.
+     */
+    private void cargarListaCam() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<WebCam> lista = daoCam.getAllWebCams();
 
@@ -1374,8 +1452,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "WebCam"));
     }
-
-    public void cargarListaFuente() {
+    /**
+     * Crea una Jlist con informacion de todas las fuentes de alimentacion que 
+     * hay en la base de datos.
+     */
+    private void cargarListaFuente() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Fuente_alimentacion> lista = daoFuente.getAllFuentes();
 
@@ -1401,8 +1482,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Fuente_alimentacion"));
     }
-
-    public void cargarListaRam() {
+    /**
+     * Crea una Jlist con informacion de todas las memorias ram que 
+     * hay en la base de datos.
+     */
+    private void cargarListaRam() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Memoria_RAM> lista = daoRam.getAllMemoria_RAM();
 
@@ -1428,8 +1512,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Memoria_RAM"));
     }
-
-    public void cargarListaDisco() {
+    /**
+     * Crea una Jlist con informacion de todos los discos duros que 
+     * hay en la base de datos.
+     */
+    private void cargarListaDisco() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Disco_duro> lista = daoDisco.getAllDiscos();
 
@@ -1455,8 +1542,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Disco_duro"));
     }
-
-    public void cargarListaCaja() {
+    /**
+     * Crea una Jlist con informacion de todas las cajas que 
+     * hay en la base de datos.
+     */
+    private void cargarListaCaja() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Caja> lista = daoCaja.getAllCajas();
 
@@ -1482,8 +1572,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Caja"));
     }
-
-    public void cargarListaPortatil() {
+    /**
+     * Crea una Jlist con informacion de todos los portatiles que 
+     * hay en la base de datos.
+     */
+    private void cargarListaPortatil() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Portatil> lista = daoPortatil.getAllPortatil();
 
@@ -1509,8 +1602,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Portatil"));
     }
-
-    public void cargarListaPcTorre() {
+    /**
+     * Crea una Jlist con informacion de todas las torres pc que 
+     * hay en la base de datos.
+     */
+    private void cargarListaPcTorre() {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<PcTorre> lista = daoPctorre.getAllPcTorre();
 
@@ -1537,6 +1633,11 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "PcTorre"));
     }
 
+    /**
+     * Metodo para comprobar el formulario para cambiar la password en el panel
+     * del perfil de cliente. 
+     * @return Devuelve si la password es o no correcta.
+     */
     private boolean comprobarPassword() {
         boolean correcto = false;
         if (client.nuevaPass.getPassword().length != 0) {
