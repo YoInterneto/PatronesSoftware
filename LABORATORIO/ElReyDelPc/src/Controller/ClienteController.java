@@ -801,7 +801,7 @@ public class ClienteController implements ActionListener {
     
     private void cargarCarro(){
         
-        
+        cesta.clear();
         String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
         String[] articulo = carroActual.split(",");
         for (int i = 0; i < articulo.length; i++) {
