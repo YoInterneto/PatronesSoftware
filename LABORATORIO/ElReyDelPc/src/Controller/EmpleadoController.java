@@ -170,7 +170,7 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()) {
-                    //Meter posiblement una interfaz con la info del pedido
+                    //PARA COGER EL PEDIDO HACEMOS getAllPedidos() Y HACEMOS .GET(inicio.listaPedidos.getSelectedIndex()) DE LA LISTA
                     System.out.println("PEDIDO SELECCIONADO "+ inicio.listaPedidos.getSelectedIndex());
                 }
             }
@@ -311,14 +311,13 @@ public class EmpleadoController implements ActionListener{
     public void cargarListaPedidos(){
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
-        System.out.println(listaPedidos.size());
         for(int i=0; i<listaPedidos.size(); i++){
             Pedido pedido = listaPedidos.get(i);
             int idPedido = pedido.getIdPedido();
             String pedidoInfo = "  ID-"+ String.format("%04d", idPedido) +" \tFecha-"+ pedido.getFecha() +" \tPrecio pedido-"+ pedido.getPrecio_total() +"€ \tUsuario-"+ pedido.getEmail_cliente();
             pedidoInfo = pedidoInfo.replaceAll("\t", "         ");
             
-            listModel.add(idPedido, pedidoInfo);
+            listModel.add(i, pedidoInfo);
         }
         
         inicio.listaPedidos.setModel(listModel);
