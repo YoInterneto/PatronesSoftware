@@ -55,4 +55,40 @@ public class DiscoDuroDao {
         Log.logBd.info("Consulta realizada con éxito - getAllDiscos");
        return discodb;
     }  
+    
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo disco duro
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirDiscoDuro(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String tipo){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirDiscoDuro");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirDiscoDuro()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into disco_duro VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ tipo +"');");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirDiscoDuro(): " + error);
+            Log.logBd.error("                    SQL State - " + error.getSQLState());
+            Log.logBd.error("                    ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

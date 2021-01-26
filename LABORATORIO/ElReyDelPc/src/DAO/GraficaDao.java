@@ -55,4 +55,41 @@ public class GraficaDao {
         Log.logBd.info("Consulta realizada con éxito - getAllGraficaes()");
        return graficadb;
     }  
+    
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo fuente de alimentacion
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param generacion
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirGrafica(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, int generacion){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirGrafica");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirGrafica()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into grafica VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", "+ generacion +");");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirGrafica(): " + error);
+            Log.logBd.error("                  SQL State - " + error.getSQLState());
+            Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

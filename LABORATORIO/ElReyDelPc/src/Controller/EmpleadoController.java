@@ -271,6 +271,9 @@ public class EmpleadoController implements ActionListener{
         if(articulo.getRutaImagen() == null){
             inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png")));
         }
+        else if(getClass().getResource(articulo.getRutaImagen()) == null){
+            inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/error.png")));
+        }
         else{
             inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource(articulo.getRutaImagen())));
         }
@@ -559,15 +562,20 @@ public class EmpleadoController implements ActionListener{
                         exito = consultaCaja.anadirCaja(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, cristal);
                         break;
                     case "Disco duro":
-
+                        String tipo = inicio.atributo1Anadir.getText();
+                        exito = consultaDiscoDuro.anadirDiscoDuro(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipo);
                         break;
                     case "Fuente alimentacion":
-
+                        int potencia = Integer.parseInt(inicio.atributo1Anadir.getText());
+                        String certificacion = inicio.atributo2Anadir.getText();
+                        exito = consultaFuente.anadirFuente(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, potencia, certificacion);
                         break;
                     case "Grafica":
-
+                        int generacion = Integer.parseInt(inicio.atributo1Anadir.getText());
+                        exito = consultaGrafica.anadirGrafica(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, generacion);
                         break;
                     case "RAM":
+                        
                         break;
                     case "Monitor":
 
@@ -576,16 +584,22 @@ public class EmpleadoController implements ActionListener{
 
                         break;
                     case "Placa base":
+                        
                         break;
                     case "Portatil":
+                        
                         break;
                     case "Procesador":
+                        
                         break;
                     case "Raton":
+                        
                         break;
                     case "Teclado":
+                        
                         break;
                     case "WebCam":
+                        
                         break;
                     default:
                         break;

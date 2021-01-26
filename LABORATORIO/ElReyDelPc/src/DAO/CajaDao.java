@@ -68,7 +68,7 @@ public class CajaDao {
      * @param rutaImagen
      * @param idTienda
      * @param cristal
-     * @return Devuelve un objeto tipo caja
+     * @return Devuelve un boolean para saber si se ha insertado
      */
     public boolean anadirCaja(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, boolean cristal){
         boolean hecho = false;
