@@ -1,21 +1,6 @@
 package Controller;
 
-import DAO.ArticuloDao;
-import DAO.CajaDao;
-import DAO.CarroDao;
-import DAO.DiscoDuroDao;
-import DAO.FuenteDao;
-import DAO.GraficaDao;
-import DAO.MemoriaRAMDao;
-import DAO.MonitorDao;
-import DAO.PcTorreDao;
-import DAO.Placa_baseDao;
-import DAO.PortatilDao;
-import DAO.ProcesadorDao;
-import DAO.RatonDao;
-import DAO.TecladoDao;
-import DAO.UsuarioDao;
-import DAO.WebCamDao;
+import DAO.*;
 import Model.Articulos.Articulo;
 import Model.Articulos.Caja;
 import Model.Articulos.Disco_duro;
@@ -71,6 +56,7 @@ public class ClienteController implements ActionListener {
     private PortatilDao daoPortatil;
     private PcTorreDao daoPctorre;
     private UsuarioDao daoUser;
+    private PedidoDao daoPedido;
 
     private String tipo;
 
@@ -92,6 +78,7 @@ public class ClienteController implements ActionListener {
         daoPortatil = new PortatilDao();
         daoPctorre = new PcTorreDao();
         daoUser = new UsuarioDao();
+        daoPedido = new PedidoDao();
     }
 
     public void iniciar() {
@@ -99,6 +86,7 @@ public class ClienteController implements ActionListener {
         client.setLocationRelativeTo(null);
         client.nombreCliente.setText(cliente.getNombre());
 
+        //Listeners botones menu cliente 
         this.client.btnProducto.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -190,6 +178,7 @@ public class ClienteController implements ActionListener {
             }
         });
 
+        //Listeners botones panel Articulos
         this.client.placaBase.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -373,6 +362,7 @@ public class ClienteController implements ActionListener {
             }
         });
 
+        //Listeners JComboBox montaje
         this.client.cpuBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -434,6 +424,7 @@ public class ClienteController implements ActionListener {
             }
         });
 
+        //Listener lista producto elegido en panel articulo
         this.client.listaProductos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -509,6 +500,29 @@ public class ClienteController implements ActionListener {
             }
         });
 
+        this.client.btnComprarProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desear realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+
+                if (seleccion == 0) { // Confirma insertar
+                    int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
+                    boolean hecho = daoPedido.hacerPedido(client.codigo_ref.getText(), client.precio.getText(), cliente.getEmail(), nuevoIdPedido);
+
+                    if (hecho) {
+                        JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                    }
+                } else { // Deniega insertar
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
+
+        //Listeners carrito 
         this.client.insertarCesta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -559,38 +573,63 @@ public class ClienteController implements ActionListener {
                 }
             }
         });
-        
+        this.client.btnRealizaPedidoCarro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desear realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+
+                if (seleccion == 0) { // Confirma insertar
+                    ArrayList<Integer> cesta = cargarCarro();
+                    int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
+                    boolean hecho = daoPedido.hacerPedidoCarro(cesta, client.precioCarro.getText(), cliente.getEmail(), nuevoIdPedido);
+
+                    if (hecho) {
+                        carroDao.actualizaCarro(cliente.getEmail(), "");
+                        cesta.clear();
+                        listaArticulos(cesta);
+                        JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                    }
+                } else { // Deniega insertar
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
+
+        //Listners de perfil cliente
         this.client.btnCambiaEmail.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-        
+
                 String nuevoEmail = client.nuevoEmail.getText();
-                boolean hecho = daoUser.editarEmailCliente(cliente.getEmail(),nuevoEmail);
-                if (hecho){
+                boolean hecho = daoUser.editarEmailCliente(cliente.getEmail(), nuevoEmail);
+                if (hecho) {
                     cliente.setEmail(nuevoEmail);
                     client.datoEmail.setText(nuevoEmail);
                     JOptionPane.showMessageDialog(null, "Su email se ha actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                }else { 
+                } else {
                     JOptionPane.showMessageDialog(null, "Su email no se ha podido actualizar es posible "
                             + "que el email introdocido ya exista, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
-                
-                
+
             }
         });
         this.client.btnCambiaContra.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {              
+            public void actionPerformed(ActionEvent e) {
                 boolean correcto = comprobarPassword();
-                if (correcto){
+                if (correcto) {
                     char[] valorContrasenna = client.nuevaPass.getPassword();
                     String passNueva = new String(valorContrasenna);
-                    
-                    boolean hecho = daoUser.editarPasswordCliente(passNueva,cliente.getEmail());
-                    if (hecho){ 
+
+                    boolean hecho = daoUser.editarPasswordCliente(passNueva, cliente.getEmail());
+                    if (hecho) {
                         cliente.setPass(passNueva);
                         JOptionPane.showMessageDialog(null, "Su contraseña se ha actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Su contraseña no se ha podido actualizar, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
 
                     }
@@ -600,35 +639,35 @@ public class ClienteController implements ActionListener {
         this.client.btnCambiaAtributos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-        
-                if(client.datoTarjeta.getText().equalsIgnoreCase("") || client.datoTelefono.getText().equalsIgnoreCase("") 
-                    || client.datoDireccion.getText().equalsIgnoreCase("")){
+
+                if (client.datoTarjeta.getText().equalsIgnoreCase("") || client.datoTelefono.getText().equalsIgnoreCase("")
+                        || client.datoDireccion.getText().equalsIgnoreCase("")) {
                     JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Trjeta, Direccion, Telefono");
-                }else{
-                    try{
-                        int telefono = Integer.parseInt(client.datoTelefono.getText()); 
-                        String tarjeta =  client.datoTarjeta.getText();
+                } else {
+                    try {
+                        int telefono = Integer.parseInt(client.datoTelefono.getText());
+                        String tarjeta = client.datoTarjeta.getText();
                         String direccion = client.datoDireccion.getText();
-                        boolean hecho = daoUser.editarDatosCliente(cliente.getEmail(),direccion,tarjeta,telefono);
-                        
-                        if (hecho){ 
+                        boolean hecho = daoUser.editarDatosCliente(cliente.getEmail(), direccion, tarjeta, telefono);
+
+                        if (hecho) {
                             cliente.setDireccion(direccion);
                             cliente.setTelefono(telefono);
                             cliente.setTarjeta(tarjeta);
                             JOptionPane.showMessageDialog(null, "Sus datos se han actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "Sus datos no se han podido actualizar, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
 
-                        } 
-                    }catch(NumberFormatException ex){
+                        }
+                    } catch (NumberFormatException ex) {
                         Log.log.error(ex + "Error en extraer datos actualizar perfil cliente");
                         JOptionPane.showMessageDialog(null, "Error al extraer los datos, vuelva a introducirlos.", "Error", JOptionPane.DEFAULT_OPTION);
                     }
-                    
-                }  
+
+                }
             }
         });
-        
+
     }
 
     public void iniciarPanelPerfil() {
@@ -657,6 +696,8 @@ public class ClienteController implements ActionListener {
 
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
@@ -678,6 +719,8 @@ public class ClienteController implements ActionListener {
         String ruta = cpu.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -701,6 +744,8 @@ public class ClienteController implements ActionListener {
 
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
@@ -721,6 +766,8 @@ public class ClienteController implements ActionListener {
         String ruta = caja.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -746,6 +793,8 @@ public class ClienteController implements ActionListener {
         String ruta = monitor.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -777,6 +826,8 @@ public class ClienteController implements ActionListener {
 
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
@@ -797,6 +848,8 @@ public class ClienteController implements ActionListener {
         String ruta = raton.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -828,6 +881,8 @@ public class ClienteController implements ActionListener {
 
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
@@ -849,6 +904,8 @@ public class ClienteController implements ActionListener {
         String ruta = fuente.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -876,6 +933,8 @@ public class ClienteController implements ActionListener {
 
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
@@ -897,6 +956,8 @@ public class ClienteController implements ActionListener {
 
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
@@ -917,6 +978,8 @@ public class ClienteController implements ActionListener {
         String ruta = portatil.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -942,6 +1005,8 @@ public class ClienteController implements ActionListener {
         String ruta = pctorre.getRutaImagen();
 
         if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
@@ -1076,10 +1141,10 @@ public class ClienteController implements ActionListener {
 
         ArrayList<Integer> cesta = new ArrayList<>();
         String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
-        
+
         if (carroActual != null) {
             String[] articulo = carroActual.split("-");
-            if (!articulo[0].equals("")){ 
+            if (!articulo[0].equals("")) {
                 for (int i = 0; i < articulo.length; i++) {
                     cesta.add(Integer.parseInt(articulo[i]));
                 }
@@ -1116,7 +1181,7 @@ public class ClienteController implements ActionListener {
             precioCarro += precio;
         }
 
-        client.precioCarro.setText(precioCarro + " €");
+        client.precioCarro.setText(String.valueOf(precioCarro));
         client.listaPedidos.setModel(listModel);
         client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
     }
@@ -1472,34 +1537,31 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "PcTorre"));
     }
 
-    private boolean comprobarPassword(){
+    private boolean comprobarPassword() {
         boolean correcto = false;
-                if(client.nuevaPass.getPassword().length != 0){
-                    if((client.nuevaPass.getPassword().length != 0 && client.repitePass.getPassword().length != 0)){
-                        String passNueva= Arrays.toString(client.nuevaPass.getPassword());
-                        String passRepite= Arrays.toString(client.repitePass.getPassword());
-                        if(passNueva.equals(passRepite)){
-                            char[] valorContrasenna = client.nuevaPass.getPassword();
-                            passNueva = new String(valorContrasenna);
-                            String passAnterior = cliente.getPass();
-                            if(passNueva.equals(passAnterior)){
-                                JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
-                            }
-                            else{
-                                correcto = true;
-                            }
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
-                        }
+        if (client.nuevaPass.getPassword().length != 0) {
+            if ((client.nuevaPass.getPassword().length != 0 && client.repitePass.getPassword().length != 0)) {
+                String passNueva = Arrays.toString(client.nuevaPass.getPassword());
+                String passRepite = Arrays.toString(client.repitePass.getPassword());
+                if (passNueva.equals(passRepite)) {
+                    char[] valorContrasenna = client.nuevaPass.getPassword();
+                    passNueva = new String(valorContrasenna);
+                    String passAnterior = cliente.getPass();
+                    if (passNueva.equals(passAnterior)) {
+                        JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+                    } else {
+                        correcto = true;
                     }
-                    else{
-                        JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
-                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
                 }
-                return correcto;
-    } 
-    
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
+            }
+        }
+        return correcto;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

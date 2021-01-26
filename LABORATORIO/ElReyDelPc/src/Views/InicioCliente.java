@@ -98,7 +98,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator34 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         precioCarro = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        btnRealizaPedidoCarro = new javax.swing.JButton();
         eliminarArticulo = new javax.swing.JButton();
         panelMonta = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
@@ -168,7 +168,7 @@ public class InicioCliente extends javax.swing.JFrame {
         atrParticular3 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         descripcion = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnComprarProducto = new javax.swing.JButton();
         insertarCesta = new javax.swing.JButton();
         imgProducto = new javax.swing.JLabel();
         panelPerfil = new javax.swing.JPanel();
@@ -579,8 +579,8 @@ public class InicioCliente extends javax.swing.JFrame {
         precioCarro.setText("jLabel5");
         panelCarro.add(precioCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 460, 110, 30));
 
-        jButton8.setText("Realizar pedido");
-        panelCarro.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 500, 180, -1));
+        btnRealizaPedidoCarro.setText("Realizar pedido");
+        panelCarro.add(btnRealizaPedidoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 500, 180, -1));
 
         eliminarArticulo.setText("Eliminar");
         panelCarro.add(eliminarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 550, 180, 40));
@@ -868,7 +868,7 @@ public class InicioCliente extends javax.swing.JFrame {
         descripcion.setForeground(new java.awt.Color(204, 204, 204));
         descripcion.setText("jLabel20");
 
-        jButton1.setText("Comprar");
+        btnComprarProducto.setText("Comprar");
 
         insertarCesta.setText("Cesta");
 
@@ -902,7 +902,7 @@ public class InicioCliente extends javax.swing.JFrame {
                                         .addComponent(datoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(nombreAtributo3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(insertarCesta, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -950,7 +950,7 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(precio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
+                        .addComponent(btnComprarProducto)
                         .addComponent(insertarCesta)))
                 .addGap(31, 31, 31))
         );
@@ -1175,10 +1175,12 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JButton btnCambiaEmail;
     public javax.swing.JLabel btnCarro;
     public javax.swing.JLabel btnCerrar;
+    public javax.swing.JButton btnComprarProducto;
     public javax.swing.JLabel btnInicio;
     public javax.swing.JLabel btnMontar;
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel btnProducto;
+    public javax.swing.JButton btnRealizaPedidoCarro;
     public javax.swing.JLabel caja;
     public javax.swing.JComboBox<String> cajaBox;
     public javax.swing.JLabel cam;
@@ -1204,10 +1206,8 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel imgProducto;
     private javax.swing.JPanel infoPanelAnadir1;
     public javax.swing.JButton insertarCesta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
