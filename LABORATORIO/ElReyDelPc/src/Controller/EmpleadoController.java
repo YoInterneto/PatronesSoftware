@@ -1,9 +1,7 @@
 
 package Controller;
 
-import DAO.ArticuloDao;
-import DAO.PedidoDao;
-import DAO.UsuarioDao;
+import DAO.*;
 import Model.Articulos.Articulo;
 import Model.Negocio.Pedido;
 import Model.Usuario.Empleado;
@@ -32,8 +30,22 @@ public class EmpleadoController implements ActionListener{
     private Tienda tienda;
     
     private UsuarioDao consultaUsuario = new UsuarioDao();
+    
     private PedidoDao consultaPedido = new PedidoDao();
     private ArticuloDao consultaArticulo = new ArticuloDao();
+    private CajaDao consultaCaja = new CajaDao();
+    private DiscoDuroDao consultaDiscoDuro = new DiscoDuroDao();
+    private FuenteDao consultaFuente = new FuenteDao();
+    private GraficaDao consultaGrafica = new GraficaDao();
+    private MemoriaRAMDao consultaRAM = new MemoriaRAMDao();
+    private MonitorDao consultaMonitor = new MonitorDao();
+    private PcTorreDao consultaTorre = new PcTorreDao();
+    private Placa_baseDao consultaPlacaBase = new Placa_baseDao();
+    private PortatilDao consultaPortatil = new PortatilDao();
+    private ProcesadorDao consultaProcesador = new ProcesadorDao();
+    private RatonDao consultaRaton = new RatonDao();
+    private TecladoDao consultaTeclado = new TecladoDao();
+    private WebCamDao consultaWebCam = new WebCamDao();
     
     public EmpleadoController(InicioEmpleado inicioVista, Empleado usuario){
         this.inicio = inicioVista;
@@ -291,7 +303,7 @@ public class EmpleadoController implements ActionListener{
             //ESTO ES PORQUE DE MOMENTO CODIGO DE REFERENCIA EMPIEZA EN 1
             //************************************************************
             //************************************************************
-            listModel.add(codigoReferencia-1, articuloInfo);
+            listModel.add(i, articuloInfo);
         }
         
         inicio.listaProductos.setModel(listModel);
@@ -393,29 +405,35 @@ public class EmpleadoController implements ActionListener{
         
         if(inicio.nombreEdit.getText().equalsIgnoreCase("") || inicio.apellidoEdit.getText().equalsIgnoreCase("") 
                 || inicio.direccionEdit.getText().equalsIgnoreCase("") || inicio.telefonoEdit.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Nombre, Apellido, Direccion, Telefono");
+            JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Nombre, Apellido, Direccion, Telefono.");
         }
         else{
             if(inicio.passActualEdit.getPassword().length != 0){
                 if((inicio.passNuevaEdit.getPassword().length != 0 && inicio.passRepitaEdit.getPassword().length != 0)){
-                    String passNueva= Arrays.toString(inicio.passNuevaEdit.getPassword());
-                    String passRepite= Arrays.toString(inicio.passRepitaEdit.getPassword());
+                    char[] valorPassNueva = inicio.passNuevaEdit.getPassword();
+                    String passNueva = new String(valorPassNueva);
+                    char[] valorPassRepite = inicio.passRepitaEdit.getPassword();
+                    String passRepite = new String(valorPassRepite);
                     
                     if(passNueva.equals(passRepite)){
-                        String passAnterior= Arrays.toString(inicio.passActualEdit.getPassword());
+                        char[] valorPassAnterior = inicio.passActualEdit.getPassword();
+                        String passAnterior = new String(valorPassAnterior);
                         if(passNueva.equals(passAnterior)){
-                            JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+                            JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior.");
+                        }
+                        else if(!passAnterior.equals(empleado.getPass())){
+                            JOptionPane.showMessageDialog(null, "ERROR: Contraseña anterior incorrecta.");
                         }
                         else{
                             correcto = true;
                         }
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
+                        JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden.");
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña.");
                 }
             }
             else{
@@ -467,6 +485,7 @@ public class EmpleadoController implements ActionListener{
             
             if(comprobarFormularioEditarEmpleado()){
                 String correo = empleado.getEmail();
+                String pass = empleado.getPass();
                 String nombre = inicio.nombreEdit.getText();
                 String apellido = inicio.apellidoEdit.getText();
                 String direccion = inicio.direccionEdit.getText();
@@ -478,6 +497,7 @@ public class EmpleadoController implements ActionListener{
                 if(inicio.passNuevaEdit.getPassword().length != 0){
                     char[] valorContrasenna = inicio.passNuevaEdit.getPassword();
                     String contrasenna = new String(valorContrasenna);
+                    pass = contrasenna;
                     exito = consultaUsuario.editarUsuarioPass(correo, nombre, apellido, direccion, telefono, contrasenna);
                 }
                 else{
@@ -486,6 +506,13 @@ public class EmpleadoController implements ActionListener{
                 
                 if(exito){
                     JOptionPane.showMessageDialog(null, "Tus datos se han modificado con éxito.");
+                    empleado.setEmail(correo);
+                    empleado.setNombre(nombre);
+                    empleado.setApellido(apellido);
+                    empleado.setDireccion(direccion);
+                    empleado.setTelefono(telefono);
+                    empleado.setPass(pass);
+                    iniciarPanelInicio();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar tus datos");
@@ -513,20 +540,23 @@ public class EmpleadoController implements ActionListener{
             }
         }
         else if(boton.getSource() == inicio.btnAnadirNuevoArticulo){
-            String a = inicio.atributo1Anadir.getText();
-            String b = inicio.atributo2Anadir.getText();
-            String c = inicio.atributo3Anadir.getText();
-            
-            System.out.println(a +" - "+ b +" - "+ c);
             
             if(comprobarFormularioAnadirProducto()){
-                JOptionPane.showMessageDialog(null, "Todo correcto. ");
+                boolean exito = false;
                 String eleccion = inicio.tipoArticuloAnadir.getSelectedItem().toString();
+                
+                String modelo = inicio.modeloAnadir.getText();
+                int codigoReferncia = Integer.parseInt(inicio.codRefAnadir.getText());
+                float precio = Float.parseFloat(inicio.precioAnadir.getText());
+                String descripcion = inicio.descripcionAnadir.getText();
+                int stock = Integer.parseInt(inicio.stockAnadir.getText());
+                String rutaImagen = "/images/"+ inicio.rutaImagenAnadir.getText() +".png";
+                int idTienda = empleado.getID_Tienda();
+                
                 switch(eleccion){
                     case "Caja":
-                        iniciarAtributo1("Cristal");
-                        iniciarAtributo2("Peso");
-                        iniciarAtributo3("Socket");
+                        boolean cristal = !inicio.atributo1Anadir.getText().equalsIgnoreCase("no");
+                        exito = consultaCaja.anadirCaja(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, cristal);
                         break;
                     case "Disco duro":
 
@@ -559,6 +589,13 @@ public class EmpleadoController implements ActionListener{
                         break;
                     default:
                         break;
+                }
+                
+                if(exito){
+                    JOptionPane.showMessageDialog(null, "Articulo "+ codigoReferncia +" añadido con éxito.");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ERROR: No se pudieron añadir el articulo.");
                 }
             }
         }

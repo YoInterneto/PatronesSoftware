@@ -126,7 +126,7 @@ public class ArticuloDao {
                 conexion = Conexion.getConexion();
                 Log.logBd.info("Realizada conexion - getAllArticulos()");
                 Statement s = conexion.createStatement();
-                ResultSet rs = s.executeQuery("select * from articulo;");
+                ResultSet rs = s.executeQuery("select * from articulo order by codigo_ref ASC;");
                 Log.logBd.info("CONSULTA getAllArticulos");
                 
                 while (rs.next()) {                	
@@ -218,6 +218,88 @@ public class ArticuloDao {
         
         return hecho;
     }
+    
+    /**
+     * Inserta en la base de datos un nuevo articulo del tipo especificado (caja, RAM...)
+     * 
+     * @param codigoReferencia
+     * @param tipoArticulo
+     * @param modelo
+     * @param descripcion
+     * @param precio
+     * @param stock
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+    
+    public boolean anadirArticuloTipo(int codigoReferencia, String tipoArticulo, String modelo, String descripcion, int stock, float precio, boolean cristal, 
+            String tipoDisco, int potencia, String certificacion, int generacion, String pn, int pulgadas, String panel, int herzios, String nombreTorre, 
+            String socketPlaca){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA AnadirArticuloTipo");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirArticuloTipo()");
+            Statement s = conexion.createStatement();
+            String sql = "";
+            
+            switch(tipoArticulo){
+                    case "Caja":
+                        sql = "INSERT INTO caja VALUES";
+                        break;
+                    case "Disco duro":
+                        sql = "INSERT INTO disco_duro VALUES";
+                        break;
+                    case "Fuente alimentacion":
+                        sql = "INSERT INTO fuente_alimentacion VALUES";
+                        break;
+                    case "Grafica":
+                        sql = "INSERT INTO grafica VALUES";
+                        break;
+                    case "RAM":
+                        sql = "INSERT INTO memoria_ram VALUES";
+                        break;
+                    case "Monitor":
+                        sql = "INSERT INTO monitor VALUES";
+                        break;
+                    case "Torre":
+                        sql = "INSERT INTO pctorre VALUES";
+                        break;
+                    case "Placa base":
+                        sql = "INSERT INTO placa_base VALUES";
+                        break;
+                    case "Portatil":
+                        sql = "INSERT INTO portatil VALUES";
+                        break;
+                    case "Procesador":
+                        sql = "INSERT INTO procesador VALUES";
+                        break;
+                    case "Raton":
+                        sql = "INSERT INTO raton VALUES";
+                        break;
+                    case "Teclado":
+                        sql = "INSERT INTO teclado VALUES";
+                        break;
+                    case "WebCam":
+                        sql = "INSERT INTO webcam VALUES";
+                        break;
+                    default:
+                        break;
+                }
+            
+            int codigo = s.executeUpdate(sql);
+            
+            if(codigo>0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - anadirArticuloTipo()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirArticuloTipo(): " + error);
+            Log.logBd.error("                       SQL State - " + error.getSQLState());
+            Log.logBd.error("                       ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }*/
     
     /**
      * Dado el codigo de un portatil realiza una consulta en la base de
