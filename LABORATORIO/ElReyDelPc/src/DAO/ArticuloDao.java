@@ -82,6 +82,37 @@ public class ArticuloDao {
     
     
     /**
+     * Retorna el articulo de la base de datos el cual tenga codigo de referencia indicado
+     *
+     * @param codigoReferencia
+     * @return Devuelve un objeto articulo
+     */
+    public int getCodRefMax() {
+        int codRefMax = -1;
+        Log.logBd.info("CONSULTA getCodRefMax");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getCodRefMax()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select MAX(codigo_ref) as maximo from articulo");
+            Log.logBd.info("Realizada consulta - getCodRefMax()"); 
+            
+            if(resultado.next()){
+                codRefMax = resultado.getInt("maximo") + 1;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getCodRefMax(): " + error);
+            Log.logBd.error("                 SQL State - " + error.getSQLState());
+            Log.logBd.error("                 ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getCodRefMax()");
+        return codRefMax;
+    }
+    
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *
