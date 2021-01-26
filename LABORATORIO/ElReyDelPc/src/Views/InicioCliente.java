@@ -192,13 +192,13 @@ public class InicioCliente extends javax.swing.JFrame {
         repitePass = new javax.swing.JPasswordField();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnCambiaEmail = new javax.swing.JButton();
+        btnCambiaContra = new javax.swing.JButton();
         jLabel50 = new javax.swing.JLabel();
         datoTarjeta = new javax.swing.JTextField();
         datoTelefono = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnCambiaAtributos = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
         datoDireccion = new javax.swing.JTextField();
 
@@ -1056,11 +1056,11 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel49.setText("Nueva cotraseña");
         panelPerfil.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 110, 20));
 
-        jButton3.setText("Cambiar");
-        panelPerfil.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 100, 30));
+        btnCambiaEmail.setText("Cambiar");
+        panelPerfil.add(btnCambiaEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 100, 30));
 
-        jButton4.setText("Cambiar");
-        panelPerfil.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 90, -1));
+        btnCambiaContra.setText("Cambiar");
+        panelPerfil.add(btnCambiaContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 90, -1));
 
         jLabel50.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(255, 255, 255));
@@ -1078,8 +1078,8 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel51.setText("Telefono");
         panelPerfil.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 140, 30));
 
-        jButton5.setText("Guardar");
-        panelPerfil.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 180, 40));
+        btnCambiaAtributos.setText("Guardar");
+        panelPerfil.add(btnCambiaAtributos, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 180, 40));
 
         jLabel52.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(255, 255, 255));
@@ -1170,6 +1170,9 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel atrParticular2;
     public javax.swing.JLabel atrParticular3;
     public javax.swing.JLabel btnBuscar;
+    public javax.swing.JButton btnCambiaAtributos;
+    public javax.swing.JButton btnCambiaContra;
+    public javax.swing.JButton btnCambiaEmail;
     public javax.swing.JLabel btnCarro;
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JLabel btnInicio;
@@ -1202,9 +1205,6 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JPanel infoPanelAnadir1;
     public javax.swing.JButton insertarCesta;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

@@ -41,6 +41,7 @@ import java.awt.event.MouseAdapter;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -69,6 +70,7 @@ public class ClienteController implements ActionListener {
     private CarroDao carroDao;
     private PortatilDao daoPortatil;
     private PcTorreDao daoPctorre;
+    private UsuarioDao daoUser;
 
     private String tipo;
 
@@ -89,6 +91,7 @@ public class ClienteController implements ActionListener {
         carroDao = new CarroDao();
         daoPortatil = new PortatilDao();
         daoPctorre = new PcTorreDao();
+        daoUser = new UsuarioDao();
     }
 
     public void iniciar() {
@@ -126,6 +129,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
                 resetValuesBox();
             }
         });
@@ -138,6 +142,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
                 ArrayList<Integer> cesta = cargarCarro();
                 Collections.sort(cesta);
                 listaArticulos(cesta);
@@ -153,6 +158,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(true);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
                 iniciarPanelMontar();
             }
         });
@@ -165,6 +171,7 @@ public class ClienteController implements ActionListener {
                 client.panelMonta.setVisible(false);
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
                 iniciarPanelPerfil();
                 resetValuesBox();
             }
@@ -552,6 +559,76 @@ public class ClienteController implements ActionListener {
                 }
             }
         });
+        
+        this.client.btnCambiaEmail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+        
+                String nuevoEmail = client.nuevoEmail.getText();
+                boolean hecho = daoUser.editarEmailCliente(cliente.getEmail(),nuevoEmail);
+                if (hecho){
+                    cliente.setEmail(nuevoEmail);
+                    client.datoEmail.setText(nuevoEmail);
+                    JOptionPane.showMessageDialog(null, "Su email se ha actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }else { 
+                    JOptionPane.showMessageDialog(null, "Su email no se ha podido actualizar es posible "
+                            + "que el email introdocido ya exista, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+                
+                
+            }
+        });
+        this.client.btnCambiaContra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {              
+                boolean correcto = comprobarPassword();
+                if (correcto){
+                    char[] valorContrasenna = client.nuevaPass.getPassword();
+                    String passNueva = new String(valorContrasenna);
+                    
+                    boolean hecho = daoUser.editarPasswordCliente(passNueva,cliente.getEmail());
+                    if (hecho){ 
+                        cliente.setPass(passNueva);
+                        JOptionPane.showMessageDialog(null, "Su contraseña se ha actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Su contraseña no se ha podido actualizar, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                    }
+                }
+            }
+        });
+        this.client.btnCambiaAtributos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+        
+                if(client.datoTarjeta.getText().equalsIgnoreCase("") || client.datoTelefono.getText().equalsIgnoreCase("") 
+                    || client.datoDireccion.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Trjeta, Direccion, Telefono");
+                }else{
+                    try{
+                        int telefono = Integer.parseInt(client.datoTelefono.getText()); 
+                        String tarjeta =  client.datoTarjeta.getText();
+                        String direccion = client.datoDireccion.getText();
+                        boolean hecho = daoUser.editarDatosCliente(cliente.getEmail(),direccion,tarjeta,telefono);
+                        
+                        if (hecho){ 
+                            cliente.setDireccion(direccion);
+                            cliente.setTelefono(telefono);
+                            cliente.setTarjeta(tarjeta);
+                            JOptionPane.showMessageDialog(null, "Sus datos se han actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Sus datos no se han podido actualizar, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                        } 
+                    }catch(NumberFormatException ex){
+                        Log.log.error(ex + "Error en extraer datos actualizar perfil cliente");
+                        JOptionPane.showMessageDialog(null, "Error al extraer los datos, vuelva a introducirlos.", "Error", JOptionPane.DEFAULT_OPTION);
+                    }
+                    
+                }  
+            }
+        });
+        
     }
 
     public void iniciarPanelPerfil() {
@@ -999,10 +1076,13 @@ public class ClienteController implements ActionListener {
 
         ArrayList<Integer> cesta = new ArrayList<>();
         String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+        
         if (carroActual != null) {
             String[] articulo = carroActual.split("-");
-            for (int i = 0; i < articulo.length; i++) {
-                cesta.add(Integer.parseInt(articulo[i]));
+            if (!articulo[0].equals("")){ 
+                for (int i = 0; i < articulo.length; i++) {
+                    cesta.add(Integer.parseInt(articulo[i]));
+                }
             }
         }
         return cesta;
@@ -1392,6 +1472,34 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "PcTorre"));
     }
 
+    private boolean comprobarPassword(){
+        boolean correcto = false;
+                if(client.nuevaPass.getPassword().length != 0){
+                    if((client.nuevaPass.getPassword().length != 0 && client.repitePass.getPassword().length != 0)){
+                        String passNueva= Arrays.toString(client.nuevaPass.getPassword());
+                        String passRepite= Arrays.toString(client.repitePass.getPassword());
+                        if(passNueva.equals(passRepite)){
+                            char[] valorContrasenna = client.nuevaPass.getPassword();
+                            passNueva = new String(valorContrasenna);
+                            String passAnterior = cliente.getPass();
+                            if(passNueva.equals(passAnterior)){
+                                JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+                            }
+                            else{
+                                correcto = true;
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
+                    }
+                }
+                return correcto;
+    } 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
