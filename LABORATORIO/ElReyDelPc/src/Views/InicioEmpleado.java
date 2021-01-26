@@ -27,6 +27,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel35 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         nombreUsuario = new javax.swing.JLabel();
@@ -120,6 +121,30 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jSeparator11 = new javax.swing.JSeparator();
         jSeparator12 = new javax.swing.JSeparator();
         jLabel27 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        tipoArticuloAnadir = new javax.swing.JComboBox<>();
+        jLabel34 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        codRefLabel = new javax.swing.JLabel();
+        codRefAnadir = new javax.swing.JTextField();
+        modeloLabel = new javax.swing.JLabel();
+        modeloAnadir = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        descripcionAnadir = new javax.swing.JTextPane();
+        jLabel39 = new javax.swing.JLabel();
+        stockAnadir = new javax.swing.JTextField();
+        jLabel44 = new javax.swing.JLabel();
+        precioAnadir = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        rutaImagenAnadir = new javax.swing.JTextField();
+        atributo1Label = new javax.swing.JLabel();
+        atributo1Anadir = new javax.swing.JTextField();
+        atributo2Label = new javax.swing.JLabel();
+        atributo2Anadir = new javax.swing.JTextField();
+        atributo3Label = new javax.swing.JLabel();
+        atributo3Anadir = new javax.swing.JTextField();
+        btnAnadirNuevoArticulo = new javax.swing.JButton();
         panelElegirProducto = new javax.swing.JPanel();
         infoPanelAnadir1 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
@@ -148,6 +173,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
         descripcionEdit = new javax.swing.JTextArea();
         btnEditarProducto = new javax.swing.JButton();
         idProductoEdit = new javax.swing.JLabel();
+
+        jLabel35.setText("jLabel35");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -732,6 +759,182 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         panelAnadir.add(infoPanelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
 
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+
+        tipoArticuloAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoArticuloAnadirActionPerformed(evt);
+            }
+        });
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("TIPO: ");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel34)
+                .addGap(18, 18, 18)
+                .addComponent(tipoArticuloAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(676, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipoArticuloAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        panelAnadir.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 960, 60));
+
+        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
+
+        codRefLabel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        codRefLabel.setForeground(new java.awt.Color(255, 255, 255));
+        codRefLabel.setText("Codigo referencia");
+
+        codRefAnadir.setEditable(false);
+
+        modeloLabel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        modeloLabel.setForeground(new java.awt.Color(255, 255, 255));
+        modeloLabel.setText("Modelo");
+
+        modeloAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeloAnadirActionPerformed(evt);
+            }
+        });
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("Descripcion");
+
+        descripcionAnadir.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane4.setViewportView(descripcionAnadir);
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("Stock");
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setText("Precio");
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel45.setText("Nombre imagen");
+
+        atributo1Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        atributo1Label.setForeground(new java.awt.Color(255, 255, 255));
+        atributo1Label.setVisible(false);
+        atributo1Label.setText("*atributo 1*");
+
+        atributo1Anadir.setVisible(false);
+        atributo1Anadir.setText("nadaDeNada");
+
+        atributo2Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        atributo2Label.setForeground(new java.awt.Color(255, 255, 255));
+        atributo2Label.setVisible(false);
+        atributo2Label.setText("*atributo 2*");
+
+        atributo2Anadir.setVisible(false);
+        atributo2Anadir.setText("nadaDeNada");
+
+        atributo3Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        atributo3Label.setForeground(new java.awt.Color(255, 255, 255));
+        atributo3Label.setVisible(false);
+        atributo3Label.setText("*atributo 3*");
+
+        atributo3Anadir.setVisible(false);
+        atributo3Anadir.setText("nadaDeNada");
+
+        btnAnadirNuevoArticulo.setText("Añadir artículo");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAnadirNuevoArticulo))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel38)
+                                .addComponent(modeloLabel)
+                                .addComponent(codRefLabel)
+                                .addComponent(modeloAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addComponent(codRefAnadir))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel39)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel45)
+                            .addComponent(stockAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(precioAnadir)
+                            .addComponent(rutaImagenAnadir))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(atributo1Label)
+                            .addComponent(atributo2Label)
+                            .addComponent(atributo3Label)
+                            .addComponent(atributo1Anadir, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(atributo2Anadir)
+                            .addComponent(atributo3Anadir))))
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codRefLabel)
+                    .addComponent(jLabel39)
+                    .addComponent(atributo1Label))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codRefAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(atributo1Anadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modeloLabel)
+                    .addComponent(jLabel44)
+                    .addComponent(atributo2Label))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modeloAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precioAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(atributo2Anadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel38)
+                    .addComponent(jLabel45)
+                    .addComponent(atributo3Label))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rutaImagenAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(atributo3Anadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnAnadirNuevoArticulo)
+                .addGap(34, 34, 34))
+        );
+
+        panelAnadir.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 910, 430));
+
         getContentPane().add(panelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelElegirProducto.setBackground(new java.awt.Color(51, 51, 51));
@@ -954,6 +1157,14 @@ public class InicioEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarProductoActionPerformed
 
+    private void tipoArticuloAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoArticuloAnadirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoArticuloAnadirActionPerformed
+
+    private void modeloAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloAnadirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modeloAnadirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -991,7 +1202,14 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField apellidoEdit;
+    public javax.swing.JTextField atributo1Anadir;
+    public javax.swing.JLabel atributo1Label;
+    public javax.swing.JTextField atributo2Anadir;
+    public javax.swing.JLabel atributo2Label;
+    public javax.swing.JTextField atributo3Anadir;
+    public javax.swing.JLabel atributo3Label;
     public javax.swing.JTextField barraBusqueda;
+    public javax.swing.JButton btnAnadirNuevoArticulo;
     public javax.swing.JLabel btnAnnadir;
     public javax.swing.JLabel btnBuscar;
     public javax.swing.JLabel btnCerrar;
@@ -1002,6 +1220,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JButton btnEditarProducto;
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel ciudadTienda;
+    public javax.swing.JTextField codRefAnadir;
+    public javax.swing.JLabel codRefLabel;
     public javax.swing.JLabel codTienda;
     public javax.swing.JLabel datoApellido;
     public javax.swing.JLabel datoDireccion;
@@ -1009,6 +1229,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JLabel datoEmail;
     public javax.swing.JLabel datoNombre;
     public javax.swing.JLabel datoTelefono;
+    public javax.swing.JTextPane descripcionAnadir;
     public javax.swing.JTextArea descripcionEdit;
     private javax.swing.JLabel direccion;
     private javax.swing.JLabel direccion1;
@@ -1050,27 +1271,36 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    public javax.swing.JLabel jLabel38;
+    public javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    public javax.swing.JLabel jLabel44;
+    public javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -1090,7 +1320,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JList<String> listaProductos;
+    public javax.swing.JTextField modeloAnadir;
     public javax.swing.JTextField modeloEdit;
+    public javax.swing.JLabel modeloLabel;
     private javax.swing.JLabel nada;
     public javax.swing.JTextField nombreEdit;
     public javax.swing.JLabel nombreTienda;
@@ -1106,10 +1338,14 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JPasswordField passActualEdit;
     public javax.swing.JPasswordField passNuevaEdit;
     public javax.swing.JPasswordField passRepitaEdit;
+    public javax.swing.JTextField precioAnadir;
     public javax.swing.JTextField precioEdit;
     public javax.swing.JLabel provinciaTienda;
+    public javax.swing.JTextField rutaImagenAnadir;
+    public javax.swing.JTextField stockAnadir;
     public javax.swing.JTextField stockEdit;
     public javax.swing.JTextField telefonoEdit;
+    public javax.swing.JComboBox<String> tipoArticuloAnadir;
     public javax.swing.JLabel tituloUsuarioId;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,6 +55,9 @@ public class EmpleadoController implements ActionListener{
         //Boton para editar los datos de un producto
         this.inicio.btnEditarProducto.addActionListener(this);
         
+        //Boton para añadir un nuevo producto al catalogo
+        this.inicio.btnAnadirNuevoArticulo.addActionListener(this);
+        
         //Boton para cerrar sesion
         this.inicio.btnCerrar.addMouseListener(new MouseAdapter() {
             @Override
@@ -94,6 +97,8 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelEditarProducto.setVisible(false);
                 
                 inicio.panelAnadir.setVisible(true);
+                
+                iniciarPanelAnadir();
             }
         });
         
@@ -178,6 +183,65 @@ public class EmpleadoController implements ActionListener{
                     inicio.panelEditarProducto.setVisible(true);
                     
                     cargarProductoEdit(inicio.listaProductos.getSelectedIndex());
+                }
+            }
+        });
+        
+        this.inicio.tipoArticuloAnadir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                esconderAtributos();
+                String eleccion = inicio.tipoArticuloAnadir.getSelectedItem().toString();
+                if(!eleccion.equalsIgnoreCase("Seleccione")){
+                    switch(eleccion){
+                        case "Caja":
+                            iniciarAtributo1("Cristal");
+                            break;
+                        case "Disco duro":
+                            iniciarAtributo1("Tipo");
+                            break;
+                        case "Fuente alimentacion":
+                            iniciarAtributo1("Potencia");
+                            iniciarAtributo2("Certificacion");
+                            break;
+                        case "Grafica":
+                            iniciarAtributo1("Generacion");
+                            break;
+                        case "RAM":
+                            iniciarAtributo1("PN");
+                            break;
+                        case "Monitor":
+                            iniciarAtributo1("Pulgadas");
+                            iniciarAtributo2("Panel");
+                            iniciarAtributo3("Hz");
+                            break;
+                        case "Torre":
+                            iniciarAtributo1("Nombre");
+                            break;
+                        case "Placa base":
+                            iniciarAtributo1("Socket");
+                            break;
+                        case "Portatil":
+                            iniciarAtributo1("Panel");
+                            iniciarAtributo2("Peso");
+                            break;
+                        case "Procesador":
+                            iniciarAtributo1("Socket");
+                            break;
+                        case "Raton":
+                            iniciarAtributo1("DPI");
+                            iniciarAtributo2("Tipo");
+                            iniciarAtributo3("Peso");
+                            break;
+                        case "Teclado":
+                            iniciarAtributo1("Tipo");
+                            break;
+                        case "WebCam":
+                            iniciarAtributo1("Calidad");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         });
@@ -271,7 +335,6 @@ public class EmpleadoController implements ActionListener{
     }
     
     public void iniciarPanelEditarUsuario(){
-        
         inicio.tituloUsuarioId.setText("USUARIO "+ empleado.getEmail());
         inicio.nombreEdit.setText(empleado.getNombre());
         inicio.apellidoEdit.setText(empleado.getApellido());
@@ -280,6 +343,49 @@ public class EmpleadoController implements ActionListener{
         inicio.passActualEdit.setText("");
         inicio.passNuevaEdit.setText("");
         inicio.passRepitaEdit.setText("");
+    }
+    
+    public void iniciarPanelAnadir(){
+        String listaTipos[] = {"Seleccione", "Caja", "Disco duro", "Fuente alimentacion", "Grafica", "RAM", "Monitor", 
+            "Torre", "Placa base", "Portatil", "Procesador", "Raton", "Teclado", "WebCam"};
+        for (String item : listaTipos) {
+            inicio.tipoArticuloAnadir.addItem(item);
+        }
+        
+        inicio.codRefAnadir.setText(""+ consultaArticulo.getCodRefMax());
+    }
+    
+    public void iniciarAtributo1(String nombre){
+        inicio.atributo1Label.setText(nombre);
+        inicio.atributo1Label.setVisible(true);
+        inicio.atributo1Anadir.setVisible(true);
+        inicio.atributo1Anadir.setText("");
+    }
+    
+    public void iniciarAtributo2(String nombre){
+        inicio.atributo2Label.setText(nombre);
+        inicio.atributo2Label.setVisible(true);
+        inicio.atributo2Anadir.setVisible(true);
+        inicio.atributo2Anadir.setText("");
+    }
+    
+    public void iniciarAtributo3(String nombre){
+        inicio.atributo3Label.setText(nombre);
+        inicio.atributo3Label.setVisible(true);
+        inicio.atributo3Anadir.setVisible(true);
+        inicio.atributo3Anadir.setText("");
+    }
+    
+    public void esconderAtributos(){
+        inicio.atributo1Label.setVisible(false);
+        inicio.atributo1Anadir.setVisible(false);
+        inicio.atributo1Anadir.setText("nadaDeNada");
+        inicio.atributo2Label.setVisible(false);
+        inicio.atributo2Anadir.setVisible(false);
+        inicio.atributo2Anadir.setText("nadaDeNada");
+        inicio.atributo3Label.setVisible(false);
+        inicio.atributo3Anadir.setVisible(false);
+        inicio.atributo3Anadir.setText("nadaDeNada");
     }
     
     public boolean comprobarFormularioEditarEmpleado(){
@@ -334,6 +440,26 @@ public class EmpleadoController implements ActionListener{
         return correcto;
     }
     
+    public boolean comprobarFormularioAnadirProducto(){
+        boolean correcto = false;
+        
+        if(inicio.tipoArticuloAnadir.getSelectedItem().toString().equalsIgnoreCase("Seleccione")){
+            JOptionPane.showMessageDialog(null, "ERROR: Seleccione el tipo de producto");
+        }
+        else{
+            if(inicio.modeloAnadir.getText().equalsIgnoreCase("") || inicio.codRefAnadir.getText().equalsIgnoreCase("") || inicio.descripcionAnadir.getText().equalsIgnoreCase("")
+                    || inicio.stockAnadir.getText().equalsIgnoreCase("") || inicio.precioAnadir.getText().equalsIgnoreCase("") || inicio.rutaImagenAnadir.getText().equalsIgnoreCase("")
+                    || inicio.atributo1Anadir.getText().equalsIgnoreCase("") || inicio.atributo2Anadir.getText().equalsIgnoreCase("") || inicio.atributo3Anadir.getText().equalsIgnoreCase("")){
+                JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los campos");
+            }
+            else{
+                correcto = true;
+            }
+        }
+        
+        return correcto;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent boton){
         if(boton.getSource() == inicio.btnEditarDatos){
@@ -346,7 +472,7 @@ public class EmpleadoController implements ActionListener{
                 String direccion = inicio.direccionEdit.getText();
                 int telefono = Integer.parseInt(inicio.telefonoEdit.getText());
                 
-                boolean exito = false;
+                boolean exito;
                 
                 //Si quiere cambiar la contraseña cogemos el valor
                 if(inicio.passNuevaEdit.getPassword().length != 0){
@@ -376,8 +502,6 @@ public class EmpleadoController implements ActionListener{
                 float precio = Float.parseFloat(inicio.precioEdit.getText());
                 String descripcion = inicio.descripcionEdit.getText();
                 
-                System.out.println(codigoReferencia);
-                
                 boolean exito = consultaArticulo.editarArticulo(codigoReferencia, modelo, descripcion, stock, precio);
                 
                 if(exito){
@@ -385,6 +509,56 @@ public class EmpleadoController implements ActionListener{
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar los datos del artículo");
+                }
+            }
+        }
+        else if(boton.getSource() == inicio.btnAnadirNuevoArticulo){
+            String a = inicio.atributo1Anadir.getText();
+            String b = inicio.atributo2Anadir.getText();
+            String c = inicio.atributo3Anadir.getText();
+            
+            System.out.println(a +" - "+ b +" - "+ c);
+            
+            if(comprobarFormularioAnadirProducto()){
+                JOptionPane.showMessageDialog(null, "Todo correcto. ");
+                String eleccion = inicio.tipoArticuloAnadir.getSelectedItem().toString();
+                switch(eleccion){
+                    case "Caja":
+                        iniciarAtributo1("Cristal");
+                        iniciarAtributo2("Peso");
+                        iniciarAtributo3("Socket");
+                        break;
+                    case "Disco duro":
+
+                        break;
+                    case "Fuente alimentacion":
+
+                        break;
+                    case "Grafica":
+
+                        break;
+                    case "RAM":
+                        break;
+                    case "Monitor":
+
+                        break;
+                    case "Torre":
+
+                        break;
+                    case "Placa base":
+                        break;
+                    case "Portatil":
+                        break;
+                    case "Procesador":
+                        break;
+                    case "Raton":
+                        break;
+                    case "Teclado":
+                        break;
+                    case "WebCam":
+                        break;
+                    default:
+                        break;
                 }
             }
         }
