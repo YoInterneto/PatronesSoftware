@@ -82,9 +82,8 @@ public class ArticuloDao {
     
     
     /**
-     * Retorna el articulo de la base de datos el cual tenga codigo de referencia indicado
+     * Retorna el codigo de referencia maximo que hay en la tabla
      *
-     * @param codigoReferencia
      * @return Devuelve un objeto articulo
      */
     public int getCodRefMax() {
@@ -220,86 +219,32 @@ public class ArticuloDao {
     }
     
     /**
-     * Inserta en la base de datos un nuevo articulo del tipo especificado (caja, RAM...)
-     * 
-     * @param codigoReferencia
-     * @param tipoArticulo
-     * @param modelo
-     * @param descripcion
-     * @param precio
-     * @param stock
-     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
-    
-    public boolean anadirArticuloTipo(int codigoReferencia, String tipoArticulo, String modelo, String descripcion, int stock, float precio, boolean cristal, 
-            String tipoDisco, int potencia, String certificacion, int generacion, String pn, int pulgadas, String panel, int herzios, String nombreTorre, 
-            String socketPlaca){
+     * Dado el codigo de referencia borra el articulo
+     *
+     * @return Devuelve un boolean que dice si se ha podido realizar la operacion
+     */
+    public boolean eliminarArticulo(int codigoReferencia){
         boolean hecho = false;
-        Log.logBd.info("CONSULTA AnadirArticuloTipo");
+        Log.logBd.info("CONSULTA EliminarArticulo");
         try {
             conexion = Conexion.getConexion();
-            Log.logBd.info("Realizada conexion - anadirArticuloTipo()");
+            Log.logBd.info("Realizada conexion - eliminarArticulo()");
             Statement s = conexion.createStatement();
-            String sql = "";
+            int codigo = s.executeUpdate("DELETE from articulo where codigo_ref="+ codigoReferencia);
             
-            switch(tipoArticulo){
-                    case "Caja":
-                        sql = "INSERT INTO caja VALUES";
-                        break;
-                    case "Disco duro":
-                        sql = "INSERT INTO disco_duro VALUES";
-                        break;
-                    case "Fuente alimentacion":
-                        sql = "INSERT INTO fuente_alimentacion VALUES";
-                        break;
-                    case "Grafica":
-                        sql = "INSERT INTO grafica VALUES";
-                        break;
-                    case "RAM":
-                        sql = "INSERT INTO memoria_ram VALUES";
-                        break;
-                    case "Monitor":
-                        sql = "INSERT INTO monitor VALUES";
-                        break;
-                    case "Torre":
-                        sql = "INSERT INTO pctorre VALUES";
-                        break;
-                    case "Placa base":
-                        sql = "INSERT INTO placa_base VALUES";
-                        break;
-                    case "Portatil":
-                        sql = "INSERT INTO portatil VALUES";
-                        break;
-                    case "Procesador":
-                        sql = "INSERT INTO procesador VALUES";
-                        break;
-                    case "Raton":
-                        sql = "INSERT INTO raton VALUES";
-                        break;
-                    case "Teclado":
-                        sql = "INSERT INTO teclado VALUES";
-                        break;
-                    case "WebCam":
-                        sql = "INSERT INTO webcam VALUES";
-                        break;
-                    default:
-                        break;
-                }
-            
-            int codigo = s.executeUpdate(sql);
-            
-            if(codigo>0){
+            if(codigo > 0){
                 hecho = true;
-                Log.logBd.info("Consulta realizada con éxito - anadirArticuloTipo()");
+                Log.logBd.info("Consulta realizada con éxito - eliminarArticulo()");
             }
             
         } catch (SQLException error) {
-            Log.logBd.error("ERROR SQL en anadirArticuloTipo(): " + error);
-            Log.logBd.error("                       SQL State - " + error.getSQLState());
-            Log.logBd.error("                       ErrorCode - " + error.getErrorCode());
+            Log.logBd.error("ERROR SQL en editarArticulo(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
         }
         
         return hecho;
-    }*/
+    }
     
     /**
      * Dado el codigo de un portatil realiza una consulta en la base de

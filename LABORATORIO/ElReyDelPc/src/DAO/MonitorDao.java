@@ -55,4 +55,43 @@ public class MonitorDao {
         Log.logBd.info("Consulta realizada con éxito - getAllMonitores()");
        return monitordb;
     }  
+    
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo monitor
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param pulgadas
+     * @param panel
+     * @param hz
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirMonitor(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, int pulgadas, String panel, int hz){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirMonitor");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirMonitor()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into monitor VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", "+ pulgadas +", '"+ panel +"', "+ hz +");");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirMonitor(): " + error);
+            Log.logBd.error("                  SQL State - " + error.getSQLState());
+            Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

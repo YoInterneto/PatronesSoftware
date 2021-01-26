@@ -67,6 +67,9 @@ public class EmpleadoController implements ActionListener{
         //Boton para editar los datos de un producto
         this.inicio.btnEditarProducto.addActionListener(this);
         
+        //Boton para borrar un producto
+        this.inicio.btnBorrarProducto.addActionListener(this);
+        
         //Boton para añadir un nuevo producto al catalogo
         this.inicio.btnAnadirNuevoArticulo.addActionListener(this);
         
@@ -178,14 +181,6 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()) {
-                    //************************************************************
-                    //************************************************************
-                    //ESTO ES PORQUE DE MOMENTO CODIGO DE REFERENCIA EMPIEZA EN 1
-                    //************************************************************
-                    //************************************************************
-                    //Meter posiblement una interfaz con la info del pedido
-                    System.out.println("ARTICULO SELECCIONADO "+ (inicio.listaProductos.getSelectedIndex()+1));
-                    
                     inicio.panelInicio.setVisible(false);
                     inicio.panelAnadir.setVisible(false);
                     inicio.panelEditarPerfil.setVisible(false);
@@ -259,9 +254,14 @@ public class EmpleadoController implements ActionListener{
         });
     }
     
+    //****************************************************************************************************************************************
+    //**                                                                                                                                    **
+    //****************************************************************************************************************************************
     public void cargarProductoEdit(int codigoReferencia){
-        inicio.idProductoEdit.setText(""+(codigoReferencia+1));
-        Articulo articulo = consultaArticulo.getArticulo(codigoReferencia+1);
+        ArrayList<Articulo> listaArticulos = consultaArticulo.getAllArticulos();
+        Articulo articulo = listaArticulos.get(codigoReferencia);
+        
+        inicio.idProductoEdit.setText(""+articulo.getCodigo_ref());
         
         inicio.modeloEdit.setText(articulo.getModelo());
         inicio.descripcionEdit.setText(articulo.getDescripcion());
@@ -301,11 +301,6 @@ public class EmpleadoController implements ActionListener{
                 listaRuta.add(articulo.getRutaImagen());
             }
             
-            //************************************************************
-            //************************************************************
-            //ESTO ES PORQUE DE MOMENTO CODIGO DE REFERENCIA EMPIEZA EN 1
-            //************************************************************
-            //************************************************************
             listModel.add(i, articuloInfo);
         }
         
@@ -330,6 +325,10 @@ public class EmpleadoController implements ActionListener{
         inicio.listaPedidos.setCellRenderer(new ListaDinamica("Pedido"));
     }
     
+    
+    //****************************************************************************************************************************************
+    //**                                                                                                                                    **
+    //****************************************************************************************************************************************
     public void iniciarPanelInicio(){
         inicio.nombreUsuario.setText("Bienvenido "+ empleado.getNombre() +" "+ empleado.getApellido());
         inicio.datoNombre.setText(empleado.getNombre());
@@ -367,6 +366,7 @@ public class EmpleadoController implements ActionListener{
             inicio.tipoArticuloAnadir.addItem(item);
         }
         
+        reiniciarPanelAnadir();
         inicio.codRefAnadir.setText(""+ consultaArticulo.getCodRefMax());
     }
     
@@ -403,6 +403,18 @@ public class EmpleadoController implements ActionListener{
         inicio.atributo3Anadir.setText("nadaDeNada");
     }
     
+    public void reiniciarPanelAnadir(){
+        inicio.modeloAnadir.setText("");
+        inicio.precioAnadir.setText("");
+        inicio.descripcionAnadir.setText("");
+        inicio.stockAnadir.setText("");
+        inicio.rutaImagenAnadir.setText("");
+    }
+    
+    
+    //****************************************************************************************************************************************
+    //**                                                                                                                                    **
+    //****************************************************************************************************************************************
     public boolean comprobarFormularioEditarEmpleado(){
         boolean correcto = false;
         
@@ -481,6 +493,10 @@ public class EmpleadoController implements ActionListener{
         return correcto;
     }
     
+    
+    //****************************************************************************************************************************************
+    //**                                                                                                                                    **
+    //****************************************************************************************************************************************
     @Override
     public void actionPerformed(ActionEvent boton){
         if(boton.getSource() == inicio.btnEditarDatos){
@@ -559,47 +575,74 @@ public class EmpleadoController implements ActionListener{
                 switch(eleccion){
                     case "Caja":
                         boolean cristal = !inicio.atributo1Anadir.getText().equalsIgnoreCase("no");
+                        
                         exito = consultaCaja.anadirCaja(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, cristal);
                         break;
                     case "Disco duro":
-                        String tipo = inicio.atributo1Anadir.getText();
-                        exito = consultaDiscoDuro.anadirDiscoDuro(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipo);
+                        String tipoDisco = inicio.atributo1Anadir.getText();
+                        
+                        exito = consultaDiscoDuro.anadirDiscoDuro(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipoDisco);
                         break;
                     case "Fuente alimentacion":
                         int potencia = Integer.parseInt(inicio.atributo1Anadir.getText());
                         String certificacion = inicio.atributo2Anadir.getText();
+                        
                         exito = consultaFuente.anadirFuente(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, potencia, certificacion);
                         break;
                     case "Grafica":
                         int generacion = Integer.parseInt(inicio.atributo1Anadir.getText());
+                        
                         exito = consultaGrafica.anadirGrafica(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, generacion);
                         break;
                     case "RAM":
+                        String pn = inicio.atributo1Anadir.getText();
                         
+                        exito = consultaRAM.anadirRAM(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, pn);
                         break;
                     case "Monitor":
-
+                        int pulgadas = Integer.parseInt(inicio.atributo1Anadir.getText());
+                        String panelMonitor = inicio.atributo2Anadir.getText();
+                        int hz = Integer.parseInt(inicio.atributo3Anadir.getText());
+                        
+                        exito = consultaMonitor.anadirMonitor(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, pulgadas, panelMonitor, hz);
                         break;
                     case "Torre":
-
+                        String nombre = inicio.atributo1Anadir.getText();
+                        
+                        exito = consultaTorre.anadirTorre(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, nombre);
                         break;
                     case "Placa base":
+                        String socketPlaca = inicio.atributo1Anadir.getText();
                         
+                        exito = consultaPlacaBase.anadirPlacaBase(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, socketPlaca);
                         break;
                     case "Portatil":
+                        String panelPortatil = inicio.atributo1Anadir.getText();
+                        int pesoPortatil = Integer.parseInt(inicio.atributo2Anadir.getText());
                         
+                        exito = consultaPortatil.anadirPortatil(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, panelPortatil, pesoPortatil);
                         break;
                     case "Procesador":
+                        String socketProcesador = inicio.atributo1Anadir.getText();
                         
+                        exito = consultaProcesador.anadirProcesador(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, socketProcesador);
                         break;
                     case "Raton":
+                        int DPI = Integer.parseInt(inicio.atributo1Anadir.getText());
+                        String tipoRaton = inicio.atributo2Anadir.getText();
+                        int pesoRaton = Integer.parseInt(inicio.atributo3Anadir.getText());
                         
+                        exito = consultaRaton.anadirRaton(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, DPI, tipoRaton, pesoRaton);
                         break;
                     case "Teclado":
+                        String tipoTeclado = inicio.atributo1Anadir.getText();
                         
+                        exito = consultaTeclado.anadirTeclado(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipoTeclado);
                         break;
                     case "WebCam":
+                        String calidad = inicio.atributo1Anadir.getText();
                         
+                        exito = consultaWebCam.anadirWebCam(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, calidad);
                         break;
                     default:
                         break;
@@ -607,10 +650,38 @@ public class EmpleadoController implements ActionListener{
                 
                 if(exito){
                     JOptionPane.showMessageDialog(null, "Articulo "+ codigoReferncia +" añadido con éxito.");
+                    
+                    iniciarPanelAnadir();
+                    esconderAtributos();
+                    inicio.tipoArticuloAnadir.setSelectedIndex(0);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "ERROR: No se pudieron añadir el articulo.");
+                    JOptionPane.showMessageDialog(null, "ERROR: No se pudo añadir el articulo.");
                 }
+            }
+        }
+        else if(boton.getSource() == inicio.btnBorrarProducto){
+            int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
+            int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar el articulo"+ codigoReferencia +"?", "Articulo", JOptionPane.YES_NO_OPTION);
+
+            if (seleccion == 0) {
+                boolean exito = consultaArticulo.eliminarArticulo(codigoReferencia);
+                if(exito){
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado el articulo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    inicio.panelInicio.setVisible(false);
+                    inicio.panelAnadir.setVisible(false);
+                    inicio.panelEditarPerfil.setVisible(false);
+                    inicio.panelCompras.setVisible(false);
+                    inicio.panelEditarProducto.setVisible(false);
+
+                    inicio.panelElegirProducto.setVisible(true);
+
+                    cargarListaProductos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha podido eliminar el articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
             }
         }
     }

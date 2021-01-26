@@ -56,4 +56,40 @@ public class Placa_baseDao {
        return placadb;
     }
     
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo placa base
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param socket
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirPlacaBase(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String socket){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirPlacaBase");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirPlacaBase()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into placa_base VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ socket +"');");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirPlacaBase(): " + error);
+            Log.logBd.error("                    SQL State - " + error.getSQLState());
+            Log.logBd.error("                    ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

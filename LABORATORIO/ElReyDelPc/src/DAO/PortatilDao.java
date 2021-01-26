@@ -57,4 +57,41 @@ public class PortatilDao {
        return portatildb;
     }  
     
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo portatil
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param panel
+     * @param peso
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirPortatil(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String panel, int peso){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirPortatil");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirPortatil()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into portatil VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ panel +"', "+ peso +");");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirPortatil(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

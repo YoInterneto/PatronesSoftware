@@ -73,7 +73,7 @@ public class CajaDao {
     public boolean anadirCaja(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, boolean cristal){
         boolean hecho = false;
         try {
-            Log.logBd.info("CONSULTA anadirCaja");
+            Log.logBd.info("CONSULTA AnadirCaja");
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - anadirCaja()");
             Statement s = conexion.createStatement();
@@ -86,8 +86,8 @@ public class CajaDao {
             
         } catch (SQLException error) {
             Log.logBd.error("ERROR SQL en anadirCaja(): " + error);
-            Log.logBd.error("                   SQL State - " + error.getSQLState());
-            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+            Log.logBd.error("               SQL State - " + error.getSQLState());
+            Log.logBd.error("               ErrorCode - " + error.getErrorCode());
         }
         
         return hecho;

@@ -56,4 +56,41 @@ public class TecladoDao {
         Log.logBd.info("Consulta realizada con éxito - getAllTecladoes()");
        return tecladodb;
     }  
+    
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo placa base
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param tipo
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirTeclado(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String tipo){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirTeclado");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirTeclado()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into teclado VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ tipo +"');");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirTeclado(): " + error);
+            Log.logBd.error("                  SQL State - " + error.getSQLState());
+            Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

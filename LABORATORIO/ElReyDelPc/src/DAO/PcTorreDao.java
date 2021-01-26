@@ -55,5 +55,40 @@ public class PcTorreDao {
        return portatildb;
     }  
     
-    
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo torre de pc
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param cristal
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirTorre(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String nombre){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirTorre");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirTorre()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into pctorre VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ nombre +"');");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirTorre(): " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }

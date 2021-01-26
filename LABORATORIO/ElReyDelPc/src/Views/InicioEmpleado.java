@@ -172,6 +172,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         descripcionEdit = new javax.swing.JTextArea();
         btnEditarProducto = new javax.swing.JButton();
+        btnBorrarProducto = new javax.swing.JButton();
         idProductoEdit = new javax.swing.JLabel();
 
         jLabel35.setText("jLabel35");
@@ -1058,6 +1059,13 @@ public class InicioEmpleado extends javax.swing.JFrame {
             }
         });
 
+        btnBorrarProducto.setText("Borrar");
+        btnBorrarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarProductoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1078,7 +1086,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
                         .addGap(73, 73, 73))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnBorrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel33)
                                 .addGap(336, 336, 336))
@@ -1105,7 +1116,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(btnEditarProducto)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditarProducto)
+                    .addComponent(btnBorrarProducto))
                 .addGap(25, 25, 25))
         );
 
@@ -1165,6 +1178,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_modeloAnadirActionPerformed
 
+    private void btnBorrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarProductoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1211,6 +1228,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JTextField barraBusqueda;
     public javax.swing.JButton btnAnadirNuevoArticulo;
     public javax.swing.JLabel btnAnnadir;
+    public javax.swing.JButton btnBorrarProducto;
     public javax.swing.JLabel btnBuscar;
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JLabel btnCompras;

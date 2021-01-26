@@ -55,4 +55,41 @@ public class MemoriaRAMDao {
         Log.logBd.info("Consulta realizada con éxito - getAllMemoria_RAMes()");
        return MemoriaRamdb;
     }  
+    
+    /**
+     * Realiza una consulta en la base de datos para añadir
+     * un nuevo artículo memoria RAM
+     *
+     * @param modelo
+     * @param codigoReferencia
+     * @param precio
+     * @param descripcion
+     * @param stock
+     * @param rutaImagen
+     * @param idTienda
+     * @param pn
+     * @return Devuelve un boolean para saber si se ha insertado
+     */
+    public boolean anadirRAM(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String pn){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA AnadirRAM");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - anadirRAM()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into memoria_ram VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ pn +"');");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en anadirRAM(): " + error);
+            Log.logBd.error("              SQL State - " + error.getSQLState());
+            Log.logBd.error("              ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
 }
