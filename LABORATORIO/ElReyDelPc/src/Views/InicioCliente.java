@@ -485,7 +485,7 @@ public class InicioCliente extends javax.swing.JFrame {
         disco.setForeground(new java.awt.Color(255, 255, 255));
         disco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         disco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hd.png"))); // NOI18N
-        disco.setText("Disco Duro");
+        disco.setText("Discos");
         disco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         panelArticulo.add(disco, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 130, 40));
 
@@ -505,14 +505,14 @@ public class InicioCliente extends javax.swing.JFrame {
 
         ram.setForeground(new java.awt.Color(255, 255, 255));
         ram.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/memory_ram_hardware_21433.png"))); // NOI18N
+        ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ram.png"))); // NOI18N
         ram.setText("Memoria RAM");
         ram.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         panelArticulo.add(ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 460, 130, 40));
 
         pctorre.setForeground(new java.awt.Color(255, 255, 255));
         pctorre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pctorre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/monitor.png"))); // NOI18N
+        pctorre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pc.png"))); // NOI18N
         pctorre.setText("PC Torre");
         pctorre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         panelArticulo.add(pctorre, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 460, 130, 40));
@@ -539,7 +539,7 @@ public class InicioCliente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaPedidos);
 
-        panelCarro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 590, 370));
+        panelCarro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 670, 370));
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));

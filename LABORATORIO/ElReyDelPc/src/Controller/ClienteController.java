@@ -491,7 +491,7 @@ public class ClienteController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desear realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
 
                 if (seleccion == 0) { // Confirma insertar
                     int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
@@ -514,7 +514,7 @@ public class ClienteController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desear añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
 
                 if (seleccion == 0) { // Confirma insertar
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
@@ -537,7 +537,7 @@ public class ClienteController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desear eliminar este articulo del carro?",
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar este articulo del carro?",
                         "Eliminar articulo", JOptionPane.YES_NO_OPTION);
 
                 ArrayList<Integer> cesta = cargarCarro();
@@ -564,7 +564,7 @@ public class ClienteController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desear realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
 
                 if (seleccion == 0) { // Confirma insertar
                     ArrayList<Integer> cesta = cargarCarro();

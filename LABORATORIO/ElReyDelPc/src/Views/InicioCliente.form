@@ -980,7 +980,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/images/hd.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Disco Duro"/>
+                    <Property name="text" type="java.lang.String" value="Discos"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder>
@@ -1059,7 +1059,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/memory_ram_hardware_21433.png"/>
+                      <Image iconType="3" name="/images/ram.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Memoria RAM"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1086,7 +1086,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/monitor.png"/>
+                      <Image iconType="3" name="/images/pc.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="PC Torre"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1161,7 +1161,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="130" y="160" width="590" height="370"/>
+                      <AbsoluteConstraints x="50" y="160" width="670" height="370"/>
                     </Constraint>
                   </Constraints>
 
