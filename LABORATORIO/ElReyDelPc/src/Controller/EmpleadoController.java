@@ -46,10 +46,13 @@ public class EmpleadoController implements ActionListener{
     private final TecladoDao consultaTeclado = new TecladoDao();
     private final WebCamDao consultaWebCam = new WebCamDao();
     
+    private String claveBusqueda;
+    
     public EmpleadoController(InicioEmpleado inicioVista, Empleado usuario){
         this.inicio = inicioVista;
         this.empleado = usuario;
         this.tienda = consultaUsuario.getTienda(empleado.getID_Tienda());
+        this.claveBusqueda = "";
     }
     
     public void iniciar(){
@@ -83,6 +86,38 @@ public class EmpleadoController implements ActionListener{
                 login.iniciar();
                 inicio.setVisible(false);
                 loginVista.setVisible(true);
+            }
+        });
+        
+        //Boton para buscar por palabra clave
+        this.inicio.btnBuscar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(!inicio.barraBusqueda.getText().equalsIgnoreCase("")){
+                    String clave = inicio.barraBusqueda.getText();
+                    ArrayList<Articulo> listaArticulos = consultaArticulo.buscarArticuloPalabraClave(clave);
+                    
+                    //Si la lista de los articulos con la clave de busqueda no es vacia, es decir, se ha encontrado algun
+                    //articulo, cargamos la lista de los articulos
+                    if(listaArticulos.size() > 0){
+                        setClaveBusqueda(clave);
+                        cargarListaProductos(listaArticulos);
+                    
+                        inicio.panelInicio.setVisible(false);
+                        inicio.panelAnadir.setVisible(false);
+                        inicio.panelEditarPerfil.setVisible(false);
+                        inicio.panelCompras.setVisible(false);
+                        inicio.panelEditarProducto.setVisible(false);
+
+                        inicio.panelElegirProducto.setVisible(true);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: No se ha encontrado nigún artículo con la clave - "+ clave +".");
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la clave de búsqueda.");
+                }
             }
         });
         
@@ -160,7 +195,8 @@ public class EmpleadoController implements ActionListener{
                 
                 inicio.panelElegirProducto.setVisible(true);
                 
-                cargarListaProductos();
+                ArrayList<Articulo> listaArticulos = consultaArticulo.getAllArticulos();
+                cargarListaProductos(listaArticulos);
             }
         });
         
@@ -188,7 +224,23 @@ public class EmpleadoController implements ActionListener{
                     
                     inicio.panelEditarProducto.setVisible(true);
                     
-                    cargarProductoEdit(inicio.listaProductos.getSelectedIndex());
+                    ArrayList<Articulo> listaArticulos;
+                    int eleccion = inicio.listaProductos.getSelectedIndex();
+                    
+                    //Si no hay niguna clave de búsqueda quiere decir que el usuario quiere ver todos los artículos
+                    if(getClaveBusqueda().equalsIgnoreCase("")){
+                        listaArticulos = consultaArticulo.getAllArticulos();
+                        cargarProductoEdit(eleccion, listaArticulos);
+                    }
+                    //Si hay un clave solo quiere ver los articulos que contegan la clave
+                    else{
+                        listaArticulos = consultaArticulo.buscarArticuloPalabraClave(getClaveBusqueda());
+                        cargarProductoEdit(eleccion, listaArticulos);
+                    }
+                    
+                    //Volvemos a poner la clave de búsqueda vacia
+                    setClaveBusqueda("");
+                    inicio.barraBusqueda.setText("");
                 }
             }
         });
@@ -256,7 +308,28 @@ public class EmpleadoController implements ActionListener{
     //****************************************************************************************************************************************
     //**                                                                                                                                    **
     //****************************************************************************************************************************************
-    public void cargarProductoEdit(int codigoReferencia){
+    public void cargarProductoEdit(int codigoReferencia, ArrayList<Articulo> listaArticulos){
+        Articulo articulo = listaArticulos.get(codigoReferencia);
+        
+        inicio.idProductoEdit.setText(""+articulo.getCodigo_ref());
+        
+        inicio.modeloEdit.setText(articulo.getModelo());
+        inicio.descripcionEdit.setText(articulo.getDescripcion());
+        inicio.precioEdit.setText(""+articulo.getPrecio());
+        inicio.stockEdit.setText(""+articulo.getStock());
+        
+        if(articulo.getRutaImagen() == null){
+            inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fotopc.png")));
+        }
+        else if(getClass().getResource(articulo.getRutaImagen()) == null){
+            inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/error.png")));
+        }
+        else{
+            inicio.imgProductoEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource(articulo.getRutaImagen())));
+        }
+    }
+    
+    public void cargarProductoBusquedaEdit(int codigoReferencia){
         ArrayList<Articulo> listaArticulos = consultaArticulo.getAllArticulos();
         Articulo articulo = listaArticulos.get(codigoReferencia);
         
@@ -278,20 +351,18 @@ public class EmpleadoController implements ActionListener{
         }
     }
     
-    public void cargarListaProductos(){
+    public void cargarListaProductos(ArrayList<Articulo> lista){
         DefaultListModel listModel = new DefaultListModel();
-        
-        ArrayList<Articulo> lista = consultaArticulo.getAllArticulos();
-        
         ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
-        
+        //ArrayList<Articulo> lista = consultaArticulo.getAllArticulos();
+
         for(int i=0; i<lista.size(); i++){
             Articulo articulo = lista.get(i);
             int codigoReferencia = articulo.getCodigo_ref();
             String articuloInfo = "  CodRef-"+ String.format("%04d", codigoReferencia) +" \t"+ articulo.getModelo() +" \tPrecio-"+ articulo.getPrecio() +"    \t[stock: "+ articulo.getStock() +"]";
             articuloInfo = articuloInfo.replaceAll("\t", "           ");
-            
+
             listaInfo.add(articuloInfo);
             if(articulo.getRutaImagen() == null){
                 listaRuta.add("/images/error.png");
@@ -299,10 +370,10 @@ public class EmpleadoController implements ActionListener{
             else{
                 listaRuta.add(articulo.getRutaImagen());
             }
-            
+
             listModel.add(i, articuloInfo);
         }
-        
+
         inicio.listaProductos.setModel(listModel);
         inicio.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
     }
@@ -360,6 +431,7 @@ public class EmpleadoController implements ActionListener{
     public void iniciarPanelAnadir(){
         String listaTipos[] = {"Seleccione", "Caja", "Disco duro", "Fuente alimentacion", "Grafica", "RAM", "Monitor", 
             "Torre", "Placa base", "Portatil", "Procesador", "Raton", "Teclado", "WebCam"};
+        
         for (String item : listaTipos) {
             inicio.tipoArticuloAnadir.addItem(item);
         }
@@ -684,8 +756,9 @@ public class EmpleadoController implements ActionListener{
                         inicio.panelEditarProducto.setVisible(false);
 
                         inicio.panelElegirProducto.setVisible(true);
-
-                        cargarListaProductos();
+                        
+                        ArrayList<Articulo> listaArticulos = consultaArticulo.getAllArticulos();
+                        cargarListaProductos(listaArticulos);
                     } else {
                         JOptionPane.showMessageDialog(null, "No se ha podido eliminar el articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
                     }
@@ -696,5 +769,17 @@ public class EmpleadoController implements ActionListener{
                 JOptionPane.showMessageDialog(null, "ERROR: No se pudo borrar el producto.\nInténtelo de nuevo");
             }
         }
+    }
+    
+    
+    //****************************************************************************************************************************************
+    //**                                                                                                                                    **
+    //****************************************************************************************************************************************
+    public void setClaveBusqueda(String clave){
+        this.claveBusqueda = clave;
+    }
+    
+    public String getClaveBusqueda(){
+        return this.claveBusqueda;
     }
 }

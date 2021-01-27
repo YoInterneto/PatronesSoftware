@@ -2,6 +2,7 @@
 package DAO;
 
 import Model.Articulos.*;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -273,6 +274,49 @@ public class ArticuloDao {
         }
         
         return hecho;
+    }
+    
+    /**
+     * Dada una palabra busca en la base de datos articulos que contengan esa palabra
+     * 
+     * @param palabraClave
+     * @return Devuelve una lista de los artículos encontrados que coinciden
+     */
+    public ArrayList<Articulo> buscarArticuloPalabraClave(String palabraClave){
+        ArrayList<Articulo> listaArticulos = new ArrayList<>();
+        try {
+            Log.logBd.info("CONSULTA BuscarArticuloPalabraClave");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - buscarArticuloPalabraClave()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from articulo;");        
+        
+            while(resultado.next()){
+                String modelo = resultado.getString("modelo").toLowerCase();
+                int busqueda = modelo.indexOf(palabraClave.toLowerCase());
+                
+                //Si se ha encontrado la palabra clave añadimos el artículo
+                if(busqueda != -1) {
+                    Articulo articulo = new Articulo();
+                    articulo.setModelo(modelo);
+                    articulo.setCodigo_ref(resultado.getInt("codigo_ref"));
+                    articulo.setDescripcion(resultado.getString("descripcion"));
+                    articulo.setID_Tienda(resultado.getInt("id_tienda"));
+                    articulo.setPrecio(resultado.getInt("precio"));
+                    articulo.setRutaImagen(resultado.getString("rutaImagen"));
+                    articulo.setStock(resultado.getInt("stock"));
+                    
+                    listaArticulos.add(articulo);
+                }
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en buscarArticuloPalabraClave(): " + error);
+            Log.logBd.error("                               SQL State - " + error.getSQLState());
+            Log.logBd.error("                               ErrorCode - " + error.getErrorCode());
+        }
+        
+        return listaArticulos;
     }
     
     /**
