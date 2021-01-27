@@ -253,11 +253,7 @@ public class InicioCliente extends javax.swing.JFrame {
 
         btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseClicked(evt);
-            }
-        });
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 50, 40));
 
         btnCarro.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -265,45 +261,40 @@ public class InicioCliente extends javax.swing.JFrame {
         btnCarro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Carrito.png"))); // NOI18N
         btnCarro.setText("Carrito");
-        jPanel2.add(btnCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 60));
+        btnCarro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(btnCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 240, 60));
 
         btnInicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnInicio.setForeground(new java.awt.Color(255, 255, 255));
         btnInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
         btnInicio.setText("Inicio");
-        btnInicio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInicioMouseClicked(evt);
-            }
-        });
-        jPanel2.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 160, 60));
+        btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 240, 60));
 
         btnProducto.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnProducto.setForeground(new java.awt.Color(255, 255, 255));
         btnProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pc.png"))); // NOI18N
         btnProducto.setText("Productos");
-        btnProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnProductoMouseClicked(evt);
-            }
-        });
-        jPanel2.add(btnProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 210, 70));
+        btnProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(btnProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 240, 70));
 
         btnMontar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnMontar.setForeground(new java.awt.Color(255, 255, 255));
         btnMontar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnMontar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ajustes.png"))); // NOI18N
         btnMontar.setText("Monta tu PC");
-        jPanel2.add(btnMontar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 180, 70));
+        btnMontar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(btnMontar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 240, 70));
 
         btnPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnPerfil.setForeground(new java.awt.Color(255, 255, 255));
         btnPerfil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfil.png"))); // NOI18N
         btnPerfil.setText("Gestiona tu perfil");
-        jPanel2.add(btnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 220, 60));
+        btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(btnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 240, 60));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 240, -1));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 240, 10));
         jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 240, -1));
@@ -320,6 +311,7 @@ public class InicioCliente extends javax.swing.JFrame {
         btnCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CerrarSesion.png"))); // NOI18N
         btnCerrar.setText("Cerrar sesion");
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 160, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 960, 80));
@@ -402,6 +394,7 @@ public class InicioCliente extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane2.setViewportView(listaProductos);
 
         panelElegirProducto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 800, 450));
@@ -446,6 +439,7 @@ public class InicioCliente extends javax.swing.JFrame {
         raton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mouse_46934.png"))); // NOI18N
         raton.setText("Raton");
         raton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        raton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(raton, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 330, 130, 40));
 
         placaBase.setForeground(new java.awt.Color(255, 255, 255));
@@ -453,6 +447,7 @@ public class InicioCliente extends javax.swing.JFrame {
         placaBase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/placa.png"))); // NOI18N
         placaBase.setText("Placa base");
         placaBase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        placaBase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(placaBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 130, 40));
 
         cpu.setForeground(new java.awt.Color(255, 255, 255));
@@ -460,6 +455,7 @@ public class InicioCliente extends javax.swing.JFrame {
         cpu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cpu_78933.png"))); // NOI18N
         cpu.setText("CPU");
         cpu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cpu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 200, 130, 40));
 
         grafica.setForeground(new java.awt.Color(255, 255, 255));
@@ -467,6 +463,7 @@ public class InicioCliente extends javax.swing.JFrame {
         grafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nvidia_23133.png"))); // NOI18N
         grafica.setText("Grafica");
         grafica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        grafica.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(grafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 200, 130, 40));
 
         caja.setForeground(new java.awt.Color(255, 255, 255));
@@ -474,6 +471,7 @@ public class InicioCliente extends javax.swing.JFrame {
         caja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/torre.png"))); // NOI18N
         caja.setText("Caja");
         caja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        caja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(caja, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 130, 40));
 
         monitor.setForeground(new java.awt.Color(255, 255, 255));
@@ -481,6 +479,7 @@ public class InicioCliente extends javax.swing.JFrame {
         monitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/monitor.png"))); // NOI18N
         monitor.setText("Monitor");
         monitor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        monitor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(monitor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 130, 40));
 
         teclado.setForeground(new java.awt.Color(255, 255, 255));
@@ -488,6 +487,7 @@ public class InicioCliente extends javax.swing.JFrame {
         teclado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/keyboard.png"))); // NOI18N
         teclado.setText("Teclado");
         teclado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        teclado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(teclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 330, 130, 40));
 
         disco.setForeground(new java.awt.Color(255, 255, 255));
@@ -495,6 +495,7 @@ public class InicioCliente extends javax.swing.JFrame {
         disco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hd.png"))); // NOI18N
         disco.setText("Discos");
         disco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        disco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(disco, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 130, 40));
 
         cam.setForeground(new java.awt.Color(255, 255, 255));
@@ -502,6 +503,7 @@ public class InicioCliente extends javax.swing.JFrame {
         cam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cam.png"))); // NOI18N
         cam.setText("WebCam");
         cam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cam.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(cam, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 330, 130, 40));
 
         fuente.setForeground(new java.awt.Color(255, 255, 255));
@@ -509,6 +511,7 @@ public class InicioCliente extends javax.swing.JFrame {
         fuente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fa.png"))); // NOI18N
         fuente.setText("Fuente alimentacion");
         fuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        fuente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(fuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, 160, 40));
 
         ram.setForeground(new java.awt.Color(255, 255, 255));
@@ -516,6 +519,7 @@ public class InicioCliente extends javax.swing.JFrame {
         ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ram.png"))); // NOI18N
         ram.setText("Memoria RAM");
         ram.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        ram.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 460, 130, 40));
 
         pctorre.setForeground(new java.awt.Color(255, 255, 255));
@@ -523,6 +527,7 @@ public class InicioCliente extends javax.swing.JFrame {
         pctorre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pc.png"))); // NOI18N
         pctorre.setText("PC Torre");
         pctorre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        pctorre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(pctorre, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 460, 130, 40));
 
         portatil.setForeground(new java.awt.Color(255, 255, 255));
@@ -530,6 +535,7 @@ public class InicioCliente extends javax.swing.JFrame {
         portatil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/portatil.png"))); // NOI18N
         portatil.setText("Portatil");
         portatil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        portatil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelArticulo.add(portatil, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 130, 40));
 
         jPanel6.add(panelArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
@@ -545,6 +551,7 @@ public class InicioCliente extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(listaPedidos);
 
         panelCarro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 670, 370));
@@ -588,12 +595,18 @@ public class InicioCliente extends javax.swing.JFrame {
         panelCarro.add(precioCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 460, 110, 30));
 
         btnRealizaPedidoCarro.setText("Realizar pedido");
+        btnRealizaPedidoCarro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRealizaPedidoCarro.setFocusPainted(false);
         panelCarro.add(btnRealizaPedidoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 500, 180, -1));
 
         eliminarArticulo.setText("Eliminar");
+        eliminarArticulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarArticulo.setFocusPainted(false);
         panelCarro.add(eliminarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 180, 40));
 
         eliminaTodoCarro.setText("Eliminar todo");
+        eliminaTodoCarro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminaTodoCarro.setFocusPainted(false);
         panelCarro.add(eliminaTodoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 550, 180, 40));
 
         panelCarro.setVisible(false);
@@ -738,9 +751,13 @@ public class InicioCliente extends javax.swing.JFrame {
         panelMonta.add(camBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 180, -1));
 
         jButton6.setText("jButton6");
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setFocusPainted(false);
         panelMonta.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 130, -1));
 
         jButton7.setText("jButton7");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.setFocusPainted(false);
         panelMonta.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 130, 30));
 
         jSeparator22.setBackground(new java.awt.Color(255, 255, 255));
@@ -784,7 +801,9 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion1.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion1.setBorder(null);
+        puntuacion1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         puntuacion1.setEnabled(false);
+        puntuacion1.setFocusPainted(false);
         puntuacion1.setOpaque(false);
         panelProducto.add(puntuacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 530, 50, 40));
 
@@ -893,8 +912,12 @@ public class InicioCliente extends javax.swing.JFrame {
         descripcion.setText("jLabel20");
 
         btnComprarProducto.setText("Comprar");
+        btnComprarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnComprarProducto.setFocusPainted(false);
 
         insertarCesta.setText("Cesta");
+        insertarCesta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        insertarCesta.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -989,7 +1012,9 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion2.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion2.setBorder(null);
+        puntuacion2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         puntuacion2.setEnabled(false);
+        puntuacion2.setFocusPainted(false);
         puntuacion2.setOpaque(false);
         panelProducto.add(puntuacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 50, 40));
 
@@ -997,7 +1022,9 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion3.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion3.setBorder(null);
+        puntuacion3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         puntuacion3.setEnabled(false);
+        puntuacion3.setFocusPainted(false);
         puntuacion3.setOpaque(false);
         panelProducto.add(puntuacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 50, 40));
 
@@ -1005,7 +1032,9 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion4.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion4.setBorder(null);
+        puntuacion4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         puntuacion4.setEnabled(false);
+        puntuacion4.setFocusPainted(false);
         puntuacion4.setOpaque(false);
         panelProducto.add(puntuacion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 50, 40));
 
@@ -1013,7 +1042,9 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion5.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion5.setBorder(null);
+        puntuacion5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         puntuacion5.setEnabled(false);
+        puntuacion5.setFocusPainted(false);
         puntuacion5.setOpaque(false);
         panelProducto.add(puntuacion5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, 50, 40));
 
@@ -1119,9 +1150,13 @@ public class InicioCliente extends javax.swing.JFrame {
         panelPerfil.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 110, 20));
 
         btnCambiaEmail.setText("Cambiar");
+        btnCambiaEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambiaEmail.setFocusPainted(false);
         panelPerfil.add(btnCambiaEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 100, 30));
 
         btnCambiaContra.setText("Cambiar");
+        btnCambiaContra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambiaContra.setFocusPainted(false);
         panelPerfil.add(btnCambiaContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 90, -1));
 
         jLabel50.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1141,6 +1176,8 @@ public class InicioCliente extends javax.swing.JFrame {
         panelPerfil.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 140, 30));
 
         btnCambiaAtributos.setText("Guardar");
+        btnCambiaAtributos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambiaAtributos.setFocusPainted(false);
         panelPerfil.add(btnCambiaAtributos, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 180, 40));
 
         jLabel52.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1168,21 +1205,6 @@ public class InicioCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarMouseClicked
-
-    private void btnProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductoMouseClicked
-        // TODO add your handling code here:
-         //panelInicio.setVisible(false);
-         //panelArticulo.setVisible(true);
-    }//GEN-LAST:event_btnProductoMouseClicked
-
-    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnInicioMouseClicked
 
     /**
      * @param args the command line arguments
