@@ -10,14 +10,13 @@ import Util.ListaDinamica;
 import Util.ListaDinamicaImagen;
 import Views.InicioEmpleado;
 import Views.Login;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,27 +24,27 @@ import util.Log;
 
 public class EmpleadoController implements ActionListener{
     
-    private InicioEmpleado inicio;
-    private Empleado empleado;
-    private Tienda tienda;
+    private final InicioEmpleado inicio;
+    private final Empleado empleado;
+    private final Tienda tienda;
     
-    private UsuarioDao consultaUsuario = new UsuarioDao();
+    private final UsuarioDao consultaUsuario = new UsuarioDao();
     
-    private PedidoDao consultaPedido = new PedidoDao();
-    private ArticuloDao consultaArticulo = new ArticuloDao();
-    private CajaDao consultaCaja = new CajaDao();
-    private DiscoDuroDao consultaDiscoDuro = new DiscoDuroDao();
-    private FuenteDao consultaFuente = new FuenteDao();
-    private GraficaDao consultaGrafica = new GraficaDao();
-    private MemoriaRAMDao consultaRAM = new MemoriaRAMDao();
-    private MonitorDao consultaMonitor = new MonitorDao();
-    private PcTorreDao consultaTorre = new PcTorreDao();
-    private Placa_baseDao consultaPlacaBase = new Placa_baseDao();
-    private PortatilDao consultaPortatil = new PortatilDao();
-    private ProcesadorDao consultaProcesador = new ProcesadorDao();
-    private RatonDao consultaRaton = new RatonDao();
-    private TecladoDao consultaTeclado = new TecladoDao();
-    private WebCamDao consultaWebCam = new WebCamDao();
+    private final PedidoDao consultaPedido = new PedidoDao();
+    private final ArticuloDao consultaArticulo = new ArticuloDao();
+    private final CajaDao consultaCaja = new CajaDao();
+    private final DiscoDuroDao consultaDiscoDuro = new DiscoDuroDao();
+    private final FuenteDao consultaFuente = new FuenteDao();
+    private final GraficaDao consultaGrafica = new GraficaDao();
+    private final MemoriaRAMDao consultaRAM = new MemoriaRAMDao();
+    private final MonitorDao consultaMonitor = new MonitorDao();
+    private final PcTorreDao consultaTorre = new PcTorreDao();
+    private final Placa_baseDao consultaPlacaBase = new Placa_baseDao();
+    private final PortatilDao consultaPortatil = new PortatilDao();
+    private final ProcesadorDao consultaProcesador = new ProcesadorDao();
+    private final RatonDao consultaRaton = new RatonDao();
+    private final TecladoDao consultaTeclado = new TecladoDao();
+    private final WebCamDao consultaWebCam = new WebCamDao();
     
     public EmpleadoController(InicioEmpleado inicioVista, Empleado usuario){
         this.inicio = inicioVista;
@@ -499,188 +498,202 @@ public class EmpleadoController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent boton){
         if(boton.getSource() == inicio.btnEditarDatos){
-            Log.log.info("Vista Inicio - evento editarDatos");
-            
-            if(comprobarFormularioEditarEmpleado()){
-                String correo = empleado.getEmail();
-                String pass = empleado.getPass();
-                String nombre = inicio.nombreEdit.getText();
-                String apellido = inicio.apellidoEdit.getText();
-                String direccion = inicio.direccionEdit.getText();
-                int telefono = Integer.parseInt(inicio.telefonoEdit.getText());
-                
-                boolean exito;
-                
-                //Si quiere cambiar la contraseña cogemos el valor
-                if(inicio.passNuevaEdit.getPassword().length != 0){
-                    char[] valorContrasenna = inicio.passNuevaEdit.getPassword();
-                    String contrasenna = new String(valorContrasenna);
-                    pass = contrasenna;
-                    exito = consultaUsuario.editarUsuarioPass(correo, nombre, apellido, direccion, telefono, contrasenna);
+            try{
+                Log.log.info("Vista Inicio - evento editarDatos");
+
+                if(comprobarFormularioEditarEmpleado()){
+                    String correo = empleado.getEmail();
+                    String pass = empleado.getPass();
+                    String nombre = inicio.nombreEdit.getText();
+                    String apellido = inicio.apellidoEdit.getText();
+                    String direccion = inicio.direccionEdit.getText();
+                    int telefono = Integer.parseInt(inicio.telefonoEdit.getText());
+
+                    boolean exito;
+
+                    //Si quiere cambiar la contraseña cogemos el valor
+                    if(inicio.passNuevaEdit.getPassword().length != 0){
+                        char[] valorContrasenna = inicio.passNuevaEdit.getPassword();
+                        String contrasenna = new String(valorContrasenna);
+                        pass = contrasenna;
+                        exito = consultaUsuario.editarUsuarioPass(correo, nombre, apellido, direccion, telefono, contrasenna);
+                    }
+                    else{
+                        exito = consultaUsuario.editarUsuario(correo, nombre, apellido, direccion, telefono);
+                    }
+
+                    if(exito){
+                        JOptionPane.showMessageDialog(null, "Tus datos se han modificado con éxito.");
+                        empleado.setEmail(correo);
+                        empleado.setNombre(nombre);
+                        empleado.setApellido(apellido);
+                        empleado.setDireccion(direccion);
+                        empleado.setTelefono(telefono);
+                        empleado.setPass(pass);
+                        iniciarPanelInicio();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar sus datos");
+                    }
                 }
-                else{
-                    exito = consultaUsuario.editarUsuario(correo, nombre, apellido, direccion, telefono);
-                }
-                
-                if(exito){
-                    JOptionPane.showMessageDialog(null, "Tus datos se han modificado con éxito.");
-                    empleado.setEmail(correo);
-                    empleado.setNombre(nombre);
-                    empleado.setApellido(apellido);
-                    empleado.setDireccion(direccion);
-                    empleado.setTelefono(telefono);
-                    empleado.setPass(pass);
-                    iniciarPanelInicio();
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar tus datos");
-                }
+            }catch(NumberFormatException error){
+                JOptionPane.showMessageDialog(null, "ERROR "+ error.getMessage() +"\nFormato incorrecto.\nIntroduzca de nuevo");
             }
         }
         else if(boton.getSource() == inicio.btnEditarProducto){
             Log.log.info("Vista Inicio - evento editarProducto");
-            
-            if(comprobarFormularioEditarProducto()){
-                int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
-                String modelo = inicio.modeloEdit.getText();
-                int stock = Integer.parseInt(inicio.stockEdit.getText());
-                float precio = Float.parseFloat(inicio.precioEdit.getText());
-                String descripcion = inicio.descripcionEdit.getText();
-                
-                boolean exito = consultaArticulo.editarArticulo(codigoReferencia, modelo, descripcion, stock, precio);
-                
-                if(exito){
-                    JOptionPane.showMessageDialog(null, "Datos de artículo se han modificado con éxito.");
+            try{
+                if(comprobarFormularioEditarProducto()){
+                    int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
+                    String modelo = inicio.modeloEdit.getText();
+                    int stock = Integer.parseInt(inicio.stockEdit.getText());
+                    float precio = Float.parseFloat(inicio.precioEdit.getText());
+                    String descripcion = inicio.descripcionEdit.getText();
+
+                    boolean exito = consultaArticulo.editarArticulo(codigoReferencia, modelo, descripcion, stock, precio);
+
+                    if(exito){
+                        JOptionPane.showMessageDialog(null, "Datos de artículo se han modificado con éxito.");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar los datos del artículo");
+                    }
                 }
-                else{
-                    JOptionPane.showMessageDialog(null, "ERROR: No se pudieron modificar los datos del artículo");
-                }
+            }catch(NumberFormatException error){
+                JOptionPane.showMessageDialog(null, "ERROR "+ error.getMessage() +"\nFormato incorrecto.\nIntroduzca de nuevo");
             }
         }
         else if(boton.getSource() == inicio.btnAnadirNuevoArticulo){
-            
-            if(comprobarFormularioAnadirProducto()){
-                boolean exito = false;
-                String eleccion = inicio.tipoArticuloAnadir.getSelectedItem().toString();
-                
-                String modelo = inicio.modeloAnadir.getText();
-                int codigoReferncia = Integer.parseInt(inicio.codRefAnadir.getText());
-                float precio = Float.parseFloat(inicio.precioAnadir.getText());
-                String descripcion = inicio.descripcionAnadir.getText();
-                int stock = Integer.parseInt(inicio.stockAnadir.getText());
-                String rutaImagen = "/images/"+ inicio.rutaImagenAnadir.getText() +".png";
-                int idTienda = empleado.getID_Tienda();
-                
-                switch(eleccion){
-                    case "Caja":
-                        boolean cristal = !inicio.atributo1Anadir.getText().equalsIgnoreCase("no");
-                        
-                        exito = consultaCaja.anadirCaja(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, cristal);
-                        break;
-                    case "Disco duro":
-                        String tipoDisco = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaDiscoDuro.anadirDiscoDuro(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipoDisco);
-                        break;
-                    case "Fuente alimentacion":
-                        int potencia = Integer.parseInt(inicio.atributo1Anadir.getText());
-                        String certificacion = inicio.atributo2Anadir.getText();
-                        
-                        exito = consultaFuente.anadirFuente(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, potencia, certificacion);
-                        break;
-                    case "Grafica":
-                        int generacion = Integer.parseInt(inicio.atributo1Anadir.getText());
-                        
-                        exito = consultaGrafica.anadirGrafica(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, generacion);
-                        break;
-                    case "RAM":
-                        String pn = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaRAM.anadirRAM(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, pn);
-                        break;
-                    case "Monitor":
-                        int pulgadas = Integer.parseInt(inicio.atributo1Anadir.getText());
-                        String panelMonitor = inicio.atributo2Anadir.getText();
-                        int hz = Integer.parseInt(inicio.atributo3Anadir.getText());
-                        
-                        exito = consultaMonitor.anadirMonitor(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, pulgadas, panelMonitor, hz);
-                        break;
-                    case "Torre":
-                        String nombre = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaTorre.anadirTorre(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, nombre);
-                        break;
-                    case "Placa base":
-                        String socketPlaca = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaPlacaBase.anadirPlacaBase(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, socketPlaca);
-                        break;
-                    case "Portatil":
-                        String panelPortatil = inicio.atributo1Anadir.getText();
-                        int pesoPortatil = Integer.parseInt(inicio.atributo2Anadir.getText());
-                        
-                        exito = consultaPortatil.anadirPortatil(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, panelPortatil, pesoPortatil);
-                        break;
-                    case "Procesador":
-                        String socketProcesador = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaProcesador.anadirProcesador(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, socketProcesador);
-                        break;
-                    case "Raton":
-                        int DPI = Integer.parseInt(inicio.atributo1Anadir.getText());
-                        String tipoRaton = inicio.atributo2Anadir.getText();
-                        int pesoRaton = Integer.parseInt(inicio.atributo3Anadir.getText());
-                        
-                        exito = consultaRaton.anadirRaton(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, DPI, tipoRaton, pesoRaton);
-                        break;
-                    case "Teclado":
-                        String tipoTeclado = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaTeclado.anadirTeclado(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipoTeclado);
-                        break;
-                    case "WebCam":
-                        String calidad = inicio.atributo1Anadir.getText();
-                        
-                        exito = consultaWebCam.anadirWebCam(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, calidad);
-                        break;
-                    default:
-                        break;
+            try{
+                if(comprobarFormularioAnadirProducto()){
+                    boolean exito = false;
+                    String eleccion = inicio.tipoArticuloAnadir.getSelectedItem().toString();
+
+                    String modelo = inicio.modeloAnadir.getText();
+                    int codigoReferncia = Integer.parseInt(inicio.codRefAnadir.getText());
+                    float precio = Float.parseFloat(inicio.precioAnadir.getText());
+                    String descripcion = inicio.descripcionAnadir.getText();
+                    int stock = Integer.parseInt(inicio.stockAnadir.getText());
+                    String rutaImagen = "/images/"+ inicio.rutaImagenAnadir.getText() +".png";
+                    int idTienda = empleado.getID_Tienda();
+
+                    switch(eleccion){
+                        case "Caja":
+                            boolean cristal = !inicio.atributo1Anadir.getText().equalsIgnoreCase("no");
+
+                            exito = consultaCaja.anadirCaja(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, cristal);
+                            break;
+                        case "Disco duro":
+                            String tipoDisco = inicio.atributo1Anadir.getText();
+
+                            exito = consultaDiscoDuro.anadirDiscoDuro(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipoDisco);
+                            break;
+                        case "Fuente alimentacion":
+                            int potencia = Integer.parseInt(inicio.atributo1Anadir.getText());
+                            String certificacion = inicio.atributo2Anadir.getText();
+
+                            exito = consultaFuente.anadirFuente(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, potencia, certificacion);
+                            break;
+                        case "Grafica":
+                            int generacion = Integer.parseInt(inicio.atributo1Anadir.getText());
+
+                            exito = consultaGrafica.anadirGrafica(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, generacion);
+                            break;
+                        case "RAM":
+                            String pn = inicio.atributo1Anadir.getText();
+
+                            exito = consultaRAM.anadirRAM(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, pn);
+                            break;
+                        case "Monitor":
+                            int pulgadas = Integer.parseInt(inicio.atributo1Anadir.getText());
+                            String panelMonitor = inicio.atributo2Anadir.getText();
+                            int hz = Integer.parseInt(inicio.atributo3Anadir.getText());
+
+                            exito = consultaMonitor.anadirMonitor(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, pulgadas, panelMonitor, hz);
+                            break;
+                        case "Torre":
+                            String nombre = inicio.atributo1Anadir.getText();
+
+                            exito = consultaTorre.anadirTorre(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, nombre);
+                            break;
+                        case "Placa base":
+                            String socketPlaca = inicio.atributo1Anadir.getText();
+
+                            exito = consultaPlacaBase.anadirPlacaBase(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, socketPlaca);
+                            break;
+                        case "Portatil":
+                            String panelPortatil = inicio.atributo1Anadir.getText();
+                            int pesoPortatil = Integer.parseInt(inicio.atributo2Anadir.getText());
+
+                            exito = consultaPortatil.anadirPortatil(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, panelPortatil, pesoPortatil);
+                            break;
+                        case "Procesador":
+                            String socketProcesador = inicio.atributo1Anadir.getText();
+
+                            exito = consultaProcesador.anadirProcesador(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, socketProcesador);
+                            break;
+                        case "Raton":
+                            int DPI = Integer.parseInt(inicio.atributo1Anadir.getText());
+                            String tipoRaton = inicio.atributo2Anadir.getText();
+                            int pesoRaton = Integer.parseInt(inicio.atributo3Anadir.getText());
+
+                            exito = consultaRaton.anadirRaton(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, DPI, tipoRaton, pesoRaton);
+                            break;
+                        case "Teclado":
+                            String tipoTeclado = inicio.atributo1Anadir.getText();
+
+                            exito = consultaTeclado.anadirTeclado(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, tipoTeclado);
+                            break;
+                        case "WebCam":
+                            String calidad = inicio.atributo1Anadir.getText();
+
+                            exito = consultaWebCam.anadirWebCam(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, calidad);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if(exito){
+                        JOptionPane.showMessageDialog(null, "Articulo "+ codigoReferncia +" añadido con éxito.");
+
+                        iniciarPanelAnadir();
+                        esconderAtributos();
+                        inicio.tipoArticuloAnadir.setSelectedIndex(0);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: No se pudo añadir el articulo.");
+                    }
                 }
-                
-                if(exito){
-                    JOptionPane.showMessageDialog(null, "Articulo "+ codigoReferncia +" añadido con éxito.");
-                    
-                    iniciarPanelAnadir();
-                    esconderAtributos();
-                    inicio.tipoArticuloAnadir.setSelectedIndex(0);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "ERROR: No se pudo añadir el articulo.");
-                }
+            }catch(NumberFormatException error){
+                JOptionPane.showMessageDialog(null, "ERROR "+ error.getMessage() +"\nFormato incorrecto.\nIntroduzca de nuevo");
             }
         }
         else if(boton.getSource() == inicio.btnBorrarProducto){
-            int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
-            int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar el articulo"+ codigoReferencia +"?", "Articulo", JOptionPane.YES_NO_OPTION);
+            try{
+                int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar el articulo"+ codigoReferencia +"?", "Articulo", JOptionPane.YES_NO_OPTION);
 
-            if (seleccion == 0) {
-                boolean exito = consultaArticulo.eliminarArticulo(codigoReferencia);
-                if(exito){
-                    JOptionPane.showMessageDialog(null, "Se ha eliminado el articulo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                    inicio.panelInicio.setVisible(false);
-                    inicio.panelAnadir.setVisible(false);
-                    inicio.panelEditarPerfil.setVisible(false);
-                    inicio.panelCompras.setVisible(false);
-                    inicio.panelEditarProducto.setVisible(false);
+                if (seleccion == 0) {
+                    boolean exito = consultaArticulo.eliminarArticulo(codigoReferencia);
+                    if(exito){
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado el articulo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        inicio.panelInicio.setVisible(false);
+                        inicio.panelAnadir.setVisible(false);
+                        inicio.panelEditarPerfil.setVisible(false);
+                        inicio.panelCompras.setVisible(false);
+                        inicio.panelEditarProducto.setVisible(false);
 
-                    inicio.panelElegirProducto.setVisible(true);
+                        inicio.panelElegirProducto.setVisible(true);
 
-                    cargarListaProductos();
+                        cargarListaProductos();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se ha podido eliminar el articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se ha podido eliminar el articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+            }catch(HeadlessException | NumberFormatException error){
+                JOptionPane.showMessageDialog(null, "ERROR: No se pudo borrar el producto.\nInténtelo de nuevo");
             }
         }
     }
