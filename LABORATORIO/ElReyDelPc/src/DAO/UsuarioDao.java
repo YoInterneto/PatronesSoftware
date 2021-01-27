@@ -105,6 +105,44 @@ public class UsuarioDao {
     }
     
     /**
+     * Inserta un nuevo cliente en la base de datos
+     *
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param direccion
+     * @param telefono
+     * @param pass
+     * @param idTienda
+     * @param tarjeta
+     * @return Devuelve un boolean que dice si se ha insertado con éxito o no al usuario
+     */
+    public boolean darAltaUsuario(String nombre, String apellido, String email, String direccion, int telefono, String pass, int idTienda, String tarjeta){
+        boolean correcto = false;
+        Log.logBd.info("CONSULTA DarAltaUsuario");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - darAltaUsuario()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT INTO cliente VALUES('"+ nombre +"', '"+ apellido +"', '"+ email +"', '"
+            + direccion +"', "+ telefono +", '"+ pass +"', "+ idTienda +", '"+ tarjeta +"');");
+            Log.logBd.info("Realizada consulta - darAltaUsuario()");
+            
+            if(codigo > 0){
+                correcto = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en darAltaUsuario(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - darAltaUsuario()");
+        return correcto;
+    }
+    
+    /**
      * Dado el correo de un cliente realiza una consulta en la base de datos y
      * nos devuelve todos los datos correspondientes a dicho cliente
      *
