@@ -2,7 +2,6 @@
 package DAO;
 
 import Model.Articulos.Procesador;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +14,45 @@ import util.Log;
 public class ProcesadorDao {
     
     private Connection conexion;
+    
+    /**
+     * Dado el codigo de un articulo realiza una consulta en la base de
+ datos y devuelve todos los datos correspondientes a dicho articulo.
+     *
+     * @pacpu codigo
+     * @return Devuelve un objeto de tipo Procesador
+     */
+    public Procesador getProcesador(int codigo){
+        Procesador cpu = new Procesador();
+        Log.logBd.info("CONSULTA getProcesador");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getProcesador()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from Procesador where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getProcesador()");
+
+            while (resultado.next()) {
+                cpu.setCodigo_ref(codigo);
+                cpu.setModelo(resultado.getString("Modelo"));
+                cpu.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                cpu.setDescripcion(resultado.getString("Descripcion"));
+                cpu.setStock(Integer.parseInt(resultado.getString("Stock")));
+                cpu.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                cpu.setSocket(resultado.getString("Socket"));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getProcesador: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getProcesador");
+        return cpu;
+    }
     
     /**
      * Realiza una consulta en la base de

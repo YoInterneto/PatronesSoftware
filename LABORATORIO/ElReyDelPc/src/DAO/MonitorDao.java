@@ -16,6 +16,46 @@ public class MonitorDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un monitor realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho monitor.
+     *
+     * @pamonitor codigo
+     * @return Devuelve un objeto de tipo Monitor
+     */
+    public Monitor getMonitor(int codigo){
+        Monitor monitor = new Monitor();
+        Log.logBd.info("CONSULTA getMonitor");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getMonitor()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from monitor where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getMonitor()");
+
+            while (resultado.next()) {
+                monitor.setCodigo_ref(codigo);
+                monitor.setModelo(resultado.getString("Modelo"));
+                monitor.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                monitor.setDescripcion(resultado.getString("Descripcion"));
+                monitor.setStock(Integer.parseInt(resultado.getString("Stock")));
+                monitor.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                monitor.setPanel(resultado.getString("Panel"));
+                monitor.setPulgadas(Integer.parseInt(resultado.getString("Pulgadas")));
+                monitor.setHz(Integer.parseInt(resultado.getString("Hz")));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getMonitor: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getMonitor");
+        return monitor;
+    }
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

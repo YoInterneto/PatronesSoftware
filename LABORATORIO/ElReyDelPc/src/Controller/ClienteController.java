@@ -44,6 +44,7 @@ public class ClienteController implements ActionListener {
     private final PcTorreDao daoPctorre;
     private final UsuarioDao daoUser;
     private final PedidoDao daoPedido;
+    private final EvaluacionDao daoEvaluacion;
     
     private String claveBusqueda;
     private String tipo;
@@ -68,6 +69,7 @@ public class ClienteController implements ActionListener {
         daoUser = new UsuarioDao();
         daoPedido = new PedidoDao();
         claveBusqueda = "";
+        daoEvaluacion = new EvaluacionDao();
     }
 
     public void iniciar() {
@@ -465,55 +467,55 @@ public class ClienteController implements ActionListener {
 
                         switch (tipo) {
                             case "placa_base":
-                                Placa_base placa = consultaArticulo.getPlaca_base(codigo);
+                                Placa_base placa = daoPlaca.getPlaca_base(codigo);
                                 iniciarPanelProductoPlaca(placa);
                                 break;
                             case "procesador":
-                                Procesador cpu = consultaArticulo.getProcesador(codigo);
+                                Procesador cpu = daoCpu.getProcesador(codigo);
                                 iniciarPanelProductoCpu(cpu);
                                 break;
                             case "grafica":
-                                Grafica grafica = consultaArticulo.getGrafica(codigo);
+                                Grafica grafica = daoGrafica.getGrafica(codigo);
                                 iniciarPanelProductoGrafica(grafica);
                                 break;
                             case "caja":
-                                Caja caja = consultaArticulo.getCaja(codigo);
+                                Caja caja = daoCaja.getCaja(codigo);
                                 iniciarPanelProductoCaja(caja);
                                 break;
                             case "monitor":
-                                Monitor monitor = consultaArticulo.getMonitor(codigo);
+                                Monitor monitor = daoMonitor.getMonitor(codigo);
                                 iniciarPanelProductoMonitor(monitor);
                                 break;
                             case "teclado":
-                                Teclado teclado = consultaArticulo.getTeclado(codigo);
+                                Teclado teclado = daoTeclado.getTeclado(codigo);
                                 iniciarPanelProductoTeclado(teclado);
                                 break;
                             case "raton":
-                                Raton raton = consultaArticulo.getRaton(codigo);
+                                Raton raton = daoRaton.getRaton(codigo);
                                 iniciarPanelProductoRaton(raton);
                                 break;
                             case "webcam":
-                                WebCam cam = consultaArticulo.getWebcam(codigo);
+                                WebCam cam = daoCam.getWebcam(codigo);
                                 iniciarPanelProductoCam(cam);
                                 break;
                             case "fuente_alimentacion":
-                                Fuente_alimentacion fuente = consultaArticulo.getFuente(codigo);
+                                Fuente_alimentacion fuente = daoFuente.getFuente(codigo);
                                 iniciarPanelProductoFuente(fuente);
                                 break;
                             case "memoria_ram":
-                                Memoria_RAM ram = consultaArticulo.getMemoria_RAM(codigo);
+                                Memoria_RAM ram = daoRam.getMemoria_RAM(codigo);
                                 iniciarPanelProductoRam(ram);
                                 break;
                             case "disco_duro":
-                                Disco_duro disco = consultaArticulo.getDisco_duro(codigo);
+                                Disco_duro disco = daoDisco.getDisco_duro(codigo);
                                 iniciarPanelProductoDisco(disco);
                                 break;
                             case "portatil":
-                                Portatil portatil = consultaArticulo.getPortatil(codigo);
+                                Portatil portatil = daoPortatil.getPortatil(codigo);
                                 iniciarPanelProductoPortatil(portatil);
                                 break;
                             case "pctorre":
-                                PcTorre pctorre = consultaArticulo.getPcTorre(codigo);
+                                PcTorre pctorre = daoPctorre.getPcTorre(codigo);
                                 iniciarPanelProductoPcTorre(pctorre);
                                 break;
                             default:
@@ -580,7 +582,7 @@ public class ClienteController implements ActionListener {
             ) {
                 try {
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(1, cliente.getEmail(), codigo);
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(1, cliente.getEmail(), codigo);
                     if (hecho) {
                         client.puntuacion1.setEnabled(false);
                         client.puntuacion2.setEnabled(false);
@@ -613,7 +615,7 @@ public class ClienteController implements ActionListener {
             ) {
                 try {
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(2, cliente.getEmail(), codigo);
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(2, cliente.getEmail(), codigo);
                     if (hecho) {
                         client.puntuacion1.setEnabled(false);
                         client.puntuacion2.setEnabled(false);
@@ -646,7 +648,7 @@ public class ClienteController implements ActionListener {
             ) {
                 try {
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(3, cliente.getEmail(), codigo);
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(3, cliente.getEmail(), codigo);
                     if (hecho) {
                         client.puntuacion1.setEnabled(false);
                         client.puntuacion2.setEnabled(false);
@@ -679,7 +681,7 @@ public class ClienteController implements ActionListener {
             ) {
                 try {
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(4, cliente.getEmail(), codigo);
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(4, cliente.getEmail(), codigo);
                     if (hecho) {
                         client.puntuacion1.setEnabled(false);
                         client.puntuacion2.setEnabled(false);
@@ -712,7 +714,7 @@ public class ClienteController implements ActionListener {
             ) {
                 try {
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(5, cliente.getEmail(), codigo);
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(5, cliente.getEmail(), codigo);
                     if (hecho) {
                         client.puntuacion1.setEnabled(false);
                         client.puntuacion2.setEnabled(false);
@@ -977,6 +979,12 @@ public class ClienteController implements ActionListener {
         rellenaComboBox();
     }
 
+    /**
+     * Inicia el panel de un producto cargando los valores del mismo
+     * en las correspondientes etiquetas. Valores genericos
+     *
+     * @param articulo
+     */
     private void iniciarPanelProducto(String busqueda,Articulo articulo){
         client.productoSeleccionado.setText(busqueda);
         client.datoModelo.setText(articulo.getModelo());
@@ -2086,10 +2094,10 @@ public class ClienteController implements ActionListener {
 
         try {
             // Pone el texto con la media del producto
-            String textMedia = String.valueOf(consultaArticulo.mediaEvaluacion(codigo));
+            String textMedia = String.valueOf(daoEvaluacion.mediaEvaluacion(codigo));
             client.datoMediaEvaluacion.setText("Puntuacion media: " + textMedia);
             // Si el cliente no ha evaluado el producto activamos para que lo valore
-            if (!consultaArticulo.comprobarEvaluacion(cliente.getEmail(), codigo)) {
+            if (!daoEvaluacion.comprobarEvaluacion(cliente.getEmail(), codigo)) {
                 client.puntuacion1.setEnabled(true);
                 client.puntuacion2.setEnabled(true);
                 client.puntuacion3.setEnabled(true);
@@ -2110,10 +2118,18 @@ public class ClienteController implements ActionListener {
 
     }
 
+    /**
+     * Obtiene el string de clave de busqueda
+     * @return Devuelve el string con lo que se ha buscado
+     */
     private String getClaveBusqueda() {
         return claveBusqueda;
     }
 
+    /**
+     * Establece una nueva clave de busqueda.
+     * @param claveBusqueda 
+     */
     private void setClaveBusqueda(String claveBusqueda) {
         this.claveBusqueda = claveBusqueda;
     }

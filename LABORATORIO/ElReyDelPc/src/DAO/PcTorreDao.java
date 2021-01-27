@@ -14,6 +14,45 @@ import util.Log;
 public class PcTorreDao {
     
     private Connection conexion;
+    
+    /**
+     * Dado el codigo de un torre realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho torre.
+     *
+     * @patorre codigo
+     * @return Devuelve un objeto de tipo PcTorre
+     */
+    public PcTorre getPcTorre(int codigo){
+        PcTorre torre = new PcTorre();
+        Log.logBd.info("CONSULTA getPcTorre");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getPcTorre()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from pctorre where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getPcTorre()");
+
+            while (resultado.next()) {
+                torre.setCodigo_ref(codigo);
+                torre.setModelo(resultado.getString("Modelo"));
+                torre.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                torre.setDescripcion(resultado.getString("Descripcion"));
+                torre.setStock(Integer.parseInt(resultado.getString("Stock")));
+                torre.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                torre.setNombre(resultado.getString("Nombre"));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getPcTorre: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getPcTorre");
+        return torre;
+    }
     /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.

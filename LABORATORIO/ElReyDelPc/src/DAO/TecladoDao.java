@@ -17,6 +17,44 @@ public class TecladoDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un teclado realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho teclado.
+     *
+     * @pateclado codigo
+     * @return Devuelve un objeto de tipo Teclado
+     */
+    public Teclado getTeclado(int codigo){
+        Teclado teclado = new Teclado();
+        Log.logBd.info("CONSULTA getTeclado");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getTeclado()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from teclado where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getTeclado()");
+
+            while (resultado.next()) {
+                teclado.setCodigo_ref(codigo);
+                teclado.setModelo(resultado.getString("Modelo"));
+                teclado.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                teclado.setDescripcion(resultado.getString("Descripcion"));
+                teclado.setStock(Integer.parseInt(resultado.getString("Stock")));
+                teclado.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                teclado.setTipo(resultado.getString("Tipo"));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getTeclado: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getTeclado");
+        return teclado;
+    }
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

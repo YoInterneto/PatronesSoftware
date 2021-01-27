@@ -16,6 +16,44 @@ public class DiscoDuroDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un disco_duro realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho disco_duro.
+     *
+     * @param codigo
+     * @return Devuelve un objeto de tipo Disco_duro
+     */
+    public Disco_duro getDisco_duro(int codigo){
+        Disco_duro disco_duro = new Disco_duro();
+        Log.logBd.info("CONSULTA getDisco_duro");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getDisco_duro()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from disco_duro where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getDisco_duro()");
+
+            while (resultado.next()) {
+                disco_duro.setCodigo_ref(codigo);
+                disco_duro.setModelo(resultado.getString("Modelo"));
+                disco_duro.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                disco_duro.setDescripcion(resultado.getString("Descripcion"));
+                disco_duro.setStock(Integer.parseInt(resultado.getString("Stock")));
+                disco_duro.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                disco_duro.setTipo(resultado.getString("Tipo"));             
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getDisco_duro: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getDisco_duro");
+        return disco_duro;
+    }
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

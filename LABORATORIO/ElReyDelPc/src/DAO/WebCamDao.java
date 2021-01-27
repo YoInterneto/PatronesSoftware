@@ -16,6 +16,44 @@ public class WebCamDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un webcam realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho webcam.
+     *
+     * @pawebcam codigo
+     * @return Devuelve un objeto de tipo Webcam
+     */
+    public WebCam getWebcam(int codigo){
+        WebCam webcam = new WebCam();
+        Log.logBd.info("CONSULTA getWebCam");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getWebCam()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from webcam where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getWebCam()");
+
+            while (resultado.next()) {
+                webcam.setCodigo_ref(codigo);
+                webcam.setModelo(resultado.getString("Modelo"));
+                webcam.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                webcam.setDescripcion(resultado.getString("Descripcion"));
+                webcam.setStock(Integer.parseInt(resultado.getString("Stock")));
+                webcam.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                webcam.setCalidad(resultado.getString("Calidad"));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getWebCam: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getWebCam");
+        return webcam;
+    }
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

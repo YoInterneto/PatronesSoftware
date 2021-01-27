@@ -16,6 +16,45 @@ public class CajaDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un caja realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho caja.
+     *
+     * @param codigo
+     * @return Devuelve un objeto de tipo Caja
+     */
+    public Caja getCaja(int codigo){
+        Caja caja = new Caja();
+        Log.logBd.info("CONSULTA getCaja");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getCaja()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from caja where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getCaja()");
+
+            while (resultado.next()) {
+                caja.setCodigo_ref(codigo);
+                caja.setModelo(resultado.getString("Modelo"));
+                caja.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                caja.setDescripcion(resultado.getString("Descripcion"));
+                caja.setStock(Integer.parseInt(resultado.getString("Stock")));
+                caja.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                caja.setCristal(Boolean.parseBoolean(resultado.getString("Cristal")));
+                
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getCaja: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getCaja");
+        return caja;
+    }
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

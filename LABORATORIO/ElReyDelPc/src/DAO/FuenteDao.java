@@ -16,6 +16,46 @@ public class FuenteDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un fuente realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho fuente.
+     *
+     * @param codigo
+     * @return Devuelve un objeto de tipo Fuente_alimentacion
+     */
+    public Fuente_alimentacion getFuente(int codigo){
+        Fuente_alimentacion fuente = new Fuente_alimentacion();
+        Log.logBd.info("CONSULTA getFuente_alimentacion");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getFuente_alimentacion()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from fuente_alimentacion where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getFuente_alimentacion()");
+
+            while (resultado.next()) {
+                fuente.setCodigo_ref(codigo);
+                fuente.setModelo(resultado.getString("Modelo"));
+                fuente.setPrecio(resultado.getFloat("Precio"));
+                fuente.setDescripcion(resultado.getString("Descripcion"));
+                fuente.setStock(Integer.parseInt(resultado.getString("Stock")));
+                fuente.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                fuente.setPotencia(Integer.parseInt(resultado.getString("Potencia")));
+		fuente.setCertificacion(resultado.getString("Certificacion"));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getFuente_alimentacion: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getFuente_alimentacion");
+        return fuente;
+    }
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

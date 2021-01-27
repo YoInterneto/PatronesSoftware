@@ -16,6 +16,45 @@ public class GraficaDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un grafica realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho grafica.
+     *
+     * @param codigo
+     * @return Devuelve un objeto de tipo Grafica
+     */
+    public Grafica getGrafica(int codigo){
+        Grafica grafica = new Grafica();
+        Log.logBd.info("CONSULTA getGrafica");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getGrafica()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from grafica where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getGrafica()");
+
+            while (resultado.next()) {
+                grafica.setCodigo_ref(codigo);
+                grafica.setModelo(resultado.getString("Modelo"));
+                grafica.setPrecio(resultado.getFloat("Precio"));
+                grafica.setDescripcion(resultado.getString("Descripcion"));
+                grafica.setStock(Integer.parseInt(resultado.getString("Stock")));
+                grafica.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                grafica.setGeneracion(Integer.parseInt(resultado.getString("Generacion")));
+
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getGrafica: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getGrafica");
+        return grafica;
+    }
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

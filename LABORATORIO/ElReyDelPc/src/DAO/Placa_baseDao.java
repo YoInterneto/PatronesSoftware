@@ -16,6 +16,45 @@ public class Placa_baseDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un placa realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho placa.
+     *
+     * @paplaca codigo
+     * @return Devuelve un objeto de tipo Placa_base
+     */
+    public Placa_base getPlaca_base(int codigo){
+        Placa_base placa = new Placa_base();
+        Log.logBd.info("CONSULTA getPlaca_base");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getPlaca_base()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from placa_base where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getPlaca_base()");
+
+            while (resultado.next()) {
+                placa.setCodigo_ref(codigo);
+                placa.setModelo(resultado.getString("Modelo"));
+                placa.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                placa.setDescripcion(resultado.getString("Descripcion"));
+                placa.setStock(Integer.parseInt(resultado.getString("Stock")));
+                placa.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                placa.setSocket(resultado.getString("Socket"));
+
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getPlaca_base: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getPlaca_base");
+        return placa;
+    }
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

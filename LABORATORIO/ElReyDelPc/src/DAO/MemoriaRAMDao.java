@@ -16,6 +16,45 @@ public class MemoriaRAMDao {
     private Connection conexion;
     
     /**
+     * Dado el codigo de un ram realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho ram.
+     *
+     * @param codigo
+     * @return Devuelve un objeto de tipo Memoria_RAM
+     */
+    public Memoria_RAM getMemoria_RAM(int codigo){
+        Memoria_RAM ram = new Memoria_RAM();
+        Log.logBd.info("CONSULTA getMemoria_RAM");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getMemoria_RAM()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from Memoria_ram where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getMemoria_RAM()");
+
+            while (resultado.next()) {
+                ram.setCodigo_ref(codigo);
+                ram.setModelo(resultado.getString("Modelo"));
+                ram.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                ram.setDescripcion(resultado.getString("Descripcion"));
+                ram.setStock(Integer.parseInt(resultado.getString("Stock")));
+                ram.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                ram.setPN(resultado.getString("PN"));
+ 
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getMemoria_RAM: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getMemoria_RAM");
+        return ram;
+    }
+    
+    /**
      * Realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes.
      *

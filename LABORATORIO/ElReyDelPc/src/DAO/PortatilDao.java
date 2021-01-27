@@ -1,7 +1,6 @@
 
 package DAO;
 
-import Model.Articulos.Fuente_alimentacion;
 import Model.Articulos.Portatil;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -56,6 +55,46 @@ public class PortatilDao {
         Log.logBd.info("Consulta realizada con éxito - getAllPortatil");
        return portatildb;
     }  
+    
+    /**
+     * Dado el codigo de un portatil realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho portatil.
+     *
+     * @param codigo
+     * @return Devuelve un objeto de tipo Portatil
+     */
+    public Portatil getPortatil(int codigo){
+        Portatil portatil = new Portatil();
+        Log.logBd.info("CONSULTA getPortatil");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getPortatil()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from portatil where codigo_ref='" + codigo + "';");
+            Log.logBd.info("Realizada consulta - getPortatil()");
+
+            while (resultado.next()) {
+                portatil.setCodigo_ref(codigo);
+                portatil.setModelo(resultado.getString("Modelo"));
+                portatil.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                portatil.setDescripcion(resultado.getString("Descripcion"));
+                portatil.setStock(Integer.parseInt(resultado.getString("Stock")));
+                portatil.setRutaImagen(resultado.getString("rutaImagen"));
+                
+                portatil.setPanel(resultado.getString("Panel"));
+                portatil.setPeso(Integer.parseInt(resultado.getString("Peso")));
+                
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getPortatil: " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getPortatil");
+        return portatil;
+    }
     
     /**
      * Realiza una consulta en la base de datos para añadir
