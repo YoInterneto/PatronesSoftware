@@ -44,7 +44,8 @@ public class ClienteController implements ActionListener {
     private final PcTorreDao daoPctorre;
     private final UsuarioDao daoUser;
     private final PedidoDao daoPedido;
-
+    
+    private String claveBusqueda;
     private String tipo;
 
     public ClienteController(InicioCliente clientVista, Cliente cliente) {
@@ -66,6 +67,7 @@ public class ClienteController implements ActionListener {
         daoPctorre = new PcTorreDao();
         daoUser = new UsuarioDao();
         daoPedido = new PedidoDao();
+        claveBusqueda = "";
     }
 
     public void iniciar() {
@@ -74,6 +76,39 @@ public class ClienteController implements ActionListener {
         client.nombreCliente.setText(cliente.getNombre());
 
         //Listeners botones menu cliente 
+        this.client.btnBuscar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               if(!client.textoBusqueda.getText().equalsIgnoreCase("")){
+                    String clave = client.textoBusqueda.getText();
+                    ArrayList<Articulo> listaArticulos = consultaArticulo.buscarArticuloPalabraClave(clave);
+                    ArrayList<Integer> listaCodigos = new ArrayList<>();
+                    //Si la lista de los articulos con la clave de busqueda no es vacia, es decir, se ha encontrado algun
+                    //articulo, cargamos la lista de los articulos
+                    if(listaArticulos.size() > 0){
+                        setClaveBusqueda(clave);
+                        for (int i = 0; i < listaArticulos.size(); i++) {
+                            listaCodigos.add(listaArticulos.get(i).getCodigo_ref());
+                        }
+                        client.panelInicio.setVisible(false);
+                        client.panelCarro.setVisible(false);
+                        client.panelPerfil.setVisible(false);
+                        client.panelMonta.setVisible(false);
+                        client.panelProducto.setVisible(false);
+                        client.panelArticulo.setVisible(false);
+                        client.panelElegirProducto.setVisible(true);
+                        cargarListaProductos(listaCodigos); 
+                        tipo = "";
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "ERROR: No se ha encontrado nigún artículo con la clave - "+ clave +".");
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la clave de búsqueda.");
+                }
+            }
+        });
         this.client.btnProducto.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -481,6 +516,9 @@ public class ClienteController implements ActionListener {
                                 PcTorre pctorre = consultaArticulo.getPcTorre(codigo);
                                 iniciarPanelProductoPcTorre(pctorre);
                                 break;
+                            default:
+                                Articulo articulo = consultaArticulo.getArticulo(codigo);
+                                iniciarPanelProducto(getClaveBusqueda(),articulo);           
                         }
                     } catch (NumberFormatException ex) {
                         Log.log.error("Error en listaProductos " + ex);
@@ -939,6 +977,24 @@ public class ClienteController implements ActionListener {
         rellenaComboBox();
     }
 
+    private void iniciarPanelProducto(String busqueda,Articulo articulo){
+        client.productoSeleccionado.setText(busqueda);
+        client.datoModelo.setText(articulo.getModelo());
+        client.codigo_ref.setText(String.valueOf(articulo.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(articulo.getStock()));
+        client.descripcion.setText(articulo.getDescripcion());
+        client.precio.setText(String.valueOf(articulo.getPrecio()));
+        String ruta = articulo.getRutaImagen();
+        comprobarEvaluacionRealizada(articulo.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+    }
+    
     /**
      * Inicia el panel del producto Placa base cargando los valores de la placa
      * en las correspondientes etiquetas las cuales referencian a su atributo.
@@ -1541,6 +1597,46 @@ public class ClienteController implements ActionListener {
         client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
     }
 
+     /**
+     * Crea una Jlist con los articulos que hay en el arraylist pasado por
+     * parametro con informacion relativa a los mismos sacada de la base de
+     * datos.
+     *
+     * @param cesta
+     */
+    private void cargarListaProductos(ArrayList<Integer> cesta) {
+        DefaultListModel listModel = new DefaultListModel();
+
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+
+        float precioCarro = 0;
+        for (int i = 0; i < cesta.size(); i++) {
+
+            int codigo = cesta.get(i);
+            Articulo articulo = consultaArticulo.getArticulo(codigo);
+            String modelo = articulo.getModelo();
+            float precio = articulo.getPrecio();
+            String ruta = articulo.getRutaImagen();
+            String articuloInfo = "  CodRef-" + String.format("%04d", codigo) + "- \t" + modelo + " \tPrecio € " + precio;
+            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+
+            listaInfo.add(articuloInfo);
+            if (ruta == null) {
+                listaRuta.add("/images/error.png");
+            } else {
+                listaRuta.add(ruta);
+            }
+            listModel.add(i, articuloInfo);
+
+            precioCarro += precio;
+        }
+
+        client.precioCarro.setText(String.valueOf(precioCarro));
+        client.listaProductos.setModel(listModel);
+        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, getClaveBusqueda()));
+    }
+    
     /**
      * Crea una Jlist con informacion de todas las placas que hay en la base de
      * datos.
@@ -2012,6 +2108,14 @@ public class ClienteController implements ActionListener {
             Log.log.error("Error en comprobar media puntucion " + ex);
         }
 
+    }
+
+    private String getClaveBusqueda() {
+        return claveBusqueda;
+    }
+
+    private void setClaveBusqueda(String claveBusqueda) {
+        this.claveBusqueda = claveBusqueda;
     }
 
     @Override
