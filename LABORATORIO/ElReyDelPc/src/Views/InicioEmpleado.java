@@ -174,6 +174,18 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnEditarProducto = new javax.swing.JButton();
         btnBorrarProducto = new javax.swing.JButton();
         idProductoEdit = new javax.swing.JLabel();
+        panelInfoPedido = new javax.swing.JPanel();
+        infoPanelAnadir3 = new javax.swing.JPanel();
+        jLabel46 = new javax.swing.JLabel();
+        jSeparator19 = new javax.swing.JSeparator();
+        jSeparator20 = new javax.swing.JSeparator();
+        jLabel47 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listaInfoPedido = new javax.swing.JList<>();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        nPedidoInfo = new javax.swing.JLabel();
+        correoInfoPedido = new javax.swing.JLabel();
 
         jLabel35.setText("jLabel35");
 
@@ -1131,6 +1143,86 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         getContentPane().add(panelEditarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
+        panelInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
+        panelInfoPedido.setPreferredSize(new java.awt.Dimension(960, 620));
+        panelInfoPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        infoPanelAnadir3.setBackground(new java.awt.Color(51, 51, 51));
+        infoPanelAnadir3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel46.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel46.setText("Resumen pedido");
+        infoPanelAnadir3.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 70));
+        infoPanelAnadir3.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 10));
+
+        jSeparator20.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        infoPanelAnadir3.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 50, 71));
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel47.setText("Información acerca de un pedido");
+        infoPanelAnadir3.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 420, 70));
+
+        panelInfoPedido.add(infoPanelAnadir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
+
+        listaInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
+        listaInfoPedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        listaInfoPedido.setForeground(new java.awt.Color(255, 255, 255));
+        listaInfoPedido.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(listaInfoPedido);
+
+        panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 420));
+
+        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Nº PEDIDO - ");
+
+        nPedidoInfo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        nPedidoInfo.setForeground(new java.awt.Color(255, 255, 255));
+        nPedidoInfo.setText("ID PEDIDO");
+
+        correoInfoPedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        correoInfoPedido.setForeground(new java.awt.Color(255, 255, 255));
+        correoInfoPedido.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        correoInfoPedido.setText("email");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nPedidoInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(nPedidoInfo)
+                    .addComponent(correoInfoPedido))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        panelInfoPedido.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 960, 70));
+
+        getContentPane().add(panelInfoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1241,6 +1333,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JTextField codRefAnadir;
     public javax.swing.JLabel codRefLabel;
     public javax.swing.JLabel codTienda;
+    public javax.swing.JLabel correoInfoPedido;
     public javax.swing.JLabel datoApellido;
     public javax.swing.JLabel datoDireccion;
     public javax.swing.JLabel datoDni;
@@ -1260,6 +1353,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel infoPanelAnadir;
     private javax.swing.JPanel infoPanelAnadir1;
     private javax.swing.JPanel infoPanelAnadir2;
+    private javax.swing.JPanel infoPanelAnadir3;
     private javax.swing.JPanel infoPanelCompras;
     private javax.swing.JPanel infoPanelProductos;
     private javax.swing.JLabel jLabel1;
@@ -1291,6 +1385,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     public javax.swing.JLabel jLabel38;
     public javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -1300,6 +1395,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     public javax.swing.JLabel jLabel44;
     public javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1307,6 +1404,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1319,6 +1417,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -1328,7 +1427,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
+    private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator20;
     private javax.swing.JSeparator jSeparator25;
     private javax.swing.JSeparator jSeparator26;
     private javax.swing.JSeparator jSeparator3;
@@ -1336,11 +1437,13 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    public javax.swing.JList<String> listaInfoPedido;
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JList<String> listaProductos;
     public javax.swing.JTextField modeloAnadir;
     public javax.swing.JTextField modeloEdit;
     public javax.swing.JLabel modeloLabel;
+    public javax.swing.JLabel nPedidoInfo;
     private javax.swing.JLabel nada;
     public javax.swing.JTextField nombreEdit;
     public javax.swing.JLabel nombreTienda;
@@ -1350,6 +1453,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JPanel panelEditarPerfil;
     public javax.swing.JPanel panelEditarProducto;
     public javax.swing.JPanel panelElegirProducto;
+    public javax.swing.JPanel panelInfoPedido;
     public javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelInicioInfo;
     private javax.swing.JPanel panelLateral;
