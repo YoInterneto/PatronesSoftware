@@ -55,6 +55,11 @@ public class EmpleadoController implements ActionListener{
         this.claveBusqueda = "";
     }
     
+    /**
+     * Funcion que inicializa toda la vista InicioEmpleado y crea todos los listeners para 
+     * todos los botones de la interfaz
+     *
+     */
     public void iniciar(){
         inicio.setTitle("INICIO - EMPLEADOS");
         inicio.setLocationRelativeTo(null);
@@ -262,11 +267,11 @@ public class EmpleadoController implements ActionListener{
                     
                     //Volvemos a poner la clave de búsqueda vacia
                     setClaveBusqueda("");
-                    inicio.barraBusqueda.setText("");
                 }
             }
         });
         
+        //Evento para generar atributos dinamicos en funcion del artículo que se quiera añadir
         this.inicio.tipoArticuloAnadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -330,6 +335,13 @@ public class EmpleadoController implements ActionListener{
     //****************************************************************************************************************************************
     //**                                                                                                                                    **
     //****************************************************************************************************************************************
+    /**
+     * Carga la información e imagen referente a un artículo seleccionado previamente por el
+     * usuario
+     *
+     * @param codigoReferencia código del artículo seleccionado
+     * @param listaArticulos lista con todos los artículos de la tienda
+     */
     public void cargarProductoEdit(int codigoReferencia, ArrayList<Articulo> listaArticulos){
         Articulo articulo = listaArticulos.get(codigoReferencia);
         
@@ -351,6 +363,12 @@ public class EmpleadoController implements ActionListener{
         }
     }
     
+    /**
+     * Carga la información e imagen referente a un artículo seleccionado en el jList tras realizar una 
+     * búsqueda en la base de datos
+     *
+     * @param codigoReferencia codigo del artículo seleccionado
+     */
     public void cargarProductoBusquedaEdit(int codigoReferencia){
         ArrayList<Articulo> listaArticulos = consultaArticulo.getAllArticulos();
         Articulo articulo = listaArticulos.get(codigoReferencia);
@@ -373,6 +391,12 @@ public class EmpleadoController implements ActionListener{
         }
     }
     
+    /**
+     * Introduce de forma dinámica la información referente a los artículos de la base de datos
+     * para mostrarla en un componente jList, con la imagen e información
+     * 
+     * @param lista lista de artículos
+     */
     public void cargarListaProductos(ArrayList<Articulo> lista){
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<String> listaInfo = new ArrayList<>();
@@ -400,6 +424,11 @@ public class EmpleadoController implements ActionListener{
         inicio.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
     }
     
+    /**
+     * Introduce de forma dinámica la información referente a los pedidos realizados por los clientes, mostrando de
+     * cada uno, una breve descripción
+     *
+     */
     public void cargarListaPedidos(){
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
@@ -416,6 +445,11 @@ public class EmpleadoController implements ActionListener{
         inicio.listaPedidos.setCellRenderer(new ListaDinamica("Pedido"));
     }
     
+    /**
+     * Carga la información referente a un artículo previamente seleccionado por el usuario en el jList
+     *
+     * @param idPedido número de pedido seleccionado
+     */
     public void cargarPedidoInfo(int idPedido){
         
     }
@@ -424,6 +458,11 @@ public class EmpleadoController implements ActionListener{
     //****************************************************************************************************************************************
     //**                                                                                                                                    **
     //****************************************************************************************************************************************
+    /**
+     * Inicializa todos los elementos del panel de inicio, el cual tiene la información sobre el
+     * empleado que inicia sesión en la aplicación
+     *
+     */
     public void iniciarPanelInicio(){
         inicio.nombreUsuario.setText("Bienvenido "+ empleado.getNombre() +" "+ empleado.getApellido());
         inicio.datoNombre.setText(empleado.getNombre());
@@ -443,6 +482,10 @@ public class EmpleadoController implements ActionListener{
         inicio.barraBusqueda.setEditable(true);
     }
     
+    /**
+     * Inicializa todos los elementos del panel de editar información personal
+     *
+     */
     public void iniciarPanelEditarUsuario(){
         inicio.tituloUsuarioId.setText("USUARIO "+ empleado.getEmail());
         inicio.nombreEdit.setText(empleado.getNombre());
@@ -454,6 +497,10 @@ public class EmpleadoController implements ActionListener{
         inicio.passRepitaEdit.setText("");
     }
     
+    /**
+     * Inicializa todos los elemento del panel de añadir un nuevo artículo al catálogo de la tienda
+     *
+     */
     public void iniciarPanelAnadir(){
         String listaTipos[] = {"Seleccione", "Caja", "Disco duro", "Fuente alimentacion", "Grafica", "RAM", "Monitor", 
             "Torre", "Placa base", "Portatil", "Procesador", "Raton", "Teclado", "WebCam"};
@@ -466,6 +513,11 @@ public class EmpleadoController implements ActionListener{
         inicio.codRefAnadir.setText(""+ consultaArticulo.getCodRefMax());
     }
     
+    /**
+     * Inicializa el atributo opcional 1 para el panel de añadir un nuevo artículo
+     *
+     * @param nombre del atributo que se mostrará en el jLabel
+     */
     public void iniciarAtributo1(String nombre){
         inicio.atributo1Label.setText(nombre);
         inicio.atributo1Label.setVisible(true);
@@ -473,6 +525,11 @@ public class EmpleadoController implements ActionListener{
         inicio.atributo1Anadir.setText("");
     }
     
+    /**
+     * Inicializa el atributo opcional 2 para el panel de añadir un nuevo artículo
+     *
+     * @param nombre del atributo que se mostrará en el jLabel
+     */
     public void iniciarAtributo2(String nombre){
         inicio.atributo2Label.setText(nombre);
         inicio.atributo2Label.setVisible(true);
@@ -480,6 +537,11 @@ public class EmpleadoController implements ActionListener{
         inicio.atributo2Anadir.setText("");
     }
     
+    /**
+     * Inicializa el atributo opcional 3 para el panel de añadir un nuevo artículo
+     *
+     * @param nombre del atributo que se mostrará en el jLabel
+     */
     public void iniciarAtributo3(String nombre){
         inicio.atributo3Label.setText(nombre);
         inicio.atributo3Label.setVisible(true);
@@ -487,6 +549,11 @@ public class EmpleadoController implements ActionListener{
         inicio.atributo3Anadir.setText("");
     }
     
+    /**
+     * Esconde y reinicia los jLabel y jTextField de los atributos opcionales del panel de añadir un 
+     * nuevo artículo
+     *
+     */
     public void esconderAtributos(){
         inicio.atributo1Label.setVisible(false);
         inicio.atributo1Anadir.setVisible(false);
@@ -499,6 +566,10 @@ public class EmpleadoController implements ActionListener{
         inicio.atributo3Anadir.setText("nadaDeNada");
     }
     
+    /**
+     * Vacia todos los jTextField del panel de añadir un nuevo artículo
+     *
+     */
     public void reiniciarPanelAnadir(){
         inicio.modeloAnadir.setText("");
         inicio.precioAnadir.setText("");
@@ -511,6 +582,12 @@ public class EmpleadoController implements ActionListener{
     //****************************************************************************************************************************************
     //**                                                                                                                                    **
     //****************************************************************************************************************************************
+    /**
+     * Comprueba que todos los jTextField del formulario para editar los datos de un empleado, estén
+     * rellenados de forma correcta y controla el cambio de contraseña
+     *
+     * @return Devuelve si se el formulario esta bien rellenado
+     */
     public boolean comprobarFormularioEditarEmpleado(){
         boolean correcto = false;
         
@@ -555,6 +632,12 @@ public class EmpleadoController implements ActionListener{
         return correcto;
     }
     
+    /**
+     * Comprueba que todos los jTextField del formulario para editar los datos de un producto, estén
+     * rellenados de forma correcta
+     *
+     * @return Devuelve si se el formulario esta bien rellenado
+     */
     public boolean comprobarFormularioEditarProducto(){
         boolean correcto = false;
         
@@ -569,6 +652,12 @@ public class EmpleadoController implements ActionListener{
         return correcto;
     }
     
+    /**
+     * Comprueba que todos los jTextField del formulario para añadir un nuevo producto, estén
+     * rellenados de forma correcta
+     *
+     * @return Devuelve si se el formulario esta bien rellenado
+     */
     public boolean comprobarFormularioAnadirProducto(){
         boolean correcto = false;
         
@@ -801,10 +890,20 @@ public class EmpleadoController implements ActionListener{
     //****************************************************************************************************************************************
     //**                                                                                                                                    **
     //****************************************************************************************************************************************
+    /**
+     * Guarda el valor de la clave de búsqueda
+     *
+     * @param clave palabra clave de la barra de búsqueda
+     */
     public void setClaveBusqueda(String clave){
         this.claveBusqueda = clave;
     }
     
+    /**
+     * Obtiene la clave de búsqueda introducida en la barra de búsqueda
+     *
+     * @return Devuelve un String con la clave de búsqueda
+     */
     public String getClaveBusqueda(){
         return this.claveBusqueda;
     }
