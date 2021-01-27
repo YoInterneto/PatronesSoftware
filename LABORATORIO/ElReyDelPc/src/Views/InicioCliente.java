@@ -178,6 +178,7 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion3 = new javax.swing.JButton();
         puntuacion4 = new javax.swing.JButton();
         puntuacion5 = new javax.swing.JButton();
+        datoMediaEvaluacion = new javax.swing.JLabel();
         panelPerfil = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -783,13 +784,14 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion1.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion1.setBorder(null);
+        puntuacion1.setEnabled(false);
         puntuacion1.setOpaque(false);
         panelProducto.add(puntuacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 530, 50, 40));
 
         confirmaPuntuacion.setForeground(new java.awt.Color(255, 255, 255));
         confirmaPuntuacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmaPuntuacion.setText("¡ Puntuacion enviada !");
-        panelProducto.add(confirmaPuntuacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 590, 170, -1));
+        panelProducto.add(confirmaPuntuacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 590, 290, -1));
 
         productoSeleccionado.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         productoSeleccionado.setForeground(new java.awt.Color(255, 255, 255));
@@ -981,12 +983,13 @@ public class InicioCliente extends javax.swing.JFrame {
 
         imgProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgProducto.setText("VISTA PREVIA");
-        panelProducto.add(imgProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 300, 310));
+        panelProducto.add(imgProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 300, 310));
 
         puntuacion2.setBackground(new java.awt.Color(51, 51, 51));
         puntuacion2.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion2.setBorder(null);
+        puntuacion2.setEnabled(false);
         puntuacion2.setOpaque(false);
         panelProducto.add(puntuacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 50, 40));
 
@@ -994,6 +997,7 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion3.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion3.setBorder(null);
+        puntuacion3.setEnabled(false);
         puntuacion3.setOpaque(false);
         panelProducto.add(puntuacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 50, 40));
 
@@ -1001,6 +1005,7 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion4.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion4.setBorder(null);
+        puntuacion4.setEnabled(false);
         puntuacion4.setOpaque(false);
         panelProducto.add(puntuacion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 50, 40));
 
@@ -1008,8 +1013,15 @@ public class InicioCliente extends javax.swing.JFrame {
         puntuacion5.setForeground(new java.awt.Color(51, 51, 51));
         puntuacion5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
         puntuacion5.setBorder(null);
+        puntuacion5.setEnabled(false);
         puntuacion5.setOpaque(false);
         panelProducto.add(puntuacion5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, 50, 40));
+
+        datoMediaEvaluacion.setForeground(new java.awt.Color(255, 255, 255));
+        datoMediaEvaluacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        datoMediaEvaluacion.setText("label5");
+        datoMediaEvaluacion.setToolTipText("");
+        panelProducto.add(datoMediaEvaluacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 505, 290, -1));
 
         panelProducto.setVisible(false);
 
@@ -1241,6 +1253,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cpuBox;
     public javax.swing.JTextField datoDireccion;
     public javax.swing.JLabel datoEmail;
+    public javax.swing.JLabel datoMediaEvaluacion;
     public javax.swing.JLabel datoModelo;
     public javax.swing.JLabel datoStock;
     public javax.swing.JTextField datoTarjeta;

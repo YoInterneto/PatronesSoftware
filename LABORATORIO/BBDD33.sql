@@ -556,7 +556,7 @@ INSERT INTO Caja VALUES('Modelo10', 10, 25, 'Descripcion10', 10,'/images/caja1.p
 INSERT INTO Raton VALUES('Modelo11', 11, 115, 'Descripcion11', 11,'/images/raton1.png', 0, 8000,'Tipo1',0.5);
 INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12,'/images/teclado1.png', 0, 'Tipo1');
 INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11,'/images/monitor1.png', 0,24,'PN',144);
-
+insert into disco_duro VALUES('HDD Barracuda', 36, 19.0, 'El mejor del mercado', 10, '/images/disco1.png', 0, 'HDD');
 
 INSERT INTO Carrito VALUES('4-5-3-8-10','email2@email.com');
 

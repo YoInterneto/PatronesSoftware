@@ -416,74 +416,75 @@ public class ClienteController implements ActionListener {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
+                    try {
 
-                    int codigo = Integer.parseInt(client.listaProductos.getSelectedValue().split("-")[1]);
-                    client.panelInicio.setVisible(false);
-                    client.panelCarro.setVisible(false);
-                    client.panelPerfil.setVisible(false);
-                    client.panelMonta.setVisible(false);
-                    client.panelProducto.setVisible(false);
-                    client.panelArticulo.setVisible(false);
-                    client.panelElegirProducto.setVisible(false);
-                    client.panelProducto.setVisible(true);
-                    
-                    client.confirmaPuntuacion.setVisible(false); //Inicia etiqueta puntuacion en no visible
-                    
-                    switch (tipo) {
-                        case "placa_base":
-                            Placa_base placa = consultaArticulo.getPlaca_base(codigo);
-                            iniciarPanelProductoPlaca(placa);
-                            break;
-                        case "procesador":
-                            Procesador cpu = consultaArticulo.getProcesador(codigo);
-                            iniciarPanelProductoCpu(cpu);
-                            break;
-                        case "grafica":
-                            Grafica grafica = consultaArticulo.getGrafica(codigo);
-                            iniciarPanelProductoGrafica(grafica);
-                            break;
-                        case "caja":
-                            Caja caja = consultaArticulo.getCaja(codigo);
-                            iniciarPanelProductoCaja(caja);
-                            break;
-                        case "monitor":
-                            Monitor monitor = consultaArticulo.getMonitor(codigo);
-                            iniciarPanelProductoMonitor(monitor);
-                            break;
-                        case "teclado":
-                            Teclado teclado = consultaArticulo.getTeclado(codigo);
-                            iniciarPanelProductoTeclado(teclado);
-                            break;
-                        case "raton":
-                            Raton raton = consultaArticulo.getRaton(codigo);
-                            iniciarPanelProductoRaton(raton);
-                            break;
-                        case "webcam":
-                            WebCam cam = consultaArticulo.getWebcam(codigo);
-                            iniciarPanelProductoCam(cam);
-                            break;
-                        case "fuente_alimentacion":
-                            Fuente_alimentacion fuente = consultaArticulo.getFuente(codigo);
-                            iniciarPanelProductoFuente(fuente);
-                            break;
-                        case "memoria_ram":
-                            Memoria_RAM ram = consultaArticulo.getMemoria_RAM(codigo);
-                            iniciarPanelProductoRam(ram);
-                            break;
-                        case "disco_duro":
-                            Disco_duro disco = consultaArticulo.getDisco_duro(codigo);
-                            iniciarPanelProductoDisco(disco);
-                            break;
-                        case "portatil":
-                            Portatil portatil = consultaArticulo.getPortatil(codigo);
-                            iniciarPanelProductoPortatil(portatil);
-                            break;
-                        case "pctorre":
-                            PcTorre pctorre = consultaArticulo.getPcTorre(codigo);
-                            iniciarPanelProductoPcTorre(pctorre);
-                            break;
+                        int codigo = Integer.parseInt(client.listaProductos.getSelectedValue().split("-")[1]);
+                        client.panelInicio.setVisible(false);
+                        client.panelCarro.setVisible(false);
+                        client.panelPerfil.setVisible(false);
+                        client.panelMonta.setVisible(false);
+                        client.panelProducto.setVisible(false);
+                        client.panelArticulo.setVisible(false);
+                        client.panelElegirProducto.setVisible(false);
+                        client.panelProducto.setVisible(true);
+
+                        switch (tipo) {
+                            case "placa_base":
+                                Placa_base placa = consultaArticulo.getPlaca_base(codigo);
+                                iniciarPanelProductoPlaca(placa);
+                                break;
+                            case "procesador":
+                                Procesador cpu = consultaArticulo.getProcesador(codigo);
+                                iniciarPanelProductoCpu(cpu);
+                                break;
+                            case "grafica":
+                                Grafica grafica = consultaArticulo.getGrafica(codigo);
+                                iniciarPanelProductoGrafica(grafica);
+                                break;
+                            case "caja":
+                                Caja caja = consultaArticulo.getCaja(codigo);
+                                iniciarPanelProductoCaja(caja);
+                                break;
+                            case "monitor":
+                                Monitor monitor = consultaArticulo.getMonitor(codigo);
+                                iniciarPanelProductoMonitor(monitor);
+                                break;
+                            case "teclado":
+                                Teclado teclado = consultaArticulo.getTeclado(codigo);
+                                iniciarPanelProductoTeclado(teclado);
+                                break;
+                            case "raton":
+                                Raton raton = consultaArticulo.getRaton(codigo);
+                                iniciarPanelProductoRaton(raton);
+                                break;
+                            case "webcam":
+                                WebCam cam = consultaArticulo.getWebcam(codigo);
+                                iniciarPanelProductoCam(cam);
+                                break;
+                            case "fuente_alimentacion":
+                                Fuente_alimentacion fuente = consultaArticulo.getFuente(codigo);
+                                iniciarPanelProductoFuente(fuente);
+                                break;
+                            case "memoria_ram":
+                                Memoria_RAM ram = consultaArticulo.getMemoria_RAM(codigo);
+                                iniciarPanelProductoRam(ram);
+                                break;
+                            case "disco_duro":
+                                Disco_duro disco = consultaArticulo.getDisco_duro(codigo);
+                                iniciarPanelProductoDisco(disco);
+                                break;
+                            case "portatil":
+                                Portatil portatil = consultaArticulo.getPortatil(codigo);
+                                iniciarPanelProductoPortatil(portatil);
+                                break;
+                            case "pctorre":
+                                PcTorre pctorre = consultaArticulo.getPcTorre(codigo);
+                                iniciarPanelProductoPcTorre(pctorre);
+                                break;
+                        }
+                    } catch (NumberFormatException ex) {
+                        Log.log.error("Error en listaProductos " + ex);
                     }
-
                 }
 
             }
@@ -492,199 +493,238 @@ public class ClienteController implements ActionListener {
         this.client.btnComprarProducto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+                    int stock = Integer.parseInt(client.datoStock.getText());
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    if (stock != 0) {
+                        if (seleccion == 0) { // Confirma insertar
+                            int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
+                            boolean hecho = daoPedido.hacerPedido(codigo, client.precio.getText(), cliente.getEmail(), nuevoIdPedido);
 
-                if (seleccion == 0) { // Confirma insertar
-                    int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
-                    boolean hecho = daoPedido.hacerPedido(client.codigo_ref.getText(), client.precio.getText(), cliente.getEmail(), nuevoIdPedido);
+                            //Actualizar stock
+                            consultaArticulo.actualizarStock(codigo, stock-1);
+                            client.datoStock.setText(String.valueOf(stock - 1));
+                            if (hecho) {
+                                JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
 
-                    if (hecho) {
-                        JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                            }
+                        } else { // Deniega insertar
+                            JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
-
+                        JOptionPane.showMessageDialog(null, "No se ha podido realizar el pedido, no hay Stock", "Mensaje", JOptionPane.DEFAULT_OPTION);
                     }
-                } else { // Deniega insertar
-                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                } catch (Exception ex) {
+                    Log.log.error("Error en comprar producto stock " + ex);
                 }
             }
         });
-        //Efectos visuales evaluar producto
-        this.client.puntuacion1.addMouseListener(new MouseAdapter() {
+
+        //Evaluacion del producto
+        this.client.puntuacion1.addMouseListener(
+                new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(MouseEvent e
+            ) {
                 client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
                 client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
                 client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
                 client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
                 client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
             }
-        });
-        this.client.puntuacion2.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(1, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        }
+        );
+
+        this.client.puntuacion2.addMouseListener(
+                new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
                 client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
                 client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
                 client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
                 client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
             }
-        });
-        this.client.puntuacion3.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(2, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        }
+        );
+
+        this.client.puntuacion3.addMouseListener(
+                new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
                 client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
                 client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
                 client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
             }
-        });
-        this.client.puntuacion4.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(3, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        }
+        );
+
+        this.client.puntuacion4.addMouseListener(
+                new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
                 client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
                 client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
             }
-        });
-        this.client.puntuacion5.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(4, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        }
+        );
+
+        this.client.puntuacion5.addMouseListener(
+                new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
                 client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
                 client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
                 client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
             }
-        });
-        //Sacar valor puntuacion
-        this.client.puntuacion1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try{
-                    int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(1, codigo, tipo);
-                    if (hecho){
-                        client.puntuacion1.setEnabled(false);
-                        client.puntuacion2.setEnabled(false);
-                        client.puntuacion3.setEnabled(false);
-                        client.puntuacion4.setEnabled(false);
-                        client.puntuacion5.setEnabled(false);
-                        client.confirmaPuntuacion.setVisible(true);
-                    }
-                }catch (NumberFormatException ex){
-                    Log.log.error("Error " + ex);
-                }  
-            }
-        });
-        this.client.puntuacion2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try{
-                    int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(2, codigo, tipo);
-                    if (hecho){
-                        client.puntuacion1.setEnabled(false);
-                        client.puntuacion2.setEnabled(false);
-                        client.puntuacion3.setEnabled(false);
-                        client.puntuacion4.setEnabled(false);
-                        client.puntuacion5.setEnabled(false);
-                        client.confirmaPuntuacion.setVisible(true);
-                    }
-                }catch (NumberFormatException ex){
-                    Log.log.error("Error " + ex);
-                }  
-            }
-        });
-        this.client.puntuacion3.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try{
-                    int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(3, codigo, tipo);
-                    if (hecho){
-                        client.puntuacion1.setEnabled(false);
-                        client.puntuacion2.setEnabled(false);
-                        client.puntuacion3.setEnabled(false);
-                        client.puntuacion4.setEnabled(false);
-                        client.puntuacion5.setEnabled(false);
-                        client.confirmaPuntuacion.setVisible(true);
-                    }
-                }catch (NumberFormatException ex){
-                    Log.log.error("Error " + ex);
-                }  
-            }
-        });
-        this.client.puntuacion4.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-               try{
-                    int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(4, codigo, tipo);
-                    if (hecho){
-                        client.puntuacion1.setEnabled(false);
-                        client.puntuacion2.setEnabled(false);
-                        client.puntuacion3.setEnabled(false);
-                        client.puntuacion4.setEnabled(false);
-                        client.puntuacion5.setEnabled(false);
-                        client.confirmaPuntuacion.setVisible(true);
-                    }
-                }catch (NumberFormatException ex){
-                    Log.log.error("Error " + ex);
-                }  
-            }
-        });
-        this.client.puntuacion5.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try{
-                    int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    boolean hecho = consultaArticulo.insertarEvaluacion(5, codigo, tipo);
-                    if (hecho){
-                        client.puntuacion1.setEnabled(false);
-                        client.puntuacion2.setEnabled(false);
-                        client.puntuacion3.setEnabled(false);
-                        client.puntuacion4.setEnabled(false);
-                        client.puntuacion5.setEnabled(false);
-                        client.confirmaPuntuacion.setVisible(true);
-                    }
-                }catch (NumberFormatException ex){
-                    Log.log.error("Error " + ex);
-                }  
-            }
-        });
-        
-        //Listeners carrito 
-        this.client.insertarCesta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
-
-                if (seleccion == 0) { // Confirma insertar
+            @Override
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
                     int codigo = Integer.parseInt(client.codigo_ref.getText());
-                    String nuevoCarro = "";
-                    String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
-                    if (carroActual == null) {
-                        carroActual = "";
+                    boolean hecho = consultaArticulo.insertarEvaluacion(5, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
                     }
-                    nuevoCarro = codigo + "-" + carroActual;
-                    carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
-
-                    JOptionPane.showMessageDialog(null, "Articulo añadido con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                } else { // Deniega insertar
-                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
                 }
-
             }
-        });
-        this.client.eliminarArticulo.addActionListener(new ActionListener() {
+        }
+        );
+
+        //Listeners carrito 
+        this.client.insertarCesta.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e
+            ) {
+                try {
+                    int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
+
+                    if (seleccion == 0) { // Confirma insertar
+                        int codigo = Integer.parseInt(client.codigo_ref.getText());
+                        String nuevoCarro = "";
+                        String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+                        if (carroActual == null) {
+                            carroActual = "";
+                        }
+                        nuevoCarro = codigo + "-" + carroActual;
+                        carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+
+                        JOptionPane.showMessageDialog(null, "Articulo añadido con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    } else { // Deniega insertar
+                        JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error en insertarCesta " + ex);
+                }
+            }
+        }
+        );
+
+        this.client.eliminarArticulo.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
 
                 ArrayList<Integer> cesta = cargarCarro();
                 Collections.sort(cesta);
@@ -693,7 +733,7 @@ public class ClienteController implements ActionListener {
 
                 if (indexSel != -1) {
                     int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar este articulo del carro?",
-                        "Eliminar articulo", JOptionPane.YES_NO_OPTION);
+                            "Eliminar articulo", JOptionPane.YES_NO_OPTION);
                     int index = Collections.binarySearch(cesta, cesta.get(indexSel));
 
                     if (seleccion == 0) { //Elimina
@@ -712,10 +752,14 @@ public class ClienteController implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Seleccione algun articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
             }
-        });
-        this.client.eliminaTodoCarro.addActionListener(new ActionListener() {
+        }
+        );
+
+        this.client.eliminaTodoCarro.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e
+            ) {
 
                 int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar todos los articulos del carro?",
                         "Eliminar carrito", JOptionPane.YES_NO_OPTION);
@@ -733,37 +777,70 @@ public class ClienteController implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
             }
-        });
-        this.client.btnRealizaPedidoCarro.addActionListener(new ActionListener() {
+        }
+        );
+
+        this.client.btnRealizaPedidoCarro.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
+            public void actionPerformed(ActionEvent e
+            ) {
+                ArrayList<Integer> cesta = cargarCarro();
                 int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
-
+                boolean noHay = false;
+                String modelo = "";
                 if (seleccion == 0) { // Confirma insertar
-                    ArrayList<Integer> cesta = cargarCarro();
-                    int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
-                    boolean hecho = daoPedido.hacerPedidoCarro(cesta, client.precioCarro.getText(), cliente.getEmail(), nuevoIdPedido);
-
-                    if (hecho) {
-                        carroDao.actualizaCarro(cliente.getEmail(), "");
-                        cesta.clear();
-                        listaArticulos(cesta);
-                        JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
-
+                    //Actualiza stock articulo
+                    for (int i = 0; i < cesta.size(); i++) {
+                        int repetido = 0;
+                        int codRef = cesta.get(i);
+                        //Comprobamos cuantas se van a pedir y el stock futuro
+                        for (int j = 0; j < cesta.size(); j++) {
+                            if(codRef==cesta.get(j)){
+                                repetido++;
+                            }
+                        }
+                        Articulo articulo = consultaArticulo.getArticulo(codRef);
+                        if ((articulo.getStock() - repetido) < 0) {
+                            noHay = true;
+                            modelo = articulo.getModelo();
+                            break;
+                        }
                     }
+                    if (noHay) {
+                        JOptionPane.showMessageDialog(null, "No hay stock de " + modelo + " eliminalo de la lista para hacer el pedido.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
+                        boolean hecho = daoPedido.hacerPedidoCarro(cesta, client.precioCarro.getText(), cliente.getEmail(), nuevoIdPedido);
+                        for (int i = 0; i < cesta.size(); i++) {
+                            int codRef = cesta.get(i);
+                            Articulo articulo = consultaArticulo.getArticulo(codRef);
+                            consultaArticulo.actualizarStock(codRef, articulo.getStock() - 1);
+                        }
+                        if (hecho) {
+                            carroDao.actualizaCarro(cliente.getEmail(), "");
+                            cesta.clear();
+                            listaArticulos(cesta);
+                            JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                        }
+                    }
+
                 } else { // Deniega insertar
                     JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
             }
-        });
+        }
+        );
 
         //Listners de perfil cliente
-        this.client.btnCambiaEmail.addActionListener(new ActionListener() {
+        this.client.btnCambiaEmail.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e
+            ) {
 
                 String nuevoEmail = client.nuevoEmail.getText();
                 boolean hecho = daoUser.editarEmailCliente(cliente.getEmail(), nuevoEmail);
@@ -777,10 +854,14 @@ public class ClienteController implements ActionListener {
                 }
 
             }
-        });
-        this.client.btnCambiaContra.addActionListener(new ActionListener() {
+        }
+        );
+
+        this.client.btnCambiaContra.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e
+            ) {
                 boolean correcto = comprobarPassword();
                 if (correcto) {
                     char[] valorContrasenna = client.nuevaPass.getPassword();
@@ -796,10 +877,14 @@ public class ClienteController implements ActionListener {
                     }
                 }
             }
-        });
-        this.client.btnCambiaAtributos.addActionListener(new ActionListener() {
+        }
+        );
+
+        this.client.btnCambiaAtributos.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e
+            ) {
 
                 if (client.datoTarjeta.getText().equalsIgnoreCase("") || client.datoTelefono.getText().equalsIgnoreCase("")
                         || client.datoDireccion.getText().equalsIgnoreCase("")) {
@@ -827,7 +912,8 @@ public class ClienteController implements ActionListener {
 
                 }
             }
-        });
+        }
+        );
 
     }
 
@@ -867,7 +953,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(placa.getDescripcion());
         client.precio.setText(String.valueOf(placa.getPrecio()));
         String ruta = placa.getRutaImagen();
-
+        comprobarEvaluacionRealizada(placa.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -898,7 +984,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(cpu.getDescripcion());
         client.precio.setText(String.valueOf(cpu.getPrecio()));
         String ruta = cpu.getRutaImagen();
-
+        comprobarEvaluacionRealizada(cpu.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -928,7 +1014,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(grafica.getDescripcion());
         client.precio.setText(String.valueOf(grafica.getPrecio()));
         String ruta = grafica.getRutaImagen();
-
+        comprobarEvaluacionRealizada(grafica.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -957,7 +1043,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(caja.getDescripcion());
         client.precio.setText(String.valueOf(caja.getPrecio()));
         String ruta = caja.getRutaImagen();
-
+        comprobarEvaluacionRealizada(caja.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -990,7 +1076,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(monitor.getDescripcion());
         client.precio.setText(String.valueOf(monitor.getPrecio()));
         String ruta = monitor.getRutaImagen();
-
+        comprobarEvaluacionRealizada(monitor.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1028,7 +1114,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(teclado.getDescripcion());
         client.precio.setText(String.valueOf(teclado.getPrecio()));
         String ruta = teclado.getRutaImagen();
-
+        comprobarEvaluacionRealizada(teclado.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1057,7 +1143,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(raton.getDescripcion());
         client.precio.setText(String.valueOf(raton.getPrecio()));
         String ruta = raton.getRutaImagen();
-
+        comprobarEvaluacionRealizada(raton.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1095,7 +1181,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(cam.getDescripcion());
         client.precio.setText(String.valueOf(cam.getPrecio()));
         String ruta = cam.getRutaImagen();
-
+        comprobarEvaluacionRealizada(cam.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1126,7 +1212,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(fuente.getDescripcion());
         client.precio.setText(String.valueOf(fuente.getPrecio()));
         String ruta = fuente.getRutaImagen();
-
+        comprobarEvaluacionRealizada(fuente.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1161,7 +1247,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(ram.getDescripcion());
         client.precio.setText(String.valueOf(ram.getPrecio()));
         String ruta = ram.getRutaImagen();
-
+        comprobarEvaluacionRealizada(ram.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1190,7 +1276,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(disco.getDescripcion());
         client.precio.setText(String.valueOf(disco.getPrecio()));
         String ruta = disco.getRutaImagen();
-
+        comprobarEvaluacionRealizada(disco.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1219,7 +1305,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(portatil.getDescripcion());
         client.precio.setText(String.valueOf(portatil.getPrecio()));
         String ruta = portatil.getRutaImagen();
-
+        comprobarEvaluacionRealizada(portatil.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1252,7 +1338,7 @@ public class ClienteController implements ActionListener {
         client.descripcion.setText(pctorre.getDescripcion());
         client.precio.setText(String.valueOf(pctorre.getPrecio()));
         String ruta = pctorre.getRutaImagen();
-
+        comprobarEvaluacionRealizada(pctorre.getCodigo_ref());
         if (ruta == null) {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
         } else if (getClass().getResource(ruta) == null) {
@@ -1325,24 +1411,27 @@ public class ClienteController implements ActionListener {
      */
     private float calculaPrecioMontaje() {
         float total = 0;
+        try {
+            String[] precioCpu = client.cpuBox.getSelectedItem().toString().split("€");
+            String[] precioPlaca = client.placaBox.getSelectedItem().toString().split("€");
+            String[] precioRam = client.ramBox.getSelectedItem().toString().split("€");
+            String[] precioGrafica = client.graficaBox.getSelectedItem().toString().split("€");
+            String[] precioDisco = client.discoBox.getSelectedItem().toString().split("€");
+            String[] precioFuente = client.fuenteBox.getSelectedItem().toString().split("€");
+            String[] precioCaja = client.cajaBox.getSelectedItem().toString().split("€");
+            String[] precioRaton = client.ratonBox.getSelectedItem().toString().split("€");
+            String[] precioTeclado = client.tecladoBox.getSelectedItem().toString().split("€");
+            String[] precioCam = client.camBox.getSelectedItem().toString().split("€");
 
-        String[] precioCpu = client.cpuBox.getSelectedItem().toString().split("€");
-        String[] precioPlaca = client.placaBox.getSelectedItem().toString().split("€");
-        String[] precioRam = client.ramBox.getSelectedItem().toString().split("€");
-        String[] precioGrafica = client.graficaBox.getSelectedItem().toString().split("€");
-        String[] precioDisco = client.discoBox.getSelectedItem().toString().split("€");
-        String[] precioFuente = client.fuenteBox.getSelectedItem().toString().split("€");
-        String[] precioCaja = client.cajaBox.getSelectedItem().toString().split("€");
-        String[] precioRaton = client.ratonBox.getSelectedItem().toString().split("€");
-        String[] precioTeclado = client.tecladoBox.getSelectedItem().toString().split("€");
-        String[] precioCam = client.camBox.getSelectedItem().toString().split("€");
+            total = sacarPrecio(precioCpu) + sacarPrecio(precioPlaca) + sacarPrecio(precioRam)
+                    + sacarPrecio(precioGrafica) + sacarPrecio(precioDisco) + sacarPrecio(precioCaja)
+                    + sacarPrecio(precioFuente) + sacarPrecio(precioRaton) + sacarPrecio(precioTeclado)
+                    + sacarPrecio(precioCam);
 
-        total = sacarPrecio(precioCpu) + sacarPrecio(precioPlaca) + sacarPrecio(precioRam)
-                + sacarPrecio(precioGrafica) + sacarPrecio(precioDisco) + sacarPrecio(precioCaja)
-                + sacarPrecio(precioFuente) + sacarPrecio(precioRaton) + sacarPrecio(precioTeclado)
-                + sacarPrecio(precioCam);
-
-        client.precioTotalPc.setText(String.valueOf(total) + " €");
+            client.precioTotalPc.setText(String.valueOf(total) + " €");
+        } catch (Exception ex) {
+            Log.log.error("Error en calcular el precio " + ex);
+        }
         return total;
 
     }
@@ -1397,14 +1486,17 @@ public class ClienteController implements ActionListener {
 
         ArrayList<Integer> cesta = new ArrayList<>();
         String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
-
-        if (carroActual != null) {
-            String[] articulo = carroActual.split("-");
-            if (!articulo[0].equals("")) {
-                for (int i = 0; i < articulo.length; i++) {
-                    cesta.add(Integer.parseInt(articulo[i]));
+        try {
+            if (carroActual != null) {
+                String[] articulo = carroActual.split("-");
+                if (!articulo[0].equals("")) {
+                    for (int i = 0; i < articulo.length; i++) {
+                        cesta.add(Integer.parseInt(articulo[i]));
+                    }
                 }
             }
+        } catch (NumberFormatException ex) {
+            Log.log.error("Error en cargarCarro " + ex);
         }
         return cesta;
     }
@@ -1860,27 +1952,66 @@ public class ClienteController implements ActionListener {
      */
     private boolean comprobarPassword() {
         boolean correcto = false;
-        if (client.nuevaPass.getPassword().length != 0) {
-            if ((client.nuevaPass.getPassword().length != 0 && client.repitePass.getPassword().length != 0)) {
-                String passNueva = Arrays.toString(client.nuevaPass.getPassword());
-                String passRepite = Arrays.toString(client.repitePass.getPassword());
-                if (passNueva.equals(passRepite)) {
-                    char[] valorContrasenna = client.nuevaPass.getPassword();
-                    passNueva = new String(valorContrasenna);
-                    String passAnterior = cliente.getPass();
-                    if (passNueva.equals(passAnterior)) {
-                        JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+        try {
+            if (client.nuevaPass.getPassword().length != 0) {
+                if ((client.nuevaPass.getPassword().length != 0 && client.repitePass.getPassword().length != 0)) {
+                    String passNueva = Arrays.toString(client.nuevaPass.getPassword());
+                    String passRepite = Arrays.toString(client.repitePass.getPassword());
+                    if (passNueva.equals(passRepite)) {
+                        char[] valorContrasenna = client.nuevaPass.getPassword();
+                        passNueva = new String(valorContrasenna);
+                        String passAnterior = cliente.getPass();
+                        if (passNueva.equals(passAnterior)) {
+                            JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+                        } else {
+                            correcto = true;
+                        }
                     } else {
-                        correcto = true;
+                        JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
             }
+        } catch (Exception ex) {
+            Log.log.error("Error en comprobar password " + ex);
         }
         return correcto;
+    }
+
+    /**
+     * Comprueba si tiene alguna evaluacion el articulo hecha por el cliente y
+     * establece los parametros de las etiquetas y botones activandolos y
+     * desactivandolos en funcion del resultado de la consulta.
+     *
+     * @param codigo
+     */
+    private void comprobarEvaluacionRealizada(int codigo) {
+
+        try {
+            // Pone el texto con la media del producto
+            String textMedia = String.valueOf(consultaArticulo.mediaEvaluacion(codigo));
+            client.datoMediaEvaluacion.setText("Puntuacion media: " + textMedia);
+            // Si el cliente no ha evaluado el producto activamos para que lo valore
+            if (!consultaArticulo.comprobarEvaluacion(cliente.getEmail(), codigo)) {
+                client.puntuacion1.setEnabled(true);
+                client.puntuacion2.setEnabled(true);
+                client.puntuacion3.setEnabled(true);
+                client.puntuacion4.setEnabled(true);
+                client.puntuacion5.setEnabled(true);
+                client.confirmaPuntuacion.setVisible(false); //Inicia etiqueta puntuacion en no visible
+            } else {
+                client.puntuacion1.setEnabled(false);
+                client.puntuacion2.setEnabled(false);
+                client.puntuacion3.setEnabled(false);
+                client.puntuacion4.setEnabled(false);
+                client.puntuacion5.setEnabled(false);
+                client.confirmaPuntuacion.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Log.log.error("Error en comprobar media puntucion " + ex);
+        }
+
     }
 
     @Override

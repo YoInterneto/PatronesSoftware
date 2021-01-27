@@ -470,7 +470,4 @@ INSERT INTO Puntuacion VALUES(4,'email2@email.com',4);
 INSERT INTO Puntuacion VALUES(2,'email2@email.com',3);
 INSERT INTO Puntuacion VALUES(3,'email2@email.com',2);
 INSERT INTO Puntuacion VALUES(5,'email2@email.com',5);
-INSERT INTO Puntuacion VALUES(1,'email2@email.com',4);
-
-
-
+--INSERT INTO Puntuacion VALUES(1,'email2@email.com',4);

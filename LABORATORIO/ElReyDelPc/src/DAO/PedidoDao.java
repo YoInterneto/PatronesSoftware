@@ -121,7 +121,7 @@ public class PedidoDao {
         return hecho;
     }
 
-    public boolean hacerPedido(String codigo_ref, String precio, String email, int idPedido) {
+    public boolean hacerPedido(int codigoRef, String precio, String email, int idPedido) {
         boolean hecho = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
@@ -131,7 +131,7 @@ public class PedidoDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - hacerPedido()");
             Statement s = conexion.createStatement();
-            int codigoRef = Integer.parseInt(codigo_ref);
+            
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + Float.parseFloat(precio) + " ,'"
                     + formatter.format(date) + "'," + idPedido + ",'{" + codigoRef + "}','" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedido()");

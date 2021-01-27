@@ -253,15 +253,14 @@ public class ArticuloDao {
      * @param codigoReferencia
      * @return Devuelve true si la consula se ha realizado correctamente
      */
-    public boolean insertarEvaluacion(int nota, int codigoReferencia,String tipo){
+    public boolean insertarEvaluacion(int nota, String email,int codigoReferencia){
         boolean hecho = false;
         try {
             Log.logBd.info("CONSULTA insertarEvaluacion");
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - insertarEvaluacion()");
             Statement s = conexion.createStatement();
-            int codigo = s.executeUpdate("INSERT into Puntuacion (Nota,Codigo_ref_"+ tipo+ ") "
-                    + "VALUES("+ nota +", "+ codigoReferencia +");");          
+            int codigo = s.executeUpdate("INSERT into Puntuacion VALUES("+ nota +",'"+ email +"',"+codigoReferencia+");");          
         
             if(codigo>0){
                 hecho = true;
@@ -271,6 +270,86 @@ public class ArticuloDao {
             Log.logBd.error("ERROR SQL en insertarEvaluacion(): " + error);
             Log.logBd.error("               SQL State - " + error.getSQLState());
             Log.logBd.error("               ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
+    /**
+     * 
+     * @param email
+     * @param codigoReferencia
+     * @return Devuelve true si la consula tiene un valor devuelto
+     */
+    public boolean comprobarEvaluacion(String email,int codigoReferencia){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA comprobarEvaluacion");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - comprobarEvaluacion()");
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select * from Puntuacion where email='"+ email+"' and codigo_ref="+codigoReferencia+";");          
+            if (rs.next()){
+                hecho = true;
+            }
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en comprobarEvaluacion(): " + error);
+            Log.logBd.error("               SQL State - " + error.getSQLState());
+            Log.logBd.error("               ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
+    
+    /**
+     * Calcula la media de las puntuaciones del producto con el codigo 
+     * de referencia dado
+     * @param codigo
+     * @return 
+     */
+    public float mediaEvaluacion(int codigo){
+        float notaMedia = 0;
+        try {
+            Log.logBd.info("CONSULTA mediaEvaluacion");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - mediaEvaluacion()");
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select round(avg(nota),2) from Puntuacion where codigo_ref="+ codigo+";");          
+            if (rs.next()){
+                notaMedia = rs.getFloat("round");
+            }
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en mediaEvaluacion(): " + error);
+            Log.logBd.error("               SQL State - " + error.getSQLState());
+            Log.logBd.error("               ErrorCode - " + error.getErrorCode());
+        }
+        return notaMedia;
+    }
+    
+    /**
+     * Actualiza el stock del articulo dado
+     * @param codigoRef
+     * @param stock
+     * @return 
+     */
+    public boolean actualizarStock(int codigoRef,int stock){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA actualizarStock");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - actualizarStock()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE articulo SET stock="+ stock +" WHERE codigo_ref="+ codigoRef +";");
+            Log.logBd.info("Realizada consulta - actualizarStock()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - actualizarStock()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en actualizarStock(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
         }
         
         return hecho;
