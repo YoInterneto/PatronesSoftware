@@ -247,6 +247,35 @@ public class ArticuloDao {
     }
     
     /**
+     * 
+     * @param nota
+     * @param codigoReferencia
+     * @return Devuelve true si la consula se ha realizado correctamente
+     */
+    public boolean insertarEvaluacion(int nota, int codigoReferencia,String tipo){
+        boolean hecho = false;
+        try {
+            Log.logBd.info("CONSULTA insertarEvaluacion");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - insertarEvaluacion()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into Puntuacion (Nota,Codigo_ref_"+ tipo+ ") "
+                    + "VALUES("+ nota +", "+ codigoReferencia +");");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en insertarEvaluacion(): " + error);
+            Log.logBd.error("               SQL State - " + error.getSQLState());
+            Log.logBd.error("               ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
+    
+    /**
      * Dado el codigo de un portatil realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes a dicho portatil.
      *

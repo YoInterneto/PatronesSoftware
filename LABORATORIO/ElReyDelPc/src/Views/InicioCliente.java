@@ -100,6 +100,7 @@ public class InicioCliente extends javax.swing.JFrame {
         precioCarro = new javax.swing.JLabel();
         btnRealizaPedidoCarro = new javax.swing.JButton();
         eliminarArticulo = new javax.swing.JButton();
+        eliminaTodoCarro = new javax.swing.JButton();
         panelMonta = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -144,6 +145,8 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator30 = new javax.swing.JSeparator();
         jSeparator31 = new javax.swing.JSeparator();
         panelProducto = new javax.swing.JPanel();
+        puntuacion1 = new javax.swing.JButton();
+        confirmaPuntuacion = new javax.swing.JLabel();
         productoSeleccionado = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -171,6 +174,10 @@ public class InicioCliente extends javax.swing.JFrame {
         btnComprarProducto = new javax.swing.JButton();
         insertarCesta = new javax.swing.JButton();
         imgProducto = new javax.swing.JLabel();
+        puntuacion2 = new javax.swing.JButton();
+        puntuacion3 = new javax.swing.JButton();
+        puntuacion4 = new javax.swing.JButton();
+        puntuacion5 = new javax.swing.JButton();
         panelPerfil = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -583,7 +590,10 @@ public class InicioCliente extends javax.swing.JFrame {
         panelCarro.add(btnRealizaPedidoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 500, 180, -1));
 
         eliminarArticulo.setText("Eliminar");
-        panelCarro.add(eliminarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 550, 180, 40));
+        panelCarro.add(eliminarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 180, 40));
+
+        eliminaTodoCarro.setText("Eliminar todo");
+        panelCarro.add(eliminaTodoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 550, 180, 40));
 
         panelCarro.setVisible(false);
 
@@ -768,6 +778,18 @@ public class InicioCliente extends javax.swing.JFrame {
 
         panelProducto.setBackground(new java.awt.Color(51, 51, 51));
         panelProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        puntuacion1.setBackground(new java.awt.Color(51, 51, 51));
+        puntuacion1.setForeground(new java.awt.Color(51, 51, 51));
+        puntuacion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
+        puntuacion1.setBorder(null);
+        puntuacion1.setOpaque(false);
+        panelProducto.add(puntuacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 530, 50, 40));
+
+        confirmaPuntuacion.setForeground(new java.awt.Color(255, 255, 255));
+        confirmaPuntuacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        confirmaPuntuacion.setText("¡ Puntuacion enviada !");
+        panelProducto.add(confirmaPuntuacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 590, 170, -1));
 
         productoSeleccionado.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         productoSeleccionado.setForeground(new java.awt.Color(255, 255, 255));
@@ -960,6 +982,34 @@ public class InicioCliente extends javax.swing.JFrame {
         imgProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgProducto.setText("VISTA PREVIA");
         panelProducto.add(imgProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 300, 310));
+
+        puntuacion2.setBackground(new java.awt.Color(51, 51, 51));
+        puntuacion2.setForeground(new java.awt.Color(51, 51, 51));
+        puntuacion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
+        puntuacion2.setBorder(null);
+        puntuacion2.setOpaque(false);
+        panelProducto.add(puntuacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 50, 40));
+
+        puntuacion3.setBackground(new java.awt.Color(51, 51, 51));
+        puntuacion3.setForeground(new java.awt.Color(51, 51, 51));
+        puntuacion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
+        puntuacion3.setBorder(null);
+        puntuacion3.setOpaque(false);
+        panelProducto.add(puntuacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 50, 40));
+
+        puntuacion4.setBackground(new java.awt.Color(51, 51, 51));
+        puntuacion4.setForeground(new java.awt.Color(51, 51, 51));
+        puntuacion4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
+        puntuacion4.setBorder(null);
+        puntuacion4.setOpaque(false);
+        panelProducto.add(puntuacion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 50, 40));
+
+        puntuacion5.setBackground(new java.awt.Color(51, 51, 51));
+        puntuacion5.setForeground(new java.awt.Color(51, 51, 51));
+        puntuacion5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/starVacia.png"))); // NOI18N
+        puntuacion5.setBorder(null);
+        puntuacion5.setOpaque(false);
+        panelProducto.add(puntuacion5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, 50, 40));
 
         panelProducto.setVisible(false);
 
@@ -1186,6 +1236,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel cam;
     public javax.swing.JComboBox<String> camBox;
     public javax.swing.JLabel codigo_ref;
+    public javax.swing.JLabel confirmaPuntuacion;
     public javax.swing.JLabel cpu;
     public javax.swing.JComboBox<String> cpuBox;
     public javax.swing.JTextField datoDireccion;
@@ -1197,6 +1248,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel descripcion;
     public javax.swing.JLabel disco;
     public javax.swing.JComboBox<String> discoBox;
+    public javax.swing.JButton eliminaTodoCarro;
     public javax.swing.JButton eliminarArticulo;
     private javax.swing.JLabel fotoInicio;
     public javax.swing.JLabel fuente;
@@ -1330,6 +1382,11 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel precioCarro;
     public javax.swing.JLabel precioTotalPc;
     public javax.swing.JLabel productoSeleccionado;
+    public javax.swing.JButton puntuacion1;
+    public javax.swing.JButton puntuacion2;
+    public javax.swing.JButton puntuacion3;
+    public javax.swing.JButton puntuacion4;
+    public javax.swing.JButton puntuacion5;
     public javax.swing.JLabel ram;
     public javax.swing.JComboBox<String> ramBox;
     public javax.swing.JLabel raton;

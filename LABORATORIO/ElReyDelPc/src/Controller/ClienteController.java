@@ -426,7 +426,9 @@ public class ClienteController implements ActionListener {
                     client.panelArticulo.setVisible(false);
                     client.panelElegirProducto.setVisible(false);
                     client.panelProducto.setVisible(true);
-
+                    
+                    client.confirmaPuntuacion.setVisible(false); //Inicia etiqueta puntuacion en no visible
+                    
                     switch (tipo) {
                         case "placa_base":
                             Placa_base placa = consultaArticulo.getPlaca_base(codigo);
@@ -508,7 +510,154 @@ public class ClienteController implements ActionListener {
                 }
             }
         });
-
+        //Efectos visuales evaluar producto
+        this.client.puntuacion1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+        });
+        this.client.puntuacion2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+        });
+        this.client.puntuacion3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+        });
+        this.client.puntuacion4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+        });
+        this.client.puntuacion5.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+            }
+        });
+        //Sacar valor puntuacion
+        this.client.puntuacion1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(1, codigo, tipo);
+                    if (hecho){
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                }catch (NumberFormatException ex){
+                    Log.log.error("Error " + ex);
+                }  
+            }
+        });
+        this.client.puntuacion2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(2, codigo, tipo);
+                    if (hecho){
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                }catch (NumberFormatException ex){
+                    Log.log.error("Error " + ex);
+                }  
+            }
+        });
+        this.client.puntuacion3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(3, codigo, tipo);
+                    if (hecho){
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                }catch (NumberFormatException ex){
+                    Log.log.error("Error " + ex);
+                }  
+            }
+        });
+        this.client.puntuacion4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               try{
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(4, codigo, tipo);
+                    if (hecho){
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                }catch (NumberFormatException ex){
+                    Log.log.error("Error " + ex);
+                }  
+            }
+        });
+        this.client.puntuacion5.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = consultaArticulo.insertarEvaluacion(5, codigo, tipo);
+                    if (hecho){
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                }catch (NumberFormatException ex){
+                    Log.log.error("Error " + ex);
+                }  
+            }
+        });
+        
         //Listeners carrito 
         this.client.insertarCesta.addActionListener(new ActionListener() {
             @Override
@@ -537,23 +686,48 @@ public class ClienteController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar este articulo del carro?",
-                        "Eliminar articulo", JOptionPane.YES_NO_OPTION);
-
                 ArrayList<Integer> cesta = cargarCarro();
                 Collections.sort(cesta);
 
                 int indexSel = client.listaPedidos.getSelectedIndex();
-                int index = Collections.binarySearch(cesta, cesta.get(indexSel));
+
+                if (indexSel != -1) {
+                    int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar este articulo del carro?",
+                        "Eliminar articulo", JOptionPane.YES_NO_OPTION);
+                    int index = Collections.binarySearch(cesta, cesta.get(indexSel));
+
+                    if (seleccion == 0) { //Elimina
+                        cesta.remove(index);
+                        String nuevoCarro = "";
+                        for (int i = 0; i < cesta.size(); i++) {
+                            nuevoCarro = cesta.get(i) + "-" + nuevoCarro;
+                        }
+                        carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+                        JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        listaArticulos(cesta);
+                    } else { // Deniega eliminar
+                        JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione algun articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
+        this.client.eliminaTodoCarro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar todos los articulos del carro?",
+                        "Eliminar carrito", JOptionPane.YES_NO_OPTION);
+
+                ArrayList<Integer> cesta = cargarCarro();
+                Collections.sort(cesta);
 
                 if (seleccion == 0) { //Elimina
-                    cesta.remove(index);
+                    cesta.clear();
                     String nuevoCarro = "";
-                    for (int i = 0; i < cesta.size(); i++) {
-                        nuevoCarro = cesta.get(i) + "-" + nuevoCarro;
-                    }
                     carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
-                    JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.showMessageDialog(null, "Articulos eliminados con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
                     listaArticulos(cesta);
                 } else { // Deniega eliminar
                     JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
@@ -658,10 +832,10 @@ public class ClienteController implements ActionListener {
     }
 
     /**
-     * Inicia el panel de perfil cargando los valores del cliente
-     * que ha iniciado sesion en su correspondiente etiqueta.
-     * 
-    */
+     * Inicia el panel de perfil cargando los valores del cliente que ha
+     * iniciado sesion en su correspondiente etiqueta.
+     *
+     */
     private void iniciarPanelPerfil() {
         client.nombrePerfil.setText(cliente.getNombre());
         client.apellidoPerfil.setText(cliente.getApellido());
@@ -670,18 +844,21 @@ public class ClienteController implements ActionListener {
         client.datoTarjeta.setText(cliente.getTarjeta());
         client.datoEmail.setText(cliente.getEmail());
     }
+
     /**
-     * Inicia el panel de montar cargando los valores de los articulos 
-     * en los respectivos JComboBox
-    */
+     * Inicia el panel de montar cargando los valores de los articulos en los
+     * respectivos JComboBox
+     */
     private void iniciarPanelMontar() {
         rellenaComboBox();
     }
+
     /**
      * Inicia el panel del producto Placa base cargando los valores de la placa
      * en las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param placa
-    */
+     */
     private void iniciarPanelProductoPlaca(Placa_base placa) {
         client.productoSeleccionado.setText("Placa base");
         client.datoModelo.setText(placa.getModelo());
@@ -705,11 +882,14 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setText("Socket");
 
     }
+
     /**
-     * Inicia el panel del producto procesador  cargando los valores del procesador
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del producto procesador cargando los valores del
+     * procesador en las correspondientes etiquetas las cuales referencian a su
+     * atributo.
+     *
      * @param cpu
-    */
+     */
     private void iniciarPanelProductoCpu(Procesador cpu) {
         client.productoSeleccionado.setText("CPU");
         client.datoModelo.setText(cpu.getModelo());
@@ -733,11 +913,13 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setVisible(true);
 
     }
+
     /**
-     * Inicia el panel del producto grafica cargando los valores del grafica
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del producto grafica cargando los valores del grafica en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param grafica
-    */
+     */
     private void iniciarPanelProductoGrafica(Grafica grafica) {
         client.productoSeleccionado.setText("Grafica");
         client.datoModelo.setText(grafica.getModelo());
@@ -760,11 +942,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
+
     /**
-     * Inicia el panel del producto caja cargando los valores de la caja
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del producto caja cargando los valores de la caja en las
+     * correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param caja
-    */
+     */
     private void iniciarPanelProductoCaja(Caja caja) {
         client.productoSeleccionado.setText("Caja");
         client.datoModelo.setText(caja.getModelo());
@@ -791,11 +975,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
+
     /**
-     * Inicia el panel del producto monitor cargando los valores del monitor
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del producto monitor cargando los valores del monitor en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param monitor
-    */
+     */
     private void iniciarPanelProductoMonitor(Monitor monitor) {
         client.productoSeleccionado.setText("Monitor");
         client.datoModelo.setText(monitor.getModelo());
@@ -827,11 +1013,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular3.setVisible(true);
         client.nombreAtributo3.setVisible(true);
     }
+
     /**
-     * Inicia el panel del teclado monitor cargando los valores del teclado
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del teclado monitor cargando los valores del teclado en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param teclado
-    */
+     */
     private void iniciarPanelProductoTeclado(Teclado teclado) {
         client.productoSeleccionado.setText("Teclado");
         client.datoModelo.setText(teclado.getModelo());
@@ -854,11 +1042,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
+
     /**
-     * Inicia el panel del raton monitor cargando los valores del raton
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del raton monitor cargando los valores del raton en las
+     * correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param raton
-    */
+     */
     private void iniciarPanelProductoRaton(Raton raton) {
         client.productoSeleccionado.setText("Raton");
         client.datoModelo.setText(raton.getModelo());
@@ -890,11 +1080,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular3.setVisible(true);
         client.nombreAtributo3.setVisible(true);
     }
+
     /**
-     * Inicia el panel de la wecbam monitor cargando los valores de la webcam
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel de la wecbam monitor cargando los valores de la webcam en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param cam
-    */
+     */
     private void iniciarPanelProductoCam(WebCam cam) {
         client.productoSeleccionado.setText("Web-Cam");
         client.datoModelo.setText(cam.getModelo());
@@ -918,11 +1110,14 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setVisible(true);
 
     }
+
     /**
-     * Inicia el panel de la fuente de alimentacion monitor cargando los valores de la
-     * fuente en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel de la fuente de alimentacion monitor cargando los valores
+     * de la fuente en las correspondientes etiquetas las cuales referencian a
+     * su atributo.
+     *
      * @param fuente
-    */
+     */
     private void iniciarPanelProductoFuente(Fuente_alimentacion fuente) {
         client.productoSeleccionado.setText("Fuente alimentacion");
         client.datoModelo.setText(fuente.getModelo());
@@ -950,11 +1145,14 @@ public class ClienteController implements ActionListener {
         client.atrParticular2.setVisible(true);
         client.nombreAtributo2.setVisible(true);
     }
+
     /**
-     * Inicia el panel de la memoria ram monitor cargando los valores de la 
-     * memoria ram en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel de la memoria ram monitor cargando los valores de la
+     * memoria ram en las correspondientes etiquetas las cuales referencian a su
+     * atributo.
+     *
      * @param ram
-    */
+     */
     private void iniciarPanelProductoRam(Memoria_RAM ram) {
         client.productoSeleccionado.setText("Memoria RAM");
         client.datoModelo.setText(ram.getModelo());
@@ -977,11 +1175,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
+
     /**
-     * Inicia el panel del producto disco duro cargando los valores del disco
-     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     * Inicia el panel del producto disco duro cargando los valores del disco en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param disco
-    */
+     */
     private void iniciarPanelProductoDisco(Disco_duro disco) {
         client.productoSeleccionado.setText("Disco duro");
         client.datoModelo.setText(disco.getModelo());
@@ -1004,11 +1204,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular1.setVisible(true);
         client.nombreAtributo1.setVisible(true);
     }
+
     /**
      * Inicia el panel del producto portatil cargando los valores del portatil
      * en las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param portatil
-    */
+     */
     private void iniciarPanelProductoPortatil(Portatil portatil) {
         client.productoSeleccionado.setText("Portatil");
         client.datoModelo.setText(portatil.getModelo());
@@ -1035,11 +1237,13 @@ public class ClienteController implements ActionListener {
         client.atrParticular2.setVisible(true);
         client.nombreAtributo2.setVisible(true);
     }
+
     /**
      * Inicia el panel del producto torre pc cargando los valores de la pc torre
      * en las correspondientes etiquetas las cuales referencian a su atributo.
+     *
      * @param pctorre
-    */
+     */
     private void iniciarPanelProductoPcTorre(PcTorre pctorre) {
         client.productoSeleccionado.setText("Pc Torre");
         client.datoModelo.setText(pctorre.getModelo());
@@ -1063,7 +1267,6 @@ public class ClienteController implements ActionListener {
         client.nombreAtributo1.setVisible(true);
     }
 
-    
     /**
      * Coloca los valores de la base de datos en los comboBox al cual pertenecen
      * mediante una consulta se guarda la lista de valores y se insertan como
@@ -1182,10 +1385,13 @@ public class ClienteController implements ActionListener {
         client.tecladoBox.setSelectedIndex(0);
         client.camBox.setSelectedIndex(0);
     }
+
     /**
-     * Obtiene el carro de la base de datos y lo transforma en un
-     * arraylist de enteros.
-     * @return Devuelve un arrayList de enteros que corresponden a los codigos de referencia
+     * Obtiene el carro de la base de datos y lo transforma en un arraylist de
+     * enteros.
+     *
+     * @return Devuelve un arrayList de enteros que corresponden a los codigos
+     * de referencia
      */
     private ArrayList<Integer> cargarCarro() {
 
@@ -1204,10 +1410,11 @@ public class ClienteController implements ActionListener {
     }
 
     /**
-     * Crea una Jlist con los articulos que hay en el 
-     * arraylist pasado por parametro con informacion relativa a los mismos
-     * sacada de la base de datos.
-     * @param cesta 
+     * Crea una Jlist con los articulos que hay en el arraylist pasado por
+     * parametro con informacion relativa a los mismos sacada de la base de
+     * datos.
+     *
+     * @param cesta
      */
     private void listaArticulos(ArrayList<Integer> cesta) {
         DefaultListModel listModel = new DefaultListModel();
@@ -1243,8 +1450,8 @@ public class ClienteController implements ActionListener {
     }
 
     /**
-     * Crea una Jlist con informacion de todas las placas que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todas las placas que hay en la base de
+     * datos.
      */
     private void cargarListaPlaca() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1272,9 +1479,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Placa_base"));
     }
+
     /**
-     * Crea una Jlist con informacion de todos los procesadores que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todos los procesadores que hay en la
+     * base de datos.
      */
     private void cargarListaCpu() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1302,9 +1510,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Procesador"));
     }
+
     /**
-     * Crea una Jlist con informacion de todas las graficas que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todas las graficas que hay en la base
+     * de datos.
      */
     private void cargarListaGraficas() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1332,9 +1541,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Grafica"));
     }
+
     /**
-     * Crea una Jlist con informacion de todos los monitores que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todos los monitores que hay en la base
+     * de datos.
      */
     private void cargarListaMonitor() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1362,9 +1572,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Monitor"));
     }
+
     /**
-     * Crea una Jlist con informacion de todos los teclados que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todos los teclados que hay en la base
+     * de datos.
      */
     private void cargarListaTeclado() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1392,9 +1603,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Teclado"));
     }
+
     /**
-     * Crea una Jlist con informacion de todos los ratones que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todos los ratones que hay en la base de
+     * datos.
      */
     private void cargarListaRaton() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1422,9 +1634,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Raton"));
     }
+
     /**
-     * Crea una Jlist con informacion de todas las webcam que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todas las webcam que hay en la base de
+     * datos.
      */
     private void cargarListaCam() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1452,8 +1665,9 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "WebCam"));
     }
+
     /**
-     * Crea una Jlist con informacion de todas las fuentes de alimentacion que 
+     * Crea una Jlist con informacion de todas las fuentes de alimentacion que
      * hay en la base de datos.
      */
     private void cargarListaFuente() {
@@ -1482,9 +1696,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Fuente_alimentacion"));
     }
+
     /**
-     * Crea una Jlist con informacion de todas las memorias ram que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todas las memorias ram que hay en la
+     * base de datos.
      */
     private void cargarListaRam() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1512,9 +1727,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Memoria_RAM"));
     }
+
     /**
-     * Crea una Jlist con informacion de todos los discos duros que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todos los discos duros que hay en la
+     * base de datos.
      */
     private void cargarListaDisco() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1542,9 +1758,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Disco_duro"));
     }
+
     /**
-     * Crea una Jlist con informacion de todas las cajas que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todas las cajas que hay en la base de
+     * datos.
      */
     private void cargarListaCaja() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1572,9 +1789,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Caja"));
     }
+
     /**
-     * Crea una Jlist con informacion de todos los portatiles que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todos los portatiles que hay en la base
+     * de datos.
      */
     private void cargarListaPortatil() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1602,9 +1820,10 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Portatil"));
     }
+
     /**
-     * Crea una Jlist con informacion de todas las torres pc que 
-     * hay en la base de datos.
+     * Crea una Jlist con informacion de todas las torres pc que hay en la base
+     * de datos.
      */
     private void cargarListaPcTorre() {
         DefaultListModel listModel = new DefaultListModel();
@@ -1635,7 +1854,8 @@ public class ClienteController implements ActionListener {
 
     /**
      * Metodo para comprobar el formulario para cambiar la password en el panel
-     * del perfil de cliente. 
+     * del perfil de cliente.
+     *
      * @return Devuelve si la password es o no correcta.
      */
     private boolean comprobarPassword() {
