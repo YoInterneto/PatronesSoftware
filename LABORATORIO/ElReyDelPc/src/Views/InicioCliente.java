@@ -258,43 +258,38 @@ public class InicioCliente extends javax.swing.JFrame {
 
         btnCarro.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnCarro.setForeground(new java.awt.Color(255, 255, 255));
-        btnCarro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Carrito.png"))); // NOI18N
         btnCarro.setText("Carrito");
         btnCarro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 240, 60));
+        jPanel2.add(btnCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 230, 60));
 
         btnInicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnInicio.setForeground(new java.awt.Color(255, 255, 255));
-        btnInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
         btnInicio.setText("Inicio");
         btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 240, 60));
+        jPanel2.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 230, 60));
 
         btnProducto.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnProducto.setForeground(new java.awt.Color(255, 255, 255));
-        btnProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pc.png"))); // NOI18N
         btnProducto.setText("Productos");
         btnProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 240, 70));
+        jPanel2.add(btnProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 230, 70));
 
         btnMontar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnMontar.setForeground(new java.awt.Color(255, 255, 255));
-        btnMontar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnMontar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ajustes.png"))); // NOI18N
         btnMontar.setText("Monta tu PC");
         btnMontar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnMontar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 240, 70));
+        jPanel2.add(btnMontar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 230, 70));
 
         btnPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnPerfil.setForeground(new java.awt.Color(255, 255, 255));
-        btnPerfil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfil.png"))); // NOI18N
         btnPerfil.setText("Gestiona tu perfil");
         btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 240, 60));
+        jPanel2.add(btnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 230, 60));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 240, -1));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 240, 10));
         jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 240, -1));
