@@ -388,113 +388,13 @@ ALTER TABLE public.Monitor OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.Puntuacion CASCADE;
 CREATE TABLE public.Puntuacion(
 	Nota smallint NOT NULL,
-	Codigo_ref_Portatil smallint,
-	Codigo_ref_Monitor smallint,
-	Codigo_ref_Placa_base smallint,
-	Codigo_ref_Procesador smallint,
-	Codigo_ref_WebCam smallint,
-	Codigo_ref_PcTorre smallint,
-	Codigo_ref_Teclado smallint,
-	Codigo_ref_Raton smallint,
-	Codigo_ref_Fuente_alimentacion smallint,
-	Codigo_ref_Memoria_RAM smallint,
-	Codigo_ref_Grafica smallint,
-	Codigo_ref_Disco_duro smallint,
-	Codigo_ref_Caja smallint
+	Email varchar NOT NULL,
+	codigo_ref smallint NOT NULL,
+	CONSTRAINT Puntuacion_pk PRIMARY KEY (Email,codigo_ref)
+
 );
 -- ddl-end --
 ALTER TABLE public.Puntuacion OWNER TO postgres;
--- ddl-end --
-
--- object: Monitor_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Monitor_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Monitor_fk FOREIGN KEY (Codigo_ref_Monitor)
-REFERENCES public.Monitor (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Placa_base_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Placa_base_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Placa_base_fk FOREIGN KEY (Codigo_ref_Placa_base)
-REFERENCES public.Placa_base (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Procesador_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Procesador_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Procesador_fk FOREIGN KEY (Codigo_ref_Procesador)
-REFERENCES public.Procesador (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: WebCam_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS WebCam_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT WebCam_fk FOREIGN KEY (Codigo_ref_WebCam)
-REFERENCES public.WebCam (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: PcTorre_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS PcTorre_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT PcTorre_fk FOREIGN KEY (Codigo_ref_PcTorre)
-REFERENCES public.PcTorre (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Teclado_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Teclado_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Teclado_fk FOREIGN KEY (Codigo_ref_Teclado)
-REFERENCES public.Teclado (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Raton_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Raton_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Raton_fk FOREIGN KEY (Codigo_ref_Raton)
-REFERENCES public.Raton (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Fuente_alimentacion_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Fuente_alimentacion_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Fuente_alimentacion_fk FOREIGN KEY (Codigo_ref_Fuente_alimentacion)
-REFERENCES public.Fuente_alimentacion (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Memoria_RAM_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Memoria_RAM_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Memoria_RAM_fk FOREIGN KEY (Codigo_ref_Memoria_RAM)
-REFERENCES public.Memoria_RAM (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Grafica_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Grafica_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Grafica_fk FOREIGN KEY (Codigo_ref_Grafica)
-REFERENCES public.Grafica (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Disco_duro_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Disco_duro_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Disco_duro_fk FOREIGN KEY (Codigo_ref_Disco_duro)
-REFERENCES public.Disco_duro (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Caja_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Caja_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Caja_fk FOREIGN KEY (Codigo_ref_Caja)
-REFERENCES public.Caja (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
--- ddl-end --
-
--- object: Portatil_fk | type: CONSTRAINT --
--- ALTER TABLE public.Puntuacion DROP CONSTRAINT IF EXISTS Portatil_fk CASCADE;
-ALTER TABLE public.Puntuacion ADD CONSTRAINT Portatil_fk FOREIGN KEY (Codigo_ref_Portatil)
-REFERENCES public.Portatil (Codigo_ref) MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: Cliente_fk | type: CONSTRAINT --
@@ -502,6 +402,30 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE public.Pedido ADD CONSTRAINT Cliente_fk FOREIGN KEY (Email_Cliente)
 REFERENCES public.Cliente (Email) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: public.Carrito | type: TABLE --
+-- DROP TABLE IF EXISTS public.Carrito CASCADE;
+CREATE TABLE public.Carrito(
+	datosArticulos varchar,
+	Email_Cliente varchar NOT NULL,
+	CONSTRAINT Carrito_pk PRIMARY KEY (Email_Cliente)
+
+);
+-- ddl-end --
+ALTER TABLE public.Carrito OWNER TO postgres;
+-- ddl-end --
+
+-- object: Cliente_fk | type: CONSTRAINT --
+-- ALTER TABLE public.Carrito DROP CONSTRAINT IF EXISTS Cliente_fk CASCADE;
+ALTER TABLE public.Carrito ADD CONSTRAINT Cliente_fk FOREIGN KEY (Email_Cliente)
+REFERENCES public.Cliente (Email) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: Carrito_uq | type: CONSTRAINT --
+-- ALTER TABLE public.Carrito DROP CONSTRAINT IF EXISTS Carrito_uq CASCADE;
+ALTER TABLE public.Carrito ADD CONSTRAINT Carrito_uq UNIQUE (Email_Cliente);
 -- ddl-end --
 
 -- INSERTS -- 
@@ -519,22 +443,22 @@ INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1
 
 -- ARTICULOS -- 
 
+INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2,'/images/portatil1.png',0,'IPS',2);
+INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4,'/images/cam1.png' ,0,'HD');
+INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,'/images/torre1.png',0,'NombreTorre1');
+INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5,'/images/grafica1.jpg', 0, 3);
+INSERT INTO Procesador VALUES('Modelo5', 5, 25, 'Descripcion5', 6,'/images/cpu1.png', 0,'AM4');
+INSERT INTO Memoria_RAM VALUES('Modelo6', 6, 25, 'Descripcion6', 6,'/images/ram1.png', 0,'PN1');
+INSERT INTO Disco_duro VALUES('Modelo7', 7, 25, 'Descripcion7', 4,'/images/disco1.png', 0,'SSD');
+INSERT INTO Placa_base VALUES('Modelo8', 8, 253, 'Descripcion8', 8,'/images/placa1.png', 0,'AM4');
+INSERT INTO Fuente_alimentacion VALUES('Modelo9', 9, 25, 'Descripcion9', 3,'/images/fa1.png', 0,750,'GOLD');
+INSERT INTO Caja VALUES('Modelo10', 10, 25, 'Descripcion10', 10,'/images/caja1.png', 0, true);
+INSERT INTO Raton VALUES('Modelo11', 11, 115, 'Descripcion11', 11,'/images/raton1.png', 0, 8000,'Tipo1',0.5);
+INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12,'/images/teclado1.png', 0, 'Tipo1');
+INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11,'/images/monitor1.png', 0,24,'PN',144);
+insert into disco_duro VALUES('HDD Barracuda', 36, 19.0, 'El mejor del mercado', 10, '/images/disco1.png', 0, 'HDD');
 
-INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2,null ,0,'IPS',2);
-INSERT INTO Caja VALUES('Modelo111', 1, 25, 'Descripcion1111', 2,null ,0,true);
-INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4,null ,0,'HD');
-INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,null,0,'NombreTorre1');
-INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5,null, 0, 3);
-INSERT INTO Procesador VALUES('Modelo5', 5, 25, 'Descripcion5', 6,'/images/cpu_78933.png', 0,'AM4');
-INSERT INTO Memoria_RAM VALUES('Modelo6', 6, 25, 'Descripcion6', 6,null, 0,'PN1');
-INSERT INTO Disco_duro VALUES('Modelo7', 7, 25, 'Descripcion7', 4,'/images/hd.png', 0,'SSD');
-INSERT INTO Placa_base VALUES('Modelo8', 8, 253, 'Descripcion8', 8,'/images/placa.png', 0,'AM4');
-INSERT INTO Fuente_alimentacion VALUES('Modelo9', 9, 25, 'Descripcion9', 3,'/images/fa.png', 0,750,'GOLD');
-INSERT INTO Caja VALUES('Modelo10', 10, 25, 'Descripcion10', 10,'/images/torre.png', 0, true);
-INSERT INTO Raton VALUES('Modelo11', 11, 115, 'Descripcion11', 11,'/images/mouse_46934.png', 0, 8000,'Tipo1',0.5);
-INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12,'/images/keyboard.png', 0, 'Tipo1');
-INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11,'/images/monitor.png', 0,24,'PN',144);
-
+INSERT INTO Carrito VALUES('4-5-3-8-10','email2@email.com');
 
 INSERT INTO Pedido VALUES(100.9,'2017-03-14',0,'{3,4}','email2@email.com');
 INSERT INTO Pedido VALUES(30.75,'2017-03-14',1,'{2,1}','email2@email.com');
@@ -542,9 +466,11 @@ INSERT INTO Pedido VALUES(50,'2017-03-14',2,'{5,6}','email2@email.com');
 
 -- PUNTUACION EJEMPLO PARA GRAFICA -- 
 
-INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(4,4);
-INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(2,4);
-INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(0,4);
-INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(5,4);
-INSERT INTO Puntuacion (Nota,Codigo_ref_grafica) VALUES(3,4);
+INSERT INTO Puntuacion VALUES(4,'email2@email.com',4);
+INSERT INTO Puntuacion VALUES(2,'email2@email.com',3);
+INSERT INTO Puntuacion VALUES(3,'email2@email.com',2);
+INSERT INTO Puntuacion VALUES(5,'email2@email.com',5);
+INSERT INTO Puntuacion VALUES(1,'email2@email.com',4);
+
+
 

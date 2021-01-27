@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,119" last-zoom="0.65"
+<dbmodel pgmodeler-ver="0.9.1" last-position="193,0" last-zoom="0.7"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -466,151 +466,20 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Puntuacion">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2620" y="960"/>
+	<position x="540" y="440"/>
 	<column name="Nota" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
-
-	<customidxs object-type="column">
-		<object name="Codigo_ref_Caja" index="13"/>
-		<object name="Codigo_ref_Disco_duro" index="12"/>
-		<object name="Codigo_ref_Fuente_alimentacion" index="9"/>
-		<object name="Codigo_ref_Grafica" index="11"/>
-		<object name="Codigo_ref_Memoria_RAM" index="10"/>
-		<object name="Codigo_ref_Monitor" index="2"/>
-		<object name="Codigo_ref_PcTorre" index="6"/>
-		<object name="Codigo_ref_Placa_base" index="3"/>
-		<object name="Codigo_ref_Portatil" index="1"/>
-		<object name="Codigo_ref_Procesador" index="4"/>
-		<object name="Codigo_ref_Raton" index="8"/>
-		<object name="Codigo_ref_Teclado" index="7"/>
-		<object name="Codigo_ref_WebCam" index="5"/>
-	</customidxs>
-
-	<customidxs object-type="constraint">
-		<object name="Caja_fk" index="11"/>
-		<object name="Disco_duro_fk" index="10"/>
-		<object name="Fuente_alimentacion_fk" index="7"/>
-		<object name="Grafica_fk" index="9"/>
-		<object name="Memoria_RAM_fk" index="8"/>
-		<object name="Monitor_fk" index="0"/>
-		<object name="PcTorre_fk" index="4"/>
-		<object name="Placa_base_fk" index="1"/>
-		<object name="Portatil_fk" index="12"/>
-		<object name="Procesador_fk" index="2"/>
-		<object name="Raton_fk" index="6"/>
-		<object name="Teclado_fk" index="5"/>
-		<object name="WebCam_fk" index="3"/>
-	</customidxs>
+	<column name="Email" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="codigo_ref" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="Puntuacion_pk" type="pk-constr" table="public.&quot;Puntuacion&quot;">
+		<columns names="Email,codigo_ref" ref-type="src-columns"/>
+	</constraint>
 </table>
-
-<relationship name="Monitor_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Monitor&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Placa_base_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Placa_base&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Procesador_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Procesador&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="WebCam_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;WebCam&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="PcTorre_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;PcTorre&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Teclado_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Teclado&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Raton_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Raton&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Fuente_alimentacion_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Fuente_alimentacion&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Memoria_RAM_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Memoria_RAM&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Grafica_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Grafica&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Disco_duro_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Disco_duro&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="Caja_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Caja&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
 
 <relationship name="Portatil_herencia_Articulo" type="relgen"
 	 pk-pattern="{dt}_pk"
@@ -619,15 +488,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.&quot;Articulo&quot;">
 	<special-pk-cols indexes="1"/>
 </relationship>
-
-<relationship name="Portatil_tiene_muchos_Puntuacion" type="rel1n"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
-	 src-table="public.&quot;Portatil&quot;"
-	 dst-table="public.&quot;Puntuacion&quot;"
-	 src-required="false" dst-required="false"/>
 
 <relationship name="Cliente_tiene_muchos_Pedido" type="rel1n"
 	 src-col-pattern="{sc}_{st}"
