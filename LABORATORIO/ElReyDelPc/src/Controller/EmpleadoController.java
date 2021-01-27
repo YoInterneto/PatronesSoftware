@@ -108,6 +108,7 @@ public class EmpleadoController implements ActionListener{
                         inicio.panelEditarPerfil.setVisible(false);
                         inicio.panelCompras.setVisible(false);
                         inicio.panelEditarProducto.setVisible(false);
+                        inicio.panelInfoPedido.setVisible(false);
 
                         inicio.panelElegirProducto.setVisible(true);
                     }
@@ -130,6 +131,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelCompras.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
                 inicio.panelEditarProducto.setVisible(false);
+                inicio.panelInfoPedido.setVisible(false);
                 
                 inicio.panelInicio.setVisible(true);
             }
@@ -144,6 +146,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelCompras.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
                 inicio.panelEditarProducto.setVisible(false);
+                inicio.panelInfoPedido.setVisible(false);
                 
                 inicio.panelAnadir.setVisible(true);
                 
@@ -160,6 +163,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelCompras.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
                 inicio.panelEditarProducto.setVisible(false);
+                inicio.panelInfoPedido.setVisible(false);
                 
                 inicio.panelEditarPerfil.setVisible(true);
                 
@@ -176,6 +180,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelElegirProducto.setVisible(false);
                 inicio.panelEditarProducto.setVisible(false);
+                inicio.panelInfoPedido.setVisible(false);                
                 
                 inicio.panelCompras.setVisible(true);
                 
@@ -192,6 +197,7 @@ public class EmpleadoController implements ActionListener{
                 inicio.panelEditarPerfil.setVisible(false);
                 inicio.panelCompras.setVisible(false);
                 inicio.panelEditarProducto.setVisible(false);
+                inicio.panelInfoPedido.setVisible(false);
                 
                 inicio.panelElegirProducto.setVisible(true);
                 
@@ -205,8 +211,23 @@ public class EmpleadoController implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()) {
-                    //PARA COGER EL PEDIDO HACEMOS getAllPedidos() Y HACEMOS .GET(inicio.listaPedidos.getSelectedIndex()) DE LA LISTA
-                    System.out.println("PEDIDO SELECCIONADO "+ inicio.listaPedidos.getSelectedIndex());
+                    inicio.panelInicio.setVisible(false);
+                    inicio.panelAnadir.setVisible(false);
+                    inicio.panelEditarPerfil.setVisible(false);
+                    inicio.panelCompras.setVisible(false);
+                    inicio.panelElegirProducto.setVisible(false);
+                    inicio.panelEditarProducto.setVisible(false);
+                    
+                    inicio.panelInfoPedido.setVisible(true);
+                    
+                    Pedido pedido = consultaPedido.getAllPedidos().get(inicio.listaPedidos.getSelectedIndex());
+                    int idPedido = pedido.getIdPedido();
+                    
+                    inicio.correoInfoPedido.setText(pedido.getEmail_cliente());
+                    inicio.nPedidoInfo.setText(""+idPedido);
+                    
+                    //TODO - CARGAR LA LISTA DE ARTICULOS EN listaInfoPedido
+                    
                 }
             }
         });
@@ -221,6 +242,7 @@ public class EmpleadoController implements ActionListener{
                     inicio.panelEditarPerfil.setVisible(false);
                     inicio.panelCompras.setVisible(false);
                     inicio.panelElegirProducto.setVisible(false);
+                    inicio.panelInfoPedido.setVisible(false);
                     
                     inicio.panelEditarProducto.setVisible(true);
                     
@@ -392,6 +414,10 @@ public class EmpleadoController implements ActionListener{
         
         inicio.listaPedidos.setModel(listModel);
         inicio.listaPedidos.setCellRenderer(new ListaDinamica("Pedido"));
+    }
+    
+    public void cargarPedidoInfo(int idPedido){
+        
     }
     
     
