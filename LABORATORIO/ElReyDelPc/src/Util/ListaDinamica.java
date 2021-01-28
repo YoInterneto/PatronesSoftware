@@ -6,6 +6,7 @@
 package Util;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class ListaDinamica extends DefaultListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         JLabel renderer = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         renderer.setBorder(cellHasFocus ? focusBorder : noFocusBorder);
+        
         return renderer;
     }
 }

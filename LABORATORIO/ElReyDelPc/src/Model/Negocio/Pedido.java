@@ -5,6 +5,8 @@
  */
 package Model.Negocio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alberto
@@ -15,6 +17,34 @@ public class Pedido {
     private String fecha;
     private String email_cliente;
     private int idPedido;
+    private ArrayList<Integer> listaArticulos;
+
+    /**
+     * Get the value of listaArticulos
+     *
+     * @return the value of listaArticulos
+     */
+    public ArrayList<Integer> getListaArticulos() {
+        return listaArticulos;
+    }
+
+    /**
+     * Set the value of listaArticulos
+     *
+     * @param articulos string con los codigos de referencia de los articulos de un pedido
+     */
+    public void setListaArticulos(String articulos) {
+        ArrayList<Integer> listaFinal = new ArrayList<>();
+        
+        String[] listaCodigos = articulos.substring(1, articulos.length()-1).split(",");
+        for (String codReferencia : listaCodigos) {
+            int codigo = Integer.parseInt(codReferencia);
+            listaFinal.add(codigo);
+        }
+        
+        this.listaArticulos = listaFinal;
+    }
+
 
     /**
      * Get the value of idPedido

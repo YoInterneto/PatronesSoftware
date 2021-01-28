@@ -10,6 +10,7 @@ import Util.ListaDinamica;
 import Util.ListaDinamicaImagen;
 import Views.InicioEmpleado;
 import Views.Login;
+import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -208,6 +209,8 @@ public class EmpleadoController implements ActionListener{
                 
                 ArrayList<Articulo> listaArticulos = consultaArticulo.getAllArticulos();
                 cargarListaProductos(listaArticulos);
+                
+                setClaveBusqueda("");
             }
         });
         
@@ -226,13 +229,11 @@ public class EmpleadoController implements ActionListener{
                     inicio.panelInfoPedido.setVisible(true);
                     
                     Pedido pedido = consultaPedido.getAllPedidos().get(inicio.listaPedidos.getSelectedIndex());
-                    int idPedido = pedido.getIdPedido();
                     
                     inicio.correoInfoPedido.setText(pedido.getEmail_cliente());
-                    inicio.nPedidoInfo.setText(""+idPedido);
+                    inicio.nPedidoInfo.setText(""+ pedido.getIdPedido() +"     ["+ pedido.getFecha() +"]");
                     
-                    //TODO - CARGAR LA LISTA DE ARTICULOS EN listaInfoPedido
-                    
+                    cargarPedidoInfo(pedido);
                 }
             }
         });
@@ -401,7 +402,6 @@ public class EmpleadoController implements ActionListener{
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
-        //ArrayList<Articulo> lista = consultaArticulo.getAllArticulos();
 
         for(int i=0; i<lista.size(); i++){
             Articulo articulo = lista.get(i);
@@ -446,12 +446,42 @@ public class EmpleadoController implements ActionListener{
     }
     
     /**
-     * Carga la información referente a un artículo previamente seleccionado por el usuario en el jList
+     * Carga la información referente todos los arículos de un pedido en concreto
      *
-     * @param idPedido número de pedido seleccionado
+     * @param pedido
      */
-    public void cargarPedidoInfo(int idPedido){
+    public void cargarPedidoInfo(Pedido pedido){
+        DefaultListModel listModel = new DefaultListModel();
         
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+        
+        ArrayList<Integer> listaCodigos = pedido.getListaArticulos();
+        
+        ArrayList<Articulo> listaCompras = new ArrayList<>();
+        for(int i=0; i< listaCodigos.size(); i++){
+            listaCompras.add(consultaArticulo.getArticulo(listaCodigos.get(i)));
+        }
+        
+        for(int i=0; i<listaCompras.size(); i++){
+            Articulo articulo = listaCompras.get(i);
+            int codigoReferencia = articulo.getCodigo_ref();
+            String articuloInfo = "  CodRef-"+ String.format("%04d", codigoReferencia) +" \t"+ articulo.getModelo() +" \tPrecio-"+ articulo.getPrecio();
+            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+
+            listaInfo.add(articuloInfo);
+            if(articulo.getRutaImagen() == null){
+                listaRuta.add("/images/error.png");
+            }
+            else{
+                listaRuta.add(articulo.getRutaImagen());
+            }
+
+            listModel.add(i, articuloInfo);
+        }
+
+        inicio.listaInfoPedido.setModel(listModel);
+        inicio.listaInfoPedido.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
     }
     
     
@@ -480,6 +510,15 @@ public class EmpleadoController implements ActionListener{
         inicio.provinciaTienda.setText(tienda.getProvincia());
         
         inicio.barraBusqueda.setEditable(true);
+        
+        inicio.panelEditarPerfil.setVisible(false);
+        inicio.panelCompras.setVisible(false);
+        inicio.panelElegirProducto.setVisible(false);
+        inicio.panelEditarProducto.setVisible(false);
+        inicio.panelInfoPedido.setVisible(false);
+        inicio.panelAnadir.setVisible(false);
+        
+        inicio.panelInicio.setVisible(true);
     }
     
     /**
@@ -801,7 +840,7 @@ public class EmpleadoController implements ActionListener{
                         case "Torre":
                             String nombre = inicio.atributo1Anadir.getText();
 
-                            exito = consultaTorre.anadirTorre(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, nombre);
+                            exito = consultaTorre.anadirTorre(modelo, codigoReferncia, precio, descripcion, stock, rutaImagen, idTienda, nombre, false);
                             break;
                         case "Placa base":
                             String socketPlaca = inicio.atributo1Anadir.getText();

@@ -2,6 +2,7 @@
 package Util;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class ListaDinamicaImagen extends DefaultListCellRenderer {
             java.net.URL imgURL = getClass().getResource(rutaImagen.get(i));
             if(imgURL == null){
                 map.put(informacion.get(i), new ImageIcon(
-                    getClass().getResource("/images/fa.png"))); //PONER IMAGEN POR DEFECTO
+                    getClass().getResource("/images/error.png"))); //PONER IMAGEN POR DEFECTO
             }
             else{
                 map.put(informacion.get(i), new ImageIcon(
@@ -52,6 +53,7 @@ public class ListaDinamicaImagen extends DefaultListCellRenderer {
         JLabel renderer = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         renderer.setIcon(imageMap.get((String)value));
         renderer.setBorder(cellHasFocus ? focusBorder : noFocusBorder);
+        
         return renderer;
     }
 }

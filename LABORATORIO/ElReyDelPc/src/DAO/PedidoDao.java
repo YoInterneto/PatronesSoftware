@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Negocio.Pedido;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ public class PedidoDao {
                 pedido.setIdPedido(resultado.getInt("id"));
                 pedido.setFecha(resultado.getString("fecha"));
                 pedido.setPrecio_total(resultado.getFloat("precio_total"));
+                pedido.setListaArticulos(resultado.getString("codigos"));
 
                 listaPedidos.add(pedido);
             }
@@ -70,8 +72,8 @@ public class PedidoDao {
                 pedido.setIdPedido(resultado.getInt("id"));
                 pedido.setFecha(resultado.getString("fecha"));
                 pedido.setPrecio_total(resultado.getInt("precio_total"));
+                pedido.setListaArticulos(resultado.getString("codigos"));
             }
-
         } catch (SQLException error) {
             Log.logBd.error("ERROR SQL en getPedido(): " + error);
             Log.logBd.error("              SQL State - " + error.getSQLState());

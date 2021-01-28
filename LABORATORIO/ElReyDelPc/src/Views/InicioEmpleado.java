@@ -191,12 +191,14 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMinimumSize(new java.awt.Dimension(1200, 750));
         setResizable(false);
         setSize(new java.awt.Dimension(1200, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
@@ -241,6 +243,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         panelLateral.setBackground(new java.awt.Color(153, 153, 153));
         panelLateral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelLateral.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelLateral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
@@ -257,6 +260,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
         btnBuscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.setPreferredSize(new java.awt.Dimension(32, 32));
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -270,6 +274,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnCompras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Carrito.png"))); // NOI18N
         btnCompras.setText(" Ver compras");
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelLateral.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 230, 60));
 
         btnPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -277,6 +282,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnPerfil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfil.png"))); // NOI18N
         btnPerfil.setText("Perfil");
+        btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPerfilMouseClicked(evt);
@@ -289,6 +295,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnEditarPerfil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnEditarPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
         btnEditarPerfil.setText(" Editar perfil");
+        btnEditarPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditarPerfilMouseClicked(evt);
@@ -301,6 +308,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnAnnadir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAnnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/anadir.png"))); // NOI18N
         btnAnnadir.setText(" Añadir artículo");
+        btnAnnadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelLateral.add(btnAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 230, 60));
 
         btnEditarArticulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -308,6 +316,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnEditarArticulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnEditarArticulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ajustes.png"))); // NOI18N
         btnEditarArticulo.setText(" Editar artículo");
+        btnEditarArticulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelLateral.add(btnEditarArticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 230, 70));
 
         jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
@@ -331,6 +340,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CerrarSesion.png"))); // NOI18N
         btnCerrar.setText("Cerrar sesion");
         btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelLateral.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 220, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -340,6 +350,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 250, 760));
 
         panelInicio.setBackground(new java.awt.Color(51, 51, 51));
+        panelInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelInicioInfo.setBackground(new java.awt.Color(51, 51, 51));
@@ -532,6 +543,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 680));
 
         panelEditarPerfil.setBackground(new java.awt.Color(51, 51, 51));
+        panelEditarPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelEditarPerfil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         infoPanelProductos.setBackground(new java.awt.Color(51, 51, 51));
@@ -557,6 +569,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         tituloUsuarioId.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         tituloUsuarioId.setForeground(new java.awt.Color(255, 255, 255));
@@ -627,6 +640,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jLabel31.setText("Repita contraseña");
 
         btnEditarDatos.setText("Editar");
+        btnEditarDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarDatosActionPerformed(evt);
@@ -712,6 +726,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelEditarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelCompras.setBackground(new java.awt.Color(51, 51, 51));
+        panelCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaPedidos.setBackground(new java.awt.Color(51, 51, 51));
@@ -722,9 +737,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(listaPedidos);
 
-        panelCompras.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 820, 450));
+        panelCompras.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 820, 410));
 
         infoPanelCompras.setBackground(new java.awt.Color(51, 51, 51));
         infoPanelCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -750,6 +766,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelAnadir.setBackground(new java.awt.Color(51, 51, 51));
+        panelAnadir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelAnadir.setPreferredSize(new java.awt.Dimension(960, 620));
         panelAnadir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -776,6 +793,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(51, 51, 51));
 
+        tipoArticuloAnadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tipoArticuloAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoArticuloAnadirActionPerformed(evt);
@@ -871,6 +889,12 @@ public class InicioEmpleado extends javax.swing.JFrame {
         atributo3Anadir.setText("nadaDeNada");
 
         btnAnadirNuevoArticulo.setText("Añadir artículo");
+        btnAnadirNuevoArticulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnadirNuevoArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirNuevoArticuloActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -953,6 +977,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelElegirProducto.setBackground(new java.awt.Color(51, 51, 51));
+        panelElegirProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelElegirProducto.setPreferredSize(new java.awt.Dimension(960, 620));
         panelElegirProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -985,6 +1010,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane2.setViewportView(listaProductos);
 
         panelElegirProducto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 800, 450));
@@ -992,6 +1018,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelElegirProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelEditarProducto.setBackground(new java.awt.Color(51, 51, 51));
+        panelEditarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelEditarProducto.setPreferredSize(new java.awt.Dimension(960, 620));
         panelEditarProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1067,6 +1094,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jScrollPane3.setViewportView(descripcionEdit);
 
         btnEditarProducto.setText("Editar");
+        btnEditarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProductoActionPerformed(evt);
@@ -1074,6 +1102,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         });
 
         btnBorrarProducto.setText("Borrar");
+        btnBorrarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBorrarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarProductoActionPerformed(evt);
@@ -1146,6 +1175,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         getContentPane().add(panelEditarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
         panelInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
+        panelInfoPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelInfoPedido.setPreferredSize(new java.awt.Dimension(960, 620));
         panelInfoPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1206,8 +1236,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nPedidoInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
         );
         jPanel11Layout.setVerticalGroup(
@@ -1275,6 +1305,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private void btnBorrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBorrarProductoActionPerformed
+
+    private void btnAnadirNuevoArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirNuevoArticuloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnadirNuevoArticuloActionPerformed
 
     /**
      * @param args the command line arguments

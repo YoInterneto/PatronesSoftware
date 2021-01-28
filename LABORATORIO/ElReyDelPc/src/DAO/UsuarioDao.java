@@ -124,11 +124,15 @@ public class UsuarioDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - darAltaUsuario()");
             Statement s = conexion.createStatement();
+            //Insertamos al usuario
             int codigo = s.executeUpdate("INSERT INTO cliente VALUES('"+ nombre +"', '"+ apellido +"', '"+ email +"', '"
             + direccion +"', "+ telefono +", '"+ pass +"', "+ idTienda +", '"+ tarjeta +"');");
             Log.logBd.info("Realizada consulta - darAltaUsuario()");
             
-            if(codigo > 0){
+            //Creamos el carrito del nuevo usuario
+            int codigo1 = s.executeUpdate("INSERT INTO carrito(email_cliente) VALUES('"+ email +"');");
+            
+            if(codigo > 0 && codigo1 > 0){
                 correcto = true;
             }
             
