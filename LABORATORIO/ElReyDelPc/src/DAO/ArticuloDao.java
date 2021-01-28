@@ -2,7 +2,6 @@
 package DAO;
 
 import Model.Articulos.*;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -127,18 +126,21 @@ public class ArticuloDao {
                 ResultSet rs = s.executeQuery("select * from articulo order by codigo_ref ASC;");
                 Log.logBd.info("CONSULTA getAllArticulos");
                 
-                while (rs.next()) {                	
-                	
-                    Articulo articulo = new Articulo();
+                while (rs.next()) {       
+                    String modelo = rs.getString("Modelo").toLowerCase();
+                    //Añade todos los artículos del catálogo excepto los pc montados por cliente
+                    if(!modelo.contains("custom-")){
+                        Articulo articulo = new Articulo();
                   
-                    articulo.setCodigo_ref(rs.getInt("Codigo_ref"));
-                    articulo.setDescripcion(rs.getString("Descripcion"));
-                    articulo.setModelo(rs.getString("Modelo"));
-                    articulo.setPrecio(rs.getFloat("Precio"));
-                    articulo.setRutaImagen(rs.getString("RutaImagen"));
-                    articulo.setStock(rs.getInt("Stock"));
-                    
-                    articulodb.add(articulo);
+                        articulo.setCodigo_ref(rs.getInt("Codigo_ref"));
+                        articulo.setDescripcion(rs.getString("Descripcion"));
+                        articulo.setModelo(rs.getString("Modelo"));
+                        articulo.setPrecio(rs.getFloat("Precio"));
+                        articulo.setRutaImagen(rs.getString("RutaImagen"));
+                        articulo.setStock(rs.getInt("Stock"));
+
+                        articulodb.add(articulo);
+                    }
                 }               
             } catch (SQLException error) {
                 Log.logBd.error("ERROR SQL en getAllArticulos(): " + error);
@@ -295,7 +297,7 @@ public class ArticuloDao {
                 int busqueda = modelo.indexOf(palabraClave.toLowerCase());
                 
                 //Si se ha encontrado la palabra clave añadimos el artículo
-                if(busqueda != -1) {
+                if(busqueda != -1 && !modelo.contains("custom-")) {
                     Articulo articulo = new Articulo();
                     articulo.setModelo(modelo);
                     articulo.setCodigo_ref(resultado.getInt("codigo_ref"));

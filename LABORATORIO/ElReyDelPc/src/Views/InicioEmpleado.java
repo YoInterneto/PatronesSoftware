@@ -5,6 +5,8 @@
  */
 package Views;
 
+import Controller.LoginController;
+
 /**
  *
  * @author Alberto
@@ -189,12 +191,20 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         jLabel35.setText("jLabel35");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMinimumSize(new java.awt.Dimension(1200, 750));
         setResizable(false);
         setSize(new java.awt.Dimension(1200, 750));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -1307,8 +1317,21 @@ public class InicioEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBorrarProductoActionPerformed
 
     private void btnAnadirNuevoArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirNuevoArticuloActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnAnadirNuevoArticuloActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Login loginVista = new Login();
+        LoginController login = new LoginController(loginVista);
+        
+        this.setVisible(false);
+        login.iniciar();
+        loginVista.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
