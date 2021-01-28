@@ -567,6 +567,7 @@ public class ClienteController implements ActionListener {
                                 .withNombre("Custom-PC-" + nuevoCod)
                                 .build();
 
+                        daoPctorre.insertarTorreCustom(pc);
                         int codPedido = daoPedido.getIdPedidoMax() + 1;
                         boolean hecho = daoPedido.hacerPedidoCustom(pc, codPedido, cliente.getEmail());
 
@@ -602,7 +603,8 @@ public class ClienteController implements ActionListener {
 
                             }
                         }
-
+                        resetValuesBox();
+                        iniciarPanelMontar();
                     } else {
                         JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Mensaje", JOptionPane.DEFAULT_OPTION);
                     }
