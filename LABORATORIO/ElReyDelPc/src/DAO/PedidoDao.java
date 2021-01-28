@@ -5,8 +5,8 @@
  */
 package DAO;
 
+import Model.Articulos.PcTorre;
 import Model.Negocio.Pedido;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,7 +52,7 @@ public class PedidoDao {
             Log.logBd.error("                  SQL State - " + error.getSQLState());
             Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
         }
-        
+
         Log.logBd.info("Consulta realizada con éxito - getAllPedidos()");
         return listaPedidos;
     }
@@ -123,6 +123,15 @@ public class PedidoDao {
         return hecho;
     }
 
+    /**
+     * Inserta un nuevo pedido en la base de datos con los parametros dados.
+     *
+     * @param codigoRef
+     * @param precio
+     * @param email
+     * @param idPedido
+     * @return
+     */
     public boolean hacerPedido(int codigoRef, String precio, String email, int idPedido) {
         boolean hecho = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -133,7 +142,7 @@ public class PedidoDao {
             conexion = Conexion.getConexion();
             Log.logBd.info("Realizada conexion - hacerPedido()");
             Statement s = conexion.createStatement();
-            
+
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + Float.parseFloat(precio) + " ,'"
                     + formatter.format(date) + "'," + idPedido + ",'{" + codigoRef + "}','" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedido()");
@@ -179,6 +188,33 @@ public class PedidoDao {
 
         Log.logBd.info("Consulta realizada con éxito - getIdPedidoMax()");
         return idMax;
+    }
+
+    public boolean hacerPedidoCustom(PcTorre torre,int idPedido, String email) {
+        boolean hecho = false;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        Log.logBd.info("CONSULTA hacerPedidoCustom");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - hacerPedidoCustom()");
+            Statement s = conexion.createStatement();
+
+            int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + torre.getPrecio() + " ,'"
+                    + formatter.format(date) + "'," + idPedido + ",'{" + torre.getCodigo_ref() + "}','" + email + "');");
+            Log.logBd.info("Realizada consulta - hacerPedidoCustom()");
+
+            if (codigo > 0) {
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - hacerPedidoCustom()");
+            }
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en hacerPedidoCustom(): " + error);
+            Log.logBd.error("              SQL State - " + error.getSQLState());
+            Log.logBd.error("              ErrorCode - " + error.getErrorCode());
+        }
+
+        return hecho;
     }
 
 }

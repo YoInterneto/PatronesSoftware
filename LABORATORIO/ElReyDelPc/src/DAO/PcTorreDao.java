@@ -83,8 +83,10 @@ public class PcTorreDao {
                     torre.setNombre(rs.getString("Nombre"));
                     torre.setStock(rs.getInt("Stock"));
                     torre.setCreado(rs.getBoolean("Creado"));
+                    if (!rs.getBoolean("Creado")){
+                        portatildb.add(torre);
+                    }
                     
-                    portatildb.add(torre);
                 }               
             } catch (SQLException error) {
                 Log.logBd.error("ERROR SQL en getAllPcTorre: " + error);
@@ -132,4 +134,29 @@ public class PcTorreDao {
         
         return hecho;
     }
+    
+    public boolean insertarTorreCustom(PcTorre pc){
+        boolean hecho = false;
+        
+        try {
+            Log.logBd.info("CONSULTA insertarTorreCustom");
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - insertarTorreCustom()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("INSERT into pctorre VALUES('"+ pc.getModelo() +"', "+ pc.getCodigo_ref() +", "+ pc.getPrecio() +", '"+ pc.getDescripcion() +"', "+ 
+                    pc.getStock() +", '"+ pc.getRutaImagen() +"', "+ pc.getID_Tienda() +", '"+ pc.getNombre() +"', "+pc.isCreado()+ ");");          
+        
+            if(codigo>0){
+                hecho = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en insertarTorreCustom(): " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
+    
 }

@@ -172,9 +172,10 @@ public class InicioCliente extends javax.swing.JFrame {
         nombreAtributo3 = new javax.swing.JLabel();
         atrParticular3 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        descripcion = new javax.swing.JLabel();
         btnComprarProducto = new javax.swing.JButton();
         insertarCesta = new javax.swing.JButton();
+        descripcion1 = new javax.swing.JScrollPane();
+        descripcion = new javax.swing.JTextPane();
         imgProducto = new javax.swing.JLabel();
         puntuacion2 = new javax.swing.JButton();
         puntuacion3 = new javax.swing.JButton();
@@ -840,21 +841,21 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Caracteristicas:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Modelo");
 
         datoModelo.setForeground(new java.awt.Color(204, 204, 204));
         datoModelo.setText("jLabel7");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Stock");
 
         datoStock.setForeground(new java.awt.Color(204, 204, 204));
         datoStock.setText("jLabel9");
 
-        nombreAtributo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nombreAtributo1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         nombreAtributo1.setForeground(new java.awt.Color(255, 255, 255));
         nombreAtributo1.setText("AtributoParticular*");
         nombreAtributo1.setVisible(false);
@@ -863,7 +864,7 @@ public class InicioCliente extends javax.swing.JFrame {
         atrParticular1.setText("jLabel9");
         atrParticular1.setVisible(false);
 
-        nombreAtributo2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nombreAtributo2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         nombreAtributo2.setForeground(new java.awt.Color(255, 255, 255));
         nombreAtributo2.setText("AtributoParticular*");
         nombreAtributo2.setVisible(false);
@@ -872,7 +873,7 @@ public class InicioCliente extends javax.swing.JFrame {
         atrParticular2.setText("jLabel11");
         atrParticular2.setVisible(false);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Precio");
 
@@ -880,14 +881,14 @@ public class InicioCliente extends javax.swing.JFrame {
         precio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         precio.setText("jLabel10");
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Codigo referencia");
 
         codigo_ref.setForeground(new java.awt.Color(204, 204, 204));
         codigo_ref.setText("jLabel14");
 
-        nombreAtributo3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nombreAtributo3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         nombreAtributo3.setForeground(new java.awt.Color(255, 255, 255));
         nombreAtributo3.setText("AtributoParticular*");
         nombreAtributo3.setVisible(false);
@@ -896,12 +897,9 @@ public class InicioCliente extends javax.swing.JFrame {
         atrParticular3.setText("jLabel18");
         atrParticular3.setVisible(false);
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("Descripcion");
-
-        descripcion.setForeground(new java.awt.Color(204, 204, 204));
-        descripcion.setText("jLabel20");
 
         btnComprarProducto.setText("Comprar");
         btnComprarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -910,6 +908,19 @@ public class InicioCliente extends javax.swing.JFrame {
         insertarCesta.setText("Cesta");
         insertarCesta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         insertarCesta.setFocusPainted(false);
+
+        descripcion1.setBackground(new java.awt.Color(51, 51, 51));
+        descripcion1.setForeground(new java.awt.Color(51, 51, 51));
+        descripcion1.setOpaque(false);
+
+        descripcion.setEditable(false);
+        descripcion.setBackground(new java.awt.Color(51, 51, 51));
+        descripcion.setForeground(new java.awt.Color(51, 51, 51));
+        descripcion.setCaretColor(new java.awt.Color(51, 51, 51));
+        descripcion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        descripcion.setOpaque(false);
+        descripcion.setSelectedTextColor(new java.awt.Color(51, 51, 51));
+        descripcion1.setViewportView(descripcion);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -944,17 +955,17 @@ public class InicioCliente extends javax.swing.JFrame {
                                         .addComponent(btnComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(insertarCesta, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(descripcion1)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -982,7 +993,7 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descripcion1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1282,7 +1293,8 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel datoStock;
     public javax.swing.JTextField datoTarjeta;
     public javax.swing.JTextField datoTelefono;
-    public javax.swing.JLabel descripcion;
+    public javax.swing.JTextPane descripcion;
+    public javax.swing.JScrollPane descripcion1;
     public javax.swing.JLabel disco;
     public javax.swing.JComboBox<String> discoBox;
     public javax.swing.JButton eliminaTodoCarro;
