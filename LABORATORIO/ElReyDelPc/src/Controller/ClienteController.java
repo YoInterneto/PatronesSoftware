@@ -532,24 +532,31 @@ public class ClienteController implements ActionListener {
 
                         int codPlaca = Integer.parseInt(codigoPlaca);
                         Placa_base placa = daoPlaca.getPlaca_base(codPlaca);
+                        consultaArticulo.actualizarStock(codPlaca, placa.getStock() - 1);
 
                         int codGrafica2 = Integer.parseInt(codGrafica);
                         Grafica grafica = daoGrafica.getGrafica(codGrafica2);
+                        consultaArticulo.actualizarStock(codGrafica2, grafica.getStock() - 1);
 
                         int codFuente2 = Integer.parseInt(codFuente);
                         Fuente_alimentacion fuente = daoFuente.getFuente(codFuente2);
+                        consultaArticulo.actualizarStock(codFuente2, fuente.getStock() - 1);
 
                         int codCaja2 = Integer.parseInt(codCaja);
                         Caja caja = daoCaja.getCaja(codCaja2);
+                        consultaArticulo.actualizarStock(codCaja2, caja.getStock() - 1);
 
                         int codRam2 = Integer.parseInt(codRam);
                         Memoria_RAM ram = daoRam.getMemoria_RAM(codRam2);
+                        consultaArticulo.actualizarStock(codRam2, ram.getStock() - 1);
 
                         int codCpu2 = Integer.parseInt(codCpu);
                         Procesador cpu = daoCpu.getProcesador(codCpu2);
+                        consultaArticulo.actualizarStock(codCpu2, cpu.getStock() - 1);
 
                         int codDisco2 = Integer.parseInt(codDisco);
                         Disco_duro disco = daoDisco.getDisco_duro(codDisco2);
+                        consultaArticulo.actualizarStock(codDisco2, disco.getStock() - 1);
 
                         int nuevoCod = consultaArticulo.getCodRefMax() + 1;
                         float precioTorre = placa.getPrecio() + grafica.getPrecio() + fuente.getPrecio()
@@ -567,7 +574,7 @@ public class ClienteController implements ActionListener {
                                 .withPrecio(precioTorre)
                                 .withNombre("Custom-PC-" + nuevoCod)
                                 .build();
-
+                        
                         daoPctorre.insertarTorreCustom(pc);
                         int codPedido = daoPedido.getIdPedidoMax() + 1;
                         boolean hecho = daoPedido.hacerPedidoCustom(pc, codPedido, cliente.getEmail());
@@ -582,15 +589,24 @@ public class ClienteController implements ActionListener {
                         ArrayList<Integer> extras = new ArrayList<>();
                         String codTeclado = client.tecladoBox.getSelectedItem().toString().split("-")[0];
                         if (!(codTeclado.equals("Seleccione"))) {
-                            extras.add(Integer.parseInt(codTeclado));
+                            int codTeclado2 = Integer.parseInt(codTeclado);
+                            Teclado teclado = daoTeclado.getTeclado(codTeclado2);
+                            extras.add(codTeclado2);
+                            consultaArticulo.actualizarStock(codTeclado2, teclado.getStock() - 1);
                         }
                         String codRaton = client.ratonBox.getSelectedItem().toString().split("-")[0];
                         if (!(codRaton.equals("Seleccione"))) {
-                            extras.add(Integer.parseInt(codRaton));
+                            int codRaton2 = Integer.parseInt(codRaton);
+                            Raton raton = daoRaton.getRaton(codRaton2);
+                            extras.add(codRaton2);
+                            consultaArticulo.actualizarStock(codRaton2, raton.getStock() - 1);
                         }
-                        String cam = client.camBox.getSelectedItem().toString().split("-")[0];
-                        if (!(cam.equals("Seleccione"))) {
-                            extras.add(Integer.parseInt(cam));
+                        String codCam = client.camBox.getSelectedItem().toString().split("-")[0];
+                        if (!(codCam.equals("Seleccione"))) {
+                            int codWebcam = Integer.parseInt(codCam);
+                            WebCam cam = daoCam.getWebcam(codWebcam);
+                            extras.add(codWebcam);
+                            consultaArticulo.actualizarStock(codWebcam, cam.getStock() - 1);
                         }
 
                         if (extras.size() != 0) {
