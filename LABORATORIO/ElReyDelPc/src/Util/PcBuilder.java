@@ -21,10 +21,14 @@ public class PcBuilder implements IBuilder{
     private Caja caja;
     private String nombre;
     private boolean creado;
+    private float precio;
+    private int idTienda;
+    private int codigo;
     
-    public PcBuilder(String nombre,boolean creado){
+    public PcBuilder(boolean creado,int codigo,int idTienda){
         this.creado = creado;
-        this.nombre = nombre;
+        this.codigo = codigo;
+        this.idTienda = idTienda;
     }
     
     public PcBuilder withCpu(Procesador cpu){
@@ -72,12 +76,21 @@ public class PcBuilder implements IBuilder{
         return this;
     }
     
+    public PcBuilder withPrecio(float precio){
+        this.precio = precio;
+        return this;
+    }
+    
     @Override
     public PcTorre build() {
         
         PcTorre pc = new PcTorre();
         pc.setNombre(this.nombre);
+        pc.setID_Tienda(this.idTienda);
         pc.setCreado(this.creado);
+        pc.setPrecio(this.precio);
+        pc.setModelo("Custom-"+this.codigo);
+        pc.setCodigo_ref(this.codigo);
         pc.setDescripcion(this.cpu.getModelo() + "\n" + this.placa.getModelo() + 
                 "\n" + this.ram.getModelo() + "\n" + this.grafica.getModelo() + 
                 "\n" + this.disco.getModelo() + "\n" + this.fuente.getModelo() + 

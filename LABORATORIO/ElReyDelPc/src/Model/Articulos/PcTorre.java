@@ -49,7 +49,7 @@ public class PcTorre extends Articulo{
     
     @Override
     public String toString() {
-        return "PcTorre{" + "Nombre=" + Nombre + "Descripcion="+super.getDescripcion()+'}';
+        return "PcTorre{" + "Nombre=" + Nombre + " Descripcion="+super.getDescripcion()+'}';
     }
     
     

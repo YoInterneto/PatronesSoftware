@@ -1,5 +1,7 @@
 package Views;
 
+import Controller.LoginController;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -210,8 +212,13 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         datoDireccion = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -735,15 +742,15 @@ public class InicioCliente extends javax.swing.JFrame {
 
         panelMonta.add(camBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 180, -1));
 
-        montaYcompra.setText("Crear y comprar");
+        montaYcompra.setText("Montar y comprar");
         montaYcompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         montaYcompra.setFocusPainted(false);
-        panelMonta.add(montaYcompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 130, -1));
+        panelMonta.add(montaYcompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 150, -1));
 
-        montaYguarda.setText("Crear y guardar");
+        montaYguarda.setText("Guarda productos");
         montaYguarda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         montaYguarda.setFocusPainted(false);
-        panelMonta.add(montaYguarda, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 130, 30));
+        panelMonta.add(montaYguarda, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 350, 150, 30));
 
         jSeparator22.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator22.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -1190,6 +1197,16 @@ public class InicioCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        Login loginVista = new Login();
+        LoginController login = new LoginController(loginVista);
+
+        this.setVisible(false);
+        login.iniciar();
+        loginVista.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

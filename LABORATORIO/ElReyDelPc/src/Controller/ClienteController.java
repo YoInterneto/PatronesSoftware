@@ -46,7 +46,7 @@ public class ClienteController implements ActionListener {
     private final UsuarioDao daoUser;
     private final PedidoDao daoPedido;
     private final EvaluacionDao daoEvaluacion;
-    
+
     private String claveBusqueda;
     private String tipo;
 
@@ -82,13 +82,13 @@ public class ClienteController implements ActionListener {
         this.client.btnBuscar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               if(!client.textoBusqueda.getText().equalsIgnoreCase("")){
+                if (!client.textoBusqueda.getText().equalsIgnoreCase("")) {
                     String clave = client.textoBusqueda.getText();
                     ArrayList<Articulo> listaArticulos = consultaArticulo.buscarArticuloPalabraClave(clave);
                     ArrayList<Integer> listaCodigos = new ArrayList<>();
                     //Si la lista de los articulos con la clave de busqueda no es vacia, es decir, se ha encontrado algun
                     //articulo, cargamos la lista de los articulos
-                    if(listaArticulos.size() > 0){
+                    if (listaArticulos.size() > 0) {
                         setClaveBusqueda(clave);
                         for (int i = 0; i < listaArticulos.size(); i++) {
                             listaCodigos.add(listaArticulos.get(i).getCodigo_ref());
@@ -101,14 +101,12 @@ public class ClienteController implements ActionListener {
                         client.panelArticulo.setVisible(false);
                         client.panelElegirProducto.setVisible(true);
                         resetValuesBox();
-                        cargarListaProductos(listaCodigos); 
+                        cargarListaProductos(listaCodigos);
                         tipo = "";
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR: No se ha encontrado nigún artículo con la clave - " + clave + ".");
                     }
-                    else{
-                        JOptionPane.showMessageDialog(null, "ERROR: No se ha encontrado nigún artículo con la clave - "+ clave +".");
-                    }
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "ERROR: Introduzca la clave de búsqueda.");
                 }
             }
@@ -450,45 +448,111 @@ public class ClienteController implements ActionListener {
                 calculaPrecioMontaje();
             }
         });
-        
+
         this.client.montaYguarda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PcBuilder builder = new PcBuilder("Prueba",true);
-                
-                Placa_base placa = new Placa_base();
-                placa.setModelo("modelo placa");
-                
-                Grafica g = new Grafica();
-                g.setModelo("modelo grafica");
-                
-                Fuente_alimentacion fuente = new Fuente_alimentacion();
-                fuente.setModelo("modeloFuente");
-                
-                Caja caja = new Caja();
-                caja.setModelo("modeloCAJA");
-                
-                Memoria_RAM ram = new Memoria_RAM();
-                ram.setModelo("modeloRam");
-                
-                Procesador cpu = new Procesador();
-                cpu.setModelo("modelcpu");
-                
-                Disco_duro disco = new Disco_duro();
-                disco.setModelo("modeloDisco");
-                
-                PcTorre pc = builder.withCpu(cpu)
-                        .withCaja(caja)
-                        .withPlaca(placa)
-                        .withGrafica(g)
-                        .withDisco(disco)
-                        .withFuente(fuente)
-                        .withRam(ram)
-                        .build();
-                
-                System.out.println(pc.toString());
-                
-            } 
+                try {
+
+                    String codigoPlaca = client.placaBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codigoPlaca);
+
+                    String codGrafica = client.graficaBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codGrafica);
+
+                    String codFuente = client.fuenteBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codFuente);
+
+                    String codCaja = client.cajaBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codCaja);
+
+                    String codRam = client.ramBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codRam);
+
+                    String codCpu = client.cpuBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codCpu);
+
+                    String codDisco = client.discoBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codDisco);
+                    
+                    String codTeclado = client.tecladoBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codTeclado);
+                    
+                    String codRaton = client.ratonBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(codRaton);
+                    
+                    String cam = client.camBox.getSelectedItem().toString().split("-")[0];
+                    meterCarro(cam);
+
+                } catch (Exception ex) {
+                    Log.log.error("Error en crear y guardar pc " + ex);
+                }
+
+            }
+        });
+        this.client.montaYcompra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    String codigoPlaca = client.placaBox.getSelectedItem().toString().split("-")[0];
+                    int codPlaca = Integer.parseInt(codigoPlaca);
+                    Placa_base placa = daoPlaca.getPlaca_base(codPlaca);
+
+                    String codGrafica = client.graficaBox.getSelectedItem().toString().split("-")[0];
+                    int codGrafica2 = Integer.parseInt(codGrafica);
+                    Grafica grafica = daoGrafica.getGrafica(codGrafica2);
+
+                    String codFuente = client.fuenteBox.getSelectedItem().toString().split("-")[0];
+                    int codFuente2 = Integer.parseInt(codFuente);
+                    Fuente_alimentacion fuente = daoFuente.getFuente(codFuente2);
+
+                    String codCaja = client.cajaBox.getSelectedItem().toString().split("-")[0];
+                    int codCaja2 = Integer.parseInt(codCaja);
+                    Caja caja = daoCaja.getCaja(codCaja2);
+
+                    String codRam = client.ramBox.getSelectedItem().toString().split("-")[0];
+                    int codRam2 = Integer.parseInt(codRam);
+                    Memoria_RAM ram = daoRam.getMemoria_RAM(codRam2);
+
+                    String codCpu = client.cpuBox.getSelectedItem().toString().split("-")[0];
+                    int codCpu2 = Integer.parseInt(codCpu);
+                    Procesador cpu = daoCpu.getProcesador(codCpu2);
+
+                    String codDisco = client.discoBox.getSelectedItem().toString().split("-")[0];
+                    int codDisco2 = Integer.parseInt(codDisco);
+                    Disco_duro disco = daoDisco.getDisco_duro(codDisco2);
+                    
+                    String codTeclado = client.tecladoBox.getSelectedItem().toString().split("-")[0];
+                    //meterCarro(codTeclado);
+                    
+                    String codRaton = client.ratonBox.getSelectedItem().toString().split("-")[0];
+                    //meterCarro(codRaton);
+                    
+                    String cam = client.camBox.getSelectedItem().toString().split("-")[0];
+                    //meterCarro(cam);
+
+                    int nuevoCod = consultaArticulo.getCodRefMax();
+                    float precio = Float.parseFloat(client.precioTotalPc.getText());
+
+                    PcBuilder builder = new PcBuilder(true, nuevoCod, 0);
+                    PcTorre pc = builder
+                            .withCpu(cpu)
+                            .withCaja(caja)
+                            .withPlaca(placa)
+                            .withGrafica(grafica)
+                            .withDisco(disco)
+                            .withFuente(fuente)
+                            .withRam(ram)
+                            .withPrecio(precio)
+                            .withNombre("Custom PC " + nuevoCod)
+                            .build();
+
+                    System.out.println(pc.toString());
+                } catch (Exception ex) {
+                    Log.log.error("Error en crear y guardar pc " + ex);
+                }
+            }
         });
 
         //Listener lista producto elegido en panel articulo
@@ -563,7 +627,7 @@ public class ClienteController implements ActionListener {
                                 break;
                             default:
                                 Articulo articulo = consultaArticulo.getArticulo(codigo);
-                                iniciarPanelProducto(getClaveBusqueda(),articulo);           
+                                iniciarPanelProducto(getClaveBusqueda(), articulo);
                         }
                     } catch (NumberFormatException ex) {
                         Log.log.error("Error en listaProductos " + ex);
@@ -587,7 +651,7 @@ public class ClienteController implements ActionListener {
                             boolean hecho = daoPedido.hacerPedido(codigo, client.precio.getText(), cliente.getEmail(), nuevoIdPedido);
 
                             //Actualizar stock
-                            consultaArticulo.actualizarStock(codigo, stock-1);
+                            consultaArticulo.actualizarStock(codigo, stock - 1);
                             client.datoStock.setText(String.valueOf(stock - 1));
                             if (hecho) {
                                 JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
@@ -779,26 +843,16 @@ public class ClienteController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
-                try {
-                    int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
 
-                    if (seleccion == 0) { // Confirma insertar
-                        int codigo = Integer.parseInt(client.codigo_ref.getText());
-                        String nuevoCarro = "";
-                        String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
-                        if (carroActual == null) {
-                            carroActual = "";
-                        }
-                        nuevoCarro = codigo + "-" + carroActual;
-                        carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
 
-                        JOptionPane.showMessageDialog(null, "Articulo añadido con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                    } else { // Deniega insertar
-                        JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
-                    }
-                } catch (NumberFormatException ex) {
-                    Log.log.error("Error en insertarCesta " + ex);
+                if (seleccion == 0) { // Confirma insertar
+                    meterCarro(client.codigo_ref.getText());
+                    JOptionPane.showMessageDialog(null, "Articulo añadido con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                } else { // Deniega insertar
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
+
             }
         }
         );
@@ -879,7 +933,7 @@ public class ClienteController implements ActionListener {
                         int codRef = cesta.get(i);
                         //Comprobamos cuantas se van a pedir y el stock futuro
                         for (int j = 0; j < cesta.size(); j++) {
-                            if(codRef==cesta.get(j)){
+                            if (codRef == cesta.get(j)) {
                                 repetido++;
                             }
                         }
@@ -1023,12 +1077,12 @@ public class ClienteController implements ActionListener {
     }
 
     /**
-     * Inicia el panel de un producto cargando los valores del mismo
-     * en las correspondientes etiquetas. Valores genericos
+     * Inicia el panel de un producto cargando los valores del mismo en las
+     * correspondientes etiquetas. Valores genericos
      *
      * @param articulo
      */
-    private void iniciarPanelProducto(String busqueda,Articulo articulo){
+    private void iniciarPanelProducto(String busqueda, Articulo articulo) {
         client.productoSeleccionado.setText(busqueda);
         client.datoModelo.setText(articulo.getModelo());
         client.codigo_ref.setText(String.valueOf(articulo.getCodigo_ref()));
@@ -1045,7 +1099,7 @@ public class ClienteController implements ActionListener {
             client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
         }
     }
-    
+
     /**
      * Inicia el panel del producto Placa base cargando los valores de la placa
      * en las correspondientes etiquetas las cuales referencian a su atributo.
@@ -1466,56 +1520,86 @@ public class ClienteController implements ActionListener {
      * nuevo item.
      */
     private void rellenaComboBox() {
-        
+
         ArrayList<Procesador> listaCpu = daoCpu.getAllProcesadores();
         for (int i = 0; i < listaCpu.size(); i++) {
-            if (i==0) client.cpuBox.addItem("Seleccione");
-            client.cpuBox.addItem(listaCpu.get(i).getModelo() + " - " + listaCpu.get(i).getSocket() + " - € " + listaCpu.get(i).getPrecio());
+            if (i == 0) {
+                client.cpuBox.addItem("Seleccione");
+            }
+            client.cpuBox.addItem(listaCpu.get(i).getCodigo_ref() + "- " + listaCpu.get(i).getModelo()
+                    + " - " + listaCpu.get(i).getSocket() + " - € " + listaCpu.get(i).getPrecio());
         }
         ArrayList<Placa_base> listaPlaca = daoPlaca.getAllPlacas();
         for (int i = 0; i < listaPlaca.size(); i++) {
-            if (i==0) client.placaBox.addItem("Seleccione");
-            client.placaBox.addItem(listaPlaca.get(i).getModelo() + " - " + listaPlaca.get(i).getSocket() + " - € " + listaPlaca.get(i).getPrecio());
+            if (i == 0) {
+                client.placaBox.addItem("Seleccione");
+            }
+            client.placaBox.addItem(listaPlaca.get(i).getCodigo_ref() + "- " + listaPlaca.get(i).getModelo()
+                    + " - " + listaPlaca.get(i).getSocket() + " - € " + listaPlaca.get(i).getPrecio());
         }
         ArrayList<Memoria_RAM> listaRam = daoRam.getAllMemoria_RAM();
         for (int i = 0; i < listaRam.size(); i++) {
-            if (i==0) client.ramBox.addItem("Seleccione");
-            client.ramBox.addItem(listaRam.get(i).getModelo() + " - € " + listaRam.get(i).getPrecio());
+            if (i == 0) {
+                client.ramBox.addItem("Seleccione");
+            }
+            client.ramBox.addItem(listaRam.get(i).getCodigo_ref() + "- " + listaRam.get(i).getModelo()
+                    + " - € " + listaRam.get(i).getPrecio());
         }
         ArrayList<Grafica> listaGrafica = daoGrafica.getAllGraficas();
         for (int i = 0; i < listaGrafica.size(); i++) {
-            if (i==0) client.graficaBox.addItem("Seleccione");
-            client.graficaBox.addItem(listaGrafica.get(i).getModelo() + " - € " + listaGrafica.get(i).getPrecio());
+            if (i == 0) {
+                client.graficaBox.addItem("Seleccione");
+            }
+            client.graficaBox.addItem(listaGrafica.get(i).getCodigo_ref() + "- " + listaGrafica.get(i).getModelo()
+                    + " - € " + listaGrafica.get(i).getPrecio());
         }
         ArrayList<Disco_duro> listaDisco = daoDisco.getAllDiscos();
         for (int i = 0; i < listaDisco.size(); i++) {
-            if (i==0) client.discoBox.addItem("Seleccione");
-            client.discoBox.addItem(listaDisco.get(i).getModelo() + " - " + listaDisco.get(i).getTipo() + " - € " + listaDisco.get(i).getPrecio());
+            if (i == 0) {
+                client.discoBox.addItem("Seleccione");
+            }
+            client.discoBox.addItem(listaDisco.get(i).getCodigo_ref() + "- " + listaDisco.get(i).getModelo()
+                    + " - " + listaDisco.get(i).getTipo() + " - € " + listaDisco.get(i).getPrecio());
         }
         ArrayList<Fuente_alimentacion> listaFuente = daoFuente.getAllFuentes();
         for (int i = 0; i < listaFuente.size(); i++) {
-            if (i==0) client.fuenteBox.addItem("Seleccione");
-            client.fuenteBox.addItem(listaFuente.get(i).getModelo() + " - " + listaFuente.get(i).getPotencia() + " W - € " + listaFuente.get(i).getPrecio());
+            if (i == 0) {
+                client.fuenteBox.addItem("Seleccione");
+            }
+            client.fuenteBox.addItem(listaFuente.get(i).getCodigo_ref() + "- " + listaFuente.get(i).getModelo()
+                    + " - " + listaFuente.get(i).getPotencia() + " W - € " + listaFuente.get(i).getPrecio());
         }
         ArrayList<Caja> listaCaja = daoCaja.getAllCajas();
         for (int i = 0; i < listaCaja.size(); i++) {
-            if (i==0) client.cajaBox.addItem("Seleccione");
-            client.cajaBox.addItem(listaCaja.get(i).getModelo() + " - € " + listaCaja.get(i).getPrecio());
+            if (i == 0) {
+                client.cajaBox.addItem("Seleccione");
+            }
+            client.cajaBox.addItem(listaCaja.get(i).getCodigo_ref() + "- " + listaCaja.get(i).getModelo()
+                    + " - € " + listaCaja.get(i).getPrecio());
         }
         ArrayList<Raton> listaRaton = daoRaton.getAllRatones();
         for (int i = 0; i < listaRaton.size(); i++) {
-            if (i==0) client.ratonBox.addItem("Seleccione");
-            client.ratonBox.addItem(listaRaton.get(i).getModelo() + " - " + listaRaton.get(i).getPeso() + " gr - € " + listaRaton.get(i).getPrecio());
+            if (i == 0) {
+                client.ratonBox.addItem("Seleccione");
+            }
+            client.ratonBox.addItem(listaRaton.get(i).getCodigo_ref() + "- " + listaRaton.get(i).getModelo()
+                    + " - " + listaRaton.get(i).getPeso() + " gr - € " + listaRaton.get(i).getPrecio());
         }
         ArrayList<Teclado> listaTeclado = daoTeclado.getAllTeclados();
         for (int i = 0; i < listaTeclado.size(); i++) {
-            if (i==0) client.tecladoBox.addItem("Seleccione");
-            client.tecladoBox.addItem(listaTeclado.get(i).getModelo() + " - € " + listaTeclado.get(i).getPrecio());
+            if (i == 0) {
+                client.tecladoBox.addItem("Seleccione");
+            }
+            client.tecladoBox.addItem(listaTeclado.get(i).getCodigo_ref() + "- " + listaTeclado.get(i).getModelo()
+                    + " - € " + listaTeclado.get(i).getPrecio());
         }
         ArrayList<WebCam> listaCam = daoCam.getAllWebCams();
         for (int i = 0; i < listaCam.size(); i++) {
-            if (i==0) client.camBox.addItem("Seleccione");
-            client.camBox.addItem(listaCam.get(i).getModelo() + " - " + listaCam.get(i).getCalidad() + " - € " + listaCam.get(i).getPrecio());
+            if (i == 0) {
+                client.camBox.addItem("Seleccione");
+            }
+            client.camBox.addItem(listaCam.get(i).getCodigo_ref() + "- " + listaCam.get(i).getModelo()
+                    + " - " + listaCam.get(i).getCalidad() + " - € " + listaCam.get(i).getPrecio());
         }
 
     }
@@ -1545,7 +1629,7 @@ public class ClienteController implements ActionListener {
                     + sacarPrecio(precioFuente) + sacarPrecio(precioRaton) + sacarPrecio(precioTeclado)
                     + sacarPrecio(precioCam);
 
-            client.precioTotalPc.setText(String.valueOf(total) + " €");
+            client.precioTotalPc.setText(String.valueOf(total));
         } catch (Exception ex) {
             Log.log.error("Error en calcular el precio " + ex);
         }
@@ -1658,7 +1742,7 @@ public class ClienteController implements ActionListener {
         client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "articulo"));
     }
 
-     /**
+    /**
      * Crea una Jlist con los articulos que hay en el arraylist pasado por
      * parametro con informacion relativa a los mismos sacada de la base de
      * datos.
@@ -1697,7 +1781,7 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, getClaveBusqueda()));
     }
-    
+
     /**
      * Crea una Jlist con informacion de todas las placas que hay en la base de
      * datos.
@@ -2083,18 +2167,20 @@ public class ClienteController implements ActionListener {
 
         for (int i = 0; i < lista.size(); i++) {
             PcTorre articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            if (!articulo.isCreado()) { //Solo aparecen articulos ya montados por la tienda
+                int codigoReferencia = articulo.getCodigo_ref();
+                String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
+                articuloInfo = articuloInfo.replaceAll("\t", "           ");
 
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
+                listaInfo.add(articuloInfo);
+                if (articulo.getRutaImagen() == null) {
+                    listaRuta.add("/images/error.png");
+                } else {
+                    listaRuta.add(articulo.getRutaImagen());
+                }
+
+                listModel.add(i, articuloInfo);
             }
-
-            listModel.add(i, articuloInfo);
         }
 
         client.listaProductos.setModel(listModel);
@@ -2173,6 +2259,7 @@ public class ClienteController implements ActionListener {
 
     /**
      * Obtiene el string de clave de busqueda
+     *
      * @return Devuelve el string con lo que se ha buscado
      */
     private String getClaveBusqueda() {
@@ -2181,10 +2268,27 @@ public class ClienteController implements ActionListener {
 
     /**
      * Establece una nueva clave de busqueda.
-     * @param claveBusqueda 
+     *
+     * @param claveBusqueda
      */
     private void setClaveBusqueda(String claveBusqueda) {
         this.claveBusqueda = claveBusqueda;
+    }
+
+    private void meterCarro(String codigo) {
+        try {
+            int cod = Integer.parseInt(codigo);
+            String nuevoCarro = "";
+            String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+            if (carroActual == null) {
+                carroActual = "";
+            }
+            nuevoCarro = cod + "-" + carroActual;
+            carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+        } catch (NumberFormatException ex) {
+            Log.log.error("Error en crear nuevo carro " + ex);
+        }
+
     }
 
     @Override
