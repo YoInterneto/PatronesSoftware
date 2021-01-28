@@ -467,7 +467,7 @@ public class EmpleadoController implements ActionListener{
             int codigoReferencia = articulo.getCodigo_ref();
             String articuloInfo;
             if(articulo.getModelo().toLowerCase().contains("custom-")){
-                articuloInfo = "<html><body><strong><u><sup>Articulo "+ (i+1) +" </sup></strong></u> <br>PcCustom- ["+ articulo.getDescripcion() +"] <br>Precio-"+ 
+                articuloInfo = "<html><body><strong><u><sup>PcCustom "+ codigoReferencia +" </sup></strong></u> <br>Caracteristicas- ["+ articulo.getDescripcion() +"] <br>Precio-"+ 
                         articulo.getPrecio()+ " €</body></html>";
             }
             else{
