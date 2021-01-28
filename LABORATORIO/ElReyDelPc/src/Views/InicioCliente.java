@@ -132,8 +132,8 @@ public class InicioCliente extends javax.swing.JFrame {
         ratonBox = new javax.swing.JComboBox<>();
         tecladoBox = new javax.swing.JComboBox<>();
         camBox = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        montaYcompra = new javax.swing.JButton();
+        montaYguarda = new javax.swing.JButton();
         jSeparator22 = new javax.swing.JSeparator();
         jSeparator23 = new javax.swing.JSeparator();
         jSeparator24 = new javax.swing.JSeparator();
@@ -642,7 +642,6 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator21.setForeground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 30));
 
-        cajaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(cajaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, 190, -1));
 
         jLabel54.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -697,22 +696,16 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel63.setText("Fuente");
         panelMonta.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 482, 70, 30));
 
-        cpuBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(cpuBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 190, -1));
 
-        placaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(placaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 265, 190, -1));
 
-        ramBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(ramBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 190, -1));
 
-        graficaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(graficaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 375, 190, -1));
 
-        discoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(discoBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 190, -1));
 
-        fuenteBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(fuenteBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 485, 190, -1));
 
         jLabel64.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -736,24 +729,21 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel67.setText("WebCam");
         panelMonta.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 425, 70, 30));
 
-        ratonBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(ratonBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 180, -1));
 
-        tecladoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(tecladoBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 375, 180, -1));
 
-        camBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         panelMonta.add(camBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 180, -1));
 
-        jButton6.setText("jButton6");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setFocusPainted(false);
-        panelMonta.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 130, -1));
+        montaYcompra.setText("Crear y comprar");
+        montaYcompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        montaYcompra.setFocusPainted(false);
+        panelMonta.add(montaYcompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 130, -1));
 
-        jButton7.setText("jButton7");
-        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton7.setFocusPainted(false);
-        panelMonta.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 130, 30));
+        montaYguarda.setText("Crear y guardar");
+        montaYguarda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        montaYguarda.setFocusPainted(false);
+        panelMonta.add(montaYguarda, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 130, 30));
 
         jSeparator22.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator22.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -1288,8 +1278,6 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel imgProducto;
     private javax.swing.JPanel infoPanelAnadir1;
     public javax.swing.JButton insertarCesta;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1390,6 +1378,8 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JList<String> listaProductos;
     public javax.swing.JLabel monitor;
+    public javax.swing.JButton montaYcompra;
+    public javax.swing.JButton montaYguarda;
     public javax.swing.JLabel nombreAtributo1;
     public javax.swing.JLabel nombreAtributo2;
     public javax.swing.JLabel nombreAtributo3;

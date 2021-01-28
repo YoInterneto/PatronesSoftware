@@ -4,6 +4,7 @@ import DAO.*;
 import Model.Articulos.*;
 import Model.Usuario.Cliente;
 import Util.ListaDinamicaImagen;
+import Util.PcBuilder;
 
 import Views.InicioCliente;
 import Views.Login;
@@ -99,6 +100,7 @@ public class ClienteController implements ActionListener {
                         client.panelProducto.setVisible(false);
                         client.panelArticulo.setVisible(false);
                         client.panelElegirProducto.setVisible(true);
+                        resetValuesBox();
                         cargarListaProductos(listaCodigos); 
                         tipo = "";
                     }
@@ -171,6 +173,7 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(false);
+                resetValuesBox();
                 iniciarPanelMontar();
             }
         });
@@ -446,6 +449,46 @@ public class ClienteController implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 calculaPrecioMontaje();
             }
+        });
+        
+        this.client.montaYguarda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PcBuilder builder = new PcBuilder("Prueba",true);
+                
+                Placa_base placa = new Placa_base();
+                placa.setModelo("modelo placa");
+                
+                Grafica g = new Grafica();
+                g.setModelo("modelo grafica");
+                
+                Fuente_alimentacion fuente = new Fuente_alimentacion();
+                fuente.setModelo("modeloFuente");
+                
+                Caja caja = new Caja();
+                caja.setModelo("modeloCAJA");
+                
+                Memoria_RAM ram = new Memoria_RAM();
+                ram.setModelo("modeloRam");
+                
+                Procesador cpu = new Procesador();
+                cpu.setModelo("modelcpu");
+                
+                Disco_duro disco = new Disco_duro();
+                disco.setModelo("modeloDisco");
+                
+                PcTorre pc = builder.withCpu(cpu)
+                        .withCaja(caja)
+                        .withPlaca(placa)
+                        .withGrafica(g)
+                        .withDisco(disco)
+                        .withFuente(fuente)
+                        .withRam(ram)
+                        .build();
+                
+                System.out.println(pc.toString());
+                
+            } 
         });
 
         //Listener lista producto elegido en panel articulo
@@ -1423,45 +1466,55 @@ public class ClienteController implements ActionListener {
      * nuevo item.
      */
     private void rellenaComboBox() {
-
+        
         ArrayList<Procesador> listaCpu = daoCpu.getAllProcesadores();
         for (int i = 0; i < listaCpu.size(); i++) {
+            if (i==0) client.cpuBox.addItem("Seleccione");
             client.cpuBox.addItem(listaCpu.get(i).getModelo() + " - " + listaCpu.get(i).getSocket() + " - € " + listaCpu.get(i).getPrecio());
         }
         ArrayList<Placa_base> listaPlaca = daoPlaca.getAllPlacas();
         for (int i = 0; i < listaPlaca.size(); i++) {
+            if (i==0) client.placaBox.addItem("Seleccione");
             client.placaBox.addItem(listaPlaca.get(i).getModelo() + " - " + listaPlaca.get(i).getSocket() + " - € " + listaPlaca.get(i).getPrecio());
         }
         ArrayList<Memoria_RAM> listaRam = daoRam.getAllMemoria_RAM();
         for (int i = 0; i < listaRam.size(); i++) {
+            if (i==0) client.ramBox.addItem("Seleccione");
             client.ramBox.addItem(listaRam.get(i).getModelo() + " - € " + listaRam.get(i).getPrecio());
         }
         ArrayList<Grafica> listaGrafica = daoGrafica.getAllGraficas();
         for (int i = 0; i < listaGrafica.size(); i++) {
+            if (i==0) client.graficaBox.addItem("Seleccione");
             client.graficaBox.addItem(listaGrafica.get(i).getModelo() + " - € " + listaGrafica.get(i).getPrecio());
         }
         ArrayList<Disco_duro> listaDisco = daoDisco.getAllDiscos();
         for (int i = 0; i < listaDisco.size(); i++) {
+            if (i==0) client.discoBox.addItem("Seleccione");
             client.discoBox.addItem(listaDisco.get(i).getModelo() + " - " + listaDisco.get(i).getTipo() + " - € " + listaDisco.get(i).getPrecio());
         }
         ArrayList<Fuente_alimentacion> listaFuente = daoFuente.getAllFuentes();
         for (int i = 0; i < listaFuente.size(); i++) {
+            if (i==0) client.fuenteBox.addItem("Seleccione");
             client.fuenteBox.addItem(listaFuente.get(i).getModelo() + " - " + listaFuente.get(i).getPotencia() + " W - € " + listaFuente.get(i).getPrecio());
         }
         ArrayList<Caja> listaCaja = daoCaja.getAllCajas();
         for (int i = 0; i < listaCaja.size(); i++) {
+            if (i==0) client.cajaBox.addItem("Seleccione");
             client.cajaBox.addItem(listaCaja.get(i).getModelo() + " - € " + listaCaja.get(i).getPrecio());
         }
         ArrayList<Raton> listaRaton = daoRaton.getAllRatones();
         for (int i = 0; i < listaRaton.size(); i++) {
+            if (i==0) client.ratonBox.addItem("Seleccione");
             client.ratonBox.addItem(listaRaton.get(i).getModelo() + " - " + listaRaton.get(i).getPeso() + " gr - € " + listaRaton.get(i).getPrecio());
         }
         ArrayList<Teclado> listaTeclado = daoTeclado.getAllTeclados();
         for (int i = 0; i < listaTeclado.size(); i++) {
+            if (i==0) client.tecladoBox.addItem("Seleccione");
             client.tecladoBox.addItem(listaTeclado.get(i).getModelo() + " - € " + listaTeclado.get(i).getPrecio());
         }
         ArrayList<WebCam> listaCam = daoCam.getAllWebCams();
         for (int i = 0; i < listaCam.size(); i++) {
+            if (i==0) client.camBox.addItem("Seleccione");
             client.camBox.addItem(listaCam.get(i).getModelo() + " - " + listaCam.get(i).getCalidad() + " - € " + listaCam.get(i).getPrecio());
         }
 
@@ -1527,16 +1580,16 @@ public class ClienteController implements ActionListener {
      * Restablece los valores de los comboBox del panel al valor default
      */
     private void resetValuesBox() {
-        client.cpuBox.setSelectedIndex(0);
-        client.placaBox.setSelectedIndex(0);
-        client.ramBox.setSelectedIndex(0);
-        client.graficaBox.setSelectedIndex(0);
-        client.discoBox.setSelectedIndex(0);
-        client.fuenteBox.setSelectedIndex(0);
-        client.cajaBox.setSelectedIndex(0);
-        client.ratonBox.setSelectedIndex(0);
-        client.tecladoBox.setSelectedIndex(0);
-        client.camBox.setSelectedIndex(0);
+        client.cpuBox.removeAllItems();
+        client.placaBox.removeAllItems();
+        client.ramBox.removeAllItems();
+        client.graficaBox.removeAllItems();
+        client.discoBox.removeAllItems();
+        client.fuenteBox.removeAllItems();
+        client.cajaBox.removeAllItems();
+        client.ratonBox.removeAllItems();
+        client.tecladoBox.removeAllItems();
+        client.camBox.removeAllItems();
     }
 
     /**
@@ -1602,7 +1655,7 @@ public class ClienteController implements ActionListener {
 
         client.precioCarro.setText(String.valueOf(precioCarro));
         client.listaPedidos.setModel(listModel);
-        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
+        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "articulo"));
     }
 
      /**

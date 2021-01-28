@@ -38,6 +38,7 @@ public class PcTorreDao {
                 torre.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 torre.setDescripcion(resultado.getString("Descripcion"));
                 torre.setStock(Integer.parseInt(resultado.getString("Stock")));
+                torre.setCreado(resultado.getBoolean("Creado"));
                 torre.setRutaImagen(resultado.getString("rutaImagen"));
                 
                 torre.setNombre(resultado.getString("Nombre"));
@@ -72,17 +73,18 @@ public class PcTorreDao {
                 
                 while (rs.next()) {                	
                 	
-                    PcTorre portatil = new PcTorre();
+                    PcTorre torre = new PcTorre();
                   
-                    portatil.setCodigo_ref(rs.getInt("Codigo_ref"));
-                    portatil.setDescripcion(rs.getString("Descripcion"));
-                    portatil.setModelo(rs.getString("Modelo"));
-                    portatil.setPrecio(rs.getFloat("Precio"));
-                    portatil.setRutaImagen(rs.getString("RutaImagen"));
-                    portatil.setNombre(rs.getString("Nombre"));
-                    portatil.setStock(rs.getInt("Stock"));
+                    torre.setCodigo_ref(rs.getInt("Codigo_ref"));
+                    torre.setDescripcion(rs.getString("Descripcion"));
+                    torre.setModelo(rs.getString("Modelo"));
+                    torre.setPrecio(rs.getFloat("Precio"));
+                    torre.setRutaImagen(rs.getString("RutaImagen"));
+                    torre.setNombre(rs.getString("Nombre"));
+                    torre.setStock(rs.getInt("Stock"));
+                    torre.setCreado(rs.getBoolean("Creado"));
                     
-                    portatildb.add(portatil);
+                    portatildb.add(torre);
                 }               
             } catch (SQLException error) {
                 Log.logBd.error("ERROR SQL en getAllPcTorre: " + error);
@@ -108,7 +110,7 @@ public class PcTorreDao {
      * @param cristal
      * @return Devuelve un boolean para saber si se ha insertado
      */
-    public boolean anadirTorre(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String nombre){
+    public boolean anadirTorre(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String nombre,boolean creado){
         boolean hecho = false;
         try {
             Log.logBd.info("CONSULTA AnadirTorre");
@@ -116,7 +118,7 @@ public class PcTorreDao {
             Log.logBd.info("Realizada conexion - anadirTorre()");
             Statement s = conexion.createStatement();
             int codigo = s.executeUpdate("INSERT into pctorre VALUES('"+ modelo +"', "+ codigoReferencia +", "+ precio +", '"+ descripcion +"', "+ 
-                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ nombre +"');");          
+                    stock +", '"+ rutaImagen +"', "+ idTienda +", '"+ nombre +"', "+creado+ ");");          
         
             if(codigo>0){
                 hecho = true;
