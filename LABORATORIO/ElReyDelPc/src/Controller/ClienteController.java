@@ -503,8 +503,9 @@ public class ClienteController implements ActionListener {
                     if (!cam.equals("Seleccione")) {
                         meterCarro(cam);
                     }
-
-                    JOptionPane.showMessageDialog(null, "Articulo/s añadidos al carro", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    resetValuesBox();
+                    iniciarPanelMontar();
+                    JOptionPane.showMessageDialog(null, "Articulo/s añadidos al carro", "Mensaje", JOptionPane.DEFAULT_OPTION);           
                 } catch (Exception ex) {
                     Log.log.error("Error en crear y guardar pc " + ex);
                 }
