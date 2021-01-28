@@ -38,7 +38,11 @@ public class Conexion {
     
     public void desconectar(){
         try{
-            conexion.close();
+            Log.logBd.info("Cerrando la conexión con la Base de Datos...");
+            if(conexion != null){
+                conexion.close();
+            }
+            Log.logBd.info("Conexión cerrada con éxito");
         }catch(SQLException error){
             Log.logBd.error("ERROR SQL: "+ error);
         }

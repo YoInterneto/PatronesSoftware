@@ -5,6 +5,13 @@
  */
 package Views;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import util.Conexion;
+import util.Log;
+
 /**
  *
  * @author Alberto
@@ -58,6 +65,11 @@ public class Login extends javax.swing.JFrame {
         btnDarAlta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         header.setBackground(new java.awt.Color(255, 153, 51));
@@ -330,6 +342,17 @@ public class Login extends javax.swing.JFrame {
     private void nombreRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreRegistroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreRegistroActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Log.logBd.info("Cerrando la conexión con la Base de Datos...");
+        Connection conexion = Conexion.getConexion();
+        try {
+            conexion.close();
+            Log.logBd.info("Conexión cerrada con éxito");
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL: Al cerrar conexion "+ error);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

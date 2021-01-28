@@ -15,8 +15,8 @@ import Views.InicioEmpleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import util.Log;
 
 /**
@@ -25,7 +25,7 @@ import util.Log;
  */
 public class LoginController implements ActionListener{
     
-    private Login login;
+    private final Login login;
     private Cliente cliente;
     private Empleado empleado;
     
@@ -41,6 +41,7 @@ public class LoginController implements ActionListener{
         login.setSize(635, 432);
         login.setLocationRelativeTo(null);
         login.setResizable(false);
+        login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         login.panelIniciarSesion.setVisible(true);
         login.panelRegistro.setVisible(false);
@@ -75,9 +76,6 @@ public class LoginController implements ActionListener{
                 login.tipoVentana.setText("INICIO SESION");
             }
         });
-        
-        ImageIcon logo = new ImageIcon("/images/error.png");
-        login.setIconImage(logo.getImage());
     }
     
     public boolean comprobarFormulario(){

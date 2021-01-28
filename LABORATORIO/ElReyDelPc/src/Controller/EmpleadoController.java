@@ -10,7 +10,6 @@ import Util.ListaDinamica;
 import Util.ListaDinamicaImagen;
 import Views.InicioEmpleado;
 import Views.Login;
-import java.awt.Cursor;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

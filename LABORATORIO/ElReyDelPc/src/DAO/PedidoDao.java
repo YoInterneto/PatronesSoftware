@@ -52,7 +52,7 @@ public class PedidoDao {
             Log.logBd.error("                  SQL State - " + error.getSQLState());
             Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
         }
-
+        
         Log.logBd.info("Consulta realizada con éxito - getAllPedidos()");
         return listaPedidos;
     }
