@@ -1210,6 +1210,8 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
         panelInfoPedido.add(infoPanelAnadir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
 
+        jScrollPane5.setToolTipText("");
+
         listaInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
         listaInfoPedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         listaInfoPedido.setForeground(new java.awt.Color(255, 255, 255));
@@ -1218,6 +1220,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaInfoPedido.setToolTipText("");
         jScrollPane5.setViewportView(listaInfoPedido);
 
         panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 420));

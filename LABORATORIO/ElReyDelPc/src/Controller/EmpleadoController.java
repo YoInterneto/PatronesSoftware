@@ -405,8 +405,8 @@ public class EmpleadoController implements ActionListener{
         for(int i=0; i<lista.size(); i++){
             Articulo articulo = lista.get(i);
             int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-"+ String.format("%04d", codigoReferencia) +" \t"+ articulo.getModelo() +" \tPrecio-"+ articulo.getPrecio() +"    \t[stock: "+ articulo.getStock() +"]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-"+ String.format("%04d", codigoReferencia) +" </sup></strong></u><br>Modelo: "+ articulo.getModelo()
+                        +" <br>Precio: "+ articulo.getPrecio() +"€ <br>[stock: "+ articulo.getStock() +"]</body></html>";
 
             listaInfo.add(articuloInfo);
             if(articulo.getRutaImagen() == null){
@@ -434,8 +434,8 @@ public class EmpleadoController implements ActionListener{
         for(int i=0; i<listaPedidos.size(); i++){
             Pedido pedido = listaPedidos.get(i);
             int idPedido = pedido.getIdPedido();
-            String pedidoInfo = "  ID-"+ String.format("%04d", idPedido) +" \tFecha-"+ pedido.getFecha() +" \tPrecio pedido-"+ pedido.getPrecio_total() +"€ \tUsuario-"+ pedido.getEmail_cliente();
-            pedidoInfo = pedidoInfo.replaceAll("\t", "         ");
+            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-"+ String.format("%04d", idPedido) +" </sup></strong></u><br>Fecha: "+ pedido.getFecha()
+                        +" <br>Usuario: "+ pedido.getEmail_cliente() +" </body></html>";
             
             listModel.add(i, pedidoInfo);
         }
@@ -465,8 +465,15 @@ public class EmpleadoController implements ActionListener{
         for(int i=0; i<listaCompras.size(); i++){
             Articulo articulo = listaCompras.get(i);
             int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-"+ String.format("%04d", codigoReferencia) +" \t"+ articulo.getModelo() +" \tPrecio-"+ articulo.getPrecio();
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            String articuloInfo;
+            if(articulo.getModelo().toLowerCase().contains("custom-")){
+                articuloInfo = "<html><body><strong><u><sup>Articulo "+ (i+1) +" </sup></strong></u> <br>PcCustom- ["+ articulo.getDescripcion() +"] <br>Precio-"+ 
+                        articulo.getPrecio()+ " €</body></html>";
+            }
+            else{
+                articuloInfo = "<html><body><strong><u><sup>Articulo "+ (i+1) +" </sup></strong></u> <br>CodRef-"+ String.format("%04d", codigoReferencia) 
+                        +" <br>  Modelo: "+ articulo.getModelo() +" <br>  Precio: "+ articulo.getPrecio() +" €</body></html>";
+            }
 
             listaInfo.add(articuloInfo);
             if(articulo.getRutaImagen() == null){
