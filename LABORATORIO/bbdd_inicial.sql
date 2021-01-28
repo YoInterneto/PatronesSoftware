@@ -152,6 +152,7 @@ ALTER TABLE public.WebCam OWNER TO postgres;
 -- DROP TABLE IF EXISTS public.PcTorre CASCADE;
 CREATE TABLE public.PcTorre(
 	Nombre varchar,
+	Creado boolean,
 -- 	Modelo varchar,
 -- 	Codigo_ref smallint NOT NULL,
 -- 	Precio float,
@@ -445,7 +446,7 @@ INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1
 
 INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2,'/images/portatil1.png',0,'IPS',2);
 INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4,'/images/cam1.png' ,0,'HD');
-INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,'/images/torre1.png',0,'NombreTorre1');
+INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,'/images/torre1.png',0,'NombreTorre1',false);
 INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5,'/images/grafica1.jpg', 0, 3);
 INSERT INTO Procesador VALUES('Modelo5', 5, 25, 'Descripcion5', 6,'/images/cpu1.png', 0,'AM4');
 INSERT INTO Memoria_RAM VALUES('Modelo6', 6, 25, 'Descripcion6', 6,'/images/ram1.png', 0,'PN1');
