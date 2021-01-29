@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import Views.Login;
 import Model.Usuario.Cliente;
 import Model.Usuario.Empleado;
+import ProxyLogin.Proxy;
+import ProxyLogin.Servidor;
+import ProxyLogin.ServidorLogin;
 import Views.InicioCliente;
 import Views.InicioEmpleado;
 import java.awt.event.ActionEvent;
@@ -136,12 +139,11 @@ public class LoginController implements ActionListener{
                     String usuario = login.usuario.getText();
                     char[] valorContrasenna = login.contrasenna.getPassword();
                     String contrasenna = new String(valorContrasenna);
-
-                    Log.log.info("USUARIO: "+ usuario +" - CONTRASEÑA: "+ contrasenna);
-                    String tipoUsuario = consulta.getTipoUsuario(usuario, contrasenna);
-
-                    if(tipoUsuario.equalsIgnoreCase("cliente")){
-                        Log.log.info("TIPO USUARIO: "+ tipoUsuario);
+                    
+                    Servidor proxy = new Proxy(new ServidorLogin("ServidorLogin"));
+                    
+                    if(proxy.esCliente(usuario, contrasenna)){
+                        Log.log.info("TIPO USUARIO: Cliente");
                         cliente = consulta.getCliente(usuario);
                         Log.log.info("Usuario  "+ cliente.toString());
 
@@ -153,8 +155,8 @@ public class LoginController implements ActionListener{
                         login.setVisible(false);
                         inicioVista.setVisible(true);
                     }
-                    else if(tipoUsuario.equalsIgnoreCase("empleado")){
-                        Log.log.info("TIPO USUARIO: "+ tipoUsuario);
+                    else if(proxy.esEmpleado(usuario, contrasenna)){
+                        Log.log.info("TIPO USUARIO: Empleado");
                         empleado = consulta.getEmpleado(usuario);
                         Log.log.info("Usuario  "+ empleado.toString());
 
@@ -165,6 +167,9 @@ public class LoginController implements ActionListener{
                         inicio.iniciar();
                         login.setVisible(false);
                         inicioVista.setVisible(true);
+                    }
+                    else if(proxy.esAdmin(usuario, contrasenna)){
+                        //TODO - Algo con admin
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "ERROR: Usuario no registrado");
