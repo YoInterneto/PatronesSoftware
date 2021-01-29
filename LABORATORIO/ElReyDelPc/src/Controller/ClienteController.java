@@ -3,6 +3,8 @@ package Controller;
 import DAO.*;
 import Model.Articulos.*;
 import Model.Usuario.Cliente;
+import Observer.ObservadorPrecio;
+import Observer.SujetoConcreto;
 import Util.ListaDinamicaImagen;
 import Util.PcBuilder;
 
@@ -16,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -77,6 +80,25 @@ public class ClienteController implements ActionListener {
         client.setTitle("INICIO - CLIENTE");
         client.setLocationRelativeTo(null);
         client.nombreCliente.setText(cliente.getNombre());
+
+        //Al comenzar iniciamos los observer para los productos del carro
+//        ArrayList<Integer> cesta = cargarCarro();
+//        Articulo componente = consultaArticulo.getArticulo(1);
+//        Observer o1 = new ObservadorPrecio("o1", 150, sujeto);
+//        for (int i = 0; i < cesta.size(); i++) {
+//            Articulo componente2 = consultaArticulo.getArticulo(cesta.get(i));
+//            SujetoConcreto sujeto = new SujetoConcreto();
+//            sujeto.setComponente(componente2);
+//            // Observadores.
+//            Observer o1 = new ObservadorPrecio("o1", 150, sujeto);
+//
+//            // Notificamos a los observadores para que actualicen.
+//            System.out.println("Notificamos...");
+//            sujeto.cambiaPrecio(165); // Cambiamos el precio.
+//
+//            System.out.println("Notificamos...");
+//            sujeto.cambiaPrecio(150); // Cambiamos el precio.
+//        }
 
         //Listeners botones menu cliente 
         this.client.btnBuscar.addMouseListener(new MouseAdapter() {
@@ -505,7 +527,7 @@ public class ClienteController implements ActionListener {
                     }
                     resetValuesBox();
                     iniciarPanelMontar();
-                    JOptionPane.showMessageDialog(null, "Articulo/s añadidos al carro", "Mensaje", JOptionPane.DEFAULT_OPTION);           
+                    JOptionPane.showMessageDialog(null, "Articulo/s añadidos al carro", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 } catch (Exception ex) {
                     Log.log.error("Error en crear y guardar pc " + ex);
                 }
@@ -574,7 +596,7 @@ public class ClienteController implements ActionListener {
                                 .withPrecio(precioTorre)
                                 .withNombre("Custom-PC-" + nuevoCod)
                                 .build();
-                        
+
                         daoPctorre.insertarTorreCustom(pc);
                         int codPedido = daoPedido.getIdPedidoMax() + 1;
                         boolean hecho = daoPedido.hacerPedidoCustom(pc, codPedido, cliente.getEmail());
