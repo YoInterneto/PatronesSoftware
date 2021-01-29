@@ -1,6 +1,7 @@
 
 package Controller;
 
+import Facade.FachadaLogin;
 import DAO.*;
 import Model.Articulos.Articulo;
 import Model.Negocio.Pedido;
@@ -86,7 +87,7 @@ public class EmpleadoController implements ActionListener{
             public void mouseClicked(MouseEvent e) {
                 Login loginVista = new Login();
         
-                LoginController login = new LoginController(loginVista);
+                FachadaLogin login = new FachadaLogin(loginVista);
         
                 login.iniciar();
                 inicio.setVisible(false);

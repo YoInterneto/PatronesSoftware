@@ -1,6 +1,6 @@
 package Views;
 
-import Controller.LoginController;
+import Facade.FachadaLogin;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -1212,7 +1212,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         Login loginVista = new Login();
-        LoginController login = new LoginController(loginVista);
+        FachadaLogin login = new FachadaLogin(loginVista);
 
         this.setVisible(false);
         login.iniciar();

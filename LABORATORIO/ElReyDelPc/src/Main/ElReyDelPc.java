@@ -5,7 +5,7 @@
  */
 package Main;
 
-import Controller.LoginController;
+import Facade.FachadaLogin;
 import Views.Login;
 
 /**
@@ -21,7 +21,7 @@ public class ElReyDelPc {
         
         Login loginVista = new Login();
         
-        LoginController login = new LoginController(loginVista);
+        FachadaLogin login = new FachadaLogin(loginVista);
         
         login.iniciar();
         loginVista.setVisible(true);

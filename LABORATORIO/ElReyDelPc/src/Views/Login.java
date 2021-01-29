@@ -7,8 +7,6 @@ package Views;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import util.Conexion;
 import util.Log;
 
@@ -42,7 +40,7 @@ public class Login extends javax.swing.JFrame {
         usuario = new javax.swing.JTextField();
         contrasenna = new javax.swing.JPasswordField();
         iniciarSesion = new javax.swing.JButton();
-        borrar = new javax.swing.JButton();
+        borrarLogin = new javax.swing.JButton();
         btnRegistro = new javax.swing.JLabel();
         panelRegistro = new javax.swing.JPanel();
         btnVolver = new javax.swing.JLabel();
@@ -63,6 +61,7 @@ public class Login extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         contrasenaRepitaRegistro = new javax.swing.JPasswordField();
         btnDarAlta = new javax.swing.JButton();
+        borrarRegistro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -135,13 +134,13 @@ public class Login extends javax.swing.JFrame {
         });
         panelIniciarSesion.add(iniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 100, 30));
 
-        borrar.setBackground(new java.awt.Color(51, 51, 51));
-        borrar.setForeground(new java.awt.Color(255, 153, 0));
-        borrar.setText("Borrar");
-        borrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
-        borrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        borrar.setFocusPainted(false);
-        panelIniciarSesion.add(borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 70, 30));
+        borrarLogin.setBackground(new java.awt.Color(51, 51, 51));
+        borrarLogin.setForeground(new java.awt.Color(255, 153, 0));
+        borrarLogin.setText("Borrar");
+        borrarLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
+        borrarLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        borrarLogin.setFocusPainted(false);
+        panelIniciarSesion.add(borrarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 70, 30));
 
         btnRegistro.setBackground(new java.awt.Color(0, 153, 255));
         btnRegistro.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -228,6 +227,18 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        borrarRegistro.setBackground(new java.awt.Color(51, 51, 51));
+        borrarRegistro.setForeground(new java.awt.Color(255, 153, 0));
+        borrarRegistro.setText("Borrar");
+        borrarRegistro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
+        borrarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        borrarRegistro.setFocusPainted(false);
+        borrarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarRegistroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelRegistroLayout = new javax.swing.GroupLayout(panelRegistro);
         panelRegistro.setLayout(panelRegistroLayout);
         panelRegistroLayout.setHorizontalGroup(
@@ -236,6 +247,8 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelRegistroLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(borrarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDarAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRegistroLayout.createSequentialGroup()
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +315,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(tarjetaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contrasenaRepitaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addComponent(btnDarAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDarAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -354,6 +369,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void borrarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarRegistroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -391,7 +410,8 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField apellidoRegistro;
-    public javax.swing.JButton borrar;
+    public javax.swing.JButton borrarLogin;
+    public javax.swing.JButton borrarRegistro;
     public javax.swing.JButton btnDarAlta;
     public javax.swing.JLabel btnRegistro;
     public javax.swing.JLabel btnVolver;

@@ -1,5 +1,6 @@
 package Controller;
 
+import Facade.FachadaLogin;
 import DAO.*;
 import Model.Articulos.*;
 import Model.Usuario.Cliente;
@@ -208,7 +209,7 @@ public class ClienteController implements ActionListener {
 
                 Login loginVista = new Login();
 
-                LoginController login = new LoginController(loginVista);
+                FachadaLogin login = new FachadaLogin(loginVista);
 
                 login.iniciar();
                 client.setVisible(false);

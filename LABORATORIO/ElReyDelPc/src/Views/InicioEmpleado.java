@@ -5,7 +5,7 @@
  */
 package Views;
 
-import Controller.LoginController;
+import Facade.FachadaLogin;
 
 /**
  *
@@ -1325,7 +1325,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         Login loginVista = new Login();
-        LoginController login = new LoginController(loginVista);
+        FachadaLogin login = new FachadaLogin(loginVista);
         
         this.setVisible(false);
         login.iniciar();
