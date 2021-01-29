@@ -1,6 +1,4 @@
-
 package Observer;
-
 
 import Model.Articulos.Articulo;
 import java.util.Observable;
@@ -13,7 +11,7 @@ public class SujetoConcreto extends Observable {
 
     // Componente monitorizado
     private Articulo c;
-   
+
     /**
      * Establece componente a monitorizar.
      *

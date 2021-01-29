@@ -52,6 +52,7 @@ public class ClienteController implements ActionListener {
 
     private String claveBusqueda;
     private String tipo;
+    public ArrayList<SujetoConcreto> listaSujetos = new ArrayList<>();
 
     public ClienteController(InicioCliente clientVista, Cliente cliente) {
         this.cliente = cliente;
@@ -82,24 +83,8 @@ public class ClienteController implements ActionListener {
         client.nombreCliente.setText(cliente.getNombre());
 
         //Al comenzar iniciamos los observer para los productos del carro
-//        ArrayList<Integer> cesta = cargarCarro();
-//        Articulo componente = consultaArticulo.getArticulo(1);
-//        Observer o1 = new ObservadorPrecio("o1", 150, sujeto);
-//        for (int i = 0; i < cesta.size(); i++) {
-//            Articulo componente2 = consultaArticulo.getArticulo(cesta.get(i));
-//            SujetoConcreto sujeto = new SujetoConcreto();
-//            sujeto.setComponente(componente2);
-//            // Observadores.
-//            Observer o1 = new ObservadorPrecio("o1", 150, sujeto);
-//
-//            // Notificamos a los observadores para que actualicen.
-//            System.out.println("Notificamos...");
-//            sujeto.cambiaPrecio(165); // Cambiamos el precio.
-//
-//            System.out.println("Notificamos...");
-//            sujeto.cambiaPrecio(150); // Cambiamos el precio.
-//        }
-
+        crearObserver();
+        compruebaPrecio();
         //Listeners botones menu cliente 
         this.client.btnBuscar.addMouseListener(new MouseAdapter() {
             @Override
@@ -125,6 +110,7 @@ public class ClienteController implements ActionListener {
                         resetValuesBox();
                         cargarListaProductos(listaCodigos);
                         tipo = "";
+                        compruebaPrecio();
                     } else {
                         JOptionPane.showMessageDialog(null, "ERROR: No se ha encontrado nigún artículo con la clave - " + clave + ".");
                     }
@@ -152,6 +138,7 @@ public class ClienteController implements ActionListener {
                 client.atrParticular3.setVisible(false);
                 client.nombreAtributo3.setVisible(false);
                 resetValuesBox();
+                compruebaPrecio();
             }
         });
         this.client.btnInicio.addMouseListener(new MouseAdapter() {
@@ -165,6 +152,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(false);
                 resetValuesBox();
+                compruebaPrecio();
             }
         });
         this.client.btnCarro.addMouseListener(new MouseAdapter() {
@@ -181,6 +169,7 @@ public class ClienteController implements ActionListener {
                 Collections.sort(cesta);
                 listaArticulos(cesta);
                 resetValuesBox();
+                compruebaPrecio();
             }
         });
         this.client.btnMontar.addMouseListener(new MouseAdapter() {
@@ -195,6 +184,7 @@ public class ClienteController implements ActionListener {
                 client.panelElegirProducto.setVisible(false);
                 resetValuesBox();
                 iniciarPanelMontar();
+                compruebaPrecio();
             }
         });
         this.client.btnPerfil.addMouseListener(new MouseAdapter() {
@@ -209,6 +199,7 @@ public class ClienteController implements ActionListener {
                 client.panelElegirProducto.setVisible(false);
                 iniciarPanelPerfil();
                 resetValuesBox();
+                compruebaPrecio();
             }
         });
         this.client.btnCerrar.addMouseListener(new MouseAdapter() {
@@ -727,6 +718,7 @@ public class ClienteController implements ActionListener {
                                 Articulo articulo = consultaArticulo.getArticulo(codigo);
                                 iniciarPanelProducto(getClaveBusqueda(), articulo);
                         }
+                        compruebaPrecio();
                     } catch (NumberFormatException ex) {
                         Log.log.error("Error en listaProductos " + ex);
                     }
@@ -770,8 +762,7 @@ public class ClienteController implements ActionListener {
         });
 
         //Evaluacion del producto
-        this.client.puntuacion1.addMouseListener(
-                new MouseAdapter() {
+        this.client.puntuacion1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e
             ) {
@@ -800,11 +791,8 @@ public class ClienteController implements ActionListener {
                     Log.log.error("Error " + ex);
                 }
             }
-        }
-        );
-
-        this.client.puntuacion2.addMouseListener(
-                new MouseAdapter() {
+        });
+        this.client.puntuacion2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e
             ) {
@@ -833,11 +821,8 @@ public class ClienteController implements ActionListener {
                     Log.log.error("Error " + ex);
                 }
             }
-        }
-        );
-
-        this.client.puntuacion3.addMouseListener(
-                new MouseAdapter() {
+        });
+        this.client.puntuacion3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e
             ) {
@@ -866,11 +851,8 @@ public class ClienteController implements ActionListener {
                     Log.log.error("Error " + ex);
                 }
             }
-        }
-        );
-
-        this.client.puntuacion4.addMouseListener(
-                new MouseAdapter() {
+        });
+        this.client.puntuacion4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e
             ) {
@@ -899,11 +881,8 @@ public class ClienteController implements ActionListener {
                     Log.log.error("Error " + ex);
                 }
             }
-        }
-        );
-
-        this.client.puntuacion5.addMouseListener(
-                new MouseAdapter() {
+        });
+        this.client.puntuacion5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e
             ) {
@@ -932,12 +911,10 @@ public class ClienteController implements ActionListener {
                     Log.log.error("Error " + ex);
                 }
             }
-        }
-        );
+        });
 
         //Listeners carrito 
-        this.client.insertarCesta.addActionListener(
-                new ActionListener() {
+        this.client.insertarCesta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -946,17 +923,20 @@ public class ClienteController implements ActionListener {
 
                 if (seleccion == 0) { // Confirma insertar
                     meterCarro(client.codigo_ref.getText());
+                    Articulo articulo = consultaArticulo.getArticulo(Integer.parseInt(client.codigo_ref.getText()));
+                    SujetoConcreto sujeto = new SujetoConcreto();
+                    sujeto.setComponente(articulo);
+                    listaSujetos.add(sujeto);
+                    Observer obs = new ObservadorPrecio("obs", articulo.getPrecio(), sujeto, getClase());
+
                     JOptionPane.showMessageDialog(null, "Articulo añadido con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 } else { // Deniega insertar
                     JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
 
             }
-        }
-        );
-
-        this.client.eliminarArticulo.addActionListener(
-                new ActionListener() {
+        });
+        this.client.eliminarArticulo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -972,6 +952,8 @@ public class ClienteController implements ActionListener {
                     int index = Collections.binarySearch(cesta, cesta.get(indexSel));
 
                     if (seleccion == 0) { //Elimina
+                        listaSujetos.get(index).deleteObservers();
+                        listaSujetos.remove(index);
                         cesta.remove(index);
                         String nuevoCarro = "";
                         for (int i = 0; i < cesta.size(); i++) {
@@ -987,11 +969,8 @@ public class ClienteController implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Seleccione algun articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
             }
-        }
-        );
-
-        this.client.eliminaTodoCarro.addActionListener(
-                new ActionListener() {
+        });
+        this.client.eliminaTodoCarro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -1003,6 +982,10 @@ public class ClienteController implements ActionListener {
                 Collections.sort(cesta);
 
                 if (seleccion == 0) { //Elimina
+                    for (SujetoConcreto sujeto : listaSujetos) {
+                        sujeto.deleteObservers();
+                    }
+                    listaSujetos.clear();
                     cesta.clear();
                     String nuevoCarro = "";
                     carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
@@ -1012,11 +995,8 @@ public class ClienteController implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
                 }
             }
-        }
-        );
-
-        this.client.btnRealizaPedidoCarro.addActionListener(
-                new ActionListener() {
+        });
+        this.client.btnRealizaPedidoCarro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -1053,6 +1033,10 @@ public class ClienteController implements ActionListener {
                             consultaArticulo.actualizarStock(codRef, articulo.getStock() - 1);
                         }
                         if (hecho) {
+                            for (SujetoConcreto sujeto : listaSujetos) {
+                                sujeto.deleteObservers();
+                            }
+                            listaSujetos.clear();
                             carroDao.actualizaCarro(cliente.getEmail(), "");
                             cesta.clear();
                             listaArticulos(cesta);
@@ -1071,8 +1055,7 @@ public class ClienteController implements ActionListener {
         );
 
         //Listners de perfil cliente
-        this.client.btnCambiaEmail.addActionListener(
-                new ActionListener() {
+        this.client.btnCambiaEmail.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -1089,11 +1072,8 @@ public class ClienteController implements ActionListener {
                 }
 
             }
-        }
-        );
-
-        this.client.btnCambiaContra.addActionListener(
-                new ActionListener() {
+        });
+        this.client.btnCambiaContra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -1112,11 +1092,8 @@ public class ClienteController implements ActionListener {
                     }
                 }
             }
-        }
-        );
-
-        this.client.btnCambiaAtributos.addActionListener(
-                new ActionListener() {
+        });
+        this.client.btnCambiaAtributos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
@@ -1147,9 +1124,38 @@ public class ClienteController implements ActionListener {
 
                 }
             }
-        }
-        );
+        });
 
+    }
+
+    private void crearObserver() {
+
+        ArrayList<Integer> cesta = cargarCarro();
+        Collections.sort(cesta);
+        for (int i = 0; i < cesta.size(); i++) {
+            Articulo articulo = consultaArticulo.getArticulo(cesta.get(i));
+            SujetoConcreto sujeto = new SujetoConcreto();
+            sujeto.setComponente(articulo);
+
+            listaSujetos.add(sujeto);
+            Observer o1 = new ObservadorPrecio("o" + i, articulo.getPrecio(), sujeto, this);
+        }
+
+    }
+
+    private void compruebaPrecio() {
+
+        for (int i = 0; i < listaSujetos.size(); i++) {
+            SujetoConcreto sujeto = listaSujetos.get(i);
+            int codigo = sujeto.getComponente().getCodigo_ref();
+            float precio = consultaArticulo.getArticulo(codigo).getPrecio();
+            sujeto.cambiaPrecio(precio);
+        }
+
+    }
+
+    public void mostrarMensaje(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     /**
@@ -2407,6 +2413,10 @@ public class ClienteController implements ActionListener {
             Log.log.error("Error en crear nuevo carro " + ex);
         }
 
+    }
+
+    private ClienteController getClase() {
+        return this;
     }
 
     @Override
