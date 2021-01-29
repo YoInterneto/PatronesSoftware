@@ -1,0 +1,16 @@
+CREACION
+   - Builder
+   - Singleton
+
+ESTRUCTURALES
+   - Proxy
+   - Facade
+   - MVC
+   - DAO
+   - *Adapter*
+
+COMPORTAMIENTO
+   - Observer
+   - * *
+   - * *
+
