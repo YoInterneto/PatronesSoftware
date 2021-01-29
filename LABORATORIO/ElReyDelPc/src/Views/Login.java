@@ -8,7 +8,7 @@ package Views;
 import java.sql.Connection;
 import java.sql.SQLException;
 import util.Conexion;
-import util.Log;
+import SingletonLog.Log;
 
 /**
  *

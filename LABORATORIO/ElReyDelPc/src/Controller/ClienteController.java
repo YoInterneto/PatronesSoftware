@@ -7,7 +7,7 @@ import Model.Usuario.Cliente;
 import Observer.ObservadorPrecio;
 import Observer.SujetoConcreto;
 import Util.ListaDinamicaImagen;
-import Util.PcBuilder;
+import BuilderTorre.PcBuilder;
 
 import Views.InicioCliente;
 import Views.Login;
@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import util.Log;
+import SingletonLog.Log;
 
 public class ClienteController implements ActionListener {
 

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Conexion;
-import util.Log;
+import SingletonLog.Log;
 
 /**
  *

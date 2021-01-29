@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import util.Conexion;
-import util.Log;
+import SingletonLog.Log;
 
 
 public class PortatilDao {

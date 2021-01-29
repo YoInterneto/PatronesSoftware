@@ -1,5 +1,5 @@
 
-package util;
+package SingletonLog;
 
 import java.io.File;
 import java.io.FileWriter;

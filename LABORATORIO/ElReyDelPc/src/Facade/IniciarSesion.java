@@ -13,7 +13,7 @@ import Model.Usuario.Empleado;
 import Views.InicioCliente;
 import Views.InicioEmpleado;
 import Views.Login;
-import util.Log;
+import SingletonLog.Log;
 
 /**
  *

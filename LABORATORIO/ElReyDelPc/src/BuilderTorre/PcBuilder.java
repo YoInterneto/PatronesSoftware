@@ -1,6 +1,7 @@
 
-package Util;
+package BuilderTorre;
 
+import BuilderTorre.IBuilder;
 import Model.Articulos.Caja;
 import Model.Articulos.Disco_duro;
 import Model.Articulos.Fuente_alimentacion;

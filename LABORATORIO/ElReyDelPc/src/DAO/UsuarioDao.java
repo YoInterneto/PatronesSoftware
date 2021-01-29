@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import util.Conexion;
-import util.Log;
+import SingletonLog.Log;
 
 
 public class UsuarioDao {
