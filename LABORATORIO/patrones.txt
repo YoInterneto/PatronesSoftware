@@ -7,7 +7,7 @@ ESTRUCTURALES
    - Facade
    - MVC
    - DAO
-   - *Adapter*
+   - Adapter
 
 COMPORTAMIENTO
    - Observer
