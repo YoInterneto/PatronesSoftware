@@ -89,7 +89,7 @@ public class ClienteController implements ActionListener {
         client.nombreCliente.setText(cliente.getNombre());
 
         //Al comenzar iniciamos los observer para los productos del carro
-        crearObserver();
+        crearObservers();
         compruebaPrecio();
         //Listeners botones menu cliente 
         this.client.btnBuscar.addMouseListener(new MouseAdapter() {
@@ -262,7 +262,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "placa_base";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -278,7 +278,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "caja";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -294,7 +294,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "procesador";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -310,7 +310,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "grafica";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -326,7 +326,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "monitor";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -342,7 +342,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "teclado";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -358,7 +358,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "raton";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -374,7 +374,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "webcam";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -390,10 +390,10 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "fuente_alimentacion";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
-            }         
+            }
         });
         this.client.disco.addMouseListener(new MouseAdapter() {
             @Override
@@ -406,7 +406,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "disco_duro";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -422,7 +422,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "memoria_ram";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -438,7 +438,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "portatil";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -454,7 +454,7 @@ public class ClienteController implements ActionListener {
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
                 tipo = "pctorre";
-                
+
                 ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
                 cargarLista(lista);
             }
@@ -529,52 +529,63 @@ public class ClienteController implements ActionListener {
 
                     String codigoPlaca = client.placaBox.getSelectedItem().toString().split("-")[0];
                     if (!codigoPlaca.equals("Seleccione")) {
+                        System.out.println(codigoPlaca);
                         meterCarro(codigoPlaca);
+                        creaUnObserver(codigoPlaca);
                     }
 
                     String codGrafica = client.graficaBox.getSelectedItem().toString().split("-")[0];
                     if (!codGrafica.equals("Seleccione")) {
                         meterCarro(codGrafica);
+                        creaUnObserver(codGrafica);
                     }
 
                     String codFuente = client.fuenteBox.getSelectedItem().toString().split("-")[0];
                     if (!codFuente.equals("Seleccione")) {
                         meterCarro(codFuente);
+                        creaUnObserver(codFuente);
                     }
 
                     String codCaja = client.cajaBox.getSelectedItem().toString().split("-")[0];
                     if (!codCaja.equals("Seleccione")) {
                         meterCarro(codCaja);
+                        creaUnObserver(codCaja);
                     }
 
                     String codRam = client.ramBox.getSelectedItem().toString().split("-")[0];
                     if (!codRam.equals("Seleccione")) {
                         meterCarro(codRam);
+                        creaUnObserver(codRam);
                     }
 
                     String codCpu = client.cpuBox.getSelectedItem().toString().split("-")[0];
                     if (!codCpu.equals("Seleccione")) {
                         meterCarro(codCpu);
+                        creaUnObserver(codCpu);
                     }
 
                     String codDisco = client.discoBox.getSelectedItem().toString().split("-")[0];
                     if (!codDisco.equals("Seleccione")) {
                         meterCarro(codDisco);
+                        creaUnObserver(codDisco);
                     }
 
                     String codTeclado = client.tecladoBox.getSelectedItem().toString().split("-")[0];
                     if (!codTeclado.equals("Seleccione")) {
                         meterCarro(codTeclado);
+                        creaUnObserver(codTeclado);
                     }
 
                     String codRaton = client.ratonBox.getSelectedItem().toString().split("-")[0];
                     if (!codRaton.equals("Seleccione")) {
                         meterCarro(codRaton);
+                        creaUnObserver(codRaton);
                     }
 
                     String cam = client.camBox.getSelectedItem().toString().split("-")[0];
                     if (!cam.equals("Seleccione")) {
                         meterCarro(cam);
+                        creaUnObserver(cam);
                     }
                     resetValuesBox();
                     iniciarPanelMontar();
@@ -820,7 +831,7 @@ public class ClienteController implements ActionListener {
                 }
             }
         });
-        
+
         //Boton para eliminar un pedido
         this.client.btnEliminarPedido.addActionListener(new ActionListener() {
             @Override
@@ -828,20 +839,19 @@ public class ClienteController implements ActionListener {
                 try {
                     int idPedido = Integer.parseInt(client.nPedidoInfo.getText());
                     Pedido pedido = daoPedido.getPedido(idPedido);
-                    
+
                     //Si el pedido se puede eliminar, es decir, esta actualmente en preparacion
                     //borramos el pedido en la base de datos
-                    if(pedido.getEstado().eliminar(pedido)){
-                        if(daoPedido.eliminarPedido(idPedido)){
-                            JOptionPane.showMessageDialog(null, "Pedido "+ idPedido +" eliminado con éxito.");
-                            
+                    if (pedido.getEstado().eliminar(pedido)) {
+                        if (daoPedido.eliminarPedido(idPedido)) {
+                            JOptionPane.showMessageDialog(null, "Pedido " + idPedido + " eliminado con éxito.");
+
                             client.panelInfoPedido.setVisible(false);
                             client.panelCompras.setVisible(true);
-                            
+
                             cargarListaPedidosCliente();
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "ERROR: No se ha podido eliminar el pedido "+ idPedido +".");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "ERROR: No se ha podido eliminar el pedido " + idPedido + ".");
                         }
                     }
                 } catch (HeadlessException | NumberFormatException ex) {
@@ -849,7 +859,7 @@ public class ClienteController implements ActionListener {
                 }
             }
         });
-        
+
         //Boton para confirmar la recepción de un pedidio
         this.client.btnRecepcionPedido.addActionListener(new ActionListener() {
             @Override
@@ -857,10 +867,10 @@ public class ClienteController implements ActionListener {
                 try {
                     int idPedido = Integer.parseInt(client.nPedidoInfo.getText());
                     Pedido pedido = daoPedido.getPedido(idPedido);
-                    
+
                     //Si se ha podido cambiar el estado, cambiamos el estado tambien en la base de datos
-                    if(pedido.getEstado().cambiarEstado(pedido, "recibido")){
-                        if(!daoPedido.cambiarEstadoPedido(idPedido, 2)){
+                    if (pedido.getEstado().cambiarEstado(pedido, "recibido")) {
+                        if (!daoPedido.cambiarEstadoPedido(idPedido, 2)) {
                             JOptionPane.showMessageDialog(null, "Ya se ha confirmado la recepción del pedido.");
                         }
                     }
@@ -1047,12 +1057,11 @@ public class ClienteController implements ActionListener {
         });
         this.client.eliminarArticulo.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e
-            ) {
+            public void actionPerformed(ActionEvent e) {
 
                 ArrayList<Integer> cesta = cargarCarro();
                 Collections.sort(cesta);
-
+                System.out.println(cesta.toString());
                 int indexSel = client.listaPedidos.getSelectedIndex();
 
                 if (indexSel != -1) {
@@ -1254,7 +1263,7 @@ public class ClienteController implements ActionListener {
 
                     client.correoInfoPedido.setText(pedido.getEmail_cliente());
                     client.nPedidoInfo.setText("" + pedido.getIdPedido());
-                    
+
                     Fecha fecha = new AdapterFecha(pedido.getFecha());
                     client.fechaPedidoInf.setText(fecha.toString());
 
@@ -1264,7 +1273,15 @@ public class ClienteController implements ActionListener {
         });
     }
 
-    private void crearObserver() {
+    private void creaUnObserver(String codigo) {
+        Articulo articulo = consultaArticulo.getArticulo(Integer.parseInt(codigo));
+        SujetoConcreto sujeto = new SujetoConcreto();
+        sujeto.setComponente(articulo);
+        listaSujetos.add(sujeto);
+        Observer obs = new ObservadorPrecio("obs", articulo.getPrecio(), sujeto, getClase());
+    }
+
+    private void crearObservers() {
 
         ArrayList<Integer> cesta = cargarCarro();
         Collections.sort(cesta);
@@ -2023,8 +2040,8 @@ public class ClienteController implements ActionListener {
             String modelo = articulo.getModelo();
             float precio = articulo.getPrecio();
             String ruta = articulo.getRutaImagen();
-            String articuloInfo = "<html><body><strong><u><sup>CodRef-"+ String.format("%04d", codigo) +"- </sup></strong></u><br>Modelo: "+ articulo.getModelo()
-                        +" <br>Precio: "+ articulo.getPrecio() +"€ <br>[stock: "+ articulo.getStock() +"]</body></html>";
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-" + String.format("%04d", codigo) + "- </sup></strong></u><br>Modelo: " + articulo.getModelo()
+                    + " <br>Precio: " + articulo.getPrecio() + "€ <br>[stock: " + articulo.getStock() + "]</body></html>";
 
             listaInfo.add(articuloInfo);
             if (ruta == null) {
@@ -2042,7 +2059,7 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, getClaveBusqueda()));
     }
 
-    private void cargarLista(ArrayList<Articulo> lista){
+    private void cargarLista(ArrayList<Articulo> lista) {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
@@ -2050,8 +2067,8 @@ public class ClienteController implements ActionListener {
         for (int i = 0; i < lista.size(); i++) {
             Articulo articulo = lista.get(i);
             int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "<html><body><strong><u><sup>CodRef-"+ String.format("%04d", codigoReferencia) +"- </sup></strong></u><br>Modelo: "+ articulo.getModelo()
-                        +" <br>Precio: "+ articulo.getPrecio() +"€ <br>[stock: "+ articulo.getStock() +"]</body></html>";
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-" + String.format("%04d", codigoReferencia) + "- </sup></strong></u><br>Modelo: " + articulo.getModelo()
+                    + " <br>Precio: " + articulo.getPrecio() + "€ <br>[stock: " + articulo.getStock() + "]</body></html>";
 
             listaInfo.add(articuloInfo);
             if (articulo.getRutaImagen() == null) {
@@ -2066,7 +2083,7 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setModel(listModel);
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
     }
-    
+
     /**
      * Introduce de forma dinámica la información referente a los pedidos
      * realizados por los clientes, mostrando de cada uno, una breve descripción
@@ -2080,21 +2097,19 @@ public class ClienteController implements ActionListener {
             Pedido pedido = listaPedidos.get(i);
             Fecha fecha = new AdapterFecha(pedido.getFecha());
             int idPedido = pedido.getIdPedido();
-            
+
             String estadoInfo = "";
-            
-            if(pedido.getEstado().getClass().getName().toLowerCase().contains("preparacion")){
+
+            if (pedido.getEstado().getClass().getName().toLowerCase().contains("preparacion")) {
                 estadoInfo = "<strong>Estado: <span style='color:#FFF700';> En preparacion </span></strong>";
-            }
-            else if(pedido.getEstado().getClass().getName().toLowerCase().contains("recibido")){
+            } else if (pedido.getEstado().getClass().getName().toLowerCase().contains("recibido")) {
                 estadoInfo = "<strong>Estado: <span style='color:#00FF03';> Recibido </span></strong>";
-            }
-            else if(pedido.getEstado().getClass().getName().toLowerCase().contains("enviado")){
+            } else if (pedido.getEstado().getClass().getName().toLowerCase().contains("enviado")) {
                 estadoInfo = "<strong>Estado: <span style='color:#0086FF';> Enviado </span></strong>";
             }
-            
+
             String pedidoInfo = "<html><body><strong><u><sup>IDPedido-" + String.format("%04d", idPedido) + " </sup></strong></u><br>Fecha: " + fecha.toString()
-                    + " <br>Usuario: " + pedido.getEmail_cliente() + " <br>"+ estadoInfo +"</body></html>";
+                    + " <br>Usuario: " + pedido.getEmail_cliente() + " <br>" + estadoInfo + "</body></html>";
 
             listModel.add(i, pedidoInfo);
         }
@@ -2104,41 +2119,40 @@ public class ClienteController implements ActionListener {
     }
 
     /**
-     * Carga la información referente todos los arículos de un pedido en concreto
+     * Carga la información referente todos los arículos de un pedido en
+     * concreto
      *
      * @param pedido
      */
-    public void cargarPedidoInfo(Pedido pedido){
+    public void cargarPedidoInfo(Pedido pedido) {
         DefaultListModel listModel = new DefaultListModel();
-        
+
         ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
-        
+
         ArrayList<Integer> listaCodigos = pedido.getListaArticulos();
-        
+
         ArrayList<Articulo> listaCompras = new ArrayList<>();
-        for(int i=0; i< listaCodigos.size(); i++){
+        for (int i = 0; i < listaCodigos.size(); i++) {
             listaCompras.add(consultaArticulo.getArticulo(listaCodigos.get(i)));
         }
-        
-        for(int i=0; i<listaCompras.size(); i++){
+
+        for (int i = 0; i < listaCompras.size(); i++) {
             Articulo articulo = listaCompras.get(i);
             int codigoReferencia = articulo.getCodigo_ref();
             String articuloInfo;
-            if(articulo.getModelo().toLowerCase().contains("custom-")){
-                articuloInfo = "<html><body><strong><u><sup>PcCustom "+ codigoReferencia +" </sup></strong></u> <br>Caracteristicas- ["+ articulo.getDescripcion() +"] <br>Precio-"+ 
-                        articulo.getPrecio()+ " €</body></html>";
-            }
-            else{
-                articuloInfo = "<html><body><strong><u><sup>Articulo "+ (i+1) +" </sup></strong></u> <br>CodRef-"+ String.format("%04d", codigoReferencia) 
-                        +" <br>  Modelo: "+ articulo.getModelo() +" <br>  Precio: "+ articulo.getPrecio() +" €</body></html>";
+            if (articulo.getModelo().toLowerCase().contains("custom-")) {
+                articuloInfo = "<html><body><strong><u><sup>PcCustom " + codigoReferencia + " </sup></strong></u> <br>Caracteristicas- [" + articulo.getDescripcion() + "] <br>Precio-"
+                        + articulo.getPrecio() + " €</body></html>";
+            } else {
+                articuloInfo = "<html><body><strong><u><sup>Articulo " + (i + 1) + " </sup></strong></u> <br>CodRef-" + String.format("%04d", codigoReferencia)
+                        + " <br>  Modelo: " + articulo.getModelo() + " <br>  Precio: " + articulo.getPrecio() + " €</body></html>";
             }
 
             listaInfo.add(articuloInfo);
-            if(articulo.getRutaImagen() == null){
+            if (articulo.getRutaImagen() == null) {
                 listaRuta.add("/images/error.png");
-            }
-            else{
+            } else {
                 listaRuta.add(articulo.getRutaImagen());
             }
 
@@ -2148,7 +2162,7 @@ public class ClienteController implements ActionListener {
         client.listaInfoPedido.setModel(listModel);
         client.listaInfoPedido.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
     }
-    
+
     /**
      * Metodo para comprobar el formulario para cambiar la password en el panel
      * del perfil de cliente.
