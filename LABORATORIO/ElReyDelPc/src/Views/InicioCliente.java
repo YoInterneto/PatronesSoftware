@@ -49,6 +49,8 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
+        jSeparator40 = new javax.swing.JSeparator();
+        btnCompras = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnCerrar = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -212,6 +214,27 @@ public class InicioCliente extends javax.swing.JFrame {
         btnCambiaAtributos = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
         datoDireccion = new javax.swing.JTextField();
+        panelCompras = new javax.swing.JPanel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jSeparator42 = new javax.swing.JSeparator();
+        jSeparator41 = new javax.swing.JSeparator();
+        jSeparator39 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaCompras = new javax.swing.JList<>();
+        panelInfoPedido = new javax.swing.JPanel();
+        infoPanelAnadir3 = new javax.swing.JPanel();
+        jLabel68 = new javax.swing.JLabel();
+        jSeparator37 = new javax.swing.JSeparator();
+        jSeparator38 = new javax.swing.JSeparator();
+        jLabel69 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listaInfoPedido = new javax.swing.JList<>();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        nPedidoInfo = new javax.swing.JLabel();
+        correoInfoPedido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -304,6 +327,17 @@ public class InicioCliente extends javax.swing.JFrame {
         jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 240, 10));
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 240, -1));
 
+        jSeparator40.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel2.add(jSeparator40, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 570, 250, -1));
+
+        btnCompras.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnCompras.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/factura.png"))); // NOI18N
+        btnCompras.setText(" Ver compras");
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 230, 60));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 700));
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
@@ -381,7 +415,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jSeparator36.setOrientation(javax.swing.SwingConstants.VERTICAL);
         infoPanelAnadir1.add(jSeparator36, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 50, 71));
 
-        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel55.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel55.setForeground(new java.awt.Color(255, 255, 255));
         jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel55.setText("Elija el producto a editar");
@@ -1193,6 +1227,137 @@ public class InicioCliente extends javax.swing.JFrame {
 
         jPanel6.add(panelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
+        panelCompras.setBackground(new java.awt.Color(51, 51, 51));
+        panelCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel34.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Tu tienda de tecnología online líder por precio, calidad y servicio");
+        panelCompras.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 520, 60));
+
+        jLabel32.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("Mis pedidos");
+        panelCompras.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 60));
+
+        jLabel33.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("Resumen pedidos");
+        panelCompras.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 70));
+
+        jSeparator42.setForeground(new java.awt.Color(255, 255, 255));
+        panelCompras.add(jSeparator42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 30));
+
+        jSeparator41.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator41.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        panelCompras.add(jSeparator41, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 10, 130));
+
+        jSeparator39.setForeground(new java.awt.Color(255, 255, 255));
+        panelCompras.add(jSeparator39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 960, 20));
+
+        listaCompras.setBackground(new java.awt.Color(51, 51, 51));
+        listaCompras.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        listaCompras.setForeground(new java.awt.Color(255, 255, 255));
+        listaCompras.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listaCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jScrollPane3.setViewportView(listaCompras);
+
+        panelCompras.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 820, 380));
+
+        jPanel6.add(panelCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
+
+        panelInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
+        panelInfoPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelInfoPedido.setPreferredSize(new java.awt.Dimension(960, 620));
+        panelInfoPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        infoPanelAnadir3.setBackground(new java.awt.Color(51, 51, 51));
+        infoPanelAnadir3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel68.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel68.setText("Resumen pedido");
+        infoPanelAnadir3.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 70));
+        infoPanelAnadir3.add(jSeparator37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 10));
+
+        jSeparator38.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        infoPanelAnadir3.add(jSeparator38, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 50, 71));
+
+        jLabel69.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel69.setText("Información acerca de un pedido");
+        infoPanelAnadir3.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 420, 70));
+
+        panelInfoPedido.add(infoPanelAnadir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 80));
+
+        jScrollPane5.setToolTipText("");
+
+        listaInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
+        listaInfoPedido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        listaInfoPedido.setForeground(new java.awt.Color(255, 255, 255));
+        listaInfoPedido.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listaInfoPedido.setToolTipText("");
+        jScrollPane5.setViewportView(listaInfoPedido);
+
+        panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 420));
+
+        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Nº PEDIDO - ");
+
+        nPedidoInfo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        nPedidoInfo.setForeground(new java.awt.Color(255, 255, 255));
+        nPedidoInfo.setText("ID PEDIDO");
+
+        correoInfoPedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        correoInfoPedido.setForeground(new java.awt.Color(255, 255, 255));
+        correoInfoPedido.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        correoInfoPedido.setText("email");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nPedidoInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(nPedidoInfo)
+                    .addComponent(correoInfoPedido))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        panelInfoPedido.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 960, 70));
+
+        jPanel6.add(panelInfoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
+
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1273,6 +1438,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel btnCarro;
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JButton btnComprarProducto;
+    public javax.swing.JLabel btnCompras;
     public javax.swing.JLabel btnInicio;
     public javax.swing.JLabel btnMontar;
     public javax.swing.JLabel btnPerfil;
@@ -1284,6 +1450,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> camBox;
     public javax.swing.JLabel codigo_ref;
     public javax.swing.JLabel confirmaPuntuacion;
+    public javax.swing.JLabel correoInfoPedido;
     public javax.swing.JLabel cpu;
     public javax.swing.JComboBox<String> cpuBox;
     public javax.swing.JTextField datoDireccion;
@@ -1306,6 +1473,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> graficaBox;
     public javax.swing.JLabel imgProducto;
     private javax.swing.JPanel infoPanelAnadir1;
+    private javax.swing.JPanel infoPanelAnadir3;
     public javax.swing.JButton insertarCesta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1329,6 +1497,10 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -1358,16 +1530,21 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -1398,17 +1575,26 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator34;
     private javax.swing.JSeparator jSeparator35;
     private javax.swing.JSeparator jSeparator36;
+    private javax.swing.JSeparator jSeparator37;
+    private javax.swing.JSeparator jSeparator38;
+    private javax.swing.JSeparator jSeparator39;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator40;
+    private javax.swing.JSeparator jSeparator41;
+    private javax.swing.JSeparator jSeparator42;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    public javax.swing.JList<String> listaCompras;
+    public javax.swing.JList<String> listaInfoPedido;
     public javax.swing.JList<String> listaPedidos;
     public javax.swing.JList<String> listaProductos;
     public javax.swing.JLabel monitor;
     public javax.swing.JButton montaYcompra;
     public javax.swing.JButton montaYguarda;
+    public javax.swing.JLabel nPedidoInfo;
     public javax.swing.JLabel nombreAtributo1;
     public javax.swing.JLabel nombreAtributo2;
     public javax.swing.JLabel nombreAtributo3;
@@ -1418,7 +1604,9 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JTextField nuevoEmail;
     public javax.swing.JPanel panelArticulo;
     public javax.swing.JPanel panelCarro;
+    public javax.swing.JPanel panelCompras;
     public javax.swing.JPanel panelElegirProducto;
+    public javax.swing.JPanel panelInfoPedido;
     public javax.swing.JPanel panelInicio;
     public javax.swing.JPanel panelMonta;
     public javax.swing.JPanel panelPerfil;

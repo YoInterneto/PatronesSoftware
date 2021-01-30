@@ -55,6 +55,38 @@ public class PedidoDao {
         Log.logBd.info("Consulta realizada con éxito - getAllPedidos()");
         return listaPedidos;
     }
+    
+    public ArrayList<Pedido> getAllPedidosCliente(String email) {
+        ArrayList<Pedido> listaPedidos = new ArrayList<>();
+        Log.logBd.info("CONSULTA getAllPedidosCliente");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getAllPedidosCliente()");
+
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from pedido where email_cliente='"+email+"';");
+            Log.logBd.info("Realizada consulta - getAllPedidosCliente()");
+
+            while (resultado.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setEmail_cliente(resultado.getString("email_cliente"));
+                pedido.setIdPedido(resultado.getInt("id"));
+                pedido.setFecha(resultado.getDate("fecha"));
+                pedido.setPrecio_total(resultado.getFloat("precio_total"));
+                pedido.setListaArticulos(resultado.getString("codigos"));
+
+                listaPedidos.add(pedido);
+            }
+
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getAllPedidos(): " + error);
+            Log.logBd.error("                  SQL State - " + error.getSQLState());
+            Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
+        }
+
+        Log.logBd.info("Consulta realizada con éxito - getAllPedidosCliente()");
+        return listaPedidos;
+    }
 
     public Pedido getPedido(int idPedido) {
         Pedido pedido = new Pedido();

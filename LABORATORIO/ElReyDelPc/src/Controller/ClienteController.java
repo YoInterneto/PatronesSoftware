@@ -1,5 +1,7 @@
 package Controller;
 
+import Adapter.AdapterFecha;
+import Adapter.Fecha;
 import Facade.FachadaLogin;
 import DAO.*;
 import Model.Articulos.*;
@@ -8,6 +10,7 @@ import Observer.ObservadorPrecio;
 import Observer.SujetoConcreto;
 import Util.ListaDinamicaImagen;
 import BuilderTorre.PcBuilder;
+import Model.Negocio.Pedido;
 
 import Views.InicioCliente;
 import Views.Login;
@@ -26,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import SingletonLog.Log;
+import Util.ListaDinamica;
 
 public class ClienteController implements ActionListener {
 
@@ -107,6 +111,8 @@ public class ClienteController implements ActionListener {
                         client.panelMonta.setVisible(false);
                         client.panelProducto.setVisible(false);
                         client.panelArticulo.setVisible(false);
+                        client.panelCompras.setVisible(false);
+                        client.panelInfoPedido.setVisible(false);
                         client.panelElegirProducto.setVisible(true);
                         resetValuesBox();
                         cargarListaProductos(listaCodigos);
@@ -130,6 +136,8 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(true);
                 client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
 
                 //Restablecemos los atributos particulares del producto
                 client.atrParticular1.setVisible(false);
@@ -152,6 +160,8 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
                 resetValuesBox();
                 compruebaPrecio();
             }
@@ -166,6 +176,8 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
                 ArrayList<Integer> cesta = cargarCarro();
                 Collections.sort(cesta);
                 listaArticulos(cesta);
@@ -183,6 +195,8 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
                 resetValuesBox();
                 iniciarPanelMontar();
                 compruebaPrecio();
@@ -198,9 +212,27 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
                 iniciarPanelPerfil();
                 resetValuesBox();
                 compruebaPrecio();
+            }
+        });
+        this.client.btnCompras.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
+
+                client.panelCompras.setVisible(true);
+
+                cargarListaPedidosCliente();
             }
         });
         this.client.btnCerrar.addMouseListener(new MouseAdapter() {
@@ -1127,6 +1159,30 @@ public class ClienteController implements ActionListener {
             }
         });
 
+        //Evento para cuando se clicka en un pedido
+        this.client.listaCompras.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    client.panelInicio.setVisible(false);
+                    client.panelCarro.setVisible(false);
+                    client.panelPerfil.setVisible(false);
+                    client.panelMonta.setVisible(false);
+                    client.panelProducto.setVisible(false);
+                    client.panelArticulo.setVisible(false);
+                    client.panelElegirProducto.setVisible(false);
+                    client.panelCompras.setVisible(false);
+                    client.panelInfoPedido.setVisible(true);
+
+                    Pedido pedido = daoPedido.getAllPedidosCliente(cliente.getEmail()).get(client.listaCompras.getSelectedIndex());
+
+                    client.correoInfoPedido.setText(pedido.getEmail_cliente());
+                    client.nPedidoInfo.setText("" + pedido.getIdPedido() + "     [" + pedido.getFecha() + "]");
+
+                    cargarPedidoInfo(pedido);
+                }
+            }
+        });
     }
 
     private void crearObserver() {
@@ -2312,6 +2368,75 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "PcTorre"));
     }
 
+    /**
+     * Introduce de forma dinámica la información referente a los pedidos
+     * realizados por los clientes, mostrando de cada uno, una breve descripción
+     *
+     */
+    public void cargarListaPedidosCliente() {
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<Pedido> listaPedidos = daoPedido.getAllPedidosCliente(cliente.getEmail());
+
+        for (int i = 0; i < listaPedidos.size(); i++) {
+            Pedido pedido = listaPedidos.get(i);
+            Fecha fecha = new AdapterFecha(pedido.getFecha());
+            int idPedido = pedido.getIdPedido();
+            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-" + String.format("%04d", idPedido) + " </sup></strong></u><br>Fecha: " + fecha.toString()
+                    + " <br>Usuario: " + pedido.getEmail_cliente() + " </body></html>";
+
+            listModel.add(i, pedidoInfo);
+        }
+
+        client.listaCompras.setModel(listModel);
+        client.listaCompras.setCellRenderer(new ListaDinamica("Pedido"));
+    }
+
+    /**
+     * Carga la información referente todos los arículos de un pedido en concreto
+     *
+     * @param pedido
+     */
+    public void cargarPedidoInfo(Pedido pedido){
+        DefaultListModel listModel = new DefaultListModel();
+        
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+        
+        ArrayList<Integer> listaCodigos = pedido.getListaArticulos();
+        
+        ArrayList<Articulo> listaCompras = new ArrayList<>();
+        for(int i=0; i< listaCodigos.size(); i++){
+            listaCompras.add(consultaArticulo.getArticulo(listaCodigos.get(i)));
+        }
+        
+        for(int i=0; i<listaCompras.size(); i++){
+            Articulo articulo = listaCompras.get(i);
+            int codigoReferencia = articulo.getCodigo_ref();
+            String articuloInfo;
+            if(articulo.getModelo().toLowerCase().contains("custom-")){
+                articuloInfo = "<html><body><strong><u><sup>PcCustom "+ codigoReferencia +" </sup></strong></u> <br>Caracteristicas- ["+ articulo.getDescripcion() +"] <br>Precio-"+ 
+                        articulo.getPrecio()+ " €</body></html>";
+            }
+            else{
+                articuloInfo = "<html><body><strong><u><sup>Articulo "+ (i+1) +" </sup></strong></u> <br>CodRef-"+ String.format("%04d", codigoReferencia) 
+                        +" <br>  Modelo: "+ articulo.getModelo() +" <br>  Precio: "+ articulo.getPrecio() +" €</body></html>";
+            }
+
+            listaInfo.add(articuloInfo);
+            if(articulo.getRutaImagen() == null){
+                listaRuta.add("/images/error.png");
+            }
+            else{
+                listaRuta.add(articulo.getRutaImagen());
+            }
+
+            listModel.add(i, articuloInfo);
+        }
+
+        client.listaInfoPedido.setModel(listModel);
+        client.listaInfoPedido.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
+    }
+    
     /**
      * Metodo para comprobar el formulario para cambiar la password en el panel
      * del perfil de cliente.
