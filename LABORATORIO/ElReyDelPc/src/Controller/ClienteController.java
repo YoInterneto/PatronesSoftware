@@ -529,7 +529,6 @@ public class ClienteController implements ActionListener {
 
                     String codigoPlaca = client.placaBox.getSelectedItem().toString().split("-")[0];
                     if (!codigoPlaca.equals("Seleccione")) {
-                        System.out.println(codigoPlaca);
                         meterCarro(codigoPlaca);
                         creaUnObserver(codigoPlaca);
                     }
@@ -844,6 +843,12 @@ public class ClienteController implements ActionListener {
                     //borramos el pedido en la base de datos
                     if (pedido.getEstado().eliminar(pedido)) {
                         if (daoPedido.eliminarPedido(idPedido)) {
+                            //Actualizamos el stock de los articulos cuando se elimina el pedido
+                            ArrayList<Integer> listaArticulos =  pedido.getListaArticulos();
+                            for (int i = 0; i < listaArticulos.size(); i++) {
+                                Articulo articulo = consultaArticulo.getArticulo(listaArticulos.get(i));
+                                consultaArticulo.actualizarStock(articulo.getCodigo_ref(), articulo.getStock()+1);
+                            }
                             JOptionPane.showMessageDialog(null, "Pedido " + idPedido + " eliminado con éxito.");
 
                             client.panelInfoPedido.setVisible(false);
@@ -1061,7 +1066,6 @@ public class ClienteController implements ActionListener {
 
                 ArrayList<Integer> cesta = cargarCarro();
                 Collections.sort(cesta);
-                System.out.println(cesta.toString());
                 int indexSel = client.listaPedidos.getSelectedIndex();
 
                 if (indexSel != -1) {
