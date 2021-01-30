@@ -261,8 +261,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaPlaca();
                 tipo = "placa_base";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.caja.addMouseListener(new MouseAdapter() {
@@ -275,8 +277,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaCaja();
                 tipo = "caja";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.cpu.addMouseListener(new MouseAdapter() {
@@ -289,8 +293,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaCpu();
                 tipo = "procesador";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.grafica.addMouseListener(new MouseAdapter() {
@@ -303,8 +309,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaGraficas();
                 tipo = "grafica";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.monitor.addMouseListener(new MouseAdapter() {
@@ -317,8 +325,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaMonitor();
                 tipo = "monitor";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.teclado.addMouseListener(new MouseAdapter() {
@@ -331,8 +341,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaTeclado();
                 tipo = "teclado";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.raton.addMouseListener(new MouseAdapter() {
@@ -345,8 +357,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaRaton();
                 tipo = "raton";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.cam.addMouseListener(new MouseAdapter() {
@@ -359,8 +373,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaCam();
                 tipo = "webcam";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.fuente.addMouseListener(new MouseAdapter() {
@@ -373,9 +389,11 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaFuente();
                 tipo = "fuente_alimentacion";
-            }
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }         
         });
         this.client.disco.addMouseListener(new MouseAdapter() {
             @Override
@@ -387,8 +405,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaDisco();
                 tipo = "disco_duro";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.ram.addMouseListener(new MouseAdapter() {
@@ -401,8 +421,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaRam();
                 tipo = "memoria_ram";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.portatil.addMouseListener(new MouseAdapter() {
@@ -415,8 +437,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaPortatil();
                 tipo = "portatil";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
         this.client.pctorre.addMouseListener(new MouseAdapter() {
@@ -429,8 +453,10 @@ public class ClienteController implements ActionListener {
                 client.panelProducto.setVisible(false);
                 client.panelArticulo.setVisible(false);
                 client.panelElegirProducto.setVisible(true);
-                cargarListaPcTorre();
                 tipo = "pctorre";
+                
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
             }
         });
 
@@ -1997,8 +2023,8 @@ public class ClienteController implements ActionListener {
             String modelo = articulo.getModelo();
             float precio = articulo.getPrecio();
             String ruta = articulo.getRutaImagen();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigo) + "- \t" + modelo + " \tPrecio € " + precio;
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-"+ String.format("%04d", codigo) +"- </sup></strong></u><br>Modelo: "+ articulo.getModelo()
+                        +" <br>Precio: "+ articulo.getPrecio() +"€ <br>[stock: "+ articulo.getStock() +"]</body></html>";
 
             listaInfo.add(articuloInfo);
             if (ruta == null) {
@@ -2016,22 +2042,16 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, getClaveBusqueda()));
     }
 
-    /**
-     * Crea una Jlist con informacion de todas las placas que hay en la base de
-     * datos.
-     */
-    private void cargarListaPlaca() {
+    private void cargarLista(ArrayList<Articulo> lista){
         DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Placa_base> lista = daoPlaca.getAllPlacas();
-
         ArrayList<String> listaInfo = new ArrayList<>();
         ArrayList<String> listaRuta = new ArrayList<>();
 
         for (int i = 0; i < lista.size(); i++) {
-            Placa_base articulo = lista.get(i);
+            Articulo articulo = lista.get(i);
             int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-"+ String.format("%04d", codigoReferencia) +"- </sup></strong></u><br>Modelo: "+ articulo.getModelo()
+                        +" <br>Precio: "+ articulo.getPrecio() +"€ <br>[stock: "+ articulo.getStock() +"]</body></html>";
 
             listaInfo.add(articuloInfo);
             if (articulo.getRutaImagen() == null) {
@@ -2044,383 +2064,9 @@ public class ClienteController implements ActionListener {
         }
 
         client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Placa_base"));
+        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
     }
-
-    /**
-     * Crea una Jlist con informacion de todos los procesadores que hay en la
-     * base de datos.
-     */
-    private void cargarListaCpu() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Procesador> lista = daoCpu.getAllProcesadores();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Procesador cpu = lista.get(i);
-            int codigoReferencia = cpu.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + cpu.getModelo() + " \tPrecio € " + cpu.getPrecio() + "    \t[stock: " + cpu.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (cpu.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(cpu.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Procesador"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todas las graficas que hay en la base
-     * de datos.
-     */
-    private void cargarListaGraficas() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Grafica> lista = daoGrafica.getAllGraficas();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Grafica grafica = lista.get(i);
-            int codigoReferencia = grafica.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + grafica.getModelo() + " \tPrecio € " + grafica.getPrecio() + "    \t[stock: " + grafica.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (grafica.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(grafica.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Grafica"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todos los monitores que hay en la base
-     * de datos.
-     */
-    private void cargarListaMonitor() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Monitor> lista = daoMonitor.getAllMonitores();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Monitor articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Monitor"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todos los teclados que hay en la base
-     * de datos.
-     */
-    private void cargarListaTeclado() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Teclado> lista = daoTeclado.getAllTeclados();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Teclado articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Teclado"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todos los ratones que hay en la base de
-     * datos.
-     */
-    private void cargarListaRaton() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Raton> lista = daoRaton.getAllRatones();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Raton articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Raton"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todas las webcam que hay en la base de
-     * datos.
-     */
-    private void cargarListaCam() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<WebCam> lista = daoCam.getAllWebCams();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            WebCam articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "WebCam"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todas las fuentes de alimentacion que
-     * hay en la base de datos.
-     */
-    private void cargarListaFuente() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Fuente_alimentacion> lista = daoFuente.getAllFuentes();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Fuente_alimentacion articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Fuente_alimentacion"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todas las memorias ram que hay en la
-     * base de datos.
-     */
-    private void cargarListaRam() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Memoria_RAM> lista = daoRam.getAllMemoria_RAM();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Memoria_RAM articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Memoria_RAM"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todos los discos duros que hay en la
-     * base de datos.
-     */
-    private void cargarListaDisco() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Disco_duro> lista = daoDisco.getAllDiscos();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Disco_duro articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Disco_duro"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todas las cajas que hay en la base de
-     * datos.
-     */
-    private void cargarListaCaja() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Caja> lista = daoCaja.getAllCajas();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Caja articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Caja"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todos los portatiles que hay en la base
-     * de datos.
-     */
-    private void cargarListaPortatil() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Portatil> lista = daoPortatil.getAllPortatil();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            Portatil articulo = lista.get(i);
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Portatil"));
-    }
-
-    /**
-     * Crea una Jlist con informacion de todas las torres pc que hay en la base
-     * de datos.
-     */
-    private void cargarListaPcTorre() {
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<PcTorre> lista = daoPctorre.getAllPcTorre();
-
-        ArrayList<String> listaInfo = new ArrayList<>();
-        ArrayList<String> listaRuta = new ArrayList<>();
-
-        for (int i = 0; i < lista.size(); i++) {
-            PcTorre articulo = lista.get(i);
-
-            int codigoReferencia = articulo.getCodigo_ref();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigoReferencia) + "- \t" + articulo.getModelo() + " \tPrecio € " + articulo.getPrecio() + "    \t[stock: " + articulo.getStock() + "]";
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
-
-            listaInfo.add(articuloInfo);
-            if (articulo.getRutaImagen() == null) {
-                listaRuta.add("/images/error.png");
-            } else {
-                listaRuta.add(articulo.getRutaImagen());
-            }
-
-            listModel.add(i, articuloInfo);
-
-        }
-
-        client.listaProductos.setModel(listModel);
-        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "PcTorre"));
-    }
-
+    
     /**
      * Introduce de forma dinámica la información referente a los pedidos
      * realizados por los clientes, mostrando de cada uno, una breve descripción
