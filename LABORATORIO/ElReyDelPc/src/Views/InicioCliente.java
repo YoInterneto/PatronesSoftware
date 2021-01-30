@@ -235,6 +235,7 @@ public class InicioCliente extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         nPedidoInfo = new javax.swing.JLabel();
         correoInfoPedido = new javax.swing.JLabel();
+        fechaPedidoInf = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -787,35 +788,17 @@ public class InicioCliente extends javax.swing.JFrame {
         montaYguarda.setFocusPainted(false);
         panelMonta.add(montaYguarda, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 350, 150, 30));
 
-        jSeparator22.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator22.setOrientation(javax.swing.SwingConstants.VERTICAL);
         panelMonta.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 305, 40, 168));
-
-        jSeparator23.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 350, 10));
-
-        jSeparator24.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 195, 350, 10));
-
-        jSeparator25.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 350, 10));
-
-        jSeparator26.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 305, 660, 10));
-
-        jSeparator27.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 660, 10));
-
-        jSeparator28.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 415, 660, 10));
-
-        jSeparator29.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 660, 10));
-
-        jSeparator30.setBackground(new java.awt.Color(255, 255, 255));
         panelMonta.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 525, 350, 10));
 
-        jSeparator31.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator31.setOrientation(javax.swing.SwingConstants.VERTICAL);
         panelMonta.add(jSeparator31, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 40, 380));
 
@@ -1330,6 +1313,11 @@ public class InicioCliente extends javax.swing.JFrame {
         correoInfoPedido.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         correoInfoPedido.setText("email");
 
+        fechaPedidoInf.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        fechaPedidoInf.setForeground(new java.awt.Color(255, 255, 255));
+        fechaPedidoInf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fechaPedidoInf.setText("jLabel5");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -1338,9 +1326,11 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nPedidoInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
-                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nPedidoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(fechaPedidoInf, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
         );
         jPanel11Layout.setVerticalGroup(
@@ -1350,7 +1340,8 @@ public class InicioCliente extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(nPedidoInfo)
-                    .addComponent(correoInfoPedido))
+                    .addComponent(correoInfoPedido)
+                    .addComponent(fechaPedidoInf))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -1466,6 +1457,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> discoBox;
     public javax.swing.JButton eliminaTodoCarro;
     public javax.swing.JButton eliminarArticulo;
+    public javax.swing.JLabel fechaPedidoInf;
     private javax.swing.JLabel fotoInicio;
     public javax.swing.JLabel fuente;
     public javax.swing.JComboBox<String> fuenteBox;

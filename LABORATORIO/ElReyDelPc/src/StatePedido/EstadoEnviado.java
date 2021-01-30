@@ -23,7 +23,8 @@ public class EstadoEnviado implements Estado{
         }
         else if(siguienteEstado.equalsIgnoreCase("recibido")){
             cambiado = true;
-            pedido.setEstado(this);
+            EstadoRecibido nuevoEstado = new EstadoRecibido();
+            pedido.setEstado(nuevoEstado);
             JOptionPane.showMessageDialog(null, "Se ha confirmado la recepcion del pedido");
         }
         

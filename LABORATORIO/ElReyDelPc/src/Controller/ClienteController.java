@@ -1177,7 +1177,10 @@ public class ClienteController implements ActionListener {
                     Pedido pedido = daoPedido.getAllPedidosCliente(cliente.getEmail()).get(client.listaCompras.getSelectedIndex());
 
                     client.correoInfoPedido.setText(pedido.getEmail_cliente());
-                    client.nPedidoInfo.setText("" + pedido.getIdPedido() + "     [" + pedido.getFecha() + "]");
+                    client.nPedidoInfo.setText("" + pedido.getIdPedido());
+                    
+                    Fecha fecha = new AdapterFecha(pedido.getFecha());
+                    client.fechaPedidoInf.setText(fecha.toString());
 
                     cargarPedidoInfo(pedido);
                 }

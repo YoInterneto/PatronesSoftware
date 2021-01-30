@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import util.Conexion;
 import SingletonLog.Log;
+import StatePedido.EstadoEnviado;
+import StatePedido.EstadoPreparacion;
+import StatePedido.EstadoRecibido;
 
 /**
  *
@@ -42,8 +45,27 @@ public class PedidoDao {
                 pedido.setFecha(resultado.getDate("fecha"));
                 pedido.setPrecio_total(resultado.getFloat("precio_total"));
                 pedido.setListaArticulos(resultado.getString("codigos"));
-
-                listaPedidos.add(pedido);
+                
+                int estado = resultado.getInt("estado");
+                
+                //Pedido en preparacion
+                if(estado == 0){
+                    EstadoPreparacion estadoPedido = new EstadoPreparacion();
+                    pedido.setEstado(estadoPedido);
+                    listaPedidos.add(pedido);
+                }
+                //Pedido enviado
+                else if(estado == 1){
+                    EstadoEnviado estadoPedido = new EstadoEnviado();
+                    pedido.setEstado(estadoPedido);
+                    listaPedidos.add(pedido);
+                }
+                //Pedido confirmada recepcion
+                else if(estado == 2){
+                    EstadoRecibido estadoPedido = new EstadoRecibido();
+                    pedido.setEstado(estadoPedido);
+                    listaPedidos.add(pedido);
+                }
             }
 
         } catch (SQLException error) {
@@ -75,7 +97,26 @@ public class PedidoDao {
                 pedido.setPrecio_total(resultado.getFloat("precio_total"));
                 pedido.setListaArticulos(resultado.getString("codigos"));
 
-                listaPedidos.add(pedido);
+                int estado = resultado.getInt("estado");
+                
+                //Pedido en preparacion
+                if(estado == 0){
+                    EstadoPreparacion estadoPedido = new EstadoPreparacion();
+                    pedido.setEstado(estadoPedido);
+                    listaPedidos.add(pedido);
+                }
+                //Pedido enviado
+                else if(estado == 1){
+                    EstadoEnviado estadoPedido = new EstadoEnviado();
+                    pedido.setEstado(estadoPedido);
+                    listaPedidos.add(pedido);
+                }
+                //Pedido confirmada recepcion
+                else if(estado == 2){
+                    EstadoRecibido estadoPedido = new EstadoRecibido();
+                    pedido.setEstado(estadoPedido);
+                    listaPedidos.add(pedido);
+                }
             }
 
         } catch (SQLException error) {
@@ -104,6 +145,24 @@ public class PedidoDao {
                 pedido.setFecha(resultado.getDate("fecha"));
                 pedido.setPrecio_total(resultado.getInt("precio_total"));
                 pedido.setListaArticulos(resultado.getString("codigos"));
+                
+                int estado = resultado.getInt("estado");
+                
+                //Pedido en preparacion
+                if(estado == 0){
+                    EstadoPreparacion estadoPedido = new EstadoPreparacion();
+                    pedido.setEstado(estadoPedido);
+                }
+                //Pedido enviado
+                else if(estado == 1){
+                    EstadoEnviado estadoPedido = new EstadoEnviado();
+                    pedido.setEstado(estadoPedido);
+                }
+                //Pedido confirmada recepcion
+                else if(estado == 2){
+                    EstadoRecibido estadoPedido = new EstadoRecibido();
+                    pedido.setEstado(estadoPedido);
+                }
             }
         } catch (SQLException error) {
             Log.logBd.error("ERROR SQL en getPedido(): " + error);
@@ -136,7 +195,7 @@ public class PedidoDao {
             }
 
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + Float.parseFloat(precio) + " ,'"
-                    + date + "'," + idPedido + ",'{" + cadenaCodigos + "}','" + email + "');");
+                    + date + "'," + idPedido + ",'{" + cadenaCodigos + "}', 0,'" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedidoCarro()");
 
             if (codigo > 0) {
@@ -173,7 +232,7 @@ public class PedidoDao {
             Statement s = conexion.createStatement();
 
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + Float.parseFloat(precio) + " ,'"
-                    + date + "'," + idPedido + ",'{" + codigoRef + "}','" + email + "');");
+                    + date + "'," + idPedido + ",'{" + codigoRef + "}', 0,'" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedido()");
 
             if (codigo > 0) {
@@ -219,6 +278,15 @@ public class PedidoDao {
         return idMax;
     }
 
+    
+    /**
+     * Crea un pedido nuevo con una torre de pc montada por el usuario
+     *
+     * @param torre
+     * @param idPedido
+     * @param email
+     * @return Devuelve un boolean si se ha podido insertar
+     */
     public boolean hacerPedidoCustom(PcTorre torre,int idPedido, String email) {
         boolean hecho = false;
         Date date = new Date();
@@ -229,7 +297,7 @@ public class PedidoDao {
             Statement s = conexion.createStatement();
 
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + torre.getPrecio() + " ,'"
-                    + date + "'," + idPedido + ",'{" + torre.getCodigo_ref() + "}','" + email + "');");
+                    + date + "'," + idPedido + ",'{" + torre.getCodigo_ref() + "}', 0,'" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedidoCustom()");
 
             if (codigo > 0) {
@@ -244,5 +312,65 @@ public class PedidoDao {
 
         return hecho;
     }
+    
+    /**
+     * Elimina un pedido de la base de datos
+     *
+     * @param idPedido
+     * @return Devuelve si se ha podido eliminar el pedido
+     */
+    public boolean eliminarPedido(int idPedido) {
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA EliminarPedido");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - eliminarPedido()");
+            Statement s = conexion.createStatement();
 
+            int codigo = s.executeUpdate("DELETE from pedido where id="+ idPedido);
+
+            if (codigo > 0) {
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - eliminarPedido()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en eliminarPedido(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+        }
+
+        return hecho;
+    }
+    
+    /**
+     * Cambia el estado de un pedido
+     *
+     * @param idPedido
+     * @param estado
+     * @return Devuelve si se ha podido modificar el estado
+     */
+    public boolean cambiarEstadoPedido(int idPedido, int estado) {
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA CambiarEstadoPedido");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - cambiarEstadoPedido()");
+            Statement s = conexion.createStatement();
+            
+            int codigo = s.executeUpdate("UPDATE pedido SET estado="+ estado +" where id="+ idPedido);
+
+            if (codigo > 0) {
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - cambiarEstadoPedido()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en cambiarEstadoPedido(): " + error);
+            Log.logBd.error("                        SQL State - " + error.getSQLState());
+            Log.logBd.error("                        ErrorCode - " + error.getErrorCode());
+        }
+
+        return hecho;
+    }
 }

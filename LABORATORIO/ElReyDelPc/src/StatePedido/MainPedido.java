@@ -25,7 +25,7 @@ public class MainPedido {
         pedidoR.setEstado(estadoRecibido);
         
         
-        pedidoP.getEstado().cambiarEstado(pedidoP, "enviado");
+        /*pedidoP.getEstado().cambiarEstado(pedidoP, "enviado");
         pedidoP.getEstado().cambiarEstado(pedidoP, "recibido");
         
         pedidoE.getEstado().cambiarEstado(pedidoP, "enviado");
@@ -37,5 +37,13 @@ public class MainPedido {
         pedidoP.getEstado().eliminar(pedidoP);
         pedidoE.getEstado().eliminar(pedidoE);
         pedidoR.getEstado().eliminar(pedidoR);
+        
+        pedidoP.getEstado().eliminar(pedidoP);
+        pedidoP.getEstado().cambiarEstado(pedidoP, "recibido");
+        pedidoP.getEstado().cambiarEstado(pedidoP, "enviado");
+        pedidoP.getEstado().eliminar(pedidoP);
+        pedidoP.getEstado().cambiarEstado(pedidoP, "enviado");
+        pedidoP.getEstado().cambiarEstado(pedidoP, "recibido");
+        pedidoP.getEstado().cambiarEstado(pedidoP, "recibido");*/
     }
 }

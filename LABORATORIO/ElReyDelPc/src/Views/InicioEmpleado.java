@@ -188,6 +188,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         nPedidoInfo = new javax.swing.JLabel();
         correoInfoPedido = new javax.swing.JLabel();
+        fechaPedidoInfo = new javax.swing.JLabel();
+        btnEnviarPedido = new javax.swing.JButton();
+        btnRecepcionPedido = new javax.swing.JButton();
 
         jLabel35.setText("jLabel35");
 
@@ -1223,7 +1226,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
         listaInfoPedido.setToolTipText("");
         jScrollPane5.setViewportView(listaInfoPedido);
 
-        panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 420));
+        panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 360));
 
         jPanel11.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -1240,6 +1243,11 @@ public class InicioEmpleado extends javax.swing.JFrame {
         correoInfoPedido.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         correoInfoPedido.setText("email");
 
+        fechaPedidoInfo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        fechaPedidoInfo.setForeground(new java.awt.Color(255, 255, 255));
+        fechaPedidoInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fechaPedidoInfo.setText("jLabel37");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -1248,10 +1256,12 @@ public class InicioEmpleado extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nPedidoInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
-                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addComponent(nPedidoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fechaPedidoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(correoInfoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1260,11 +1270,20 @@ public class InicioEmpleado extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(nPedidoInfo)
-                    .addComponent(correoInfoPedido))
+                    .addComponent(correoInfoPedido)
+                    .addComponent(fechaPedidoInfo))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         panelInfoPedido.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 960, 70));
+
+        btnEnviarPedido.setText("Enviar");
+        btnEnviarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelInfoPedido.add(btnEnviarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 540, 100, -1));
+
+        btnRecepcionPedido.setText("Confirmar recepcion");
+        btnRecepcionPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelInfoPedido.add(btnRecepcionPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 580, 180, -1));
 
         getContentPane().add(panelInfoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 670));
 
@@ -1390,7 +1409,9 @@ public class InicioEmpleado extends javax.swing.JFrame {
     public javax.swing.JButton btnEditarDatos;
     public javax.swing.JLabel btnEditarPerfil;
     public javax.swing.JButton btnEditarProducto;
+    public javax.swing.JButton btnEnviarPedido;
     public javax.swing.JLabel btnPerfil;
+    public javax.swing.JButton btnRecepcionPedido;
     public javax.swing.JLabel ciudadTienda;
     public javax.swing.JTextField codRefAnadir;
     public javax.swing.JLabel codRefLabel;
@@ -1408,6 +1429,7 @@ public class InicioEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel direccion1;
     public javax.swing.JTextField direccionEdit;
     public javax.swing.JLabel direccionTienda;
+    public javax.swing.JLabel fechaPedidoInfo;
     public javax.swing.JLabel idProductoEdit;
     public javax.swing.JLabel idTienda;
     public javax.swing.JLabel imagenUsuario;

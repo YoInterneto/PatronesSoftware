@@ -83,6 +83,12 @@ public class EmpleadoController implements ActionListener{
         //Boton para añadir un nuevo producto al catalogo
         this.inicio.btnAnadirNuevoArticulo.addActionListener(this);
         
+        //Boton para confirmar la recepcion de un pedido
+        this.inicio.btnRecepcionPedido.addActionListener(this);
+        
+        //Boton para poner el estado del pedido a enviado
+        this.inicio.btnEnviarPedido.addActionListener(this);
+        
         //Boton para cerrar sesion
         this.inicio.btnCerrar.addMouseListener(new MouseAdapter() {
             @Override
@@ -233,7 +239,10 @@ public class EmpleadoController implements ActionListener{
                     Pedido pedido = consultaPedido.getAllPedidos().get(inicio.listaPedidos.getSelectedIndex());
                     
                     inicio.correoInfoPedido.setText(pedido.getEmail_cliente());
-                    inicio.nPedidoInfo.setText(""+ pedido.getIdPedido() +"     ["+ pedido.getFecha() +"]");
+                    inicio.nPedidoInfo.setText(""+ pedido.getIdPedido());
+                    
+                    Fecha fecha = new AdapterFecha(pedido.getFecha());
+                    inicio.fechaPedidoInfo.setText(fecha.toString());
                     
                     cargarPedidoInfo(pedido);
                 }
@@ -801,6 +810,7 @@ public class EmpleadoController implements ActionListener{
             }
         }
         else if(boton.getSource() == inicio.btnAnadirNuevoArticulo){
+            Log.log.info("Vista Inicio - evento anadirArticulo");
             try{
                 if(comprobarFormularioAnadirProducto()){
                     boolean exito = false;
@@ -906,6 +916,7 @@ public class EmpleadoController implements ActionListener{
             }
         }
         else if(boton.getSource() == inicio.btnBorrarProducto){
+            Log.log.info("Vista Inicio - evento borrarProducto");
             try{
                 int codigoReferencia = Integer.parseInt(inicio.idProductoEdit.getText());
                 int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar el articulo"+ codigoReferencia +"?", "Articulo", JOptionPane.YES_NO_OPTION);
@@ -932,6 +943,38 @@ public class EmpleadoController implements ActionListener{
                 }
             }catch(HeadlessException | NumberFormatException error){
                 JOptionPane.showMessageDialog(null, "ERROR: No se pudo borrar el producto.\nInténtelo de nuevo");
+            }
+        }
+        else if(boton.getSource() == inicio.btnEnviarPedido){
+            Log.log.info("Vista Inicio - evento borrarProducto");
+            try{
+                int idPedido = Integer.parseInt(inicio.nPedidoInfo.getText());
+                Pedido pedido = consultaPedido.getPedido(idPedido);
+                
+                //Si se ha podido cambiar el estado, cambiamos el estado tambien en la base de datos
+                if(pedido.getEstado().cambiarEstado(pedido, "enviado")){
+                    if(!consultaPedido.cambiarEstadoPedido(idPedido, 1)){
+                        JOptionPane.showMessageDialog(null, "ERROR: El pedido está actualmente enviado");
+                    }
+                }
+            }catch(HeadlessException | NumberFormatException error){
+                JOptionPane.showMessageDialog(null, "ERROR: ");
+            }
+        }
+        else if(boton.getSource() == inicio.btnRecepcionPedido){
+            Log.log.info("Vista Inicio - evento borrarProducto");
+            try{
+                int idPedido = Integer.parseInt(inicio.nPedidoInfo.getText());
+                Pedido pedido = consultaPedido.getPedido(idPedido);
+                
+                //Si se ha podido cambiar el estado, cambiamos el estado tambien en la base de datos
+                if(pedido.getEstado().cambiarEstado(pedido, "recibido")){
+                    if(!consultaPedido.cambiarEstadoPedido(idPedido, 2)){
+                        JOptionPane.showMessageDialog(null, "Ya se ha confirmado la recepción del pedido.");
+                    }
+                }
+            }catch(HeadlessException | NumberFormatException error){
+                JOptionPane.showMessageDialog(null, "ERROR: ");
             }
         }
     }

@@ -19,7 +19,8 @@ public class EstadoPreparacion implements Estado{
         boolean cambiado = false;
         
         if(siguienteEstado.equalsIgnoreCase("enviado")){
-            pedido.setEstado(this);
+            EstadoEnviado nuevoEstado = new EstadoEnviado();
+            pedido.setEstado(nuevoEstado);
             cambiado = true;
             JOptionPane.showMessageDialog(null, "El estado del pedido ha cambiado a enviado");
         }
