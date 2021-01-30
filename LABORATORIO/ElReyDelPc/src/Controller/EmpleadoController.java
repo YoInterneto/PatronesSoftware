@@ -1,6 +1,8 @@
 
 package Controller;
 
+import Adapter.AdapterFecha;
+import Adapter.Fecha;
 import Facade.FachadaLogin;
 import DAO.*;
 import Model.Articulos.Articulo;
@@ -432,10 +434,12 @@ public class EmpleadoController implements ActionListener{
     public void cargarListaPedidos(){
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<Pedido> listaPedidos = consultaPedido.getAllPedidos();
+        
         for(int i=0; i<listaPedidos.size(); i++){
             Pedido pedido = listaPedidos.get(i);
+            Fecha fecha = new AdapterFecha(pedido.getFecha());
             int idPedido = pedido.getIdPedido();
-            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-"+ String.format("%04d", idPedido) +" </sup></strong></u><br>Fecha: "+ pedido.getFecha()
+            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-"+ String.format("%04d", idPedido) +" </sup></strong></u><br>Fecha: "+ fecha.toString()
                         +" <br>Usuario: "+ pedido.getEmail_cliente() +" </body></html>";
             
             listModel.add(i, pedidoInfo);

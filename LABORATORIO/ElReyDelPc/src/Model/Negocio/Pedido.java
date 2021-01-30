@@ -6,6 +6,7 @@
 package Model.Negocio;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class Pedido {
     
     private float precio_total;
-    private String fecha;
+    private Date fecha;
     private String email_cliente;
     private int idPedido;
     private ArrayList<Integer> listaArticulos;
@@ -89,7 +90,7 @@ public class Pedido {
      *
      * @return the value of fecha
      */
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -98,7 +99,7 @@ public class Pedido {
      *
      * @param fecha new value of fecha
      */
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

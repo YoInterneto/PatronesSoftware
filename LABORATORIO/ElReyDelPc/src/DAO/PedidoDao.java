@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Conexion;
@@ -40,7 +39,7 @@ public class PedidoDao {
                 Pedido pedido = new Pedido();
                 pedido.setEmail_cliente(resultado.getString("email_cliente"));
                 pedido.setIdPedido(resultado.getInt("id"));
-                pedido.setFecha(resultado.getString("fecha"));
+                pedido.setFecha(resultado.getDate("fecha"));
                 pedido.setPrecio_total(resultado.getFloat("precio_total"));
                 pedido.setListaArticulos(resultado.getString("codigos"));
 
@@ -70,7 +69,7 @@ public class PedidoDao {
             while (resultado.next()) {
                 pedido.setEmail_cliente(resultado.getString("email_cliente"));
                 pedido.setIdPedido(resultado.getInt("id"));
-                pedido.setFecha(resultado.getString("fecha"));
+                pedido.setFecha(resultado.getDate("fecha"));
                 pedido.setPrecio_total(resultado.getInt("precio_total"));
                 pedido.setListaArticulos(resultado.getString("codigos"));
             }
@@ -86,9 +85,8 @@ public class PedidoDao {
 
     public boolean hacerPedidoCarro(ArrayList<Integer> codigos, String precio, String email, int idPedido) {
         boolean hecho = false;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
-
+        
         Log.logBd.info("CONSULTA hacerPedidoCarro");
         try {
             conexion = Conexion.getConexion();
@@ -106,7 +104,7 @@ public class PedidoDao {
             }
 
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + Float.parseFloat(precio) + " ,'"
-                    + formatter.format(date) + "'," + idPedido + ",'{" + cadenaCodigos + "}','" + email + "');");
+                    + date + "'," + idPedido + ",'{" + cadenaCodigos + "}','" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedidoCarro()");
 
             if (codigo > 0) {
@@ -134,7 +132,6 @@ public class PedidoDao {
      */
     public boolean hacerPedido(int codigoRef, String precio, String email, int idPedido) {
         boolean hecho = false;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
 
         Log.logBd.info("CONSULTA hacerPedido");
@@ -144,7 +141,7 @@ public class PedidoDao {
             Statement s = conexion.createStatement();
 
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + Float.parseFloat(precio) + " ,'"
-                    + formatter.format(date) + "'," + idPedido + ",'{" + codigoRef + "}','" + email + "');");
+                    + date + "'," + idPedido + ",'{" + codigoRef + "}','" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedido()");
 
             if (codigo > 0) {
@@ -192,7 +189,6 @@ public class PedidoDao {
 
     public boolean hacerPedidoCustom(PcTorre torre,int idPedido, String email) {
         boolean hecho = false;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         Log.logBd.info("CONSULTA hacerPedidoCustom");
         try {
@@ -201,7 +197,7 @@ public class PedidoDao {
             Statement s = conexion.createStatement();
 
             int codigo = s.executeUpdate("INSERT INTO Pedido VALUES(" + torre.getPrecio() + " ,'"
-                    + formatter.format(date) + "'," + idPedido + ",'{" + torre.getCodigo_ref() + "}','" + email + "');");
+                    + date + "'," + idPedido + ",'{" + torre.getCodigo_ref() + "}','" + email + "');");
             Log.logBd.info("Realizada consulta - hacerPedidoCustom()");
 
             if (codigo > 0) {
