@@ -6,7 +6,7 @@ import Adapter.Fecha;
 import Facade.FachadaLogin;
 import DAO.*;
 import Model.Articulos.Articulo;
-import Model.Negocio.Pedido;
+import StatePedido.Pedido;
 import Model.Usuario.Empleado;
 import Model.Usuario.Tienda;
 import Util.ListaDinamica;

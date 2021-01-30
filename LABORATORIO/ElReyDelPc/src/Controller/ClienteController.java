@@ -10,7 +10,7 @@ import Observer.ObservadorPrecio;
 import Observer.SujetoConcreto;
 import Util.ListaDinamicaImagen;
 import BuilderTorre.PcBuilder;
-import Model.Negocio.Pedido;
+import StatePedido.Pedido;
 
 import Views.InicioCliente;
 import Views.Login;

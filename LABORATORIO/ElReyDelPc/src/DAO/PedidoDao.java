@@ -6,7 +6,7 @@
 package DAO;
 
 import Model.Articulos.PcTorre;
-import Model.Negocio.Pedido;
+import StatePedido.Pedido;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

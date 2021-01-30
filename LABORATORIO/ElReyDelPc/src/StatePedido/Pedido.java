@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Negocio;
+package StatePedido;
 
+import StatePedido.Estado;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,6 +20,26 @@ public class Pedido {
     private String email_cliente;
     private int idPedido;
     private ArrayList<Integer> listaArticulos;
+    private Estado estado;
+
+    /**
+     * Get the value of estado
+     *
+     * @return the value of estado
+     */
+    public Estado getEstado() {
+        return estado;
+    }
+
+    /**
+     * Set the value of estado
+     *
+     * @param estado new value of estado
+     */
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
 
     /**
      * Get the value of listaArticulos
