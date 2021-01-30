@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="193,0" last-zoom="0.7"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,256" last-zoom="0.7"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -189,6 +189,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="Nombre">
 		<type name="varchar" length="0"/>
 	</column>
+	<column name="Creado">
+		<type name="boolean" length="0"/>
+	</column>
+
+	<customidxs object-type="constraint">
+		<object name="PcTorre_pk" index="0"/>
+	</customidxs>
 </table>
 
 <table name="Grafica">
@@ -427,12 +434,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="codigos">
 		<type name="smallint" length="0" dimension="1"/>
 	</column>
+	<column name="Estado">
+		<type name="smallint" length="0"/>
+	</column>
 	<constraint name="Pedido_pk" type="pk-constr" table="public.&quot;Pedido&quot;">
 		<columns names="Id" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="Email_Cliente" index="4"/>
+		<object name="Email_Cliente" index="5"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">

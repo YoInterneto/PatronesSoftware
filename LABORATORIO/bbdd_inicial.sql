@@ -356,6 +356,7 @@ CREATE TABLE public.Pedido(
 	Fecha date,
 	Id smallint NOT NULL,
 	codigos smallint[],
+	Estado smallint,
 	Email_Cliente varchar,
 	CONSTRAINT Pedido_pk PRIMARY KEY (Id)
 
@@ -461,9 +462,9 @@ insert into disco_duro VALUES('HDD Barracuda', 36, 19.0, 'El mejor del mercado',
 
 INSERT INTO Carrito VALUES('4-5-3-8-10','email2@email.com');
 
-INSERT INTO Pedido VALUES(100.9,'2017-03-14',0,'{3,4}','email2@email.com');
-INSERT INTO Pedido VALUES(30.75,'2017-03-14',1,'{2,1}','email2@email.com');
-INSERT INTO Pedido VALUES(50,'2017-03-14',2,'{5,6}','email2@email.com');
+INSERT INTO Pedido VALUES(100.9,'2017-03-14',0,'{3,4}',0,'email2@email.com');
+INSERT INTO Pedido VALUES(30.75,'2017-03-14',1,'{2,1}',0,'email2@email.com');
+INSERT INTO Pedido VALUES(50,'2017-03-14',2,'{5,6}',0,'email2@email.com');
 
 -- PUNTUACION EJEMPLO PARA GRAFICA -- 
 
