@@ -448,8 +448,21 @@ public class EmpleadoController implements ActionListener{
             Pedido pedido = listaPedidos.get(i);
             Fecha fecha = new AdapterFecha(pedido.getFecha());
             int idPedido = pedido.getIdPedido();
-            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-"+ String.format("%04d", idPedido) +" </sup></strong></u><br>Fecha: "+ fecha.toString()
-                        +" <br>Usuario: "+ pedido.getEmail_cliente() +" </body></html>";
+            
+            String estadoInfo = "";
+            
+            if(pedido.getEstado().getClass().getName().toLowerCase().contains("preparacion")){
+                estadoInfo = "<strong>Estado: <span style='color:#FFF700';> En preparacion </span></strong>";
+            }
+            else if(pedido.getEstado().getClass().getName().toLowerCase().contains("recibido")){
+                estadoInfo = "<strong>Estado: <span style='color:#00FF03';> Recibido </span></strong>";
+            }
+            else if(pedido.getEstado().getClass().getName().toLowerCase().contains("enviado")){
+                estadoInfo = "<strong>Estado: <span style='color:#0086FF';> Enviado </span></strong>";
+            }
+            
+            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-" + String.format("%04d", idPedido) + " </sup></strong></u><br>Fecha: " + fecha.toString()
+                    + " <br>Usuario: " + pedido.getEmail_cliente() + " <br>"+ estadoInfo +"</body></html>";
             
             listModel.add(i, pedidoInfo);
         }

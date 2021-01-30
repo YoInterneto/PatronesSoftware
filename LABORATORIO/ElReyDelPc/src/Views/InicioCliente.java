@@ -236,6 +236,8 @@ public class InicioCliente extends javax.swing.JFrame {
         nPedidoInfo = new javax.swing.JLabel();
         correoInfoPedido = new javax.swing.JLabel();
         fechaPedidoInf = new javax.swing.JLabel();
+        btnEliminarPedido = new javax.swing.JButton();
+        btnRecepcionPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -1296,7 +1298,7 @@ public class InicioCliente extends javax.swing.JFrame {
         listaInfoPedido.setToolTipText("");
         jScrollPane5.setViewportView(listaInfoPedido);
 
-        panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 420));
+        panelInfoPedido.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 800, 330));
 
         jPanel11.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -1347,6 +1349,19 @@ public class InicioCliente extends javax.swing.JFrame {
 
         panelInfoPedido.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 960, 70));
 
+        btnEliminarPedido.setText("Eliminar pedido");
+        btnEliminarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelInfoPedido.add(btnEliminarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 510, 150, -1));
+
+        btnRecepcionPedido.setText("Confirmar recepción");
+        btnRecepcionPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRecepcionPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecepcionPedidoActionPerformed(evt);
+            }
+        });
+        panelInfoPedido.add(btnRecepcionPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 550, 190, -1));
+
         jPanel6.add(panelInfoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 620));
@@ -1374,6 +1389,10 @@ public class InicioCliente extends javax.swing.JFrame {
         login.iniciar();
         loginVista.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnRecepcionPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecepcionPedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRecepcionPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1430,11 +1449,13 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JButton btnComprarProducto;
     public javax.swing.JLabel btnCompras;
+    public javax.swing.JButton btnEliminarPedido;
     public javax.swing.JLabel btnInicio;
     public javax.swing.JLabel btnMontar;
     public javax.swing.JLabel btnPerfil;
     public javax.swing.JLabel btnProducto;
     public javax.swing.JButton btnRealizaPedidoCarro;
+    public javax.swing.JButton btnRecepcionPedido;
     public javax.swing.JLabel caja;
     public javax.swing.JComboBox<String> cajaBox;
     public javax.swing.JLabel cam;

@@ -33,7 +33,6 @@ public class EstadoPreparacion implements Estado{
 
     @Override
     public boolean eliminar(Pedido pedido) {
-        JOptionPane.showMessageDialog(null, "Pedido eliminado con éxito");
         return true;
     }
     

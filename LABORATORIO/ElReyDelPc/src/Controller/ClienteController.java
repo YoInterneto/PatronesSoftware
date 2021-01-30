@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import SingletonLog.Log;
 import Util.ListaDinamica;
+import java.awt.HeadlessException;
 
 public class ClienteController implements ActionListener {
 
@@ -790,6 +791,55 @@ public class ClienteController implements ActionListener {
                     }
                 } catch (Exception ex) {
                     Log.log.error("Error en comprar producto stock " + ex);
+                }
+            }
+        });
+        
+        //Boton para eliminar un pedido
+        this.client.btnEliminarPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idPedido = Integer.parseInt(client.nPedidoInfo.getText());
+                    Pedido pedido = daoPedido.getPedido(idPedido);
+                    
+                    //Si el pedido se puede eliminar, es decir, esta actualmente en preparacion
+                    //borramos el pedido en la base de datos
+                    if(pedido.getEstado().eliminar(pedido)){
+                        if(daoPedido.eliminarPedido(idPedido)){
+                            JOptionPane.showMessageDialog(null, "Pedido "+ idPedido +" eliminado con éxito.");
+                            
+                            client.panelInfoPedido.setVisible(false);
+                            client.panelCompras.setVisible(true);
+                            
+                            cargarListaPedidosCliente();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "ERROR: No se ha podido eliminar el pedido "+ idPedido +".");
+                        }
+                    }
+                } catch (HeadlessException | NumberFormatException ex) {
+                    Log.log.error(ex.getMessage());
+                }
+            }
+        });
+        
+        //Boton para confirmar la recepción de un pedidio
+        this.client.btnRecepcionPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idPedido = Integer.parseInt(client.nPedidoInfo.getText());
+                    Pedido pedido = daoPedido.getPedido(idPedido);
+                    
+                    //Si se ha podido cambiar el estado, cambiamos el estado tambien en la base de datos
+                    if(pedido.getEstado().cambiarEstado(pedido, "recibido")){
+                        if(!daoPedido.cambiarEstadoPedido(idPedido, 2)){
+                            JOptionPane.showMessageDialog(null, "Ya se ha confirmado la recepción del pedido.");
+                        }
+                    }
+                } catch (HeadlessException | NumberFormatException ex) {
+                    Log.log.error(ex.getMessage());
                 }
             }
         });
@@ -2384,8 +2434,21 @@ public class ClienteController implements ActionListener {
             Pedido pedido = listaPedidos.get(i);
             Fecha fecha = new AdapterFecha(pedido.getFecha());
             int idPedido = pedido.getIdPedido();
+            
+            String estadoInfo = "";
+            
+            if(pedido.getEstado().getClass().getName().toLowerCase().contains("preparacion")){
+                estadoInfo = "<strong>Estado: <span style='color:#FFF700';> En preparacion </span></strong>";
+            }
+            else if(pedido.getEstado().getClass().getName().toLowerCase().contains("recibido")){
+                estadoInfo = "<strong>Estado: <span style='color:#00FF03';> Recibido </span></strong>";
+            }
+            else if(pedido.getEstado().getClass().getName().toLowerCase().contains("enviado")){
+                estadoInfo = "<strong>Estado: <span style='color:#0086FF';> Enviado </span></strong>";
+            }
+            
             String pedidoInfo = "<html><body><strong><u><sup>IDPedido-" + String.format("%04d", idPedido) + " </sup></strong></u><br>Fecha: " + fecha.toString()
-                    + " <br>Usuario: " + pedido.getEmail_cliente() + " </body></html>";
+                    + " <br>Usuario: " + pedido.getEmail_cliente() + " <br>"+ estadoInfo +"</body></html>";
 
             listModel.add(i, pedidoInfo);
         }

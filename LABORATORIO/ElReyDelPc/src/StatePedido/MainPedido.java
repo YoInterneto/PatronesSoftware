@@ -24,7 +24,7 @@ public class MainPedido {
         pedidoE.setEstado(estadoEnviado);
         pedidoR.setEstado(estadoRecibido);
         
-        
+        System.out.println(pedidoP.getEstado().getClass().getName());
         /*pedidoP.getEstado().cambiarEstado(pedidoP, "enviado");
         pedidoP.getEstado().cambiarEstado(pedidoP, "recibido");
         
