@@ -842,21 +842,24 @@ public class ClienteController implements ActionListener {
                     //Si el pedido se puede eliminar, es decir, esta actualmente en preparacion
                     //borramos el pedido en la base de datos
                     if (pedido.getEstado().eliminar(pedido)) {
-                        if (daoPedido.eliminarPedido(idPedido)) {
-                            //Actualizamos el stock de los articulos cuando se elimina el pedido
-                            ArrayList<Integer> listaArticulos =  pedido.getListaArticulos();
-                            for (int i = 0; i < listaArticulos.size(); i++) {
-                                Articulo articulo = consultaArticulo.getArticulo(listaArticulos.get(i));
-                                consultaArticulo.actualizarStock(articulo.getCodigo_ref(), articulo.getStock()+1);
+                        if (JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere eliminar el pedido "+ idPedido +"?", "WARNING",
+                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            if (daoPedido.eliminarPedido(idPedido)) {
+                                //Actualizamos el stock de los articulos cuando se elimina el pedido
+                                ArrayList<Integer> listaArticulos =  pedido.getListaArticulos();
+                                for (int i = 0; i < listaArticulos.size(); i++) {
+                                    Articulo articulo = consultaArticulo.getArticulo(listaArticulos.get(i));
+                                    consultaArticulo.actualizarStock(articulo.getCodigo_ref(), articulo.getStock()+1);
+                                }
+                                JOptionPane.showMessageDialog(null, "Pedido " + idPedido + " eliminado con éxito.");
+
+                                client.panelInfoPedido.setVisible(false);
+                                client.panelCompras.setVisible(true);
+
+                                cargarListaPedidosCliente();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "ERROR: No se ha podido eliminar el pedido " + idPedido + ".");
                             }
-                            JOptionPane.showMessageDialog(null, "Pedido " + idPedido + " eliminado con éxito.");
-
-                            client.panelInfoPedido.setVisible(false);
-                            client.panelCompras.setVisible(true);
-
-                            cargarListaPedidosCliente();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "ERROR: No se ha podido eliminar el pedido " + idPedido + ".");
                         }
                     }
                 } catch (HeadlessException | NumberFormatException ex) {

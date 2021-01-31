@@ -11,6 +11,6 @@ ESTRUCTURALES
 
 COMPORTAMIENTO
    - Observer
-   - * *
+   - State
    - * *
 
