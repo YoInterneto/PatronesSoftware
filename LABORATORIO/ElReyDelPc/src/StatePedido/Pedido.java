@@ -5,7 +5,6 @@
  */
 package StatePedido;
 
-import StatePedido.Estado;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,6 +20,27 @@ public class Pedido {
     private int idPedido;
     private ArrayList<Integer> listaArticulos;
     private Estado estado;
+
+    public Pedido(float precio_total, Date fecha, String email_cliente, int idPedido, ArrayList<Integer> listaArticulos, Estado estado) {
+        this.precio_total = precio_total;
+        this.fecha = fecha;
+        this.email_cliente = email_cliente;
+        this.idPedido = idPedido;
+        this.listaArticulos = listaArticulos;
+        this.estado = estado;
+    }
+    
+    public Pedido(Pedido p) {
+        this.precio_total = p.getPrecio_total();
+        this.fecha = p.getFecha();
+        this.email_cliente = p.getEmail_cliente();
+        this.idPedido = p.getIdPedido();
+        this.listaArticulos = p.getListaArticulos();
+        this.estado = p.getEstado();
+    }
+    
+    public Pedido() {
+    }
 
     /**
      * Get the value of estado
