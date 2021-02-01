@@ -1,8 +1,8 @@
 package Command;
 
 /**
- * Amplía la interfaz Comando añadiendo los métodos deshacer y rehacer
- * @author Salvador Oton
+ * Amplía la interfaz Comando añadiendo el método de deshacer
+ * 
  */
 public interface ComandoDeshacer extends Comando {
 

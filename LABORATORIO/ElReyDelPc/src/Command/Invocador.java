@@ -2,7 +2,7 @@ package Command;
 
 /**
  * El que llama al método ejecutar del objeto Comando.
- * @author Salvador Oton
+ * 
  */
 public class Invocador {
     
@@ -11,6 +11,7 @@ public class Invocador {
 
     /**
      * Establece el comando.
+     * 
      * @param comando 
      */
     public void setComando(ComandoDeshacer comando) {
@@ -18,8 +19,9 @@ public class Invocador {
     }
 
     /**
-     * Ejecuta el comando.
-     * @param param 
+     * Ejecuta el comando. 
+     * 
+     * @param idPedido
      */
     public void ejecutaComando(int idPedido) {
         comando.ejecutar(idPedido);

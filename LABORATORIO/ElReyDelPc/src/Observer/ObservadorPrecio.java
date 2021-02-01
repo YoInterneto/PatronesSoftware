@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Observer;
 
 import Controller.ClienteController;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 
 /**
  * Mantiene una referencia a un objeto SujetoProcesador Implementa la interfaz
@@ -35,17 +32,17 @@ public class ObservadorPrecio implements Observer {
         this.cliente = client;
         sujeto.addObserver(this);
     }
-
+    
+    @Override
     public void update(Observable obs, Object arg) {
         sujeto = (SujetoConcreto) obs;
         float p = sujeto.getComponente().getPrecio();
 
         if (p < precioCompra) {
-            String res = "El articulo " + sujeto.getComponente().getModelo()
-                    + " de su carrito esta en oferta\n\tPuede ahorrarse " + (precioCompra - p) + " €";
-            cliente.mostrarMensaje(res);
+            JOptionPane.showMessageDialog(null, "El articulo " + sujeto.getComponente().getModelo()
+                    + " de su carrito esta en oferta\n\tPuede ahorrarse " + (precioCompra - p) + " €");
+            
+            this.precioCompra = sujeto.getComponente().getPrecio();
         }
-
     }
-
 }

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 /**
  * Implementa ComandoDeshacer. 
  * Proporciona el comportamiento necesario para borrar un pedido
- * @author Salvador Oton
+ * 
  */
 public class ComandoCambiarAlgo implements ComandoDeshacer {
 
@@ -36,8 +36,8 @@ public class ComandoCambiarAlgo implements ComandoDeshacer {
     }
 
     /**
-     * Cambia el lugar de la reunión por otro introducida por el usuario y
-     * almacena el valor anterior de la reunión por si luego se quiere recuperar.
+     * Elimina el pedido seleccionado.
+     * 
      * @param idPedido
      */    
     @Override
@@ -64,6 +64,7 @@ public class ComandoCambiarAlgo implements ComandoDeshacer {
 
     /**
      * Recupera el valor del pedido borrado anteriormente por el usuario
+     * 
      */
     @Override
     public void deshacer() {

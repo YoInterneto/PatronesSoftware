@@ -1308,6 +1308,10 @@ public class ClienteController implements ActionListener {
         });
     }
 
+    /**
+     * Crea un nuevo observador para un artículo añadido a la cesta
+     *
+     */
     private void creaUnObserver(String codigo) {
         Articulo articulo = consultaArticulo.getArticulo(Integer.parseInt(codigo));
         SujetoConcreto sujeto = new SujetoConcreto();
@@ -1316,6 +1320,11 @@ public class ClienteController implements ActionListener {
         Observer obs = new ObservadorPrecio("obs", articulo.getPrecio(), sujeto, getClase());
     }
 
+    /**
+     * Crea un nuevos observadores para cuando el cliente introduce los artículos
+     * a la cesta después de crear una torre
+     *
+     */
     private void crearObservers() {
 
         ArrayList<Integer> cesta = cargarCarro();
@@ -1331,6 +1340,10 @@ public class ClienteController implements ActionListener {
 
     }
 
+    /**
+     * Comprueba si ha cambiado el precio de algunos de los artículos de la cesta
+     *
+     */
     private void compruebaPrecio() {
         for (int i = 0; i < listaSujetos.size(); i++) {
             SujetoConcreto sujeto = listaSujetos.get(i);
@@ -1340,10 +1353,6 @@ public class ClienteController implements ActionListener {
             
         }
 
-    }
-
-    public void mostrarMensaje(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
     }
 
     /**
@@ -2290,7 +2299,12 @@ public class ClienteController implements ActionListener {
     private void setClaveBusqueda(String claveBusqueda) {
         this.claveBusqueda = claveBusqueda;
     }
-
+    
+    /**
+     * Añade al carro un nuevo producto
+     *
+     * 
+     */
     private void meterCarro(String codigo) {
         try {
             int cod = Integer.parseInt(codigo);
@@ -2307,6 +2321,10 @@ public class ClienteController implements ActionListener {
 
     }
 
+    /**
+     * Retorna el actual objeto ClienteController
+     *
+     */
     private ClienteController getClase() {
         return this;
     }
