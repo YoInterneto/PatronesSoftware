@@ -238,6 +238,8 @@ public class InicioCliente extends javax.swing.JFrame {
         fechaPedidoInf = new javax.swing.JLabel();
         btnEliminarPedido = new javax.swing.JButton();
         btnRecepcionPedido = new javax.swing.JButton();
+        btnDeshacer = new javax.swing.JButton();
+        labelDeshacer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -1362,6 +1364,17 @@ public class InicioCliente extends javax.swing.JFrame {
         });
         panelInfoPedido.add(btnRecepcionPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 550, 190, -1));
 
+        btnDeshacer.setText("Deshacer");
+        btnDeshacer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeshacer.setVisible(false);
+        panelInfoPedido.add(btnDeshacer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 540, 110, -1));
+
+        labelDeshacer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelDeshacer.setForeground(new java.awt.Color(255, 255, 255));
+        labelDeshacer.setText("Pedido eliminado");
+        labelDeshacer.setVisible(false);
+        panelInfoPedido.add(labelDeshacer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, 130, -1));
+
         jPanel6.add(panelInfoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 960, 620));
@@ -1449,6 +1462,7 @@ public class InicioCliente extends javax.swing.JFrame {
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JButton btnComprarProducto;
     public javax.swing.JLabel btnCompras;
+    public javax.swing.JButton btnDeshacer;
     public javax.swing.JButton btnEliminarPedido;
     public javax.swing.JLabel btnInicio;
     public javax.swing.JLabel btnMontar;
@@ -1600,6 +1614,7 @@ public class InicioCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    public javax.swing.JLabel labelDeshacer;
     public javax.swing.JList<String> listaCompras;
     public javax.swing.JList<String> listaInfoPedido;
     public javax.swing.JList<String> listaPedidos;

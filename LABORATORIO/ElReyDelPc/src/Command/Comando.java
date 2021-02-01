@@ -21,8 +21,8 @@ public interface Comando {
     public Pedido getPedido();
 
     /**
-     * Método con las acciones a realizar.
-     * @param param 
+     * Método con las acciones a realizar. 
+     * @param idPedido
      */
-    public void ejecutar(String param);
+    public void ejecutar(int idPedido);
 }

@@ -10,6 +10,9 @@ import Observer.ObservadorPrecio;
 import Observer.SujetoConcreto;
 import Util.ListaDinamicaImagen;
 import BuilderTorre.PcBuilder;
+import Command.ComandoCambiarAlgo;
+import Command.ComandoDeshacer;
+import Command.Invocador;
 import StatePedido.Pedido;
 
 import Views.InicioCliente;
@@ -59,10 +62,15 @@ public class ClienteController implements ActionListener {
     private String claveBusqueda;
     private String tipo;
     public ArrayList<SujetoConcreto> listaSujetos = new ArrayList<>();
+    
+    private ComandoDeshacer comando;
+    private Invocador invocador;
 
     public ClienteController(InicioCliente clientVista, Cliente cliente) {
         this.cliente = cliente;
         this.client = clientVista;
+        comando = new ComandoCambiarAlgo();
+        invocador = new Invocador();
         daoCpu = new ProcesadorDao();
         daoPlaca = new Placa_baseDao();
         daoRam = new MemoriaRAMDao();
@@ -91,6 +99,7 @@ public class ClienteController implements ActionListener {
         //Al comenzar iniciamos los observer para los productos del carro
         crearObservers();
         compruebaPrecio();
+        
         //Listeners botones menu cliente 
         this.client.btnBuscar.addMouseListener(new MouseAdapter() {
             @Override
@@ -797,6 +806,7 @@ public class ClienteController implements ActionListener {
             }
         });
 
+        //Boton para realizar la compra directa de un producto
         this.client.btnComprarProducto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -830,6 +840,31 @@ public class ClienteController implements ActionListener {
                 }
             }
         });
+        
+        //Boton para deshacer la eliminacion de un pedido
+        this.client.btnDeshacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idPedido = comando.getPedido().getIdPedido();
+                    if (JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere recuperar el pedido "+ idPedido +" eliminado?", "WARNING",
+                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        
+                        invocador.deshacerComando();
+                        
+                        if(comando.getPedido() == null){
+                            client.panelInfoPedido.setVisible(false);
+                            client.panelCompras.setVisible(true);
+
+                            cargarListaPedidosCliente();
+                        }
+                        
+                    }
+                } catch (Exception ex) {
+                    Log.log.error(ex.getMessage());
+                }
+            }
+        });
 
         //Boton para eliminar un pedido
         this.client.btnEliminarPedido.addActionListener(new ActionListener() {
@@ -844,22 +879,15 @@ public class ClienteController implements ActionListener {
                     if (pedido.getEstado().eliminar(pedido)) {
                         if (JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere eliminar el pedido "+ idPedido +"?", "WARNING",
                                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            if (daoPedido.eliminarPedido(idPedido)) {
-                                //Actualizamos el stock de los articulos cuando se elimina el pedido
-                                ArrayList<Integer> listaArticulos =  pedido.getListaArticulos();
-                                for (int i = 0; i < listaArticulos.size(); i++) {
-                                    Articulo articulo = consultaArticulo.getArticulo(listaArticulos.get(i));
-                                    consultaArticulo.actualizarStock(articulo.getCodigo_ref(), articulo.getStock()+1);
-                                }
-                                JOptionPane.showMessageDialog(null, "Pedido " + idPedido + " eliminado con éxito.");
 
-                                client.panelInfoPedido.setVisible(false);
-                                client.panelCompras.setVisible(true);
-
-                                cargarListaPedidosCliente();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "ERROR: No se ha podido eliminar el pedido " + idPedido + ".");
-                            }
+                                client.btnEliminarPedido.setEnabled(false);
+                                client.btnRecepcionPedido.setEnabled(false);
+                                client.btnDeshacer.setVisible(true);
+                                client.labelDeshacer.setVisible(true);
+                                
+                                comando.setPedido(pedido);
+                                invocador.setComando(comando);
+                                invocador.ejecutaComando(idPedido);
                         }
                     }
                 } catch (HeadlessException | NumberFormatException ex) {
@@ -1304,12 +1332,12 @@ public class ClienteController implements ActionListener {
     }
 
     private void compruebaPrecio() {
-
         for (int i = 0; i < listaSujetos.size(); i++) {
             SujetoConcreto sujeto = listaSujetos.get(i);
             int codigo = sujeto.getComponente().getCodigo_ref();
             float precio = consultaArticulo.getArticulo(codigo).getPrecio();
             sujeto.cambiaPrecio(precio);
+            
         }
 
     }
@@ -2165,6 +2193,11 @@ public class ClienteController implements ActionListener {
 
             listModel.add(i, articuloInfo);
         }
+        
+        client.btnEliminarPedido.setEnabled(true);
+        client.btnRecepcionPedido.setEnabled(true);
+        client.btnDeshacer.setVisible(false);
+        client.labelDeshacer.setVisible(false);
 
         client.listaInfoPedido.setModel(listModel);
         client.listaInfoPedido.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));

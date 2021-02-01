@@ -21,8 +21,8 @@ public class Invocador {
      * Ejecuta el comando.
      * @param param 
      */
-    public void ejecutaComando(String param) {
-        comando.ejecutar(param);
+    public void ejecutaComando(int idPedido) {
+        comando.ejecutar(idPedido);
     }
 
     /**
@@ -30,12 +30,5 @@ public class Invocador {
      */
     public void deshacerComando() {
         comando.deshacer();
-    }
-
-    /**
-     * Rehace el comando.
-     */
-    public void rehacerComando() {
-        comando.rehacer();
     }
 }
