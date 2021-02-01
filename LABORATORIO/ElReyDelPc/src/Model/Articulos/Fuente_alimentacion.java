@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto fuente de alimetación.
+ * 
+ */
 public class Fuente_alimentacion extends Articulo{
     
     private int Potencia;

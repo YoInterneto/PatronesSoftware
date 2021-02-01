@@ -12,14 +12,13 @@ import javax.swing.JOptionPane;
 
 /**
  * Implementa ComandoDeshacer. 
- * Proporciona el comportamiento necesario para borrar un pedido
+ * Proporciona el comportamiento necesario para borrar un pedido.
  * 
  */
 public class ComandoCambiarAlgo implements ComandoDeshacer {
-
-    // Referencia al receptor.
+    
     private Pedido pedido; 		
-    // Gestor de recuerdos.
+
     private Conserje conserje = new Conserje();   
     
     private PedidoDao daoPedido = new PedidoDao();
@@ -63,7 +62,7 @@ public class ComandoCambiarAlgo implements ComandoDeshacer {
     }
 
     /**
-     * Recupera el valor del pedido borrado anteriormente por el usuario
+     * Recupera el valor del pedido borrado anteriormente por el usuario.
      * 
      */
     @Override

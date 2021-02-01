@@ -1,6 +1,11 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto artículo.
+ * Clase padre de los demás objetos que se venden en la tienda.
+ * 
+ */
 public class Articulo {
     
     private String Modelo;
@@ -30,8 +35,8 @@ public class Articulo {
      *
      * @param modelo
      */
-    public void setModelo(String Modelo) {
-        this.Modelo = Modelo;
+    public void setModelo(String modelo) {
+        this.Modelo = modelo;
     }
 
     /**

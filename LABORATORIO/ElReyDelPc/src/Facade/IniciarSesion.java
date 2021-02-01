@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Facade;
 
 import Controller.ClienteController;
@@ -16,8 +12,9 @@ import Views.Login;
 import SingletonLog.Log;
 
 /**
- *
- * @author Alberto
+ * Clase que tiene la funcionalidad para abrir la siguiente vista al usuario.
+ * La siguiente vista dependerá de si es un cliente o un empleado.
+ * 
  */
 public class IniciarSesion {
     
@@ -33,6 +30,11 @@ public class IniciarSesion {
         this.consulta = new UsuarioDao();
     }
     
+    /**
+     * Inicia la vista del cliente.
+     * 
+     * @param usuario
+     */
     public void inicioCliente(String usuario){
         Log.log.info("TIPO USUARIO: Cliente");
         cliente = consulta.getCliente(usuario);
@@ -47,6 +49,11 @@ public class IniciarSesion {
         inicioVista.setVisible(true);
     }
     
+    /**
+     * Inicia la vista del empleado.
+     * 
+     * @param usuario
+     */
     public void inicioEmpleado(String usuario){
         Log.log.info("TIPO USUARIO: Empleado");
         empleado = consulta.getEmpleado(usuario);

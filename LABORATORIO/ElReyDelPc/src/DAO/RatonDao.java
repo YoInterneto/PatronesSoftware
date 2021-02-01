@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto ratón.
+ * 
+ */
 public class RatonDao {
     
     private Connection conexion;
@@ -57,14 +60,13 @@ public class RatonDao {
     }
     
      /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre el/los ratones.
      *
      * @return Devuelve una lista de objetos de tipo Raton
      */
     public ArrayList<Raton> getAllRatones() {
         
-        ArrayList<Raton> ratondb = new ArrayList<Raton>();
+        ArrayList<Raton> ratondb = new ArrayList<>();
         
             try {
                 conexion = Conexion.getConexion();
@@ -82,12 +84,11 @@ public class RatonDao {
                     raton.setModelo(rs.getString("Modelo"));
                     raton.setPrecio(rs.getFloat("Precio"));
                     raton.setRutaImagen(rs.getString("RutaImagen"));
-                    
                     raton.setStock(rs.getInt("Stock"));
-                    
                     raton.setTipo(rs.getString("Tipo"));
                     raton.setDPI(rs.getInt("DPI"));
                     raton.setPeso(rs.getInt("Peso"));
+                    
                     ratondb.add(raton);
                 }               
             } catch (SQLException error) {
@@ -97,12 +98,11 @@ public class RatonDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllRatons()");
-       return ratondb;
+        return ratondb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo raton
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo raton.
      *
      * @param modelo
      * @param codigoReferencia

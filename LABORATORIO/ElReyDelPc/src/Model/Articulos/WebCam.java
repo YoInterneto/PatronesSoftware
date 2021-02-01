@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto web cam.
+ * 
+ */
 public class WebCam extends Articulo{
     
     private String Calidad;

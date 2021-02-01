@@ -11,13 +11,17 @@ import java.sql.Statement;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto usuario.
+ * Usuarios de la aplicación serán tanto cliente como empleados.
+ * 
+ */
 public class UsuarioDao {
     
     private Connection conexion;
     
     /**
-     * Identifica qué usuario inicia sesión y devuelve su tipo
+     * Identifica qué usuario inicia sesión y devuelve su tipo.
      *
      * @param correo
      * @param contrasenna
@@ -105,7 +109,7 @@ public class UsuarioDao {
     }
     
     /**
-     * Inserta un nuevo cliente en la base de datos
+     * Inserta un nuevo cliente en la base de datos.
      *
      * @param nombre
      * @param apellido
@@ -148,7 +152,7 @@ public class UsuarioDao {
     
     /**
      * Dado el correo de un cliente realiza una consulta en la base de datos y
-     * nos devuelve todos los datos correspondientes a dicho cliente
+     * nos devuelve todos los datos correspondientes a dicho cliente.
      *
      * @param correo
      * @return Devuelve un objeto de tipo Cliente
@@ -184,8 +188,7 @@ public class UsuarioDao {
     }
     
     /**
-     * Dado el id de una tienda realiza una consulta a la base de datos y
-     * nos devuelve toda la informaciçon sobre esa tienda
+     * Dado el id de una tienda realiza una consulta a la base de datos y nos devuelve toda la información sobre esa tienda.
      *
      * @param idTienda 
      * @return Devuelve un objeto de tipo Tienda
@@ -220,7 +223,7 @@ public class UsuarioDao {
     
     /**
      * Dado los nuevos datos que quiere cambiar el cliente de su perfil
-     * se realiza una actualización en la base de datos para ese cliente
+     * se realiza una actualización en la base de datos para ese cliente.
      *
      * @param correo 
      * @param nombre 
@@ -256,7 +259,7 @@ public class UsuarioDao {
     
     /**
      * Dado los nuevos datos que quiere cambiar el cliente de su perfil
-     * se realiza una actualización en la base de datos para ese cliente
+     * se realiza una actualización en la base de datos para ese cliente.
      * 
      * @param correo
      * @param nombre
@@ -293,7 +296,7 @@ public class UsuarioDao {
     
     /**
      * Dado los nuevos datos que quiere cambiar el cliente de su perfil
-     * se realiza una actualización en la base de datos para ese cliente
+     * se realiza una actualización en la base de datos para ese cliente.
      * 
      * @param pass
      * @param email
@@ -324,7 +327,7 @@ public class UsuarioDao {
     
     /**
      * Dado los nuevos datos que quiere cambiar el cliente de su perfil
-     * se realiza una actualización en la base de datos para ese cliente
+     * se realiza una actualización en la base de datos para ese cliente.
      * 
      * @param email
      * @param nuevoEmail
@@ -355,7 +358,7 @@ public class UsuarioDao {
     
     /**
      * Dado los nuevos datos que quiere cambiar el cliente de su perfil
-     * se realiza una actualización en la base de datos para ese cliente
+     * se realiza una actualización en la base de datos para ese cliente.
      * 
      * @param email
      * @param direccion

@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto ratón.
+ * 
+ */
 public class Raton extends Articulo{
     
     private int Peso;

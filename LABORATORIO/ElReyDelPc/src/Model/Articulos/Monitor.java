@@ -1,5 +1,9 @@
 package Model.Articulos;
 
+/**
+ * Objeto monitor.
+ * 
+ */
 public class Monitor extends Articulo{
     
     private int Pulgadas;

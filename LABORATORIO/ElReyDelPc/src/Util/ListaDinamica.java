@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Util;
 
 import java.awt.Component;
-import java.awt.Cursor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.border.Border;
@@ -20,8 +11,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- *
- * @author Alberto
+ * Renderiza un componente jList de forma dinámica.
+ * Cada fila de la lista es un jLabel con un texto dado.
+ * 
  */
 public class ListaDinamica extends DefaultListCellRenderer {
     

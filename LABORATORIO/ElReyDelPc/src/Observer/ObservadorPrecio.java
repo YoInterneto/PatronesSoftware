@@ -7,9 +7,8 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
- * Mantiene una referencia a un objeto SujetoProcesador Implementa la interfaz
- * Observer y define los métodos para responder a los mensajes recibidos del
- * sujeto.
+ * Mantiene una referencia a un objeto SujetoProcesador.
+ * Implementa la interfaz Observer y define los métodos para responder a los mensajes recibidos del sujeto.
  *
  */
 public class ObservadorPrecio implements Observer {
@@ -25,6 +24,7 @@ public class ObservadorPrecio implements Observer {
      * @param nombre Nombre del observador.
      * @param precio Precio al que queremos comprar un componente.
      * @param sujeto Sujeto al que observamos.
+     * @param client
      */
     public ObservadorPrecio(String nombre, float precio, SujetoConcreto sujeto, ClienteController client) {
         this.nombre = nombre;

@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto fuente.
+ * 
+ */
 public class FuenteDao {
     
     private Connection conexion;
@@ -39,10 +42,8 @@ public class FuenteDao {
                 fuente.setDescripcion(resultado.getString("Descripcion"));
                 fuente.setStock(Integer.parseInt(resultado.getString("Stock")));
                 fuente.setRutaImagen(resultado.getString("rutaImagen"));
-                
                 fuente.setPotencia(Integer.parseInt(resultado.getString("Potencia")));
 		fuente.setCertificacion(resultado.getString("Certificacion"));
- 
             }
             
         } catch (SQLException error) {
@@ -56,8 +57,7 @@ public class FuenteDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre la/las fuentes.
      *
      * @return Devuelve una lista de objetos de tipo Fuente_alimentacion
      */
@@ -93,12 +93,11 @@ public class FuenteDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllFuente_alimentaciones()");
-       return fuentedb;
+        return fuentedb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo fuente de alimentacion
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo fuente de alimentacion.
      *
      * @param modelo
      * @param codigoReferencia

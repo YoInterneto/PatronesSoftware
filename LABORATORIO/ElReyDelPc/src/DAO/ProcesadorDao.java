@@ -10,16 +10,18 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto procesador.
+ * 
+ */
 public class ProcesadorDao {
     
     private Connection conexion;
     
     /**
-     * Dado el codigo de un articulo realiza una consulta en la base de
- datos y devuelve todos los datos correspondientes a dicho articulo.
+     * Dado el codigo de un articulo realiza una consulta en la base de datos y devuelve todos los datos correspondientes a dicho articulo.
      *
-     * @pacpu codigo
+     * @param codigo
      * @return Devuelve un objeto de tipo Procesador
      */
     public Procesador getProcesador(int codigo){
@@ -39,9 +41,7 @@ public class ProcesadorDao {
                 cpu.setDescripcion(resultado.getString("Descripcion"));
                 cpu.setStock(Integer.parseInt(resultado.getString("Stock")));
                 cpu.setRutaImagen(resultado.getString("rutaImagen"));
-                
                 cpu.setSocket(resultado.getString("Socket"));
- 
             }
             
         } catch (SQLException error) {
@@ -55,14 +55,13 @@ public class ProcesadorDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes.
      *
      * @return Devuelve una lista de objetos de tipo Procesador
      */
     public ArrayList<Procesador> getAllProcesadores() {
         
-        ArrayList<Procesador> procesadordb = new ArrayList<Procesador>();
+        ArrayList<Procesador> procesadordb = new ArrayList<>();
         
             try {
                 conexion = Conexion.getConexion();
@@ -92,12 +91,11 @@ public class ProcesadorDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllProcesadores()");
-       return procesadordb;
+        return procesadordb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo procesador
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo procesador.
      *
      * @param modelo
      * @param codigoReferencia

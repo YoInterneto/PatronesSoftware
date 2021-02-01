@@ -10,19 +10,22 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto portatil.
+ * 
+ */
 public class PortatilDao {
     
     private Connection conexion;
+    
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre el/los portátiles.
      *
      * @return Devuelve una lista de objetos de tipo Portatil
      */
     public ArrayList<Portatil> getAllPortatil() {
         
-        ArrayList<Portatil> portatildb = new ArrayList<Portatil>();
+        ArrayList<Portatil> portatildb = new ArrayList<>();
         
             try {
                 conexion = Conexion.getConexion();
@@ -53,12 +56,11 @@ public class PortatilDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllPortatil");
-       return portatildb;
+        return portatildb;
     }  
     
     /**
-     * Dado el codigo de un portatil realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes a dicho portatil.
+     * Dado el codigo de un portatil realiza una consulta en la base de datos y devuelve todos los datos correspondientes a dicho portatil.
      *
      * @param codigo
      * @return Devuelve un objeto de tipo Portatil
@@ -80,10 +82,8 @@ public class PortatilDao {
                 portatil.setDescripcion(resultado.getString("Descripcion"));
                 portatil.setStock(Integer.parseInt(resultado.getString("Stock")));
                 portatil.setRutaImagen(resultado.getString("rutaImagen"));
-                
                 portatil.setPanel(resultado.getString("Panel"));
                 portatil.setPeso(Integer.parseInt(resultado.getString("Peso")));
-                
             }
             
         } catch (SQLException error) {
@@ -97,8 +97,7 @@ public class PortatilDao {
     }
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo portatil
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo portatil.
      *
      * @param modelo
      * @param codigoReferencia

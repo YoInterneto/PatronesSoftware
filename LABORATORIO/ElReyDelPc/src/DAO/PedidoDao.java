@@ -15,10 +15,19 @@ import StatePedido.EstadoEnviado;
 import StatePedido.EstadoPreparacion;
 import StatePedido.EstadoRecibido;
 
+/**
+ * DAO para las operaciones de datos de la tabla y objeto pedido.
+ * 
+ */
 public class PedidoDao {
 
     private Connection conexion;
 
+    /**
+     * Consulta para conseguir información sobre todos los pedidos de la base de datos.
+     * 
+     * @return lista de pedidos completa
+     */
     public ArrayList<Pedido> getAllPedidos() {
         ArrayList<Pedido> listaPedidos = new ArrayList<>();
         Log.logBd.info("CONSULTA GetAllPedidos");
@@ -70,6 +79,12 @@ public class PedidoDao {
         return listaPedidos;
     }
     
+    /**
+     * Consulta para conseguir los pedidos de un cliente en concreto.
+     * 
+     * @param email
+     * @return lista de pedidos del cliente
+     */
     public ArrayList<Pedido> getAllPedidosCliente(String email) {
         ArrayList<Pedido> listaPedidos = new ArrayList<>();
         Log.logBd.info("CONSULTA getAllPedidosCliente");
@@ -121,6 +136,12 @@ public class PedidoDao {
         return listaPedidos;
     }
 
+    /**
+     * Dado el id de un pedido, se retorna la información referente a ese pedido.
+     * 
+     * @param idPedido
+     * @return 
+     */
     public Pedido getPedido(int idPedido) {
         Pedido pedido = new Pedido();
         Log.logBd.info("CONSULTA GetPedido");
@@ -166,6 +187,16 @@ public class PedidoDao {
         return pedido;
     }
 
+    /**
+     * Crea un nuevo pedido el cual tendrá, los artículos comprados, el precio, el email del cliente y 
+     * su id.
+     * 
+     * @param codigos
+     * @param precio
+     * @param email
+     * @param idPedido
+     * @return 
+     */
     public boolean hacerPedidoCarro(ArrayList<Integer> codigos, String precio, String email, int idPedido) {
         boolean hecho = false;
         Date date = new Date();
@@ -242,9 +273,9 @@ public class PedidoDao {
     }
 
     /**
-     * Retorna el id maximo
+     * Retorna el id maximo de la tabla pedidos.
      *
-     * @return Devuelve un entero
+     * @return 
      */
     public int getIdPedidoMax() {
         int idMax = -1;
@@ -272,7 +303,7 @@ public class PedidoDao {
 
     
     /**
-     * Crea un pedido nuevo con una torre de pc montada por el usuario
+     * Crea un pedido nuevo con una torre de pc montada por el usuario.
      *
      * @param torre
      * @param idPedido
@@ -306,7 +337,7 @@ public class PedidoDao {
     }
     
     /**
-     * Elimina un pedido de la base de datos
+     * Elimina un pedido de la base de datos.
      *
      * @param idPedido
      * @return Devuelve si se ha podido eliminar el pedido
@@ -336,7 +367,8 @@ public class PedidoDao {
     }
     
     /**
-     * Cambia el estado de un pedido
+     * Cambia el estado de un pedido.
+     * El estado puede ser preparacion-0, enviado-1 o recibido-2.
      *
      * @param idPedido
      * @param estado

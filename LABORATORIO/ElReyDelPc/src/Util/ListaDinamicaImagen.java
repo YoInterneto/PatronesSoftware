@@ -2,7 +2,6 @@
 package Util;
 
 import java.awt.Component;
-import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-
+/**
+ * Renderiza un componente jList de forma dinámica.
+ * Cada fila de la lista es un jLabel con un texto y una imagen dados.
+ * 
+ */
 public class ListaDinamicaImagen extends DefaultListCellRenderer {
     Border noFocusBorder;
     TitledBorder focusBorder;
@@ -30,6 +33,13 @@ public class ListaDinamicaImagen extends DefaultListCellRenderer {
         this.defaultRenderer = new DefaultListCellRenderer();
     }
     
+    /**
+     * Crea un mapa con la información de un artículo y su imagen.
+     * 
+     * @param informacion
+     * @param rutaImagen
+     * @return 
+     */
     public Map<String, ImageIcon> crearImageMap(ArrayList<String> informacion, ArrayList<String> rutaImagen) {
         Map<String, ImageIcon> map = new HashMap<>();
         

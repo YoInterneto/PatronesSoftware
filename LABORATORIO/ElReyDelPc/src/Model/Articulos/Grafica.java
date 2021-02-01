@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto gráfica.
+ * 
+ */
 public class Grafica extends Articulo{
     
     private int Generacion;

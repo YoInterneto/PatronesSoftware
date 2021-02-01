@@ -1,22 +1,23 @@
 
 package DAO;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos sobre el carro de un cliente.
+ * 
+ */
 public class CarroDao {
     
     private Connection conexion;
+    
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes.
      *
      * @return Devuelve una lista de objetos de tipo Grafica
      */
@@ -44,6 +45,12 @@ public class CarroDao {
        return cesta;
     }  
     
+    /**
+     * Actualiza la lista de artículos que tiene un cliente en su carro.
+     * 
+     * @param email
+     * @param nuevoCarro
+     */
     public void actualizaCarro(String email,String nuevoCarro){
         
         Log.logBd.info("CONSULTA actualizaCarro");
@@ -58,8 +65,5 @@ public class CarroDao {
             Log.logBd.error("                   SQL State - " + error.getSQLState());
             Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
         }
-        
-        
     }
-    
 }

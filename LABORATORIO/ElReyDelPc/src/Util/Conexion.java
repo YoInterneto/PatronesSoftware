@@ -6,11 +6,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
+/**
+ * Realiza la conexión a la base de datos.
+ *
+ */
 public class Conexion {
     
     private static Connection conexion = null;
     
+    /**
+     * Devuelve la conexión a la base de datos.
+     *
+     * @return 
+     */
     public static Connection getConexion() {
         String driver = "org.postgresql.Driver";
         String nombreBd = "ElReyDelPc";
@@ -37,6 +45,10 @@ public class Conexion {
         }
     }
     
+    /**
+     * Cierra la conexión a la base de datos.
+     * 
+     */
     public void desconectar(){
         try{
             Log.logBd.info("Cerrando la conexión con la Base de Datos...");

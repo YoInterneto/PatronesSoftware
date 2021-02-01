@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto procesador.
+ * 
+ */
 public class Procesador extends Articulo{
     
     private String Socket;

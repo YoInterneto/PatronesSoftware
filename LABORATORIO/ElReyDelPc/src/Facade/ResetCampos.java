@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Facade;
 
 import Views.Login;
 
 /**
- *
- * @author Alberto
+ * Clase que da la funcionalidad a los botones de borrar en la interfaz de registro.
+ * 
  */
 public class ResetCampos {
     private Login login;
@@ -18,11 +14,19 @@ public class ResetCampos {
         this.login = loginVista;
     }
     
+    /**
+     * Resetea los campos del formulario login.
+     * 
+     */
     public void resetCamposLogin(){
         login.contrasenna.setText(null);
         login.usuario.setText(null);
     }
     
+    /**
+     * Resetea los campos del formulario registro.
+     * 
+     */
     public void resetCamposRegistro(){
         login.nombreRegistro.setText(null);
         login.apellidoRegistro.setText(null);

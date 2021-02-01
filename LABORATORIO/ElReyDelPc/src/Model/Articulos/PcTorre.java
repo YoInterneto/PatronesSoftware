@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto torre pc.
+ * 
+ */
 public class PcTorre extends Articulo{
     
     private String Nombre;

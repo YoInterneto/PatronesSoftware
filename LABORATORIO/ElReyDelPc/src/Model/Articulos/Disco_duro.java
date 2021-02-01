@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto disco duro.
+ * 
+ */
 public class Disco_duro extends Articulo{
     
     private String Tipo;

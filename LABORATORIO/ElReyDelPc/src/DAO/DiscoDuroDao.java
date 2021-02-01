@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto disco duro.
+ * 
+ */
 public class DiscoDuroDao {
     
     private Connection conexion;
@@ -54,8 +57,7 @@ public class DiscoDuroDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes.
      *
      * @return Devuelve una lista de objetos de tipo Disco_duro
      */
@@ -91,12 +93,11 @@ public class DiscoDuroDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllDiscos");
-       return discodb;
+        return discodb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo disco duro
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo disco duro.
      *
      * @param modelo
      * @param codigoReferencia

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Es el responsable de la custodia de los recuerdos. 
  * Nunca opera o examina el contenido de un recuerdo.
- * @author Salvador Oton
+ * 
  */
 public class Conserje {
 
@@ -14,7 +14,8 @@ public class Conserje {
 
     /**
      * Añade un recuerdo al final de la lista de recuerdos.
-     * @param recuerdo Recuerdo a añadir.
+     * 
+     * @param recuerdo
      */
     public void pushRecuerdo(Recuerdo recuerdo) {
         recuerdos.add(recuerdo);
@@ -22,7 +23,8 @@ public class Conserje {
 
     /**
      * Recupera el último recuerdo.
-     * @return Recuerdo.
+     * 
+     * @return
      */
     public Recuerdo popRecuerdo() {
         if (recuerdos.size()>0) {

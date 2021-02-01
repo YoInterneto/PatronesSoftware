@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto RAM.
+ * 
+ */
 public class Memoria_RAM extends Articulo{
     
     private String PN;

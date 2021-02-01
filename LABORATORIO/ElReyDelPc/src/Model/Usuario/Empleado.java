@@ -1,5 +1,9 @@
 package Model.Usuario;
 
+/**
+ * Objeto empleado.
+ * 
+ */
 public class Empleado extends Usuario{
     
     private String DNI;

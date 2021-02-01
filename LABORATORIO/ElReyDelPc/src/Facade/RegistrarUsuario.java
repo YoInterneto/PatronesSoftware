@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Facade;
 
 import DAO.UsuarioDao;
-import Model.Usuario.Cliente;
-import Model.Usuario.Empleado;
 import Views.Login;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Alberto
+ * Clase que tiene la funcionalidad para el registro de nuevos clientes.
+ * 
  */
 public class RegistrarUsuario {
     
@@ -26,6 +20,10 @@ public class RegistrarUsuario {
         this.consulta = new UsuarioDao();
     }
     
+    /**
+     * Crea al nuevo usuario.
+     * 
+     */
     public void nuevoUsuario(){
         char[] valorContrasenna = login.contrasenaRegistro.getPassword();
         String contrasenna = new String(valorContrasenna);

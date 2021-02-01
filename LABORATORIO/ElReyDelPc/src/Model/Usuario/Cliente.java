@@ -1,5 +1,9 @@
 package Model.Usuario;
 
+/**
+ * Objeto cliente.
+ * 
+ */
 public class Cliente extends Usuario{
     
     private String Tarjeta;

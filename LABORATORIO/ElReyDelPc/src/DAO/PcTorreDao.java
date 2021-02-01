@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto PCTorre.
+ * 
+ */
 public class PcTorreDao {
     
     private Connection conexion;
@@ -19,7 +22,7 @@ public class PcTorreDao {
      * Dado el codigo de un torre realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes a dicho torre.
      *
-     * @patorre codigo
+     * @param codigo
      * @return Devuelve un objeto de tipo PcTorre
      */
     public PcTorre getPcTorre(int codigo){
@@ -40,9 +43,7 @@ public class PcTorreDao {
                 torre.setStock(Integer.parseInt(resultado.getString("Stock")));
                 torre.setCreado(resultado.getBoolean("Creado"));
                 torre.setRutaImagen(resultado.getString("rutaImagen"));
-                
                 torre.setNombre(resultado.getString("Nombre"));
- 
             }
             
         } catch (SQLException error) {
@@ -54,9 +55,9 @@ public class PcTorreDao {
         Log.logBd.info("Consulta realizada con éxito - getPcTorre");
         return torre;
     }
+    
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre el/los pc torre.
      *
      * @return Devuelve una lista de objetos de tipo PcTorre
      */
@@ -83,10 +84,10 @@ public class PcTorreDao {
                     torre.setNombre(rs.getString("Nombre"));
                     torre.setStock(rs.getInt("Stock"));
                     torre.setCreado(rs.getBoolean("Creado"));
+                    
                     if (!rs.getBoolean("Creado")){
                         portatildb.add(torre);
                     }
-                    
                 }               
             } catch (SQLException error) {
                 Log.logBd.error("ERROR SQL en getAllPcTorre: " + error);
@@ -95,12 +96,11 @@ public class PcTorreDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllPcTorre");
-       return portatildb;
+        return portatildb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo torre de pc
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo torre de pc.
      *
      * @param modelo
      * @param codigoReferencia
@@ -109,10 +109,11 @@ public class PcTorreDao {
      * @param stock
      * @param rutaImagen
      * @param idTienda
-     * @param cristal
+     * @param nombre
+     * @param creado
      * @return Devuelve un boolean para saber si se ha insertado
      */
-    public boolean anadirTorre(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String nombre,boolean creado){
+    public boolean anadirTorre(String modelo, int codigoReferencia, float precio, String descripcion, int stock, String rutaImagen, int idTienda, String nombre, boolean creado){
         boolean hecho = false;
         try {
             Log.logBd.info("CONSULTA AnadirTorre");
@@ -135,6 +136,12 @@ public class PcTorreDao {
         return hecho;
     }
     
+    /**
+     * Inserta una nueva torre creada por un cliente en la base de datos.
+     * 
+     * @param pc
+     * @return 
+     */
     public boolean insertarTorreCustom(PcTorre pc){
         boolean hecho = false;
         
@@ -158,5 +165,4 @@ public class PcTorreDao {
         
         return hecho;
     }
-    
 }

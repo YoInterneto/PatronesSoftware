@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto gráfica.
+ * 
+ */
 public class GraficaDao {
     
     private Connection conexion;
@@ -55,8 +58,7 @@ public class GraficaDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre una gráfica.
      *
      * @return Devuelve una lista de objetos de tipo Grafica
      */
@@ -96,8 +98,7 @@ public class GraficaDao {
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo fuente de alimentacion
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo gráfica.
      *
      * @param modelo
      * @param codigoReferencia

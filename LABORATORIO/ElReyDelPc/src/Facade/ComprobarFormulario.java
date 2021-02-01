@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Facade;
 
 import Views.Login;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Alberto
+ * Clase que tiene la funcionalidad para la comprobación de formularios.
+ * 
  */
 public class ComprobarFormulario {
     
@@ -20,6 +16,11 @@ public class ComprobarFormulario {
         this.login = loginVista;
     }
     
+    /**
+     * Comprueba el formulario del inicio de sesión.
+     * 
+     * @return 
+     */
     public boolean comprobarFormulario(){
         boolean correcto = false;
         if(!login.usuario.getText().equalsIgnoreCase("")){
@@ -37,6 +38,11 @@ public class ComprobarFormulario {
         return correcto;
     }
     
+    /**
+     * Comprueba el formulario del registro de un nuevo usuario.
+     * 
+     * @return 
+     */
     public boolean comprobarFormularioRegistro(){
         boolean correcto = false;
         if(login.nombreRegistro.getText().equalsIgnoreCase("") || login.apellidoRegistro.getText().equalsIgnoreCase("")

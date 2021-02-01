@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto placa base.
+ * 
+ */
 public class Placa_baseDao {
     
     private Connection conexion;
@@ -19,7 +22,7 @@ public class Placa_baseDao {
      * Dado el codigo de un placa realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes a dicho placa.
      *
-     * @paplaca codigo
+     * @param codigo
      * @return Devuelve un objeto de tipo Placa_base
      */
     public Placa_base getPlaca_base(int codigo){
@@ -55,14 +58,13 @@ public class Placa_baseDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre la/las placas.
      *
      * @return Devuelve una lista de objetos de tipo Placa base
      */
     public ArrayList<Placa_base> getAllPlacas() {
         
-        ArrayList<Placa_base> placadb = new ArrayList<Placa_base>();
+        ArrayList<Placa_base> placadb = new ArrayList<>();
         
             try {
                 conexion = Conexion.getConexion();
@@ -92,12 +94,11 @@ public class Placa_baseDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllPlaca_basees()");
-       return placadb;
+        return placadb;
     }
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo placa base
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo placa base.
      *
      * @param modelo
      * @param codigoReferencia

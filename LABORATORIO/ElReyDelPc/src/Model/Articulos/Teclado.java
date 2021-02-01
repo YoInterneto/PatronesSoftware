@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto teclado.
+ * 
+ */
 public class Teclado extends Articulo{
     
     private String Tipo;

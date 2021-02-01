@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto portátil.
+ * 
+ */
 public class Portatil extends Articulo{
     
     private int Peso;

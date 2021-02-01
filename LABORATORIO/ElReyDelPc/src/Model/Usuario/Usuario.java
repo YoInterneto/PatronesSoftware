@@ -1,7 +1,11 @@
 
 package Model.Usuario;
 
-
+/**
+ * Objeto usuario.
+ * Clase padre de los demás usuarios de la aplicación.
+ * 
+ */
 public class Usuario {
     
     private String Nombre;

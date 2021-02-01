@@ -6,14 +6,16 @@ import StatePedido.Pedido;
  * Clase que crea el objeto recuerdo y lo utiliza para recuperar su estado.
  * Crea un Recuerdo que contiene una instantánea de su estado interno actual. 
  * Usa el Recuerdo para restaurar su estado interno.
+ * 
  */
 public class Originador {
 
-    // Referencia a la reunion.
+    // Referencia al pedido.
     private Pedido pedido;
 
     /**
-     * Establece la reunion.
+     * Establece el pedido.
+     * 
      * @param pedido 
      */
     public void setPedido(Pedido pedido) {
@@ -21,7 +23,8 @@ public class Originador {
     }
 
     /**
-     * Asigna un recuerdo a la reunion.
+     * Asigna un recuerdo al pedido.
+     * 
      * @param recuerdo 
      */
     public void setRecuerdo(Recuerdo recuerdo) {
@@ -29,7 +32,8 @@ public class Originador {
     }
 
     /**
-     * Devuelve un recuerdo creado a partir de la reunion actual.
+     * Devuelve un recuerdo creado a partir del pedido actual.
+     * 
      * @return 
      */
     public Recuerdo crearRecuerdo() {

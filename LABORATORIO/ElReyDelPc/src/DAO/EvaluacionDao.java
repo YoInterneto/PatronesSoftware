@@ -7,11 +7,16 @@ import java.sql.Statement;
 import util.Conexion;
 import SingletonLog.Log;
 
+/**
+ * DAO para las operaciones de datos para la evaluaciones de los clientes sobre un artículo.
+ * 
+ */
 public class EvaluacionDao {
     
     private Connection conexion;
     
     /**
+     * Crea una nueva evaluación de un producto.
      * 
      * @param nota
      * @param codigoReferencia
@@ -39,6 +44,7 @@ public class EvaluacionDao {
         return hecho;
     }
     /**
+     * Comprueba si el usuario ha evaluado con anterioridad el artículo.
      * 
      * @param email
      * @param codigoReferencia
@@ -65,8 +71,8 @@ public class EvaluacionDao {
     }
     
     /**
-     * Calcula la media de las puntuaciones del producto con el codigo 
-     * de referencia dado
+     * Calcula la media de las puntuaciones del producto con el codigo de referencia dado.
+     * 
      * @param codigo
      * @return 
      */
@@ -86,9 +92,7 @@ public class EvaluacionDao {
             Log.logBd.error("               SQL State - " + error.getSQLState());
             Log.logBd.error("               ErrorCode - " + error.getErrorCode());
         }
+        
         return notaMedia;
     }
-    
-    
-    
 }

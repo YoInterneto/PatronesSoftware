@@ -66,6 +66,12 @@ public class ClienteController implements ActionListener {
     private ComandoDeshacer comando;
     private Invocador invocador;
 
+    /**
+     * Controlador para la vista InicioCliente.
+     * Define toda la lógica y comportamiento de la interfaz, además del
+     * flujo de ejecución de esta
+     * 
+     */
     public ClienteController(InicioCliente clientVista, Cliente cliente) {
         this.cliente = cliente;
         this.client = clientVista;
@@ -90,7 +96,12 @@ public class ClienteController implements ActionListener {
         claveBusqueda = "";
         daoEvaluacion = new EvaluacionDao();
     }
-
+    
+    /**
+     * Inicializa y define todos los elementos iniciales necesarios.
+     * Además define los listeners para botones de la aplicación.
+     * 
+     */
     public void iniciar() {
         client.setTitle("INICIO - CLIENTE");
         client.setLocationRelativeTo(null);

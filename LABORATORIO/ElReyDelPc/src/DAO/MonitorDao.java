@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto monitor.
+ * 
+ */
 public class MonitorDao {
     
     private Connection conexion;
@@ -56,8 +59,7 @@ public class MonitorDao {
         return monitor;
     }
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre el/los monitores.
      *
      * @return Devuelve una lista de objetos de tipo Monitor
      */
@@ -93,12 +95,11 @@ public class MonitorDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllMonitores()");
-       return monitordb;
+        return monitordb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo monitor
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo monitor.
      *
      * @param modelo
      * @param codigoReferencia

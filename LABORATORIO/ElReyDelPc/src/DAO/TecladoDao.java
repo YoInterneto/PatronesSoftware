@@ -1,7 +1,6 @@
 
 package DAO;
 
-
 import Model.Articulos.Teclado;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto teclado.
+ * 
+ */
 public class TecladoDao {
     
     private Connection conexion;
@@ -20,7 +22,7 @@ public class TecladoDao {
      * Dado el codigo de un teclado realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes a dicho teclado.
      *
-     * @pateclado codigo
+     * @param codigo
      * @return Devuelve un objeto de tipo Teclado
      */
     public Teclado getTeclado(int codigo){
@@ -42,7 +44,6 @@ public class TecladoDao {
                 teclado.setRutaImagen(resultado.getString("rutaImagen"));
                 
                 teclado.setTipo(resultado.getString("Tipo"));
- 
             }
             
         } catch (SQLException error) {
@@ -54,15 +55,15 @@ public class TecladoDao {
         Log.logBd.info("Consulta realizada con éxito - getTeclado");
         return teclado;
     }
+    
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre el/los teclados.
      *
      * @return Devuelve una lista de objetos de tipo Teclado
      */
     public ArrayList<Teclado> getAllTeclados() {
         
-        ArrayList<Teclado> tecladodb = new ArrayList<Teclado>();
+        ArrayList<Teclado> tecladodb = new ArrayList<>();
         
             try {
                 conexion = Conexion.getConexion();
@@ -96,8 +97,7 @@ public class TecladoDao {
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo placa base
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo teclado.
      *
      * @param modelo
      * @param codigoReferencia

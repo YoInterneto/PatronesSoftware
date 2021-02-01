@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto caja.
+ * 
+ */
 public class CajaDao {
     
     private Connection conexion;
@@ -55,8 +58,7 @@ public class CajaDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre la/las cajas.
      *
      * @return Devuelve una lista de objetos de tipo Caja
      */
@@ -96,8 +98,7 @@ public class CajaDao {
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo caja
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo caja.
      *
      * @param modelo
      * @param codigoReferencia

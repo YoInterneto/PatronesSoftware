@@ -2,8 +2,9 @@
 package ProxyLogin;
 
 /**
- *
- * @author Alberto
+ * Define la interfaz común para el Proxy y el SujetoReal de forma que
+ * se pueda usar un Proxy donde se espere un SujetoReal.
+ * 
  */
 public interface Servidor {
     

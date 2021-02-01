@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto caja.
+ * 
+ */
 public class Caja extends Articulo{
     
     private boolean Cristal;

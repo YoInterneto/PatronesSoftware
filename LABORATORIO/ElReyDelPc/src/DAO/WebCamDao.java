@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto web cam.
+ * 
+ */
 public class WebCamDao {
     
     private Connection conexion;
@@ -19,7 +22,7 @@ public class WebCamDao {
      * Dado el codigo de un webcam realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes a dicho webcam.
      *
-     * @pawebcam codigo
+     * @param codigo
      * @return Devuelve un objeto de tipo Webcam
      */
     public WebCam getWebcam(int codigo){
@@ -39,9 +42,7 @@ public class WebCamDao {
                 webcam.setDescripcion(resultado.getString("Descripcion"));
                 webcam.setStock(Integer.parseInt(resultado.getString("Stock")));
                 webcam.setRutaImagen(resultado.getString("rutaImagen"));
-                
                 webcam.setCalidad(resultado.getString("Calidad"));
- 
             }
             
         } catch (SQLException error) {
@@ -53,15 +54,15 @@ public class WebCamDao {
         Log.logBd.info("Consulta realizada con éxito - getWebCam");
         return webcam;
     }
+    
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre la/las webcams.
      *
      * @return Devuelve una lista de objetos de tipo WebCam
      */
     public ArrayList<WebCam> getAllWebCams() {
         
-        ArrayList<WebCam> camdb = new ArrayList<WebCam>();
+        ArrayList<WebCam> camdb = new ArrayList<>();
         
             try {
                 conexion = Conexion.getConexion();
@@ -80,7 +81,6 @@ public class WebCamDao {
                     cam.setPrecio(rs.getFloat("Precio"));
                     cam.setRutaImagen(rs.getString("RutaImagen"));
                     cam.setStock(rs.getInt("Stock"));
-                    
                     cam.setCalidad(rs.getString("Calidad"));
                     
                     camdb.add(cam);
@@ -92,12 +92,11 @@ public class WebCamDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllWebCams()");
-       return camdb;
+        return camdb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo placa base
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo placa base.
      *
      * @param modelo
      * @param codigoReferencia

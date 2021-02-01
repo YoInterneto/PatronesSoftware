@@ -51,6 +51,12 @@ public class EmpleadoController implements ActionListener{
     
     private String claveBusqueda;
     
+    /**
+     * Controlador para la vista InicioEmpleado.
+     * Define toda la lógica y comportamiento de la interfaz, además del
+     * flujo de ejecución de esta
+     * 
+     */
     public EmpleadoController(InicioEmpleado inicioVista, Empleado usuario){
         this.inicio = inicioVista;
         this.empleado = usuario;
@@ -59,9 +65,9 @@ public class EmpleadoController implements ActionListener{
     }
     
     /**
-     * Funcion que inicializa toda la vista InicioEmpleado y crea todos los listeners para 
-     * todos los botones de la interfaz
-     *
+     * Inicializa y define todos los elementos iniciales necesarios.
+     * Además define los listeners para botones de la aplicación.
+     * 
      */
     public void iniciar(){
         inicio.setTitle("INICIO - EMPLEADOS");
@@ -344,9 +350,7 @@ public class EmpleadoController implements ActionListener{
         });
     }
     
-    //****************************************************************************************************************************************
-    //**                                                                                                                                    **
-    //****************************************************************************************************************************************
+    
     /**
      * Carga la información e imagen referente a un artículo seleccionado previamente por el
      * usuario
@@ -518,9 +522,6 @@ public class EmpleadoController implements ActionListener{
     }
     
     
-    //****************************************************************************************************************************************
-    //**                                                                                                                                    **
-    //****************************************************************************************************************************************
     /**
      * Inicializa todos los elementos del panel de inicio, el cual tiene la información sobre el
      * empleado que inicia sesión en la aplicación
@@ -651,9 +652,6 @@ public class EmpleadoController implements ActionListener{
     }
     
     
-    //****************************************************************************************************************************************
-    //**                                                                                                                                    **
-    //****************************************************************************************************************************************
     /**
      * Comprueba que todos los jTextField del formulario para editar los datos de un empleado, estén
      * rellenados de forma correcta y controla el cambio de contraseña
@@ -751,9 +749,6 @@ public class EmpleadoController implements ActionListener{
     }
     
     
-    //****************************************************************************************************************************************
-    //**                                                                                                                                    **
-    //****************************************************************************************************************************************
     @Override
     public void actionPerformed(ActionEvent boton){
         if(boton.getSource() == inicio.btnEditarDatos){
@@ -993,9 +988,6 @@ public class EmpleadoController implements ActionListener{
     }
     
     
-    //****************************************************************************************************************************************
-    //**                                                                                                                                    **
-    //****************************************************************************************************************************************
     /**
      * Guarda el valor de la clave de búsqueda
      *

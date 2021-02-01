@@ -1,7 +1,10 @@
 
 package Model.Usuario;
 
-
+/**
+ * Objeto tienda.
+ * 
+ */
 public class Tienda {
     
     private int id_tienda;

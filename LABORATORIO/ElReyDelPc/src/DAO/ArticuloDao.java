@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto artículo.
+ * 
+ */
 public class ArticuloDao {
     
     private Connection conexion;
     
     /**
-     * Identifica qué modelo es y devuelve su tipo
+     * Identifica qué modelo es y devuelve su tipo.
      *
      * @param modelo
      * @return Devuelve un String que representa el modelo de articulo
@@ -46,7 +49,7 @@ public class ArticuloDao {
     }
     
     /**
-     * Retorna el articulo de la base de datos el cual tenga codigo de referencia indicado
+     * Retorna el articulo de la base de datos el cual tenga codigo de referencia indicado.
      *
      * @param codigoReferencia
      * @return Devuelve un objeto articulo
@@ -81,7 +84,7 @@ public class ArticuloDao {
     }
     
     /**
-     * Retorna el codigo de referencia maximo que hay en la tabla
+     * Retorna el codigo de referencia maximo que hay en la tabla.
      *
      * @return Devuelve un objeto articulo
      */
@@ -110,8 +113,7 @@ public class ArticuloDao {
     }  
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes.
      *
      * @return Devuelve una lista de objetos de tipo Articulo
      */
@@ -153,8 +155,7 @@ public class ArticuloDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes sobre el/los artículo
      *
      * @return Devuelve una lista de objetos de tipo Articulo
      */
@@ -197,7 +198,7 @@ public class ArticuloDao {
     
     /**
      * Dado el nombre de la tabla y el codigo de referencia retorna la ruta de la imagen
-     * del artículo
+     * del artículo.
      *
      * @param tabla
      * @param codigo
@@ -228,7 +229,7 @@ public class ArticuloDao {
     
     /**
      * Dado los nuevos datos que quiere cambiar el empleado de un articulo
-     * se realiza una actualización en la base de datos para ese articulo
+     * se realiza una actualización en la base de datos para ese articulo.
      * 
      * @param codigoReferencia
      * @param modelo
@@ -263,7 +264,7 @@ public class ArticuloDao {
     }
     
     /**
-     * Dado el codigo de referencia borra el articulo
+     * Dado el codigo de referencia borra el articulo.
      *
      * @return Devuelve un boolean que dice si se ha podido realizar la operacion
      */
@@ -291,7 +292,8 @@ public class ArticuloDao {
     }
     
     /**
-     * Actualiza el stock del articulo dado
+     * Actualiza el stock del articulo dado.
+     * 
      * @param codigoRef
      * @param stock
      * @return 
@@ -321,7 +323,7 @@ public class ArticuloDao {
     }
     
     /**
-     * Dada una palabra busca en la base de datos articulos que contengan esa palabra
+     * Dada una palabra busca en la base de datos articulos que contengan esa palabra.
      * 
      * @param palabraClave
      * @return Devuelve una lista de los artículos encontrados que coinciden
@@ -361,6 +363,5 @@ public class ArticuloDao {
         }
         
         return listaArticulos;
-    }
-    
+    }   
 }

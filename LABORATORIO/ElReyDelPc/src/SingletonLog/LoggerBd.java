@@ -8,7 +8,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
+/**
+ * Singleton para la creación de un Log de la base de datos.
+ * 
+ */
 public final class LoggerBd {
     private static final LoggerBd instancia = new LoggerBd();
 
@@ -18,10 +21,21 @@ public final class LoggerBd {
     protected String os = System.getProperty("os.name");
     private static File logFile;
 
+    /**
+     * Retorna la instancia del Log con nombre simplelog.
+     *
+     * @return
+     */
     public static LoggerBd getInstance(){
         return instancia;
     }
 
+    /**
+     * Retorna la instancia del Log con un nombre en específico.
+     *
+     * @param nombre nombre del log
+     * @return
+     */
     public static LoggerBd getInstance(String nombre){
         instancia.nombreLog = nombre;
         //Ponemos el directorio base diferente en funcion de si es Windows-Mac o Unix
@@ -33,7 +47,11 @@ public final class LoggerBd {
         instancia.crearLogFile();
         return instancia;
     }
-
+    
+    /**
+     * Crea el Log de la base de datos.
+     *
+     */
     public void crearLogFile(){
         //Cogemos la fecha actual
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,6 +95,11 @@ public final class LoggerBd {
         
     }
     
+    /**
+     * Crea una nueva entrada en el log con la etiqueta [INFO].
+     *
+     * @param mensaje
+     */
     public void info(String mensaje){
         try{
             FileWriter salida = new FileWriter(LoggerBd.logFile, true);
@@ -88,6 +111,11 @@ public final class LoggerBd {
         }
     }
     
+    /**
+     * Crea una nueva entrada en el log con la etiqueta [ERROR].
+     *
+     * @param mensaje
+     */
     public void error(String mensaje){
         try{
             FileWriter salida = new FileWriter(LoggerBd.logFile, true);
@@ -99,6 +127,11 @@ public final class LoggerBd {
         }
     }
     
+    /**
+     * Crea una nueva entrada en el log con la etiqueta [WARN].
+     *
+     * @param mensaje
+     */
     public void warn(String mensaje){
         try{
             FileWriter salida = new FileWriter(LoggerBd.logFile, true);

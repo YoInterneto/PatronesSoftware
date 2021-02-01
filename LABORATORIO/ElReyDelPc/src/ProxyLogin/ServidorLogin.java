@@ -4,8 +4,9 @@ package ProxyLogin;
 import DAO.UsuarioDao;
 
 /**
- *
- * @author Alberto
+ * Es la clase que implementa los servicios reales ofrecidos, puede
+ * ser una instancia local o remota.
+ * 
  */
 public class ServidorLogin implements Servidor{
     
@@ -15,12 +16,7 @@ public class ServidorLogin implements Servidor{
     private final String nombreServidor;
     
     private final UsuarioDao consultaUsuario;
-
-    /**
-     * Constructor.
-     *
-     * @param nombre Nombre del servidor.
-     */
+    
     public ServidorLogin(String nombre){
         this.nombreServidor = nombre;
         this.consultaUsuario = new UsuarioDao();

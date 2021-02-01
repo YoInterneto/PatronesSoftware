@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Facade;
 
 import java.awt.event.ActionListener;
@@ -18,8 +14,9 @@ import javax.swing.WindowConstants;
 import SingletonLog.Log;
 
 /**
- *
- * @author Alberto
+ * Simplifica el acceso a las funcionalidades que se ponen a disposición del usuario
+ * en la interfaz login.
+ * 
  */
 public class FachadaLogin implements ActionListener{
     
@@ -39,6 +36,11 @@ public class FachadaLogin implements ActionListener{
         this.reset = new ResetCampos(loginVista);
     }
     
+    /**
+     * Inicializa y define todos los elementos iniciales necesarios.
+     * Además define los listeners para botones de la aplicación.
+     * 
+     */
     public void iniciar(){
         login.setTitle("INICIO SESION");
         login.setSize(635, 432);
@@ -124,8 +126,6 @@ public class FachadaLogin implements ActionListener{
             else if(boton.getSource() == login.borrarLogin){
                 reset.resetCamposLogin();
                 Log.log.info("Vista Login - evento borrarLogin");
-                login.usuario.setText("email@email.com");
-                login.contrasenna.setText("pass1");
             }
             else if(boton.getSource() == login.borrarRegistro){
                 reset.resetCamposRegistro();

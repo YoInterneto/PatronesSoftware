@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import util.Conexion;
 import SingletonLog.Log;
 
-
+/**
+ * DAO para las operaciones de datos de la tabla y objeto RAM.
+ * 
+ */
 public class MemoriaRAMDao {
     
     private Connection conexion;
     
     /**
-     * Dado el codigo de un ram realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes a dicho ram.
+     * Dado el codigo de un ram realiza una consulta en la base de datos y devuelve todos los datos correspondientes a dicho ram.
      *
      * @param codigo
      * @return Devuelve un objeto de tipo Memoria_RAM
@@ -55,8 +57,7 @@ public class MemoriaRAMDao {
     }
     
     /**
-     * Realiza una consulta en la base de
-     * datos y devuelve todos los datos correspondientes.
+     * Realiza una consulta en la base de datos y devuelve todos los datos correspondientes de la/las RAM.
      *
      * @return Devuelve una lista de objetos de tipo Memoria_RAM
      */
@@ -92,12 +93,11 @@ public class MemoriaRAMDao {
             }                   
       
         Log.logBd.info("Consulta realizada con éxito - getAllMemoria_RAMes()");
-       return MemoriaRamdb;
+        return MemoriaRamdb;
     }  
     
     /**
-     * Realiza una consulta en la base de datos para añadir
-     * un nuevo artículo memoria RAM
+     * Realiza una consulta en la base de datos para añadir un nuevo artículo memoria RAM.
      *
      * @param modelo
      * @param codigoReferencia

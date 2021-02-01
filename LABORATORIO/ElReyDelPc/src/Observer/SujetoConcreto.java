@@ -4,7 +4,8 @@ import Model.Articulos.Articulo;
 import java.util.Observable;
 
 /**
- * Gestiona a sus observadores. Notifica cambios en el precio de un componente.
+ * Gestiona a sus observadores. 
+ * Notifica cambios en el precio de un componente.
  *
  */
 public class SujetoConcreto extends Observable {

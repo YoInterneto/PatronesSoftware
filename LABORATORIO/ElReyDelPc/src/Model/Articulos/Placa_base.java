@@ -1,6 +1,10 @@
 
 package Model.Articulos;
 
+/**
+ * Objeto placa base.
+ * 
+ */
 public class Placa_base extends Articulo{
     
     private String Socket;
