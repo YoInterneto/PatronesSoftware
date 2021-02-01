@@ -12,5 +12,5 @@ ESTRUCTURALES
 COMPORTAMIENTO
    - Observer
    - State
-   - * *
+   - Command
 
