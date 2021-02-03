@@ -2051,12 +2051,11 @@ public class ClienteController implements ActionListener {
         for (int i = 0; i < cesta.size(); i++) {
 
             int codigo = cesta.get(i);
-            Articulo articulo = consultaArticulo.getArticulo(codigo);
-            String modelo = articulo.getModelo();
+            Articulo articulo = consultaArticulo.getArticulo(codigo);  
             float precio = articulo.getPrecio();
             String ruta = articulo.getRutaImagen();
-            String articuloInfo = "  CodRef-" + String.format("%04d", codigo) + "- \t" + modelo + " \tPrecio € " + precio;
-            articuloInfo = articuloInfo.replaceAll("\t", "           ");
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-" + String.format("%04d", codigo) + "- </sup></strong></u><br>Modelo: " + articulo.getModelo()
+                    + " <br>Precio: " + articulo.getPrecio() + "€ <br>[stock: " + articulo.getStock() + "]</body></html>";
 
             listaInfo.add(articuloInfo);
             if (ruta == null) {
@@ -2114,6 +2113,12 @@ public class ClienteController implements ActionListener {
         client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, getClaveBusqueda()));
     }
 
+    /**
+     * Crea una Jlist con los articulos que hay en el arraylist pasado por
+     * parametro con informacion relativa a los mismos sacada de la base de
+     * datos.
+     * @param lista 
+     */
     private void cargarLista(ArrayList<Articulo> lista) {
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<String> listaInfo = new ArrayList<>();

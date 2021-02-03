@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,256" last-zoom="0.7"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.75"
 	 default-schema="public" default-owner="postgres">
 <database name="ElReyDelPc_BBDD" is-template="false" allow-conns="true">
 </database>
@@ -61,7 +61,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Cliente">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="320" y="660"/>
+	<position x="400" y="660"/>
 	<column name="Tarjeta">
 		<type name="varchar" length="0"/>
 	</column>
@@ -93,7 +93,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Tienda">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="420" y="40"/>
+	<position x="420" y="100"/>
 	<column name="ID" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -129,7 +129,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Articulo">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="920" y="320"/>
+	<position x="1100" y="440"/>
 	<column name="Modelo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -164,7 +164,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Portatil">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1500" y="0"/>
+	<position x="800" y="60"/>
 	<column name="Panel">
 		<type name="varchar" length="0"/>
 	</column>
@@ -176,7 +176,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="WebCam">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1560" y="2000"/>
+	<position x="1020" y="920"/>
 	<column name="Calidad">
 		<type name="varchar" length="0"/>
 	</column>
@@ -185,7 +185,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="PcTorre">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1600" y="2400"/>
+	<position x="1240" y="1080"/>
 	<column name="Nombre">
 		<type name="varchar" length="0"/>
 	</column>
@@ -201,7 +201,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Grafica">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1500" y="1000"/>
+	<position x="1620" y="520"/>
 	<column name="Generacion">
 		<type name="smallint" length="0"/>
 	</column>
@@ -214,7 +214,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Procesador">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1520" y="1560"/>
+	<position x="820" y="740"/>
 	<column name="Socket">
 		<type name="varchar" length="0"/>
 	</column>
@@ -227,7 +227,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Memoria_RAM">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1500" y="1180"/>
+	<position x="1500" y="700"/>
 	<column name="PN">
 		<type name="varchar" length="0"/>
 	</column>
@@ -236,7 +236,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Disco_duro">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1480" y="620"/>
+	<position x="1500" y="160"/>
 	<column name="Tipo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -249,7 +249,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Placa_base">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1500" y="1380"/>
+	<position x="1480" y="860"/>
 	<column name="Socket">
 		<type name="varchar" length="0"/>
 	</column>
@@ -262,7 +262,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Fuente_alimentacion">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1460" y="800"/>
+	<position x="1620" y="340"/>
 	<column name="Potencia">
 		<type name="smallint" length="0"/>
 	</column>
@@ -278,7 +278,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Caja">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1500" y="200"/>
+	<position x="1040" y="60"/>
 	<column name="Cristal">
 		<type name="boolean" length="0"/>
 	</column>
@@ -287,7 +287,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Raton">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1500" y="400"/>
+	<position x="1280" y="60"/>
 	<column name="DPI">
 		<type name="smallint" length="0"/>
 	</column>
@@ -339,7 +339,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Teclado">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1580" y="2200"/>
+	<position x="700" y="520"/>
 	<column name="Tipo">
 		<type name="varchar" length="0"/>
 	</column>
@@ -421,7 +421,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Pedido">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="700" y="640"/>
+	<position x="640" y="940"/>
 	<column name="Precio_total">
 		<type name="float" length="0"/>
 	</column>
@@ -453,7 +453,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Monitor">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1540" y="1760"/>
+	<position x="1480" y="1040"/>
 	<column name="Pulgadas">
 		<type name="smallint" length="0"/>
 	</column>
@@ -476,7 +476,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Puntuacion">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="540" y="440"/>
+	<position x="440" y="440"/>
 	<column name="Nota" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -511,7 +511,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="Carrito">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="360" y="960"/>
+	<position x="120" y="960"/>
 	<column name="datosArticulos">
 		<type name="varchar" length="0"/>
 	</column>

@@ -435,41 +435,139 @@ ALTER TABLE public.Carrito ADD CONSTRAINT Carrito_uq UNIQUE (Email_Cliente);
 
 -- TIENDA Y USUARIOS --
 
-INSERT INTO Tienda VALUES(0, 'Name1', 'Direccion1', 28073, 'Ciudad1', 'Provincia1');
-INSERT INTO Empleado VALUES('Name2', 'Apellido2', 'email@email.com', 'Direccion2', 621512233, 'pass1',0,'DNI1','Empleado1');
-INSERT INTO Cliente VALUES('Name3', 'Apellido1', 'email2@email.com', 'Direccion1', 621424233, 'pass1',0,'tarjeta1');
+INSERT INTO Tienda VALUES(0, 'ElReyDelPc', 'Direccion1', 28073, 'Ciudad1', 'Provincia1');
+INSERT INTO Empleado VALUES('Juan', 'Apellido2', 'email@email.com', 'Direccion2', 621512233, 'pass1',0,'DNI1','Empleado1');
+INSERT INTO Cliente VALUES('Pedro', 'Apellido1', 'email2@email.com', 'Direccion1', 621424230, 'pass1',0,'tarjeta1');
 
--- TRAMITESS -- 
-
---INSERT INTO Carrito VALUES(0,'email2@email.com');
+INSERT INTO Empleado VALUES('Maria', 'Apellido2', 'prueba@gmail.com', 'DireccionX', 671512237, '111',0,'DNI2','Empleado2');
+INSERT INTO Cliente VALUES('Sandra', 'Apellido1', 'cliente1@gmail.com', 'Direccion3', 631426239, '111',0,'tarjeta2');
+INSERT INTO Cliente VALUES('Marta', 'Apellido1', 'cliente2@gmail.com', 'Direccion4', 641424731, '111',0,'tarjeta3');
+INSERT INTO Cliente VALUES('Julio', 'Apellido1', 'cliente3@gmail.com', 'Direccion5', 651424732, '111',0,'tarjeta4');
+INSERT INTO Cliente VALUES('Javier', 'Apellido1', 'cliente4@gmail.com', 'Direccion6', 656624234, '111',0,'tarjeta5');
 
 -- ARTICULOS -- 
 
-INSERT INTO Portatil VALUES('Modelo1', 1, 20, 'Descripcion1', 2,'/images/portatil1.png',0,'IPS',2);
-INSERT INTO WebCam VALUES('Modelo2', 2, 26, 'Descripcion2', 4,'/images/cam1.png' ,0,'HD');
-INSERT INTO PcTorre VALUES('Modelo3', 3, 21, 'Descripcion3', 7,'/images/torre1.png',0,'NombreTorre1',false);
-INSERT INTO Grafica VALUES('Modelo4', 4, 500, 'Descripcion4', 5,'/images/grafica1.jpg', 0, 3);
-INSERT INTO Procesador VALUES('Modelo5', 5, 25, 'Descripcion5', 6,'/images/cpu1.png', 0,'AM4');
-INSERT INTO Memoria_RAM VALUES('Modelo6', 6, 25, 'Descripcion6', 6,'/images/ram1.png', 0,'PN1');
-INSERT INTO Disco_duro VALUES('Modelo7', 7, 25, 'Descripcion7', 4,'/images/disco1.png', 0,'SSD');
-INSERT INTO Placa_base VALUES('Modelo8', 8, 253, 'Descripcion8', 8,'/images/placa1.png', 0,'AM4');
-INSERT INTO Fuente_alimentacion VALUES('Modelo9', 9, 25, 'Descripcion9', 3,'/images/fa1.png', 0,750,'GOLD');
-INSERT INTO Caja VALUES('Modelo10', 10, 25, 'Descripcion10', 10,'/images/caja1.png', 0, true);
-INSERT INTO Raton VALUES('Modelo11', 11, 115, 'Descripcion11', 11,'/images/raton1.png', 0, 8000,'Tipo1',0.5);
-INSERT INTO Teclado VALUES('Modelo12', 12, 125, 'Descripcion12', 12,'/images/teclado1.png', 0, 'Tipo1');
-INSERT INTO Monitor VALUES('Modelo13', 13, 222, 'Descripcion13', 11,'/images/monitor1.png', 0,24,'PN',144);
-insert into disco_duro VALUES('HDD Barracuda', 36, 19.0, 'El mejor del mercado', 10, '/images/disco1.png', 0, 'HDD');
+INSERT INTO Portatil VALUES('Portatil Acer ChromeBook', 1, 350, 'Descripcion1', 2,'/images/portatil1.png',0,'IPS',2);
+INSERT INTO Portatil VALUES('Portatil ASUS ChromeBook', 123, 399, 'Descripcion123', 2,'/images/portatil1.png',0,'IPS',2);
+INSERT INTO Portatil VALUES('Portatil ASUS TUF Gaming', 124, 899, 'Descripcion124', 3,'/images/portatil1.png',0,'IPS',3);
+INSERT INTO Portatil VALUES('Portatil Lenovo iDeaPad 4', 125, 420, 'Descripcion125', 5,'/images/portatil1.png',0,'IPS',2);
+INSERT INTO Portatil VALUES('Portatil HP ChromeBook', 126, 500, 'Descripcion126', 1,'/images/portatil1.png',0,'IPS',1);
+INSERT INTO Portatil VALUES('Portatil HP Pavilion Gaming', 127, 905, 'Descripcion127', 2,'/images/portatil1.png',0,'IPS',4);
+
+INSERT INTO WebCam VALUES('Webcam Logitech C505', 2, 30.5, 'Descripcion2', 4,'/images/cam1.png' ,0,'HD');
+INSERT INTO WebCam VALUES('Webcam Logitech C920', 222, 90, 'Descripcion222', 3,'/images/cam1.png' ,0,'4k');
+INSERT INTO WebCam VALUES('Webcam Owlotech', 223, 20, 'Descripcion223', 2,'/images/cam1.png' ,0,'HD');
+INSERT INTO WebCam VALUES('Webcam Logitech Brio', 224, 80, 'Descripcion224', 8,'/images/cam1.png' ,0,'4k');
+INSERT INTO WebCam VALUES('Webcam Logitech C930', 225, 70, 'Descripcion225', 1,'/images/cam1.png' ,0,'HD');
+
+INSERT INTO PcTorre VALUES('PcTorre Prestige P100A', 3, 502, 'AMD', 1,'/images/torre1.png',0,'Prestige',false);
+INSERT INTO PcTorre VALUES('PcTorre MSI Bronze', 332, 800, 'Descripcion332', 2,'/images/torre1.png',0,'MSI Bronze',false);
+INSERT INTO PcTorre VALUES('PcTorre Milenium Machine 1 Mini', 333, 700, 'Descripcion333', 4,'/images/torre1.png',0,'Milenium Machine',false);
+INSERT INTO PcTorre VALUES('PcTorre Zone Evil Silver', 334, 899.99, 'Descripcion334', 1,'/images/torre1.png',0,'Zone Evil',false);
+
+INSERT INTO Grafica VALUES('Grafica NVIDIA GTX 3070', 4, 540, 'Descripcion4', 1,'/images/grafica1.jpg', 0, 3);
+INSERT INTO Grafica VALUES('Grafica NVIDIA GTX 3080', 441, 850, 'Descripcion441', 0,'/images/grafica1.jpg', 0, 3);
+INSERT INTO Grafica VALUES('Grafica NVIDIA GTX 3080Ti', 442, 999, 'Descripcion443', 2,'/images/grafica1.jpg', 0, 3);
+INSERT INTO Grafica VALUES('Grafica AMD 5700XT', 443, 440, 'Descripcion444', 2,'/images/grafica1.jpg', 0, 2);
+INSERT INTO Grafica VALUES('Grafica NVIDIA GTX 1060', 444, 200, 'Descripcion445', 10,'/images/grafica1.jpg', 0, 1);
+
+INSERT INTO Procesador VALUES('CPU AMD Ryzen 7 3700x', 5, 310, 'Descripcion5', 3,'/images/cpu1.png', 0,'AM4');
+INSERT INTO Procesador VALUES('CPU AMD Ryzen 5 3600', 552, 189, 'Descripcion552', 10,'/images/cpu1.png', 0,'AM4');
+INSERT INTO Procesador VALUES('CPU AMD Ryzen 5 5600x', 553, 320, 'Descripcion553', 1,'/images/cpu1.png', 0,'AM4');
+INSERT INTO Procesador VALUES('CPU AMD Ryzen 7 2700x', 554, 190, 'Descripcion554', 2,'/images/cpu1.png', 0,'AM4');
+INSERT INTO Procesador VALUES('CPU Intel Core i5-10400F', 555, 139.90, 'Descripcion555', 3,'/images/cpu1.png', 0,'LGA1200');
+INSERT INTO Procesador VALUES('CPU Intel Core i9-9900k', 556, 550, 'Descripcion556', 4,'/images/cpu1.png', 0,'1151');
+
+INSERT INTO Memoria_RAM VALUES('RAM Kingston HyperX Fury', 6, 120, 'Descripcion6', 2,'/images/ram1.png', 0,'HX432C16FB3K2/16');
+INSERT INTO Memoria_RAM VALUES('RAM Crucial DDR4 2400', 661, 80, 'Descripcion661', 3,'/images/ram1.png', 0,'HX426C16FB4/16');
+INSERT INTO Memoria_RAM VALUES('RAM G.Skill Trident DDR4 3200', 662, 90, 'Descripcion662', 1,'/images/ram1.png', 0,'F4-3200C16D-16GTZRX');
+INSERT INTO Memoria_RAM VALUES('RAM Crorsair Vengance RGB pro', 663, 100, 'Descripcion663', 6,'/images/ram1.png', 0,'CMW16GX4M2Z3200C16');
+
+INSERT INTO Disco_duro VALUES('Disco SSD Kingstone A400', 7, 50, 'Descripcion7', 4,'/images/disco1.png', 0,'SSD');
+INSERT INTO Disco_duro VALUES('Disco SSD Samsung 860 EVO', 772, 220, 'Descripcion772', 4,'/images/disco1.png', 0,'SSD');
+INSERT INTO Disco_duro VALUES('Disco HDD Barracuda B342 5T', 773, 300, 'Descripcion773', 4,'/images/disco1.png', 0,'HDD');
+insert into disco_duro VALUES('Disco HDD Barracuda 1T', 776, 49.0, 'El mejor del mercado', 10, '/images/disco1.png', 0, 'HDD');
+
+INSERT INTO Placa_base VALUES('Placa Gigabyte B450M', 8, 80, 'Descripcion8', 3,'/images/placa1.png', 0,'AM4');
+INSERT INTO Placa_base VALUES('Placa MSI B550', 882, 129.80, 'Descripcion882', 1,'/images/placa1.png', 0,'AM4');
+INSERT INTO Placa_base VALUES('Placa AORUS x470M', 883, 130, 'Descripcion883', 4,'/images/placa1.png', 0,'AM4');
+INSERT INTO Placa_base VALUES('Placa Gigabyte Z490', 884, 150, 'Descripcion884', 2,'/images/placa1.png', 0,'LGA1200');
+
+INSERT INTO Fuente_alimentacion VALUES('Fuente Tempest Gaming', 9, 39.98, 'Descripcion9', 3,'/images/fa1.png', 0,750,'GOLD');
+INSERT INTO Fuente_alimentacion VALUES('Fuente Corsair CV Series', 992, 120, 'Descripcion992', 3,'/images/fa1.png', 0,850,'Titanium');
+
+INSERT INTO Caja VALUES('Caja Thermaltake H200', 10, 150, 'Descripcion10', 1,'/images/caja1.png', 0, true);
+INSERT INTO Caja VALUES('Caja Nox', 101, 120, 'Descripcion101', 3,'/images/caja1.png', 0, false);
+INSERT INTO Caja VALUES('Caja NZXT', 102, 91.47, 'Descripcion102', 2,'/images/caja1.png', 0, true);
+
+INSERT INTO Raton VALUES('Raton Logitech GPro', 11, 115, 'Descripcion11', 3,'/images/raton1.png', 0, 8000,'Tipo1',0.5);
+INSERT INTO Raton VALUES('Raton Logitech G520', 112, 40, 'Descripcion112', 1,'/images/raton1.png', 0, 16000,'Tipo3',0.8);
+INSERT INTO Raton VALUES('Raton Logitech G203', 113, 50, 'Descripcion113', 5,'/images/raton1.png', 0, 3000,'Tipo2',0.7);
+
+INSERT INTO Teclado VALUES('Teclado MSI Vigor GK50', 12, 60, 'Descripcion12', 12,'/images/teclado1.png', 0, 'Mecanico');
+INSERT INTO Teclado VALUES('Teclado Corsair', 129, 140, 'Descripcion129', 1,'/images/teclado1.png', 0, 'Mecanico');
+INSERT INTO Teclado VALUES('Teclado NewSkill', 128, 105, 'Descripcion128', 2,'/images/teclado1.png', 0, 'Mecanico');
+
+INSERT INTO Monitor VALUES('Monitor BenQ 144hz', 13, 202, 'Descripcion13', 8,'/images/monitor1.png', 0,20,'PN',144);
+INSERT INTO Monitor VALUES('Monitor Zowie XL241LP1', 132, 222, 'Descripcion132', 1,'/images/monitor1.png', 0,24,'PN',144);
+INSERT INTO Monitor VALUES('Monitor BenQ 60hz', 133, 100, 'Descripcion133', 3,'/images/monitor1.png', 0,26,'IPS',60);
+
 
 INSERT INTO Carrito VALUES('4-5-3-8-10','email2@email.com');
+INSERT INTO Carrito VALUES('6-3','cliente1@gmail.com');
+INSERT INTO Carrito VALUES('1-2-3-7','cliente2@gmail.com');
+INSERT INTO Carrito VALUES('5-2-3-8','cliente3@gmail.com');
+INSERT INTO Carrito VALUES('4-11-13-7','cliente4@gmail.com');
 
 INSERT INTO Pedido VALUES(100.9,'2017-03-14',0,'{3,4}',0,'email2@email.com');
 INSERT INTO Pedido VALUES(30.75,'2017-03-14',1,'{2,1}',0,'email2@email.com');
 INSERT INTO Pedido VALUES(50,'2017-03-14',2,'{5,6}',0,'email2@email.com');
 
--- PUNTUACION EJEMPLO PARA GRAFICA -- 
+INSERT INTO Pedido VALUES(500,'2017-03-14',3,'{5,6}',0,'cliente1@gmail.com');
+INSERT INTO Pedido VALUES(100.9,'2017-03-14',4,'{3,4}',0,'cliente1@gmail.com');
+INSERT INTO Pedido VALUES(300.75,'2017-03-14',5,'{2,1}',0,'cliente1@gmail.com');
+
+-- PUNTUACION EJEMPLO -- 
 
 INSERT INTO Puntuacion VALUES(4,'email2@email.com',4);
-INSERT INTO Puntuacion VALUES(2,'email2@email.com',3);
-INSERT INTO Puntuacion VALUES(3,'email2@email.com',2);
-INSERT INTO Puntuacion VALUES(5,'email2@email.com',5);
---INSERT INTO Puntuacion VALUES(1,'email2@email.com',4);
+INSERT INTO Puntuacion VALUES(3,'email2@email.com',9);
+
+INSERT INTO Puntuacion VALUES(4,'cliente1@gmail.com',1);
+INSERT INTO Puntuacion VALUES(3,'cliente1@gmail.com',2);
+INSERT INTO Puntuacion VALUES(2,'cliente1@gmail.com',3);
+INSERT INTO Puntuacion VALUES(3,'cliente1@gmail.com',7);
+INSERT INTO Puntuacion VALUES(3,'cliente1@gmail.com',8);
+INSERT INTO Puntuacion VALUES(3,'cliente1@gmail.com',9);
+INSERT INTO Puntuacion VALUES(3,'cliente1@gmail.com',10);
+INSERT INTO Puntuacion VALUES(3,'cliente1@gmail.com',11);
+
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',6);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',7);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',8);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',9);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',10);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',11);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',12);
+INSERT INTO Puntuacion VALUES(3,'cliente2@gmail.com',13);
+
+INSERT INTO Puntuacion VALUES(4,'cliente3@gmail.com',1);
+INSERT INTO Puntuacion VALUES(3,'cliente3@gmail.com',2);
+INSERT INTO Puntuacion VALUES(2,'cliente3@gmail.com',3);
+INSERT INTO Puntuacion VALUES(4,'cliente3@gmail.com',4);
+INSERT INTO Puntuacion VALUES(5,'cliente3@gmail.com',5);
+INSERT INTO Puntuacion VALUES(3,'cliente3@gmail.com',6);
+INSERT INTO Puntuacion VALUES(3,'cliente3@gmail.com',7);
+INSERT INTO Puntuacion VALUES(3,'cliente3@gmail.com',8);
+INSERT INTO Puntuacion VALUES(3,'cliente3@gmail.com',9);
+INSERT INTO Puntuacion VALUES(3,'cliente3@gmail.com',10);
+
+
+INSERT INTO Puntuacion VALUES(2,'cliente4@gmail.com',4);
+INSERT INTO Puntuacion VALUES(1,'cliente4@gmail.com',3);
+INSERT INTO Puntuacion VALUES(1,'cliente4@gmail.com',2);
+INSERT INTO Puntuacion VALUES(2,'cliente4@gmail.com',5);
+
+
+
+
+
