@@ -2,6 +2,7 @@ package Controller;
 
 import Adapter.AdapterFecha;
 import Adapter.Fecha;
+import Adapter.FechaUS;
 import Facade.FachadaLogin;
 import DAO.*;
 import Model.Articulos.*;
@@ -1310,7 +1311,7 @@ public class ClienteController implements ActionListener {
                     client.correoInfoPedido.setText(pedido.getEmail_cliente());
                     client.nPedidoInfo.setText("" + pedido.getIdPedido());
 
-                    Fecha fecha = new AdapterFecha(pedido.getFecha());
+                    Fecha fecha = new AdapterFecha(new FechaUS(pedido.getFecha()));
                     client.fechaPedidoInf.setText(fecha.toString());
 
                     cargarPedidoInfo(pedido);
@@ -2155,7 +2156,7 @@ public class ClienteController implements ActionListener {
 
         for (int i = 0; i < listaPedidos.size(); i++) {
             Pedido pedido = listaPedidos.get(i);
-            Fecha fecha = new AdapterFecha(pedido.getFecha());
+            Fecha fecha = new AdapterFecha(new FechaUS(pedido.getFecha()));
             int idPedido = pedido.getIdPedido();
 
             String estadoInfo = "";
