@@ -2,7 +2,6 @@
 package Adapter;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
@@ -11,23 +10,23 @@ import java.util.StringTokenizer;
  */
 public class AdapterFecha implements Fecha {
     
-    private Date fecha;
+    private FechaUS fecha;
     
     /**
      * Constructor
      *
      * @param fecha Fecha en formato USA.
      */
-    public AdapterFecha(Date fecha) {
+    public AdapterFecha(FechaUS fecha) {
         this.fecha = fecha;
     }
     
     @Override
     public String toString() {
-        StringTokenizer st = new StringTokenizer(fecha.toString(), "-");
-        String aaaa = st.nextToken();
+        StringTokenizer st = new StringTokenizer(fecha.toString(), "/");
         String mm = st.nextToken();
         String dd = st.nextToken();
+        String aaaa = st.nextToken();
 
         return dd + "/" + mm + "/" + aaaa;
     }
