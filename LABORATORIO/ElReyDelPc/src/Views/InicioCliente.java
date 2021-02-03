@@ -1259,6 +1259,8 @@ public class InicioCliente extends javax.swing.JFrame {
 
         panelCompras.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 820, 380));
 
+        panelCompras.setVisible(false);
+
         jPanel6.add(panelCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 620));
 
         panelInfoPedido.setBackground(new java.awt.Color(51, 51, 51));
@@ -1374,6 +1376,8 @@ public class InicioCliente extends javax.swing.JFrame {
         labelDeshacer.setText("Pedido eliminado");
         labelDeshacer.setVisible(false);
         panelInfoPedido.add(labelDeshacer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, 130, -1));
+
+        panelInfoPedido.setVisible(false);
 
         jPanel6.add(panelInfoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
