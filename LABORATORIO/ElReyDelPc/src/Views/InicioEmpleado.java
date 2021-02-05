@@ -6,6 +6,9 @@
 package Views;
 
 import Facade.FachadaLogin;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 /**
  *
@@ -18,6 +21,10 @@ public class InicioEmpleado extends javax.swing.JFrame {
      */
     public InicioEmpleado() {
         initComponents();
+        URL pathIcon = this.getClass().getClassLoader().getResource("images/logo.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(pathIcon);
+        this.setIconImage(img);
     }
 
     /**

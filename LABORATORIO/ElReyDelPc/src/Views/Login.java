@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import util.Conexion;
 import SingletonLog.Log;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 /**
  *
@@ -21,6 +24,10 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        URL pathIcon = this.getClass().getClassLoader().getResource("images/logo.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(pathIcon);
+        this.setIconImage(img);
     }
 
     /**

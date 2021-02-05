@@ -1,6 +1,9 @@
 package Views;
 
 import Facade.FachadaLogin;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +22,10 @@ public class InicioCliente extends javax.swing.JFrame {
      */
     public InicioCliente() {
         initComponents();
+        URL pathIcon = this.getClass().getClassLoader().getResource("images/logo.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(pathIcon);
+        this.setIconImage(img);
     }
 
     /**

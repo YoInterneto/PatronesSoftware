@@ -22,7 +22,7 @@ public class MonitorDao {
      * Dado el codigo de un monitor realiza una consulta en la base de
      * datos y devuelve todos los datos correspondientes a dicho monitor.
      *
-     * @pamonitor codigo
+     * @param codigo
      * @return Devuelve un objeto de tipo Monitor
      */
     public Monitor getMonitor(int codigo){
