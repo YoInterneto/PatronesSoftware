@@ -1964,7 +1964,7 @@ public class ClienteController implements ActionListener {
 
             client.precioTotalPc.setText(String.valueOf(total));
         } catch (Exception ex) {
-            Log.log.error("Error en calcular el precio " + ex);
+            //Log.log.error("Error en calcular el precio " + ex);
         }
         return total;
 
