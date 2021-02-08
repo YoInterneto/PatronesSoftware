@@ -1,0 +1,6 @@
+[INFO] Sistema Operativo - Windows 10
+[INFO] Creacion de nuevo log en C:\Users\Alberto\OneDrive\Documentos\GitHub\PatronesSoftware\LABORATORIO\ElReyDelPc/logs/log2021-01-23/[18··37··51]log.log
+[INFO] Vista Login - evento iniciarSesion
+[INFO] USUARIO: email@email.com - CONTRASEÑA: PASS1
+[INFO] TIPO USUARIO: empleado
+[INFO] Usuario  Empleado{Nombre=Name2, Apellido=Apellido2, Email=email@email.com, Direccion=Direccion2, Telefono=621512233, Password=pass1, ID_Tienda=0, DNI=DNI1, Cargo=Empleado1}

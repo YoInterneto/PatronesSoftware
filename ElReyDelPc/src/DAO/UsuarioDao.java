@@ -1,0 +1,392 @@
+
+package DAO;
+
+import Model.Usuario.Cliente;
+import Model.Usuario.Empleado;
+import Model.Usuario.Tienda;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import util.Conexion;
+import SingletonLog.Log;
+
+/**
+ * DAO para las operaciones de datos de la tabla y objeto usuario.
+ * Usuarios de la aplicación serán tanto cliente como empleados.
+ * 
+ */
+public class UsuarioDao {
+    
+    private Connection conexion;
+    
+    /**
+     * Identifica qué usuario inicia sesión y devuelve su tipo.
+     *
+     * @param correo
+     * @param contrasenna
+     * @return Devuelve un String que representa el tipo de usuario que inicia
+     * sesión (cliente o empleado)
+     */
+    public String getTipoUsuario(String correo, String contrasenna) {
+        String tipo = "";
+        Log.logBd.info("CONSULTA GetTipoUsuario");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getTipoUsuario()");
+            Statement s = conexion.createStatement();
+            ResultSet resultadoEmpleado = s.executeQuery("select * from empleado where email='" + correo + "';");
+            Log.logBd.info("Realizada consulta - getTipoUsuario()");
+            if (resultadoEmpleado.next()) {
+                if (resultadoEmpleado.getString("pass").equalsIgnoreCase(contrasenna)) {
+                    tipo = "empleado";
+                } else {
+                    tipo = "error";
+                }
+            } else {
+                ResultSet resultadoUsuario = s.executeQuery("select * from cliente where email='" + correo + "';");  //Si no es ni usuario ni empleado es error
+
+                if (resultadoUsuario.next()) {
+                    if (resultadoUsuario.getString("pass").equalsIgnoreCase(contrasenna)) {
+                        tipo = "cliente";
+                    } else {
+                        tipo = "error";
+                    }
+                } else {
+                    tipo = "error";
+                }
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getTipoUsuario(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+
+            tipo = "error";
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getTipoUsuario()");
+        return tipo;
+    }
+    
+    /**
+     * Dado el correo de un empleado realiza una consulta en la base de
+     * datos y devuelve todos los datos correspondientes a dicho empleado.
+     *
+     * @param correo
+     * @return Devuelve un objeto de tipo Empleado
+     */
+    public Empleado getEmpleado(String correo){
+        Empleado empleado = new Empleado();
+        Log.logBd.info("CONSULTA GetEmpleado");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getEmpleado()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from empleado where email='" + correo + "';");
+            Log.logBd.info("Realizada consulta - getEmpleado()");
+
+            while (resultado.next()) {
+                empleado.setEmail(correo);
+                empleado.setNombre(resultado.getString("nombre"));
+                empleado.setApellido(resultado.getString("apellido"));
+                empleado.setDireccion(resultado.getString("direccion"));
+                empleado.setTelefono(resultado.getInt("telefono"));
+                empleado.setPass(resultado.getString("pass"));
+                empleado.setID_Tienda(resultado.getInt("id_tienda"));
+                empleado.setDNI(resultado.getString("dni"));
+                empleado.setCargo(resultado.getString("cargo"));
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getEmpleado(): " + error);
+            Log.logBd.error("                SQL State - " + error.getSQLState());
+            Log.logBd.error("                ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - getEmpleado()");
+        return empleado;
+    }
+    
+    /**
+     * Inserta un nuevo cliente en la base de datos.
+     *
+     * @param nombre
+     * @param apellido
+     * @param email
+     * @param direccion
+     * @param telefono
+     * @param pass
+     * @param idTienda
+     * @param tarjeta
+     * @return Devuelve un boolean que dice si se ha insertado con éxito o no al usuario
+     */
+    public boolean darAltaUsuario(String nombre, String apellido, String email, String direccion, int telefono, String pass, int idTienda, String tarjeta){
+        boolean correcto = false;
+        Log.logBd.info("CONSULTA DarAltaUsuario");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - darAltaUsuario()");
+            Statement s = conexion.createStatement();
+            //Insertamos al usuario
+            int codigo = s.executeUpdate("INSERT INTO cliente VALUES('"+ nombre +"', '"+ apellido +"', '"+ email +"', '"
+            + direccion +"', "+ telefono +", '"+ pass +"', "+ idTienda +", '"+ tarjeta +"');");
+            Log.logBd.info("Realizada consulta - darAltaUsuario()");
+            
+            //Creamos el carrito del nuevo usuario
+            int codigo1 = s.executeUpdate("INSERT INTO carrito(email_cliente) VALUES('"+ email +"');");
+            
+            if(codigo > 0 && codigo1 > 0){
+                correcto = true;
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en darAltaUsuario(): " + error);
+            Log.logBd.error("                   SQL State - " + error.getSQLState());
+            Log.logBd.error("                   ErrorCode - " + error.getErrorCode());
+        }
+        
+        Log.logBd.info("Consulta realizada con éxito - darAltaUsuario()");
+        return correcto;
+    }
+    
+    /**
+     * Dado el correo de un cliente realiza una consulta en la base de datos y
+     * nos devuelve todos los datos correspondientes a dicho cliente.
+     *
+     * @param correo
+     * @return Devuelve un objeto de tipo Cliente
+     */
+    public Cliente getCliente(String correo){
+        Cliente cliente = new Cliente();
+        Log.logBd.info("CONSULTA getCliente");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getCliente()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from cliente where email='" + correo + "';");
+            Log.logBd.info("Realizada consulta - getCliente()");
+
+            while (resultado.next()) {
+                cliente.setEmail(correo);
+                cliente.setNombre(resultado.getString("nombre"));
+                cliente.setApellido(resultado.getString("apellido"));
+                cliente.setDireccion(resultado.getString("direccion"));
+                cliente.setTelefono(resultado.getInt("telefono"));
+                cliente.setPass(resultado.getString("pass"));
+                cliente.setID_Tienda(resultado.getInt("id_tienda"));
+                cliente.setTarjeta(resultado.getString("tarjeta"));
+            }
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getCliente(): " + error);
+            Log.logBd.error("               SQL State - " + error.getSQLState());
+            Log.logBd.error("               ErrorCode - " + error.getErrorCode());
+        }
+
+        Log.logBd.info("Consulta realizada con éxito - getCliente()");
+        return cliente;
+    }
+    
+    /**
+     * Dado el id de una tienda realiza una consulta a la base de datos y nos devuelve toda la información sobre esa tienda.
+     *
+     * @param idTienda 
+     * @return Devuelve un objeto de tipo Tienda
+     */
+    public Tienda getTienda(int idTienda){
+        Tienda tienda = new Tienda();
+        Log.logBd.info("CONSULTA getTienda");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - getTienda()");
+            Statement s = conexion.createStatement();
+            ResultSet resultado = s.executeQuery("select * from tienda where id='" + idTienda + "';");
+            Log.logBd.info("Realizada consulta - getTienda()");
+
+            while (resultado.next()) {
+                tienda.setId_tienda(idTienda);
+                tienda.setNombre(resultado.getString("nombre"));
+                tienda.setDireccion(resultado.getString("direccion"));
+                tienda.setCodigo_postal(resultado.getInt("cp"));
+                tienda.setCuidad(resultado.getString("ciudad"));
+                tienda.setProvincia(resultado.getString("provincia"));
+            }
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en getTienda(): " + error);
+            Log.logBd.error("              SQL State - " + error.getSQLState());
+            Log.logBd.error("              ErrorCode - " + error.getErrorCode());
+        }
+
+        Log.logBd.info("Consulta realizada con éxito - getTienda()");
+        return tienda;
+    }
+    
+    /**
+     * Dado los nuevos datos que quiere cambiar el cliente de su perfil
+     * se realiza una actualización en la base de datos para ese cliente.
+     *
+     * @param correo 
+     * @param nombre 
+     * @param apellido 
+     * @param direccion 
+     * @param telefono 
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+     */
+    public boolean editarUsuario(String correo, String nombre, String apellido, String direccion, int telefono){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA EditarUsuario");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - editarUsuario()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE empleado SET nombre='"+ nombre +"', apellido='"+ apellido +"', direccion='"
+                    + direccion +"', telefono="+ telefono +" WHERE email='"+ correo +"';");
+            Log.logBd.info("Realizada consulta - editarUsuario()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - editarUsuario()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en editarUsuario(): " + error);
+            Log.logBd.error("                  SQL State - " + error.getSQLState());
+            Log.logBd.error("                  ErrorCode - " + error.getErrorCode());
+        }
+        
+        return hecho;
+    }
+    
+    /**
+     * Dado los nuevos datos que quiere cambiar el cliente de su perfil
+     * se realiza una actualización en la base de datos para ese cliente.
+     * 
+     * @param correo
+     * @param nombre
+     * @param apellido
+     * @param direccion
+     * @param telefono
+     * @param pass
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+     */
+    public boolean editarUsuarioPass(String correo, String nombre, String apellido, String direccion, int telefono, String pass){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA EditarUsuarioPass");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - editarUsuarioPass()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE empleado SET nombre='"+ nombre +"', apellido='"+ apellido +"', direccion='"
+                    + direccion +"', telefono="+ telefono +", pass='"+ pass +"' where email='"+ correo +"';");
+            Log.logBd.info("Realizada consulta - editarUsuarioPass()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - editarUsuarioPass()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en editarUsuarioPass(): " + error);
+            Log.logBd.error("                      SQL State - " + error.getSQLState());
+            Log.logBd.error("                      ErrorCode - " + error.getErrorCode());
+        }
+
+        return hecho;
+    }
+    
+    /**
+     * Dado los nuevos datos que quiere cambiar el cliente de su perfil
+     * se realiza una actualización en la base de datos para ese cliente.
+     * 
+     * @param pass
+     * @param email
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+     */
+    public boolean editarPasswordCliente(String pass,String email){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA editarPasswordCliente");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - editarPasswordCliente()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE cliente SET pass='"+ pass +"' where email='"+ email +"';");
+            Log.logBd.info("Realizada consulta - editarPasswordCliente()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - editarPasswordCliente()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en editarPasswordCliente(): " + error);
+            Log.logBd.error("                      SQL State - " + error.getSQLState());
+            Log.logBd.error("                      ErrorCode - " + error.getErrorCode());
+        }
+        return hecho;
+    }
+    
+    /**
+     * Dado los nuevos datos que quiere cambiar el cliente de su perfil
+     * se realiza una actualización en la base de datos para ese cliente.
+     * 
+     * @param email
+     * @param nuevoEmail
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+     */
+    public boolean editarEmailCliente(String email,String nuevoEmail){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA editarEmailCliente");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - editarEmailCliente()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE cliente SET email='"+ nuevoEmail +"' where email='"+ email +"';");
+            Log.logBd.info("Realizada consulta - editarEmailCliente()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - editarEmailCliente()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en editarEmailCliente(): " + error);
+            Log.logBd.error("                      SQL State - " + error.getSQLState());
+            Log.logBd.error("                      ErrorCode - " + error.getErrorCode());
+        }
+        return hecho;
+    }
+    
+    /**
+     * Dado los nuevos datos que quiere cambiar el cliente de su perfil
+     * se realiza una actualización en la base de datos para ese cliente.
+     * 
+     * @param email
+     * @param direccion
+     * @param tarjeta
+     * @param telefono
+     * @return Devuelve un boolean para saber si se ha realizado o no la consulta
+     */
+    public boolean editarDatosCliente(String email,String direccion, String tarjeta, int telefono){
+        boolean hecho = false;
+        Log.logBd.info("CONSULTA editarDatosCliente");
+        try {
+            conexion = Conexion.getConexion();
+            Log.logBd.info("Realizada conexion - editarDatosCliente()");
+            Statement s = conexion.createStatement();
+            int codigo = s.executeUpdate("UPDATE cliente SET tarjeta='"+ tarjeta +"', telefono='"+ telefono +"', direccion='"
+                    + direccion +"' where email='"+ email +"';");
+            Log.logBd.info("Realizada consulta - editarDatosCliente()");
+            
+            if(codigo > 0){
+                hecho = true;
+                Log.logBd.info("Consulta realizada con éxito - editarDatosCliente()");
+            }
+            
+        } catch (SQLException error) {
+            Log.logBd.error("ERROR SQL en editarDatosCliente(): " + error);
+            Log.logBd.error("                      SQL State - " + error.getSQLState());
+            Log.logBd.error("                      ErrorCode - " + error.getErrorCode());
+        }
+        return hecho;
+    }
+}

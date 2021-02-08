@@ -1,0 +1,30 @@
+[INFO] Sistema Operativo - Windows 10
+[INFO] Creacion de nuevo log en C:\Users\Alberto\OneDrive\Documentos\GitHub\PatronesSoftware\LABORATORIO\ElReyDelPc\dist/logs/log2021-02-05/[14··50··04]logBd.log
+[INFO] CONSULTA GetTipoUsuario
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Conexion establecida en puerto[5432]
+[INFO] Realizada conexion - getTipoUsuario()
+[INFO] Realizada consulta - getTipoUsuario()
+[INFO] Consulta realizada con éxito - getTipoUsuario()
+[INFO] CONSULTA GetTipoUsuario
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getTipoUsuario()
+[INFO] Realizada consulta - getTipoUsuario()
+[INFO] Consulta realizada con éxito - getTipoUsuario()
+[INFO] CONSULTA GetEmpleado
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getEmpleado()
+[INFO] Realizada consulta - getEmpleado()
+[INFO] Consulta realizada con éxito - getEmpleado()
+[INFO] CONSULTA getTienda
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getTienda()
+[INFO] Realizada consulta - getTienda()
+[INFO] Consulta realizada con éxito - getTienda()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getAllArticulos()
+[INFO] CONSULTA getAllArticulos
+[INFO] Consulta realizada con éxito - getAllArticulos()
+[INFO] Cerrando la conexión con la Base de Datos...
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Conexión cerrada con éxito

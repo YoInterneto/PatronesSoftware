@@ -1,0 +1,301 @@
+[INFO] Sistema Operativo - Windows 10
+[INFO] Creacion de nuevo log en C:\Users\Alberto\OneDrive\Documentos\GitHub\PatronesSoftware\LABORATORIO\ElReyDelPc\dist/logs/log2021-02-05/[14··38··19]logBd.log
+[INFO] CONSULTA GetTipoUsuario
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Conexion establecida en puerto[5432]
+[INFO] Realizada conexion - getTipoUsuario()
+[INFO] Realizada consulta - getTipoUsuario()
+[INFO] Consulta realizada con éxito - getTipoUsuario()
+[INFO] CONSULTA getCliente
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getCliente()
+[INFO] Realizada consulta - getCliente()
+[INFO] Consulta realizada con éxito - getCliente()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllGraficaes()
+[INFO] CONSULTA getAllGraficaes
+[INFO] Consulta realizada con éxito - getAllGraficaes()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllGraficaes()
+[INFO] CONSULTA getAllGraficaes
+[INFO] Consulta realizada con éxito - getAllGraficaes()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllGraficaes()
+[INFO] CONSULTA getAllGraficaes
+[INFO] Consulta realizada con éxito - getAllGraficaes()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllProcesadores()
+[INFO] CONSULTA getAllProcesadores
+[INFO] Consulta realizada con éxito - getAllProcesadores()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllPlaca_basees()
+[INFO] CONSULTA getAllPlaca_basees
+[INFO] Consulta realizada con éxito - getAllPlaca_basees()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllMemoria_RAMes()
+[INFO] CONSULTA getAllMemoria_RAMes
+[INFO] Consulta realizada con éxito - getAllMemoria_RAMes()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllGraficaes()
+[INFO] CONSULTA getAllGraficaes
+[INFO] Consulta realizada con éxito - getAllGraficaes()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllDiscos()
+[INFO] CONSULTA getAllDisco_duroes
+[INFO] Consulta realizada con éxito - getAllDiscos
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllFuente_alimentaciones()
+[INFO] CONSULTA getAllFuente_alimentaciones
+[INFO] Consulta realizada con éxito - getAllFuente_alimentaciones()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllCajaes()
+[INFO] CONSULTA getAllCajaes
+[INFO] Consulta realizada con éxito - getAllCajaes()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllRatons()
+[INFO] CONSULTA getAllRatons
+[INFO] Consulta realizada con éxito - getAllRatons()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllTecladoes()
+[INFO] CONSULTA getAllTecladoes
+[INFO] Consulta realizada con éxito - getAllTecladoes()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllWebCams()
+[INFO] CONSULTA getAllWebCams
+[INFO] Consulta realizada con éxito - getAllWebCams()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllGraficaes()
+[INFO] CONSULTA getAllGraficaes
+[INFO] Consulta realizada con éxito - getAllGraficaes()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - ggetAllGraficaes()
+[INFO] CONSULTA getAllGraficaes
+[INFO] Consulta realizada con éxito - getAllGraficaes()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] CONSULTA GetArticulo
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Realizada conexion - getArticulo()
+[INFO] Realizada consulta - getArticulo()
+[INFO] Consulta realizada con éxito - getArticulo()
+[INFO] Cerrando la conexión con la Base de Datos...
+[INFO] Inicio de conexion en puerto[5432]
+[INFO] Conexión cerrada con éxito

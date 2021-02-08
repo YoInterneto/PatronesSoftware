@@ -1,0 +1,36 @@
+
+package StatePedido;
+
+import javax.swing.JOptionPane;
+
+/**
+ * Estado concreto: Implementa la interfaz Estado. 
+ * Implementa el comportamiento para el estado preparación.
+ *
+ */
+public class EstadoPreparacion implements Estado{
+
+    @Override
+    public boolean cambiarEstado(Pedido pedido, String siguienteEstado) {
+        // siguienteEstado - [enviado, recibido]
+        boolean cambiado = false;
+        
+        if(siguienteEstado.equalsIgnoreCase("enviado")){
+            EstadoEnviado nuevoEstado = new EstadoEnviado();
+            pedido.setEstado(nuevoEstado);
+            cambiado = true;
+            JOptionPane.showMessageDialog(null, "El estado del pedido ha cambiado a enviado");
+        }
+        else if(siguienteEstado.equalsIgnoreCase("recibido")){
+            JOptionPane.showMessageDialog(null, "ERROR: El pedido está aún en preparación");
+        }
+        
+        return cambiado;
+    }
+
+    @Override
+    public boolean eliminar(Pedido pedido) {
+        return true;
+    }
+    
+}

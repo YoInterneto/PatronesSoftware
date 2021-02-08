@@ -1,0 +1,2354 @@
+package Controller;
+
+import Adapter.AdapterFecha;
+import Adapter.Fecha;
+import Adapter.FechaUS;
+import Facade.FachadaLogin;
+import DAO.*;
+import Model.Articulos.*;
+import Model.Usuario.Cliente;
+import Observer.ObservadorPrecio;
+import Observer.SujetoConcreto;
+import Util.ListaDinamicaImagen;
+import BuilderTorre.PcBuilder;
+import Command.ComandoCambiarAlgo;
+import Command.ComandoDeshacer;
+import Command.Invocador;
+import StatePedido.Pedido;
+
+import Views.InicioCliente;
+import Views.Login;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Observer;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import SingletonLog.Log;
+import Util.ListaDinamica;
+import java.awt.HeadlessException;
+
+public class ClienteController implements ActionListener {
+
+    private final InicioCliente client;
+    private final Cliente cliente;
+
+    private final ArticuloDao consultaArticulo = new ArticuloDao();
+    private final ProcesadorDao daoCpu;
+    private final Placa_baseDao daoPlaca;
+    private final MemoriaRAMDao daoRam;
+    private final GraficaDao daoGrafica;
+    private final DiscoDuroDao daoDisco;
+    private final CajaDao daoCaja;
+    private final TecladoDao daoTeclado;
+    private final RatonDao daoRaton;
+    private final WebCamDao daoCam;
+    private final FuenteDao daoFuente;
+    private final MonitorDao daoMonitor;
+    private final CarroDao carroDao;
+    private final PortatilDao daoPortatil;
+    private final PcTorreDao daoPctorre;
+    private final UsuarioDao daoUser;
+    private final PedidoDao daoPedido;
+    private final EvaluacionDao daoEvaluacion;
+
+    private String claveBusqueda;
+    private String tipo;
+    public ArrayList<SujetoConcreto> listaSujetos = new ArrayList<>();
+    
+    private ComandoDeshacer comando;
+    private Invocador invocador;
+
+    /**
+     * Controlador para la vista InicioCliente.
+     * Define toda la lógica y comportamiento de la interfaz, además del
+     * flujo de ejecución de esta
+     * 
+     */
+    public ClienteController(InicioCliente clientVista, Cliente cliente) {
+        this.cliente = cliente;
+        this.client = clientVista;
+        comando = new ComandoCambiarAlgo();
+        invocador = new Invocador();
+        daoCpu = new ProcesadorDao();
+        daoPlaca = new Placa_baseDao();
+        daoRam = new MemoriaRAMDao();
+        daoGrafica = new GraficaDao();
+        daoDisco = new DiscoDuroDao();
+        daoCaja = new CajaDao();
+        daoTeclado = new TecladoDao();
+        daoRaton = new RatonDao();
+        daoCam = new WebCamDao();
+        daoFuente = new FuenteDao();
+        daoMonitor = new MonitorDao();
+        carroDao = new CarroDao();
+        daoPortatil = new PortatilDao();
+        daoPctorre = new PcTorreDao();
+        daoUser = new UsuarioDao();
+        daoPedido = new PedidoDao();
+        claveBusqueda = "";
+        daoEvaluacion = new EvaluacionDao();
+    }
+    
+    /**
+     * Inicializa y define todos los elementos iniciales necesarios.
+     * Además define los listeners para botones de la aplicación.
+     * 
+     */
+    public void iniciar() {
+        client.setTitle("INICIO - CLIENTE");
+        client.setLocationRelativeTo(null);
+        client.nombreCliente.setText(cliente.getNombre());
+
+        //Al comenzar iniciamos los observer para los productos del carro
+        crearObservers();
+        compruebaPrecio();
+        
+        //Listeners botones menu cliente 
+        this.client.btnBuscar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!client.textoBusqueda.getText().equalsIgnoreCase("")) {
+                    String clave = client.textoBusqueda.getText();
+                    ArrayList<Articulo> listaArticulos = consultaArticulo.buscarArticuloPalabraClave(clave);
+                    ArrayList<Integer> listaCodigos = new ArrayList<>();
+                    //Si la lista de los articulos con la clave de busqueda no es vacia, es decir, se ha encontrado algun
+                    //articulo, cargamos la lista de los articulos
+                    if (listaArticulos.size() > 0) {
+                        setClaveBusqueda(clave);
+                        for (int i = 0; i < listaArticulos.size(); i++) {
+                            listaCodigos.add(listaArticulos.get(i).getCodigo_ref());
+                        }
+                        client.panelInicio.setVisible(false);
+                        client.panelCarro.setVisible(false);
+                        client.panelPerfil.setVisible(false);
+                        client.panelMonta.setVisible(false);
+                        client.panelProducto.setVisible(false);
+                        client.panelArticulo.setVisible(false);
+                        client.panelCompras.setVisible(false);
+                        client.panelInfoPedido.setVisible(false);
+                        client.panelElegirProducto.setVisible(true);
+                        resetValuesBox();
+                        cargarListaProductos(listaCodigos);
+                        tipo = "";
+                        compruebaPrecio();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR: No se ha encontrado nigún artículo con la clave - " + clave + ".");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la clave de búsqueda.");
+                }
+            }
+        });
+        this.client.btnProducto.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(true);
+                client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
+
+                //Restablecemos los atributos particulares del producto
+                client.atrParticular1.setVisible(false);
+                client.nombreAtributo1.setVisible(false);
+                client.atrParticular2.setVisible(false);
+                client.nombreAtributo2.setVisible(false);
+                client.atrParticular3.setVisible(false);
+                client.nombreAtributo3.setVisible(false);
+                resetValuesBox();
+                compruebaPrecio();
+            }
+        });
+        this.client.btnInicio.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(true);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
+                resetValuesBox();
+                compruebaPrecio();
+            }
+        });
+        this.client.btnCarro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(true);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
+                ArrayList<Integer> cesta = cargarCarro();
+                Collections.sort(cesta);
+                listaArticulos(cesta);
+                resetValuesBox();
+                compruebaPrecio();
+            }
+        });
+        this.client.btnMontar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(true);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
+                resetValuesBox();
+                iniciarPanelMontar();
+                compruebaPrecio();
+            }
+        });
+        this.client.btnPerfil.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(true);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
+                client.panelCompras.setVisible(false);
+                client.panelInfoPedido.setVisible(false);
+                iniciarPanelPerfil();
+                resetValuesBox();
+                compruebaPrecio();
+            }
+        });
+        this.client.btnCompras.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(false);
+
+                client.panelCompras.setVisible(true);
+
+                cargarListaPedidosCliente();
+            }
+        });
+        this.client.btnCerrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                Login loginVista = new Login();
+
+                FachadaLogin login = new FachadaLogin(loginVista);
+
+                login.iniciar();
+                client.setVisible(false);
+                loginVista.setVisible(true);
+            }
+        });
+
+        //Listeners botones panel Articulos
+        this.client.placaBase.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "placa_base";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.caja.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "caja";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.cpu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "procesador";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.grafica.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "grafica";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.monitor.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "monitor";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.teclado.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "teclado";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.raton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "raton";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.cam.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "webcam";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.fuente.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "fuente_alimentacion";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.disco.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "disco_duro";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.ram.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "memoria_ram";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.portatil.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "portatil";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+        this.client.pctorre.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                client.panelInicio.setVisible(false);
+                client.panelCarro.setVisible(false);
+                client.panelPerfil.setVisible(false);
+                client.panelMonta.setVisible(false);
+                client.panelProducto.setVisible(false);
+                client.panelArticulo.setVisible(false);
+                client.panelElegirProducto.setVisible(true);
+                tipo = "pctorre";
+
+                ArrayList<Articulo> lista = consultaArticulo.getAllArticulosTipo(tipo);
+                cargarLista(lista);
+            }
+        });
+
+        //Listeners JComboBox montaje
+        this.client.cpuBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.ramBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.cajaBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.graficaBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.tecladoBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.placaBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.discoBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.ratonBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.fuenteBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+        this.client.camBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculaPrecioMontaje();
+            }
+        });
+
+        this.client.montaYguarda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    String codigoPlaca = client.placaBox.getSelectedItem().toString().split("-")[0];
+                    if (!codigoPlaca.equals("Seleccione")) {
+                        meterCarro(codigoPlaca);
+                        creaUnObserver(codigoPlaca);
+                    }
+
+                    String codGrafica = client.graficaBox.getSelectedItem().toString().split("-")[0];
+                    if (!codGrafica.equals("Seleccione")) {
+                        meterCarro(codGrafica);
+                        creaUnObserver(codGrafica);
+                    }
+
+                    String codFuente = client.fuenteBox.getSelectedItem().toString().split("-")[0];
+                    if (!codFuente.equals("Seleccione")) {
+                        meterCarro(codFuente);
+                        creaUnObserver(codFuente);
+                    }
+
+                    String codCaja = client.cajaBox.getSelectedItem().toString().split("-")[0];
+                    if (!codCaja.equals("Seleccione")) {
+                        meterCarro(codCaja);
+                        creaUnObserver(codCaja);
+                    }
+
+                    String codRam = client.ramBox.getSelectedItem().toString().split("-")[0];
+                    if (!codRam.equals("Seleccione")) {
+                        meterCarro(codRam);
+                        creaUnObserver(codRam);
+                    }
+
+                    String codCpu = client.cpuBox.getSelectedItem().toString().split("-")[0];
+                    if (!codCpu.equals("Seleccione")) {
+                        meterCarro(codCpu);
+                        creaUnObserver(codCpu);
+                    }
+
+                    String codDisco = client.discoBox.getSelectedItem().toString().split("-")[0];
+                    if (!codDisco.equals("Seleccione")) {
+                        meterCarro(codDisco);
+                        creaUnObserver(codDisco);
+                    }
+
+                    String codTeclado = client.tecladoBox.getSelectedItem().toString().split("-")[0];
+                    if (!codTeclado.equals("Seleccione")) {
+                        meterCarro(codTeclado);
+                        creaUnObserver(codTeclado);
+                    }
+
+                    String codRaton = client.ratonBox.getSelectedItem().toString().split("-")[0];
+                    if (!codRaton.equals("Seleccione")) {
+                        meterCarro(codRaton);
+                        creaUnObserver(codRaton);
+                    }
+
+                    String cam = client.camBox.getSelectedItem().toString().split("-")[0];
+                    if (!cam.equals("Seleccione")) {
+                        meterCarro(cam);
+                        creaUnObserver(cam);
+                    }
+                    resetValuesBox();
+                    iniciarPanelMontar();
+                    JOptionPane.showMessageDialog(null, "Articulo/s añadidos al carro", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                } catch (Exception ex) {
+                    Log.log.error("Error en crear y guardar pc " + ex);
+                }
+
+            }
+        });
+        this.client.montaYcompra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    String codigoPlaca = client.placaBox.getSelectedItem().toString().split("-")[0];
+                    String codGrafica = client.graficaBox.getSelectedItem().toString().split("-")[0];
+                    String codFuente = client.fuenteBox.getSelectedItem().toString().split("-")[0];
+                    String codCaja = client.cajaBox.getSelectedItem().toString().split("-")[0];
+                    String codRam = client.ramBox.getSelectedItem().toString().split("-")[0];
+                    String codCpu = client.cpuBox.getSelectedItem().toString().split("-")[0];
+                    String codDisco = client.discoBox.getSelectedItem().toString().split("-")[0];
+
+                    if (!(codigoPlaca.equals("Seleccione") || codGrafica.equals("Seleccione")
+                            || codFuente.equals("Seleccione") || codCaja.equals("Seleccione")
+                            || codRam.equals("Seleccione") || codCpu.equals("Seleccione")
+                            || codDisco.equals("Seleccione"))) {
+
+                        int codPlaca = Integer.parseInt(codigoPlaca);
+                        Placa_base placa = daoPlaca.getPlaca_base(codPlaca);
+                        consultaArticulo.actualizarStock(codPlaca, placa.getStock() - 1);
+
+                        int codGrafica2 = Integer.parseInt(codGrafica);
+                        Grafica grafica = daoGrafica.getGrafica(codGrafica2);
+                        consultaArticulo.actualizarStock(codGrafica2, grafica.getStock() - 1);
+
+                        int codFuente2 = Integer.parseInt(codFuente);
+                        Fuente_alimentacion fuente = daoFuente.getFuente(codFuente2);
+                        consultaArticulo.actualizarStock(codFuente2, fuente.getStock() - 1);
+
+                        int codCaja2 = Integer.parseInt(codCaja);
+                        Caja caja = daoCaja.getCaja(codCaja2);
+                        consultaArticulo.actualizarStock(codCaja2, caja.getStock() - 1);
+
+                        int codRam2 = Integer.parseInt(codRam);
+                        Memoria_RAM ram = daoRam.getMemoria_RAM(codRam2);
+                        consultaArticulo.actualizarStock(codRam2, ram.getStock() - 1);
+
+                        int codCpu2 = Integer.parseInt(codCpu);
+                        Procesador cpu = daoCpu.getProcesador(codCpu2);
+                        consultaArticulo.actualizarStock(codCpu2, cpu.getStock() - 1);
+
+                        int codDisco2 = Integer.parseInt(codDisco);
+                        Disco_duro disco = daoDisco.getDisco_duro(codDisco2);
+                        consultaArticulo.actualizarStock(codDisco2, disco.getStock() - 1);
+
+                        int nuevoCod = consultaArticulo.getCodRefMax() + 1;
+                        float precioTorre = placa.getPrecio() + grafica.getPrecio() + fuente.getPrecio()
+                                + caja.getPrecio() + ram.getPrecio() + cpu.getPrecio() + disco.getPrecio();
+
+                        PcBuilder builder = new PcBuilder(true, nuevoCod, 0);
+                        PcTorre pc = builder
+                                .withCpu(cpu)
+                                .withCaja(caja)
+                                .withPlaca(placa)
+                                .withGrafica(grafica)
+                                .withDisco(disco)
+                                .withFuente(fuente)
+                                .withRam(ram)
+                                .withPrecio(precioTorre)
+                                .withNombre("Custom-PC-" + nuevoCod)
+                                .build();
+
+                        daoPctorre.insertarTorreCustom(pc);
+                        int codPedido = daoPedido.getIdPedidoMax() + 1;
+                        boolean hecho = daoPedido.hacerPedidoCustom(pc, codPedido, cliente.getEmail());
+
+                        if (hecho) {
+                            JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                        }
+
+                        ArrayList<Integer> extras = new ArrayList<>();
+                        String codTeclado = client.tecladoBox.getSelectedItem().toString().split("-")[0];
+                        if (!(codTeclado.equals("Seleccione"))) {
+                            int codTeclado2 = Integer.parseInt(codTeclado);
+                            Teclado teclado = daoTeclado.getTeclado(codTeclado2);
+                            extras.add(codTeclado2);
+                            consultaArticulo.actualizarStock(codTeclado2, teclado.getStock() - 1);
+                        }
+                        String codRaton = client.ratonBox.getSelectedItem().toString().split("-")[0];
+                        if (!(codRaton.equals("Seleccione"))) {
+                            int codRaton2 = Integer.parseInt(codRaton);
+                            Raton raton = daoRaton.getRaton(codRaton2);
+                            extras.add(codRaton2);
+                            consultaArticulo.actualizarStock(codRaton2, raton.getStock() - 1);
+                        }
+                        String codCam = client.camBox.getSelectedItem().toString().split("-")[0];
+                        if (!(codCam.equals("Seleccione"))) {
+                            int codWebcam = Integer.parseInt(codCam);
+                            WebCam cam = daoCam.getWebcam(codWebcam);
+                            extras.add(codWebcam);
+                            consultaArticulo.actualizarStock(codWebcam, cam.getStock() - 1);
+                        }
+
+                        if (extras.size() != 0) {
+                            int codPedidoExtras = daoPedido.getIdPedidoMax() + 1;
+                            float precioExtras = Float.parseFloat(client.precioTotalPc.getText()) - precioTorre;
+                            boolean hechoExtra = daoPedido.hacerPedidoCarro(extras, String.valueOf(precioExtras), cliente.getEmail(), codPedidoExtras);
+                            if (hechoExtra) {
+                                JOptionPane.showMessageDialog(null, "El pedido con los extras ha sido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                            }
+                        }
+                        resetValuesBox();
+                        iniciarPanelMontar();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }
+                } catch (Exception ex) {
+                    Log.log.error("Error en montar y comprar pc " + ex);
+                }
+            }
+        });
+
+        //Listener lista producto elegido en panel articulo
+        this.client.listaProductos.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    try {
+
+                        int codigo = Integer.parseInt(client.listaProductos.getSelectedValue().split("-")[1]);
+                        client.panelInicio.setVisible(false);
+                        client.panelCarro.setVisible(false);
+                        client.panelPerfil.setVisible(false);
+                        client.panelMonta.setVisible(false);
+                        client.panelProducto.setVisible(false);
+                        client.panelArticulo.setVisible(false);
+                        client.panelElegirProducto.setVisible(false);
+                        client.panelProducto.setVisible(true);
+
+                        switch (tipo) {
+                            case "placa_base":
+                                Placa_base placa = daoPlaca.getPlaca_base(codigo);
+                                iniciarPanelProductoPlaca(placa);
+                                break;
+                            case "procesador":
+                                Procesador cpu = daoCpu.getProcesador(codigo);
+                                iniciarPanelProductoCpu(cpu);
+                                break;
+                            case "grafica":
+                                Grafica grafica = daoGrafica.getGrafica(codigo);
+                                iniciarPanelProductoGrafica(grafica);
+                                break;
+                            case "caja":
+                                Caja caja = daoCaja.getCaja(codigo);
+                                iniciarPanelProductoCaja(caja);
+                                break;
+                            case "monitor":
+                                Monitor monitor = daoMonitor.getMonitor(codigo);
+                                iniciarPanelProductoMonitor(monitor);
+                                break;
+                            case "teclado":
+                                Teclado teclado = daoTeclado.getTeclado(codigo);
+                                iniciarPanelProductoTeclado(teclado);
+                                break;
+                            case "raton":
+                                Raton raton = daoRaton.getRaton(codigo);
+                                iniciarPanelProductoRaton(raton);
+                                break;
+                            case "webcam":
+                                WebCam cam = daoCam.getWebcam(codigo);
+                                iniciarPanelProductoCam(cam);
+                                break;
+                            case "fuente_alimentacion":
+                                Fuente_alimentacion fuente = daoFuente.getFuente(codigo);
+                                iniciarPanelProductoFuente(fuente);
+                                break;
+                            case "memoria_ram":
+                                Memoria_RAM ram = daoRam.getMemoria_RAM(codigo);
+                                iniciarPanelProductoRam(ram);
+                                break;
+                            case "disco_duro":
+                                Disco_duro disco = daoDisco.getDisco_duro(codigo);
+                                iniciarPanelProductoDisco(disco);
+                                break;
+                            case "portatil":
+                                Portatil portatil = daoPortatil.getPortatil(codigo);
+                                iniciarPanelProductoPortatil(portatil);
+                                break;
+                            case "pctorre":
+                                PcTorre pctorre = daoPctorre.getPcTorre(codigo);
+                                iniciarPanelProductoPcTorre(pctorre);
+                                break;
+                            default:
+                                Articulo articulo = consultaArticulo.getArticulo(codigo);
+                                iniciarPanelProducto(getClaveBusqueda(), articulo);
+                        }
+                        compruebaPrecio();
+                    } catch (NumberFormatException ex) {
+                        Log.log.error("Error en listaProductos " + ex);
+                    }
+                }
+
+            }
+        });
+
+        //Boton para realizar la compra directa de un producto
+        this.client.btnComprarProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+
+                    int stock = Integer.parseInt(client.datoStock.getText());
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    if (stock != 0) {
+                        if (seleccion == 0) { // Confirma insertar
+                            int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
+                            boolean hecho = daoPedido.hacerPedido(codigo, client.precio.getText(), cliente.getEmail(), nuevoIdPedido);
+
+                            //Actualizar stock
+                            consultaArticulo.actualizarStock(codigo, stock - 1);
+                            client.datoStock.setText(String.valueOf(stock - 1));
+                            if (hecho) {
+                                JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                            }
+                        } else { // Deniega insertar
+                            JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se ha podido realizar el pedido, no hay Stock", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }
+                } catch (Exception ex) {
+                    Log.log.error("Error en comprar producto stock " + ex);
+                }
+            }
+        });
+        
+        //Boton para deshacer la eliminacion de un pedido
+        this.client.btnDeshacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idPedido = comando.getPedido().getIdPedido();
+                    if (JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere recuperar el pedido "+ idPedido +" eliminado?", "WARNING",
+                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        
+                        invocador.deshacerComando();
+                        
+                        if(comando.getPedido() == null){
+                            client.panelInfoPedido.setVisible(false);
+                            client.panelCompras.setVisible(true);
+
+                            cargarListaPedidosCliente();
+                        }
+                        
+                    }
+                } catch (Exception ex) {
+                    Log.log.error(ex.getMessage());
+                }
+            }
+        });
+
+        //Boton para eliminar un pedido
+        this.client.btnEliminarPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idPedido = Integer.parseInt(client.nPedidoInfo.getText());
+                    Pedido pedido = daoPedido.getPedido(idPedido);
+
+                    //Si el pedido se puede eliminar, es decir, esta actualmente en preparacion
+                    //borramos el pedido en la base de datos
+                    if (pedido.getEstado().eliminar(pedido)) {
+                        if (JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere eliminar el pedido "+ idPedido +"?", "WARNING",
+                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                                client.btnEliminarPedido.setEnabled(false);
+                                client.btnRecepcionPedido.setEnabled(false);
+                                client.btnDeshacer.setVisible(true);
+                                client.labelDeshacer.setVisible(true);
+                                
+                                comando.setPedido(pedido);
+                                invocador.setComando(comando);
+                                invocador.ejecutaComando(idPedido);
+                        }
+                    }
+                } catch (HeadlessException | NumberFormatException ex) {
+                    Log.log.error(ex.getMessage());
+                }
+            }
+        });
+
+        //Boton para confirmar la recepción de un pedidio
+        this.client.btnRecepcionPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int idPedido = Integer.parseInt(client.nPedidoInfo.getText());
+                    Pedido pedido = daoPedido.getPedido(idPedido);
+
+                    //Si se ha podido cambiar el estado, cambiamos el estado tambien en la base de datos
+                    if (pedido.getEstado().cambiarEstado(pedido, "recibido")) {
+                        if (!daoPedido.cambiarEstadoPedido(idPedido, 2)) {
+                            JOptionPane.showMessageDialog(null, "Ya se ha confirmado la recepción del pedido.");
+                        }
+                    }
+                } catch (HeadlessException | NumberFormatException ex) {
+                    Log.log.error(ex.getMessage());
+                }
+            }
+        });
+
+        //Evaluacion del producto
+        this.client.puntuacion1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(1, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        });
+        this.client.puntuacion2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(2, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        });
+        this.client.puntuacion3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(3, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        });
+        this.client.puntuacion4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//starVacia.png")));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(4, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        });
+        this.client.puntuacion5.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e
+            ) {
+                client.puntuacion1.setIcon(new ImageIcon(getClass().getResource("/images/star.png")));
+                client.puntuacion2.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion3.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion4.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+                client.puntuacion5.setIcon(new ImageIcon(getClass().getResource("/images//star.png")));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e
+            ) {
+                try {
+                    int codigo = Integer.parseInt(client.codigo_ref.getText());
+                    boolean hecho = daoEvaluacion.insertarEvaluacion(5, cliente.getEmail(), codigo);
+                    if (hecho) {
+                        client.puntuacion1.setEnabled(false);
+                        client.puntuacion2.setEnabled(false);
+                        client.puntuacion3.setEnabled(false);
+                        client.puntuacion4.setEnabled(false);
+                        client.puntuacion5.setEnabled(false);
+                        client.confirmaPuntuacion.setVisible(true);
+                    }
+                } catch (NumberFormatException ex) {
+                    Log.log.error("Error " + ex);
+                }
+            }
+        });
+
+        //Listeners carrito 
+        this.client.insertarCesta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea añadir al carro?", "Insertar carrito!", JOptionPane.YES_NO_OPTION);
+
+                if (seleccion == 0) { // Confirma insertar
+                    meterCarro(client.codigo_ref.getText());
+                    Articulo articulo = consultaArticulo.getArticulo(Integer.parseInt(client.codigo_ref.getText()));
+                    SujetoConcreto sujeto = new SujetoConcreto();
+                    sujeto.setComponente(articulo);
+                    listaSujetos.add(sujeto);
+                    Observer obs = new ObservadorPrecio("obs", articulo.getPrecio(), sujeto, getClase());
+
+                    JOptionPane.showMessageDialog(null, "Articulo añadido con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                } else { // Deniega insertar
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+
+            }
+        });
+        this.client.eliminarArticulo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ArrayList<Integer> cesta = cargarCarro();
+                Collections.sort(cesta);
+                int indexSel = client.listaPedidos.getSelectedIndex();
+
+                if (indexSel != -1) {
+                    int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar este articulo del carro?",
+                            "Eliminar articulo", JOptionPane.YES_NO_OPTION);
+                    int index = Collections.binarySearch(cesta, cesta.get(indexSel));
+
+                    if (seleccion == 0) { //Elimina
+                        listaSujetos.get(index).deleteObservers();
+                        listaSujetos.remove(index);
+                        cesta.remove(index);
+                        String nuevoCarro = "";
+                        for (int i = 0; i < cesta.size(); i++) {
+                            nuevoCarro = cesta.get(i) + "-" + nuevoCarro;
+                        }
+                        carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+                        JOptionPane.showMessageDialog(null, "Articulo eliminado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        listaArticulos(cesta);
+                    } else { // Deniega eliminar
+                        JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione algun articulo", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
+        this.client.eliminaTodoCarro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar todos los articulos del carro?",
+                        "Eliminar carrito", JOptionPane.YES_NO_OPTION);
+
+                ArrayList<Integer> cesta = cargarCarro();
+                Collections.sort(cesta);
+
+                if (seleccion == 0) { //Elimina
+                    for (SujetoConcreto sujeto : listaSujetos) {
+                        sujeto.deleteObservers();
+                    }
+                    listaSujetos.clear();
+                    cesta.clear();
+                    String nuevoCarro = "";
+                    carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+                    JOptionPane.showMessageDialog(null, "Articulos eliminados con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    listaArticulos(cesta);
+                } else { // Deniega eliminar
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
+        this.client.btnRealizaPedidoCarro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                ArrayList<Integer> cesta = cargarCarro();
+                int seleccion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea realizar el pedido?", "Pedido", JOptionPane.YES_NO_OPTION);
+                boolean noHay = false;
+                String modelo = "";
+                if (seleccion == 0) { // Confirma insertar
+                    //Actualiza stock articulo
+                    for (int i = 0; i < cesta.size(); i++) {
+                        int repetido = 0;
+                        int codRef = cesta.get(i);
+                        //Comprobamos cuantas se van a pedir y el stock futuro
+                        for (int j = 0; j < cesta.size(); j++) {
+                            if (codRef == cesta.get(j)) {
+                                repetido++;
+                            }
+                        }
+                        Articulo articulo = consultaArticulo.getArticulo(codRef);
+                        if ((articulo.getStock() - repetido) < 0) {
+                            noHay = true;
+                            modelo = articulo.getModelo();
+                            break;
+                        }
+                    }
+                    if (noHay) {
+                        JOptionPane.showMessageDialog(null, "No hay stock de " + modelo + " eliminalo de la lista para hacer el pedido.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        int nuevoIdPedido = daoPedido.getIdPedidoMax() + 1;
+                        boolean hecho = daoPedido.hacerPedidoCarro(cesta, client.precioCarro.getText(), cliente.getEmail(), nuevoIdPedido);
+                        for (int i = 0; i < cesta.size(); i++) {
+                            int codRef = cesta.get(i);
+                            Articulo articulo = consultaArticulo.getArticulo(codRef);
+                            consultaArticulo.actualizarStock(codRef, articulo.getStock() - 1);
+                        }
+                        if (hecho) {
+                            for (SujetoConcreto sujeto : listaSujetos) {
+                                sujeto.deleteObservers();
+                            }
+                            listaSujetos.clear();
+                            carroDao.actualizaCarro(cliente.getEmail(), "");
+                            cesta.clear();
+                            listaArticulos(cesta);
+                            JOptionPane.showMessageDialog(null, "Pedido creado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se ha podido crear pedido, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                        }
+                    }
+
+                } else { // Deniega insertar
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        }
+        );
+
+        //Listners de perfil cliente
+        this.client.btnCambiaEmail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+
+                String nuevoEmail = client.nuevoEmail.getText();
+                boolean hecho = daoUser.editarEmailCliente(cliente.getEmail(), nuevoEmail);
+                if (hecho) {
+                    cliente.setEmail(nuevoEmail);
+                    client.datoEmail.setText(nuevoEmail);
+                    JOptionPane.showMessageDialog(null, "Su email se ha actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Su email no se ha podido actualizar es posible "
+                            + "que el email introdocido ya exista, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                }
+
+            }
+        });
+        this.client.btnCambiaContra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                boolean correcto = comprobarPassword();
+                if (correcto) {
+                    char[] valorContrasenna = client.nuevaPass.getPassword();
+                    String passNueva = new String(valorContrasenna);
+
+                    boolean hecho = daoUser.editarPasswordCliente(passNueva, cliente.getEmail());
+                    if (hecho) {
+                        cliente.setPass(passNueva);
+                        JOptionPane.showMessageDialog(null, "Su contraseña se ha actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Su contraseña no se ha podido actualizar, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                    }
+                }
+            }
+        });
+        this.client.btnCambiaAtributos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+
+                if (client.datoTarjeta.getText().equalsIgnoreCase("") || client.datoTelefono.getText().equalsIgnoreCase("")
+                        || client.datoDireccion.getText().equalsIgnoreCase("")) {
+                    JOptionPane.showMessageDialog(null, "ERROR: Rellene los campos Trjeta, Direccion, Telefono");
+                } else {
+                    try {
+                        int telefono = Integer.parseInt(client.datoTelefono.getText());
+                        String tarjeta = client.datoTarjeta.getText();
+                        String direccion = client.datoDireccion.getText();
+                        boolean hecho = daoUser.editarDatosCliente(cliente.getEmail(), direccion, tarjeta, telefono);
+
+                        if (hecho) {
+                            cliente.setDireccion(direccion);
+                            cliente.setTelefono(telefono);
+                            cliente.setTarjeta(tarjeta);
+                            JOptionPane.showMessageDialog(null, "Sus datos se han actualizado con exito", "Mensaje", JOptionPane.DEFAULT_OPTION);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Sus datos no se han podido actualizar, vuelva a intentarlo.", "Mensaje", JOptionPane.DEFAULT_OPTION);
+
+                        }
+                    } catch (NumberFormatException ex) {
+                        Log.log.error(ex + "Error en extraer datos actualizar perfil cliente");
+                        JOptionPane.showMessageDialog(null, "Error al extraer los datos, vuelva a introducirlos.", "Error", JOptionPane.DEFAULT_OPTION);
+                    }
+
+                }
+            }
+        });
+
+        //Evento para cuando se clicka en un pedido
+        this.client.listaCompras.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    client.panelInicio.setVisible(false);
+                    client.panelCarro.setVisible(false);
+                    client.panelPerfil.setVisible(false);
+                    client.panelMonta.setVisible(false);
+                    client.panelProducto.setVisible(false);
+                    client.panelArticulo.setVisible(false);
+                    client.panelElegirProducto.setVisible(false);
+                    client.panelCompras.setVisible(false);
+                    client.panelInfoPedido.setVisible(true);
+
+                    Pedido pedido = daoPedido.getAllPedidosCliente(cliente.getEmail()).get(client.listaCompras.getSelectedIndex());
+
+                    client.correoInfoPedido.setText(pedido.getEmail_cliente());
+                    client.nPedidoInfo.setText("" + pedido.getIdPedido());
+
+                    Fecha fecha = new AdapterFecha(new FechaUS(pedido.getFecha()));
+                    client.fechaPedidoInf.setText(fecha.toString());
+
+                    cargarPedidoInfo(pedido);
+                }
+            }
+        });
+    }
+
+    /**
+     * Crea un nuevo observador para un artículo añadido a la cesta
+     *
+     */
+    private void creaUnObserver(String codigo) {
+        Articulo articulo = consultaArticulo.getArticulo(Integer.parseInt(codigo));
+        SujetoConcreto sujeto = new SujetoConcreto();
+        sujeto.setComponente(articulo);
+        listaSujetos.add(sujeto);
+        Observer obs = new ObservadorPrecio("obs", articulo.getPrecio(), sujeto, getClase());
+    }
+
+    /**
+     * Crea un nuevos observadores para cuando el cliente introduce los artículos
+     * a la cesta después de crear una torre
+     *
+     */
+    private void crearObservers() {
+
+        ArrayList<Integer> cesta = cargarCarro();
+        Collections.sort(cesta);
+        for (int i = 0; i < cesta.size(); i++) {
+            Articulo articulo = consultaArticulo.getArticulo(cesta.get(i));
+            SujetoConcreto sujeto = new SujetoConcreto();
+            sujeto.setComponente(articulo);
+
+            listaSujetos.add(sujeto);
+            Observer o1 = new ObservadorPrecio("o" + i, articulo.getPrecio(), sujeto, this);
+        }
+
+    }
+
+    /**
+     * Comprueba si ha cambiado el precio de algunos de los artículos de la cesta
+     *
+     */
+    private void compruebaPrecio() {
+        for (int i = 0; i < listaSujetos.size(); i++) {
+            SujetoConcreto sujeto = listaSujetos.get(i);
+            int codigo = sujeto.getComponente().getCodigo_ref();
+            float precio = consultaArticulo.getArticulo(codigo).getPrecio();
+            sujeto.cambiaPrecio(precio);
+            
+        }
+
+    }
+
+    /**
+     * Inicia el panel de perfil cargando los valores del cliente que ha
+     * iniciado sesion en su correspondiente etiqueta.
+     *
+     */
+    private void iniciarPanelPerfil() {
+        client.nombrePerfil.setText(cliente.getNombre());
+        client.apellidoPerfil.setText(cliente.getApellido());
+        client.datoTelefono.setText(String.valueOf(cliente.getTelefono()));
+        client.datoDireccion.setText(cliente.getDireccion());
+        client.datoTarjeta.setText(cliente.getTarjeta());
+        client.datoEmail.setText(cliente.getEmail());
+    }
+
+    /**
+     * Inicia el panel de montar cargando los valores de los articulos en los
+     * respectivos JComboBox
+     */
+    private void iniciarPanelMontar() {
+        rellenaComboBox();
+    }
+
+    /**
+     * Inicia el panel de un producto cargando los valores del mismo en las
+     * correspondientes etiquetas. Valores genericos
+     *
+     * @param articulo
+     */
+    private void iniciarPanelProducto(String busqueda, Articulo articulo) {
+        client.productoSeleccionado.setText(busqueda);
+        client.datoModelo.setText(articulo.getModelo());
+        client.codigo_ref.setText(String.valueOf(articulo.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(articulo.getStock()));
+        client.descripcion.setText(articulo.getDescripcion());
+        client.precio.setText(String.valueOf(articulo.getPrecio()));
+        String ruta = articulo.getRutaImagen();
+        comprobarEvaluacionRealizada(articulo.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+    }
+
+    /**
+     * Inicia el panel del producto Placa base cargando los valores de la placa
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param placa
+     */
+    private void iniciarPanelProductoPlaca(Placa_base placa) {
+        client.productoSeleccionado.setText("Placa base");
+        client.datoModelo.setText(placa.getModelo());
+        client.codigo_ref.setText(String.valueOf(placa.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(placa.getStock()));
+        client.descripcion.setText(placa.getDescripcion());
+        client.precio.setText(String.valueOf(placa.getPrecio()));
+        String ruta = placa.getRutaImagen();
+        comprobarEvaluacionRealizada(placa.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+        client.atrParticular1.setText(placa.getSocket());
+        client.nombreAtributo1.setText("Socket");
+
+    }
+
+    /**
+     * Inicia el panel del producto procesador cargando los valores del
+     * procesador en las correspondientes etiquetas las cuales referencian a su
+     * atributo.
+     *
+     * @param cpu
+     */
+    private void iniciarPanelProductoCpu(Procesador cpu) {
+        client.productoSeleccionado.setText("CPU");
+        client.datoModelo.setText(cpu.getModelo());
+        client.codigo_ref.setText(String.valueOf(cpu.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(cpu.getStock()));
+        client.descripcion.setText(cpu.getDescripcion());
+        client.precio.setText(String.valueOf(cpu.getPrecio()));
+        String ruta = cpu.getRutaImagen();
+        comprobarEvaluacionRealizada(cpu.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.atrParticular1.setText(cpu.getSocket());
+        client.nombreAtributo1.setText("Socket");
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+
+    }
+
+    /**
+     * Inicia el panel del producto grafica cargando los valores del grafica en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param grafica
+     */
+    private void iniciarPanelProductoGrafica(Grafica grafica) {
+        client.productoSeleccionado.setText("Grafica");
+        client.datoModelo.setText(grafica.getModelo());
+        client.codigo_ref.setText(String.valueOf(grafica.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(grafica.getStock()));
+        client.descripcion.setText(grafica.getDescripcion());
+        client.precio.setText(String.valueOf(grafica.getPrecio()));
+        String ruta = grafica.getRutaImagen();
+        comprobarEvaluacionRealizada(grafica.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.atrParticular1.setText(String.valueOf(grafica.getGeneracion()));
+        client.nombreAtributo1.setText("Generacion");
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del producto caja cargando los valores de la caja en las
+     * correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param caja
+     */
+    private void iniciarPanelProductoCaja(Caja caja) {
+        client.productoSeleccionado.setText("Caja");
+        client.datoModelo.setText(caja.getModelo());
+        client.codigo_ref.setText(String.valueOf(caja.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(caja.getStock()));
+        client.descripcion.setText(caja.getDescripcion());
+        client.precio.setText(String.valueOf(caja.getPrecio()));
+        String ruta = caja.getRutaImagen();
+        comprobarEvaluacionRealizada(caja.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        if (caja.isCristal()) {
+            client.atrParticular1.setText("Si");
+        } else {
+            client.atrParticular1.setText("No");
+        }
+        client.nombreAtributo1.setText("Cristal");
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del producto monitor cargando los valores del monitor en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param monitor
+     */
+    private void iniciarPanelProductoMonitor(Monitor monitor) {
+        client.productoSeleccionado.setText("Monitor");
+        client.datoModelo.setText(monitor.getModelo());
+        client.codigo_ref.setText(String.valueOf(monitor.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(monitor.getStock()));
+        client.descripcion.setText(monitor.getDescripcion());
+        client.precio.setText(String.valueOf(monitor.getPrecio()));
+        String ruta = monitor.getRutaImagen();
+        comprobarEvaluacionRealizada(monitor.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Panel");
+        client.atrParticular1.setText(monitor.getPanel());
+        client.nombreAtributo2.setText("Pulgadas");
+        client.atrParticular2.setText(String.valueOf(monitor.getPulgadas()));
+        client.nombreAtributo3.setText("HZ");
+        client.atrParticular3.setText(String.valueOf(monitor.getHz()));
+
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+        client.atrParticular2.setVisible(true);
+        client.nombreAtributo2.setVisible(true);
+        client.atrParticular3.setVisible(true);
+        client.nombreAtributo3.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del teclado monitor cargando los valores del teclado en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param teclado
+     */
+    private void iniciarPanelProductoTeclado(Teclado teclado) {
+        client.productoSeleccionado.setText("Teclado");
+        client.datoModelo.setText(teclado.getModelo());
+        client.codigo_ref.setText(String.valueOf(teclado.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(teclado.getStock()));
+        client.descripcion.setText(teclado.getDescripcion());
+        client.precio.setText(String.valueOf(teclado.getPrecio()));
+        String ruta = teclado.getRutaImagen();
+        comprobarEvaluacionRealizada(teclado.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Tipo");
+        client.atrParticular1.setText(teclado.getTipo());
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del raton monitor cargando los valores del raton en las
+     * correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param raton
+     */
+    private void iniciarPanelProductoRaton(Raton raton) {
+        client.productoSeleccionado.setText("Raton");
+        client.datoModelo.setText(raton.getModelo());
+        client.codigo_ref.setText(String.valueOf(raton.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(raton.getStock()));
+        client.descripcion.setText(raton.getDescripcion());
+        client.precio.setText(String.valueOf(raton.getPrecio()));
+        String ruta = raton.getRutaImagen();
+        comprobarEvaluacionRealizada(raton.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Tipo");
+        client.atrParticular1.setText(raton.getTipo());
+        client.nombreAtributo2.setText("DPI");
+        client.atrParticular2.setText(String.valueOf(raton.getDPI()));
+        client.nombreAtributo3.setText("Peso");
+        client.atrParticular3.setText(String.valueOf(raton.getPeso()));
+
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+        client.atrParticular2.setVisible(true);
+        client.nombreAtributo2.setVisible(true);
+        client.atrParticular3.setVisible(true);
+        client.nombreAtributo3.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel de la wecbam monitor cargando los valores de la webcam en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param cam
+     */
+    private void iniciarPanelProductoCam(WebCam cam) {
+        client.productoSeleccionado.setText("Web-Cam");
+        client.datoModelo.setText(cam.getModelo());
+        client.codigo_ref.setText(String.valueOf(cam.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(cam.getStock()));
+        client.descripcion.setText(cam.getDescripcion());
+        client.precio.setText(String.valueOf(cam.getPrecio()));
+        String ruta = cam.getRutaImagen();
+        comprobarEvaluacionRealizada(cam.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Calidad");
+        client.atrParticular1.setText(cam.getCalidad());
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+
+    }
+
+    /**
+     * Inicia el panel de la fuente de alimentacion monitor cargando los valores
+     * de la fuente en las correspondientes etiquetas las cuales referencian a
+     * su atributo.
+     *
+     * @param fuente
+     */
+    private void iniciarPanelProductoFuente(Fuente_alimentacion fuente) {
+        client.productoSeleccionado.setText("Fuente alimentacion");
+        client.datoModelo.setText(fuente.getModelo());
+        client.codigo_ref.setText(String.valueOf(fuente.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(fuente.getStock()));
+        client.descripcion.setText(fuente.getDescripcion());
+        client.precio.setText(String.valueOf(fuente.getPrecio()));
+        String ruta = fuente.getRutaImagen();
+        comprobarEvaluacionRealizada(fuente.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Potencia");
+        client.atrParticular1.setText(String.valueOf(fuente.getPotencia()) + " W");
+        client.nombreAtributo2.setText("Certificacion");
+        client.atrParticular2.setText(fuente.getCertificacion());
+
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+        client.atrParticular2.setVisible(true);
+        client.nombreAtributo2.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel de la memoria ram monitor cargando los valores de la
+     * memoria ram en las correspondientes etiquetas las cuales referencian a su
+     * atributo.
+     *
+     * @param ram
+     */
+    private void iniciarPanelProductoRam(Memoria_RAM ram) {
+        client.productoSeleccionado.setText("Memoria RAM");
+        client.datoModelo.setText(ram.getModelo());
+        client.codigo_ref.setText(String.valueOf(ram.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(ram.getStock()));
+        client.descripcion.setText(ram.getDescripcion());
+        client.precio.setText(String.valueOf(ram.getPrecio()));
+        String ruta = ram.getRutaImagen();
+        comprobarEvaluacionRealizada(ram.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("P/N");
+        client.atrParticular1.setText(ram.getPN());
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del producto disco duro cargando los valores del disco en
+     * las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param disco
+     */
+    private void iniciarPanelProductoDisco(Disco_duro disco) {
+        client.productoSeleccionado.setText("Disco duro");
+        client.datoModelo.setText(disco.getModelo());
+        client.codigo_ref.setText(String.valueOf(disco.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(disco.getStock()));
+        client.descripcion.setText(disco.getDescripcion());
+        client.precio.setText(String.valueOf(disco.getPrecio()));
+        String ruta = disco.getRutaImagen();
+        comprobarEvaluacionRealizada(disco.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Tipo");
+        client.atrParticular1.setText(disco.getTipo());
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del producto portatil cargando los valores del portatil
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param portatil
+     */
+    private void iniciarPanelProductoPortatil(Portatil portatil) {
+        client.productoSeleccionado.setText("Portatil");
+        client.datoModelo.setText(portatil.getModelo());
+        client.codigo_ref.setText(String.valueOf(portatil.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(portatil.getStock()));
+        client.descripcion.setText(portatil.getDescripcion());
+        client.precio.setText(String.valueOf(portatil.getPrecio()));
+        String ruta = portatil.getRutaImagen();
+        comprobarEvaluacionRealizada(portatil.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Peso");
+        client.atrParticular1.setText(String.valueOf(portatil.getPeso()));
+        client.nombreAtributo2.setText("Panel");
+        client.atrParticular2.setText(portatil.getPanel());
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+        client.atrParticular2.setVisible(true);
+        client.nombreAtributo2.setVisible(true);
+    }
+
+    /**
+     * Inicia el panel del producto torre pc cargando los valores de la pc torre
+     * en las correspondientes etiquetas las cuales referencian a su atributo.
+     *
+     * @param pctorre
+     */
+    private void iniciarPanelProductoPcTorre(PcTorre pctorre) {
+        client.productoSeleccionado.setText("Pc Torre");
+        client.datoModelo.setText(pctorre.getModelo());
+        client.codigo_ref.setText(String.valueOf(pctorre.getCodigo_ref()));
+        client.datoStock.setText(String.valueOf(pctorre.getStock()));
+        client.descripcion.setText(pctorre.getDescripcion());
+        client.precio.setText(String.valueOf(pctorre.getPrecio()));
+        String ruta = pctorre.getRutaImagen();
+        comprobarEvaluacionRealizada(pctorre.getCodigo_ref());
+        if (ruta == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else if (getClass().getResource(ruta) == null) {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource("/images/error.png")));
+        } else {
+            client.imgProducto.setIcon(new ImageIcon(getClass().getResource(ruta)));
+        }
+
+        client.nombreAtributo1.setText("Nombre");
+        client.atrParticular1.setText(pctorre.getNombre());
+        client.atrParticular1.setVisible(true);
+        client.nombreAtributo1.setVisible(true);
+    }
+
+    /**
+     * Coloca los valores de la base de datos en los comboBox al cual pertenecen
+     * mediante una consulta se guarda la lista de valores y se insertan como
+     * nuevo item.
+     */
+    private void rellenaComboBox() {
+
+        ArrayList<Procesador> listaCpu = daoCpu.getAllProcesadores();
+        for (int i = 0; i < listaCpu.size(); i++) {
+            if (i == 0) {
+                client.cpuBox.addItem("Seleccione");
+            }
+            if (listaCpu.get(i).getStock() > 0) {
+                client.cpuBox.addItem(listaCpu.get(i).getCodigo_ref() + "- " + listaCpu.get(i).getModelo()
+                        + " - " + listaCpu.get(i).getSocket() + " - € " + listaCpu.get(i).getPrecio());
+            }
+        }
+        ArrayList<Placa_base> listaPlaca = daoPlaca.getAllPlacas();
+        for (int i = 0; i < listaPlaca.size(); i++) {
+            if (i == 0) {
+                client.placaBox.addItem("Seleccione");
+            }
+            if (listaPlaca.get(i).getStock() > 0) {
+                client.placaBox.addItem(listaPlaca.get(i).getCodigo_ref() + "- " + listaPlaca.get(i).getModelo()
+                        + " - " + listaPlaca.get(i).getSocket() + " - € " + listaPlaca.get(i).getPrecio());
+            }
+        }
+        ArrayList<Memoria_RAM> listaRam = daoRam.getAllMemoria_RAM();
+        for (int i = 0; i < listaRam.size(); i++) {
+            if (i == 0) {
+                client.ramBox.addItem("Seleccione");
+            }
+            if (listaRam.get(i).getStock() > 0) {
+                client.ramBox.addItem(listaRam.get(i).getCodigo_ref() + "- " + listaRam.get(i).getModelo()
+                        + " - € " + listaRam.get(i).getPrecio());
+            }
+        }
+        ArrayList<Grafica> listaGrafica = daoGrafica.getAllGraficas();
+        for (int i = 0; i < listaGrafica.size(); i++) {
+            if (i == 0) {
+                client.graficaBox.addItem("Seleccione");
+            }
+            if (listaGrafica.get(i).getStock() > 0) {
+                client.graficaBox.addItem(listaGrafica.get(i).getCodigo_ref() + "- " + listaGrafica.get(i).getModelo()
+                        + " - € " + listaGrafica.get(i).getPrecio());
+            }
+        }
+        ArrayList<Disco_duro> listaDisco = daoDisco.getAllDiscos();
+        for (int i = 0; i < listaDisco.size(); i++) {
+            if (i == 0) {
+                client.discoBox.addItem("Seleccione");
+            }
+            if (listaDisco.get(i).getStock() > 0) {
+                client.discoBox.addItem(listaDisco.get(i).getCodigo_ref() + "- " + listaDisco.get(i).getModelo()
+                        + " - " + listaDisco.get(i).getTipo() + " - € " + listaDisco.get(i).getPrecio());
+            }
+        }
+        ArrayList<Fuente_alimentacion> listaFuente = daoFuente.getAllFuentes();
+        for (int i = 0; i < listaFuente.size(); i++) {
+            if (i == 0) {
+                client.fuenteBox.addItem("Seleccione");
+            }
+            if (listaFuente.get(i).getStock() > 0) {
+                client.fuenteBox.addItem(listaFuente.get(i).getCodigo_ref() + "- " + listaFuente.get(i).getModelo()
+                        + " - " + listaFuente.get(i).getPotencia() + " W - € " + listaFuente.get(i).getPrecio());
+            }
+        }
+        ArrayList<Caja> listaCaja = daoCaja.getAllCajas();
+        for (int i = 0; i < listaCaja.size(); i++) {
+            if (i == 0) {
+                client.cajaBox.addItem("Seleccione");
+            }
+            if (listaCaja.get(i).getStock() > 0) {
+                client.cajaBox.addItem(listaCaja.get(i).getCodigo_ref() + "- " + listaCaja.get(i).getModelo()
+                        + " - € " + listaCaja.get(i).getPrecio());
+            }
+        }
+        ArrayList<Raton> listaRaton = daoRaton.getAllRatones();
+        for (int i = 0; i < listaRaton.size(); i++) {
+            if (i == 0) {
+                client.ratonBox.addItem("Seleccione");
+            }
+            if (listaRaton.get(i).getStock() > 0) {
+                client.ratonBox.addItem(listaRaton.get(i).getCodigo_ref() + "- " + listaRaton.get(i).getModelo()
+                        + " - " + listaRaton.get(i).getPeso() + " gr - € " + listaRaton.get(i).getPrecio());
+            }
+        }
+        ArrayList<Teclado> listaTeclado = daoTeclado.getAllTeclados();
+        for (int i = 0; i < listaTeclado.size(); i++) {
+            if (i == 0) {
+                client.tecladoBox.addItem("Seleccione");
+            }
+            if (listaTeclado.get(i).getStock() > 0) {
+                client.tecladoBox.addItem(listaTeclado.get(i).getCodigo_ref() + "- " + listaTeclado.get(i).getModelo()
+                        + " - € " + listaTeclado.get(i).getPrecio());
+            }
+        }
+        ArrayList<WebCam> listaCam = daoCam.getAllWebCams();
+        for (int i = 0; i < listaCam.size(); i++) {
+            if (i == 0) {
+                client.camBox.addItem("Seleccione");
+            }
+            if (listaCam.get(i).getStock() > 0) {
+                client.camBox.addItem(listaCam.get(i).getCodigo_ref() + "- " + listaCam.get(i).getModelo()
+                        + " - " + listaCam.get(i).getCalidad() + " - € " + listaCam.get(i).getPrecio());
+            }
+        }
+
+    }
+
+    /**
+     * Obtiene el precio del producto seleccionado mediante un split del string
+     * luego suma los valores de cada uno y pone el precio total del montaje
+     *
+     * @return Devuelve un valor float del precio del montaje
+     */
+    private float calculaPrecioMontaje() {
+        float total = 0;
+        try {
+            String[] precioCpu = client.cpuBox.getSelectedItem().toString().split("€");
+            String[] precioPlaca = client.placaBox.getSelectedItem().toString().split("€");
+            String[] precioRam = client.ramBox.getSelectedItem().toString().split("€");
+            String[] precioGrafica = client.graficaBox.getSelectedItem().toString().split("€");
+            String[] precioDisco = client.discoBox.getSelectedItem().toString().split("€");
+            String[] precioFuente = client.fuenteBox.getSelectedItem().toString().split("€");
+            String[] precioCaja = client.cajaBox.getSelectedItem().toString().split("€");
+            String[] precioRaton = client.ratonBox.getSelectedItem().toString().split("€");
+            String[] precioTeclado = client.tecladoBox.getSelectedItem().toString().split("€");
+            String[] precioCam = client.camBox.getSelectedItem().toString().split("€");
+
+            total = sacarPrecio(precioCpu) + sacarPrecio(precioPlaca) + sacarPrecio(precioRam)
+                    + sacarPrecio(precioGrafica) + sacarPrecio(precioDisco) + sacarPrecio(precioCaja)
+                    + sacarPrecio(precioFuente) + sacarPrecio(precioRaton) + sacarPrecio(precioTeclado)
+                    + sacarPrecio(precioCam);
+
+            client.precioTotalPc.setText(String.valueOf(total));
+        } catch (Exception ex) {
+            //Log.log.error("Error en calcular el precio " + ex);
+        }
+        return total;
+
+    }
+
+    /**
+     * Transforma el precio de String a float en caso de ser posible si no lo es
+     * da error y pone valor a 0 dado que no hay precio disponible.
+     *
+     * @param text
+     * @return Devuelve el precio en formato float
+     */
+    private float sacarPrecio(String[] text) {
+        float valor = 0;
+        try {
+            if (text[0].equals("Seleccione")) {
+                return 0;
+            }
+            valor = Float.parseFloat(text[1]);
+        } catch (NumberFormatException e) {
+            Log.log.info("Error al sacar precio montaje " + e);
+            valor = 0;
+        } finally {
+            return valor;
+        }
+
+    }
+
+    /**
+     * Restablece los valores de los comboBox del panel al valor default
+     */
+    private void resetValuesBox() {
+        client.cpuBox.removeAllItems();
+        client.placaBox.removeAllItems();
+        client.ramBox.removeAllItems();
+        client.graficaBox.removeAllItems();
+        client.discoBox.removeAllItems();
+        client.fuenteBox.removeAllItems();
+        client.cajaBox.removeAllItems();
+        client.ratonBox.removeAllItems();
+        client.tecladoBox.removeAllItems();
+        client.camBox.removeAllItems();
+    }
+
+    /**
+     * Obtiene el carro de la base de datos y lo transforma en un arraylist de
+     * enteros.
+     *
+     * @return Devuelve un arrayList de enteros que corresponden a los codigos
+     * de referencia
+     */
+    private ArrayList<Integer> cargarCarro() {
+
+        ArrayList<Integer> cesta = new ArrayList<>();
+        String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+        try {
+            if (carroActual != null) {
+                String[] articulo = carroActual.split("-");
+                if (!articulo[0].equals("")) {
+                    for (int i = 0; i < articulo.length; i++) {
+                        cesta.add(Integer.parseInt(articulo[i]));
+                    }
+                }
+            }
+        } catch (NumberFormatException ex) {
+            Log.log.error("Error en cargarCarro " + ex);
+        }
+        return cesta;
+    }
+
+    /**
+     * Crea una Jlist con los articulos que hay en el arraylist pasado por
+     * parametro con informacion relativa a los mismos sacada de la base de
+     * datos.
+     *
+     * @param cesta
+     */
+    private void listaArticulos(ArrayList<Integer> cesta) {
+        DefaultListModel listModel = new DefaultListModel();
+
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+
+        float precioCarro = 0;
+        for (int i = 0; i < cesta.size(); i++) {
+
+            int codigo = cesta.get(i);
+            Articulo articulo = consultaArticulo.getArticulo(codigo);  
+            float precio = articulo.getPrecio();
+            String ruta = articulo.getRutaImagen();
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-" + String.format("%04d", codigo) + "- </sup></strong></u><br>Modelo: " + articulo.getModelo()
+                    + " <br>Precio: " + articulo.getPrecio() + "€ <br>[stock: " + articulo.getStock() + "]</body></html>";
+
+            listaInfo.add(articuloInfo);
+            if (ruta == null) {
+                listaRuta.add("/images/error.png");
+            } else {
+                listaRuta.add(ruta);
+            }
+            listModel.add(i, articuloInfo);
+
+            precioCarro += precio;
+        }
+
+        client.precioCarro.setText(String.valueOf(precioCarro));
+        client.listaPedidos.setModel(listModel);
+        client.listaPedidos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "articulo"));
+    }
+
+    /**
+     * Crea una Jlist con los articulos que hay en el arraylist pasado por
+     * parametro con informacion relativa a los mismos sacada de la base de
+     * datos.
+     *
+     * @param cesta
+     */
+    private void cargarListaProductos(ArrayList<Integer> cesta) {
+        DefaultListModel listModel = new DefaultListModel();
+
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+
+        float precioCarro = 0;
+        for (int i = 0; i < cesta.size(); i++) {
+
+            int codigo = cesta.get(i);
+            Articulo articulo = consultaArticulo.getArticulo(codigo);
+            String modelo = articulo.getModelo();
+            float precio = articulo.getPrecio();
+            String ruta = articulo.getRutaImagen();
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-" + String.format("%04d", codigo) + "- </sup></strong></u><br>Modelo: " + articulo.getModelo()
+                    + " <br>Precio: " + articulo.getPrecio() + "€ <br>[stock: " + articulo.getStock() + "]</body></html>";
+
+            listaInfo.add(articuloInfo);
+            if (ruta == null) {
+                listaRuta.add("/images/error.png");
+            } else {
+                listaRuta.add(ruta);
+            }
+            listModel.add(i, articuloInfo);
+
+            precioCarro += precio;
+        }
+
+        client.precioCarro.setText(String.valueOf(precioCarro));
+        client.listaProductos.setModel(listModel);
+        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, getClaveBusqueda()));
+    }
+
+    /**
+     * Crea una Jlist con los articulos que hay en el arraylist pasado por
+     * parametro con informacion relativa a los mismos sacada de la base de
+     * datos.
+     * @param lista 
+     */
+    private void cargarLista(ArrayList<Articulo> lista) {
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+
+        for (int i = 0; i < lista.size(); i++) {
+            Articulo articulo = lista.get(i);
+            int codigoReferencia = articulo.getCodigo_ref();
+            String articuloInfo = "<html><body><strong><u><sup>CodRef-" + String.format("%04d", codigoReferencia) + "- </sup></strong></u><br>Modelo: " + articulo.getModelo()
+                    + " <br>Precio: " + articulo.getPrecio() + "€ <br>[stock: " + articulo.getStock() + "]</body></html>";
+
+            listaInfo.add(articuloInfo);
+            if (articulo.getRutaImagen() == null) {
+                listaRuta.add("/images/error.png");
+            } else {
+                listaRuta.add(articulo.getRutaImagen());
+            }
+
+            listModel.add(i, articuloInfo);
+        }
+
+        client.listaProductos.setModel(listModel);
+        client.listaProductos.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, tipo));
+    }
+
+    /**
+     * Introduce de forma dinámica la información referente a los pedidos
+     * realizados por los clientes, mostrando de cada uno, una breve descripción
+     *
+     */
+    public void cargarListaPedidosCliente() {
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<Pedido> listaPedidos = daoPedido.getAllPedidosCliente(cliente.getEmail());
+
+        for (int i = 0; i < listaPedidos.size(); i++) {
+            Pedido pedido = listaPedidos.get(i);
+            Fecha fecha = new AdapterFecha(new FechaUS(pedido.getFecha()));
+            int idPedido = pedido.getIdPedido();
+
+            String estadoInfo = "";
+
+            if (pedido.getEstado().getClass().getName().toLowerCase().contains("preparacion")) {
+                estadoInfo = "<strong>Estado: <span style='color:#FFF700';> En preparacion </span></strong>";
+            } else if (pedido.getEstado().getClass().getName().toLowerCase().contains("recibido")) {
+                estadoInfo = "<strong>Estado: <span style='color:#00FF03';> Recibido </span></strong>";
+            } else if (pedido.getEstado().getClass().getName().toLowerCase().contains("enviado")) {
+                estadoInfo = "<strong>Estado: <span style='color:#0086FF';> Enviado </span></strong>";
+            }
+
+            String pedidoInfo = "<html><body><strong><u><sup>IDPedido-" + String.format("%04d", idPedido) + " </sup></strong></u><br>Fecha: " + fecha.toString()
+                    + " <br>Usuario: " + pedido.getEmail_cliente() + " <br>" + estadoInfo + "</body></html>";
+
+            listModel.add(i, pedidoInfo);
+        }
+
+        client.listaCompras.setModel(listModel);
+        client.listaCompras.setCellRenderer(new ListaDinamica("Pedido"));
+    }
+
+    /**
+     * Carga la información referente todos los arículos de un pedido en
+     * concreto
+     *
+     * @param pedido
+     */
+    public void cargarPedidoInfo(Pedido pedido) {
+        DefaultListModel listModel = new DefaultListModel();
+
+        ArrayList<String> listaInfo = new ArrayList<>();
+        ArrayList<String> listaRuta = new ArrayList<>();
+
+        ArrayList<Integer> listaCodigos = pedido.getListaArticulos();
+
+        ArrayList<Articulo> listaCompras = new ArrayList<>();
+        for (int i = 0; i < listaCodigos.size(); i++) {
+            listaCompras.add(consultaArticulo.getArticulo(listaCodigos.get(i)));
+        }
+
+        for (int i = 0; i < listaCompras.size(); i++) {
+            Articulo articulo = listaCompras.get(i);
+            int codigoReferencia = articulo.getCodigo_ref();
+            String articuloInfo;
+            if (articulo.getModelo().toLowerCase().contains("custom-")) {
+                articuloInfo = "<html><body><strong><u><sup>PcCustom " + codigoReferencia + " </sup></strong></u> <br>Caracteristicas- [" + articulo.getDescripcion() + "] <br>Precio-"
+                        + articulo.getPrecio() + " €</body></html>";
+            } else {
+                articuloInfo = "<html><body><strong><u><sup>Articulo " + (i + 1) + " </sup></strong></u> <br>CodRef-" + String.format("%04d", codigoReferencia)
+                        + " <br>  Modelo: " + articulo.getModelo() + " <br>  Precio: " + articulo.getPrecio() + " €</body></html>";
+            }
+
+            listaInfo.add(articuloInfo);
+            if (articulo.getRutaImagen() == null) {
+                listaRuta.add("/images/error.png");
+            } else {
+                listaRuta.add(articulo.getRutaImagen());
+            }
+
+            listModel.add(i, articuloInfo);
+        }
+        
+        client.btnEliminarPedido.setEnabled(true);
+        client.btnRecepcionPedido.setEnabled(true);
+        client.btnDeshacer.setVisible(false);
+        client.labelDeshacer.setVisible(false);
+
+        client.listaInfoPedido.setModel(listModel);
+        client.listaInfoPedido.setCellRenderer(new ListaDinamicaImagen(listaInfo, listaRuta, "Articulo"));
+    }
+
+    /**
+     * Metodo para comprobar el formulario para cambiar la password en el panel
+     * del perfil de cliente.
+     *
+     * @return Devuelve si la password es o no correcta.
+     */
+    private boolean comprobarPassword() {
+        boolean correcto = false;
+        try {
+            if (client.nuevaPass.getPassword().length != 0) {
+                if ((client.nuevaPass.getPassword().length != 0 && client.repitePass.getPassword().length != 0)) {
+                    String passNueva = Arrays.toString(client.nuevaPass.getPassword());
+                    String passRepite = Arrays.toString(client.repitePass.getPassword());
+                    if (passNueva.equals(passRepite)) {
+                        char[] valorContrasenna = client.nuevaPass.getPassword();
+                        passNueva = new String(valorContrasenna);
+                        String passAnterior = cliente.getPass();
+                        if (passNueva.equals(passAnterior)) {
+                            JOptionPane.showMessageDialog(null, "ERROR: La nueva contraseña es la misma que la anterior");
+                        } else {
+                            correcto = true;
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR: Las contraseñas no coinciden");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR: Introduzca la nueva contraseña");
+                }
+            }
+        } catch (Exception ex) {
+            Log.log.error("Error en comprobar password " + ex);
+        }
+        return correcto;
+    }
+
+    /**
+     * Comprueba si tiene alguna evaluacion el articulo hecha por el cliente y
+     * establece los parametros de las etiquetas y botones activandolos y
+     * desactivandolos en funcion del resultado de la consulta.
+     *
+     * @param codigo
+     */
+    private void comprobarEvaluacionRealizada(int codigo) {
+
+        try {
+            // Pone el texto con la media del producto
+            String textMedia = String.valueOf(daoEvaluacion.mediaEvaluacion(codigo));
+            client.datoMediaEvaluacion.setText("Puntuacion media: " + textMedia);
+            // Si el cliente no ha evaluado el producto activamos para que lo valore
+            if (!daoEvaluacion.comprobarEvaluacion(cliente.getEmail(), codigo)) {
+                client.puntuacion1.setEnabled(true);
+                client.puntuacion2.setEnabled(true);
+                client.puntuacion3.setEnabled(true);
+                client.puntuacion4.setEnabled(true);
+                client.puntuacion5.setEnabled(true);
+                client.confirmaPuntuacion.setVisible(false); //Inicia etiqueta puntuacion en no visible
+            } else {
+                client.puntuacion1.setEnabled(false);
+                client.puntuacion2.setEnabled(false);
+                client.puntuacion3.setEnabled(false);
+                client.puntuacion4.setEnabled(false);
+                client.puntuacion5.setEnabled(false);
+                client.confirmaPuntuacion.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Log.log.error("Error en comprobar media puntucion " + ex);
+        }
+
+    }
+
+    /**
+     * Obtiene el string de clave de busqueda
+     *
+     * @return Devuelve el string con lo que se ha buscado
+     */
+    private String getClaveBusqueda() {
+        return claveBusqueda;
+    }
+
+    /**
+     * Establece una nueva clave de busqueda.
+     *
+     * @param claveBusqueda
+     */
+    private void setClaveBusqueda(String claveBusqueda) {
+        this.claveBusqueda = claveBusqueda;
+    }
+    
+    /**
+     * Añade al carro un nuevo producto
+     *
+     * 
+     */
+    private void meterCarro(String codigo) {
+        try {
+            int cod = Integer.parseInt(codigo);
+            String nuevoCarro = "";
+            String carroActual = carroDao.getArticulosCarro(cliente.getEmail());
+            if (carroActual == null) {
+                carroActual = "";
+            }
+            nuevoCarro = cod + "-" + carroActual;
+            carroDao.actualizaCarro(cliente.getEmail(), nuevoCarro);
+        } catch (NumberFormatException ex) {
+            Log.log.error("Error en crear nuevo carro " + ex);
+        }
+
+    }
+
+    /**
+     * Retorna el actual objeto ClienteController
+     *
+     */
+    private ClienteController getClase() {
+        return this;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}
